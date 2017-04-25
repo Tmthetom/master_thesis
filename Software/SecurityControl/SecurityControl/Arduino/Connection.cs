@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SecurityControl.Arduino
 {
-    class Connection
+    public class Connection
     {
         private SerialPort mySerial = new SerialPort();
 

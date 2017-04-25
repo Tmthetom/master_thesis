@@ -12,26 +12,28 @@ using System.IO.Ports;
 
 namespace SecurityControl
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         Connection myConnection;
+        FormConnection myFormConnection;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
+            InitializeForm();
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void InitializeForm()
+        {
+            myFormConnection = new FormConnection(myConnection);
+            myFormConnection.Show();
+            this.Hide();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            try
-            {
-                myConnection = new Connection("COM3", 9600);
-                SerialPort mySerial = myConnection.GetConnection();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            
         }
     }
 }
