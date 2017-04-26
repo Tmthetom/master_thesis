@@ -7,14 +7,25 @@ namespace SecurityControl
 {
     public partial class FormConnection : Form
     {
+        Form parent;
         Connection myConnection;
 
-        public FormConnection(Connection myConnection)
+        /// <summary>
+        /// Initialize form
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="myConnection"></param>
+        public FormConnection(Form parent, Connection myConnection)
         {
             InitializeComponent();
+            this.parent = parent;
             InitializeForm(myConnection);
         }
 
+        /// <summary>
+        /// Initialize form components
+        /// </summary>
+        /// <param name="myConnection"></param>
         private void InitializeForm(Connection myConnection)
         {
             // Initialize Connection
@@ -51,20 +62,41 @@ namespace SecurityControl
             comboBoxConnectionBaudRate.SelectedIndex = i;
         }
 
+        /// <summary>
+        /// Connect to port
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonConnection_Click(object sender, EventArgs e)
         {
             try
             {
+                // Get connection informations
                 string port = comboBoxConnectionPort.Text;
                 int baudRate = Int32.Parse(comboBoxConnectionBaudRate.Text);
 
+                // Try to connect
                 myConnection = new Connection(port, baudRate);
                 SerialPort mySerial = myConnection.GetConnection();
+
+                // Restor parent and hide connection form
+                parent.WindowState = FormWindowState.Normal;
+                this.Hide();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+        }
+
+        /// <summary>
+        /// When form closing, close whole application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormConnection_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -26,14 +26,9 @@ namespace SecurityControl
 
         private void InitializeForm()
         {
-            myFormConnection = new FormConnection(myConnection);
+            myFormConnection = new FormConnection(this, myConnection);
             myFormConnection.Show();
             this.Hide();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            
         }
     }
 }
