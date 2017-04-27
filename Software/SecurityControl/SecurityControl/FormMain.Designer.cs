@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Vchodove");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Okna", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Sklep");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Prizemi");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Pohyb", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -77,20 +69,6 @@
             this.treeView.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView.Location = new System.Drawing.Point(0, 24);
             this.treeView.Name = "treeView";
-            treeNode1.Name = "Node2";
-            treeNode1.Text = "Vchodove";
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "Okna";
-            treeNode2.ToolTipText = "Rada okna";
-            treeNode3.Name = "Node4";
-            treeNode3.Text = "Sklep";
-            treeNode4.Name = "Node7";
-            treeNode4.Text = "Prizemi";
-            treeNode5.Name = "Node1";
-            treeNode5.Text = "Pohyb";
-            this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode5});
             this.treeView.Size = new System.Drawing.Size(264, 464);
             this.treeView.TabIndex = 1;
             // 

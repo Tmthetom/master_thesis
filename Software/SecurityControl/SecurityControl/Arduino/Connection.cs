@@ -104,9 +104,22 @@ namespace SecurityControl.Arduino
         #endregion Connection
 
         #region Operations
+        /// <summary>
+        /// Send command into serial
+        /// </summary>
+        /// <param name="command">Command string</param>
         public void Send(string command)
         {
             mySerial.WriteLine(command);
+        }
+
+        /// <summary>
+        /// Recieve one line from serial
+        /// </summary>
+        /// <returns>Answer for command</returns>
+        public string ReadLine()
+        {
+            return mySerial.ReadLine();
         }
         #endregion Operations
     }

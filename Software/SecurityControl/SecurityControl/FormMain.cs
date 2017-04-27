@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SecurityControl.Arduino;
 using System.IO.Ports;
+using System.Text.RegularExpressions;
 
 namespace SecurityControl
 {
@@ -32,20 +33,63 @@ namespace SecurityControl
         /// Initialize form after successfull connection
         /// </summary>
         public void InitializeForm()
-        {/*
-            TreeNode dverniCidla = new TreeNode("Dverni cidla");
-            dverniCidla.Nodes.Add("Vstupni dvere");
-            dverniCidla.Nodes.Add("Vystupni dvere");
-            dverniCidla.Nodes.Add("Bocni dvere");
-            dverniCidla.Nodes.Add("Garazove dvere");
-            treeView.Nodes.Add(dverniCidla);
+        {
+            // Init
+            string instring;
+            Regex regex = null;
+            Match match = null;
+            int[] numbers = null;
+            string stringNumbers;
+            string[] splitNumbers;
 
-            TreeNode mikrofony = new TreeNode("Mikrofony");
-            mikrofony.Nodes.Add("Hlavni mikrofon");
-            mikrofony.Nodes.Add("Zalozni mikrofon");
-            treeView.Nodes.Add(mikrofony);
+            // Get leds
+            arduino.Send("GetLeds");
+            instring = arduino.ReadLine();
+            regex = new Regex(@"[a-zA-Z]*\[(.*)\]");
+            match = regex.Match(instring);
+            
+            if (match.Success)
+            {
+                stringNumbers = match.Groups[1].Value;
+                splitNumbers = stringNumbers.Split(',');
+                numbers = new int[splitNumbers.Length];
+                for (int i = 0; i < splitNumbers.Length; i++)
+                {
+                    numbers[i] = Int32.Parse(splitNumbers[i]);
+                }
+            }
+            TreeNode leds = new TreeNode("Door sensors");
+            foreach (int sensor in numbers)
+            {
+                leds.Nodes.Add("Led pin: " + sensor);
+            }
+            treeView.Nodes.Add(leds);
 
-            treeView.ExpandAll();*/
+            // Get doors
+            arduino.Send("GetDoors");
+            instring = arduino.ReadLine();
+            regex = new Regex(@"[a-zA-Z]*\[(.*)\]");
+            match = regex.Match(instring);
+           
+            if (match.Success)
+            {
+                stringNumbers = match.Groups[1].Value;
+                splitNumbers = stringNumbers.Split(',');
+                numbers = new int[splitNumbers.Length];
+                for (int i = 0; i < splitNumbers.Length; i++)
+                {
+                    numbers[i] = Int32.Parse(splitNumbers[i]);
+                }
+            }
+            TreeNode doors = new TreeNode("Door sensors");
+            foreach (int sensor in numbers)
+            {
+                doors.Nodes.Add("Senzor pin: " + sensor);
+            }
+            treeView.Nodes.Add(doors);
+
+            // Expand all childs
+            treeView.ExpandAll();
         }
         #endregion Initialization
 
@@ -267,6 +311,47 @@ namespace SecurityControl
 
         #endregion Connection
 
+        #region Communication
+        /// <summary>
+        /// What method is called, when data is recieved
+        /// </summary>
+        private void InitDataReciever()
+        {
+            arduino.SetDataReciever(SerialPort_DataReceived);
+        }
+
+        private void ButtonSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                textBoxOutput.Text = "";
+                arduino.Send(textBoxInput.Text);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
+        }
+
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort mySerial = sender as SerialPort;
+                string indata = mySerial.ReadExisting();
+
+                MethodInvoker action = delegate
+                { textBoxOutput.Text += indata; };
+                textBoxOutput.BeginInvoke(action);
+            }
+            catch
+            {
+                ;
+            }
+        }
+        #endregion Communication
+
         #region StatusStrip
         /// <summary>
         /// Set status strip into connecting state
@@ -298,38 +383,5 @@ namespace SecurityControl
             toolStripStatusLabel.Text = "Connected to " + arduino.GetPort() + " with " + arduino.GetBaudRate() + " baud rate.";
         }
         #endregion StatusStrip
-
-        #region Communication
-        /// <summary>
-        /// What method is called, when data is recieved
-        /// </summary>
-        private void InitDataReciever()
-        {
-            arduino.SetDataReciever(SerialPort_DataReceived);
-        }
-
-        private void ButtonSend_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                arduino.Send(textBoxInput.Text);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-            
-        }
-
-        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            SerialPort mySerial = sender as SerialPort;
-            string indata = mySerial.ReadExisting();
-
-            MethodInvoker action = delegate
-            { textBoxOutput.Text += indata; };
-            textBoxOutput.BeginInvoke(action);
-        }
-        #endregion Communication
     }
 }
