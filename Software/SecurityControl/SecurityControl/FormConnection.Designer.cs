@@ -62,17 +62,17 @@
             // comboBoxConnectionBaudRate
             // 
             this.comboBoxConnectionBaudRate.FormattingEnabled = true;
-            this.comboBoxConnectionBaudRate.Location = new System.Drawing.Point(125, 59);
+            this.comboBoxConnectionBaudRate.Location = new System.Drawing.Point(108, 59);
             this.comboBoxConnectionBaudRate.Name = "comboBoxConnectionBaudRate";
-            this.comboBoxConnectionBaudRate.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxConnectionBaudRate.Size = new System.Drawing.Size(183, 21);
             this.comboBoxConnectionBaudRate.TabIndex = 3;
             // 
             // comboBoxConnectionPort
             // 
             this.comboBoxConnectionPort.FormattingEnabled = true;
-            this.comboBoxConnectionPort.Location = new System.Drawing.Point(125, 28);
+            this.comboBoxConnectionPort.Location = new System.Drawing.Point(108, 28);
             this.comboBoxConnectionPort.Name = "comboBoxConnectionPort";
-            this.comboBoxConnectionPort.Size = new System.Drawing.Size(167, 21);
+            this.comboBoxConnectionPort.Size = new System.Drawing.Size(183, 21);
             this.comboBoxConnectionPort.TabIndex = 2;
             // 
             // labelConnectionBaudRate

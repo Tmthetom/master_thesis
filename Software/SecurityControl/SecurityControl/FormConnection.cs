@@ -31,15 +31,16 @@ namespace SecurityControl
             // Initialize Connection
             this.myConnection = myConnection;
 
-            // Initialize Port
+            // Initialize Ports
             string[] ports = SerialPort.GetPortNames();
+            comboBoxConnectionPort.Items.Clear();
             comboBoxConnectionPort.Items.AddRange(ports);
             if (ports.Length > 0)
             {
                 comboBoxConnectionPort.SelectedIndex = 0;
             }
 
-            // Initialize BaudRate
+            // Initialize BaudRates
             string[] baudRates = new string[] {
                 "300",
                 "1200",
@@ -57,6 +58,7 @@ namespace SecurityControl
                 "1000000",
                 "2000000",
             };
+            comboBoxConnectionBaudRate.Items.Clear();
             comboBoxConnectionBaudRate.Items.AddRange(baudRates);
             int i = comboBoxConnectionBaudRate.Items.IndexOf("9600");
             comboBoxConnectionBaudRate.SelectedIndex = i;
@@ -77,7 +79,6 @@ namespace SecurityControl
 
                 // Try to connect
                 myConnection = new Connection(port, baudRate);
-                SerialPort mySerial = myConnection.GetConnection();
 
                 // Restor parent and hide connection form
                 parent.WindowState = FormWindowState.Normal;
