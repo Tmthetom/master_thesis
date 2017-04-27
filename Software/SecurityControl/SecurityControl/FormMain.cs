@@ -243,13 +243,24 @@ namespace SecurityControl
         /// <param name="e"></param>
         private void ToolStripMenuItemConnect_Click(object sender, EventArgs e)
         {
-            try
+            // Connect
+            if (!arduino.IsOpen())
             {
-                Connection();
+                try
+                {
+                    Connection();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
             }
-            catch (Exception exception)
+
+            // Disconnect
+            else
             {
-                MessageBox.Show(exception.Message);
+                arduino.Close();
+                StatusStripNotConnected();
             }
         }
         #endregion Buttons
@@ -299,7 +310,15 @@ namespace SecurityControl
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
-            arduino.Send(textBoxInput.Text);
+            try
+            {
+                arduino.Send(textBoxInput.Text);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+            
         }
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)

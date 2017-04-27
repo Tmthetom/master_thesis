@@ -45,12 +45,11 @@
             this.toolStripMenuItemConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPort = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemBaudRate = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorConnection = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSend = new System.Windows.Forms.Button();
             this.textBoxOutput = new System.Windows.Forms.TextBox();
             this.textBoxInput = new System.Windows.Forms.TextBox();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.connectDisconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -98,6 +97,7 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectDisconnectToolStripMenuItem,
             this.toolStripMenuItemConnection});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -109,36 +109,22 @@
             // 
             this.toolStripMenuItemConnection.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemPort,
-            this.toolStripMenuItemBaudRate,
-            this.toolStripSeparatorConnection,
-            this.toolStripMenuItemConnect});
+            this.toolStripMenuItemBaudRate});
             this.toolStripMenuItemConnection.Name = "toolStripMenuItemConnection";
-            this.toolStripMenuItemConnection.Size = new System.Drawing.Size(81, 20);
-            this.toolStripMenuItemConnection.Text = "Connection";
+            this.toolStripMenuItemConnection.Size = new System.Drawing.Size(61, 20);
+            this.toolStripMenuItemConnection.Text = "Settings";
             // 
             // toolStripMenuItemPort
             // 
             this.toolStripMenuItemPort.Name = "toolStripMenuItemPort";
-            this.toolStripMenuItemPort.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemPort.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemPort.Text = "Port";
             // 
             // toolStripMenuItemBaudRate
             // 
             this.toolStripMenuItemBaudRate.Name = "toolStripMenuItemBaudRate";
-            this.toolStripMenuItemBaudRate.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItemBaudRate.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItemBaudRate.Text = "BaudRate";
-            // 
-            // toolStripSeparatorConnection
-            // 
-            this.toolStripSeparatorConnection.Name = "toolStripSeparatorConnection";
-            this.toolStripSeparatorConnection.Size = new System.Drawing.Size(121, 6);
-            // 
-            // toolStripMenuItemConnect
-            // 
-            this.toolStripMenuItemConnect.Name = "toolStripMenuItemConnect";
-            this.toolStripMenuItemConnect.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItemConnect.Text = "Connect";
-            this.toolStripMenuItemConnect.Click += new System.EventHandler(this.ToolStripMenuItemConnect_Click);
             // 
             // buttonSend
             // 
@@ -166,6 +152,13 @@
             this.textBoxInput.Name = "textBoxInput";
             this.textBoxInput.Size = new System.Drawing.Size(611, 182);
             this.textBoxInput.TabIndex = 5;
+            // 
+            // connectDisconnectToolStripMenuItem
+            // 
+            this.connectDisconnectToolStripMenuItem.Name = "connectDisconnectToolStripMenuItem";
+            this.connectDisconnectToolStripMenuItem.Size = new System.Drawing.Size(128, 20);
+            this.connectDisconnectToolStripMenuItem.Text = "Connect/Disconnect";
+            this.connectDisconnectToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItemConnect_Click);
             // 
             // FormMain
             // 
@@ -201,12 +194,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConnection;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPort;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemBaudRate;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorConnection;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConnect;
         private System.Windows.Forms.Button buttonSend;
         private System.Windows.Forms.TextBox textBoxOutput;
         private System.Windows.Forms.TextBox textBoxInput;
         private System.IO.Ports.SerialPort serialPort;
+        private System.Windows.Forms.ToolStripMenuItem connectDisconnectToolStripMenuItem;
     }
 }
 
