@@ -34,62 +34,70 @@ namespace SecurityControl
         /// </summary>
         public void InitializeForm()
         {
-            // Init
-            string instring;
-            Regex regex = null;
-            Match match = null;
-            int[] numbers = null;
-            string stringNumbers;
-            string[] splitNumbers;
-
-            // Get leds
-            arduino.Send("GetLeds");
-            instring = arduino.ReadLine();
-            regex = new Regex(@"[a-zA-Z]*\[(.*)\]");
-            match = regex.Match(instring);
-            
-            if (match.Success)
+            try
             {
-                stringNumbers = match.Groups[1].Value;
-                splitNumbers = stringNumbers.Split(',');
-                numbers = new int[splitNumbers.Length];
-                for (int i = 0; i < splitNumbers.Length; i++)
+                // Init
+                treeView.Nodes.Clear();
+                string instring;
+                Regex regex = null;
+                Match match = null;
+                int[] numbers = null;
+                string stringNumbers;
+                string[] splitNumbers;
+
+                // Get leds
+                arduino.Send("GetLeds");
+                instring = arduino.ReadLine();
+                regex = new Regex(@"[a-zA-Z]*\[(.*)\]");
+                match = regex.Match(instring);
+
+                if (match.Success)
                 {
-                    numbers[i] = Int32.Parse(splitNumbers[i]);
+                    stringNumbers = match.Groups[1].Value;
+                    splitNumbers = stringNumbers.Split(',');
+                    numbers = new int[splitNumbers.Length];
+                    for (int i = 0; i < splitNumbers.Length; i++)
+                    {
+                        numbers[i] = Int32.Parse(splitNumbers[i]);
+                    }
                 }
-            }
-            TreeNode leds = new TreeNode("Door sensors");
-            foreach (int sensor in numbers)
-            {
-                leds.Nodes.Add("Led pin: " + sensor);
-            }
-            treeView.Nodes.Add(leds);
-
-            // Get doors
-            arduino.Send("GetDoors");
-            instring = arduino.ReadLine();
-            regex = new Regex(@"[a-zA-Z]*\[(.*)\]");
-            match = regex.Match(instring);
-           
-            if (match.Success)
-            {
-                stringNumbers = match.Groups[1].Value;
-                splitNumbers = stringNumbers.Split(',');
-                numbers = new int[splitNumbers.Length];
-                for (int i = 0; i < splitNumbers.Length; i++)
+                TreeNode leds = new TreeNode("Door sensors");
+                foreach (int sensor in numbers)
                 {
-                    numbers[i] = Int32.Parse(splitNumbers[i]);
+                    leds.Nodes.Add("Led pin: " + sensor);
                 }
-            }
-            TreeNode doors = new TreeNode("Door sensors");
-            foreach (int sensor in numbers)
-            {
-                doors.Nodes.Add("Senzor pin: " + sensor);
-            }
-            treeView.Nodes.Add(doors);
+                treeView.Nodes.Add(leds);
 
-            // Expand all childs
-            treeView.ExpandAll();
+                // Get doors
+                arduino.Send("GetDoors");
+                instring = arduino.ReadLine();
+                regex = new Regex(@"[a-zA-Z]*\[(.*)\]");
+                match = regex.Match(instring);
+
+                if (match.Success)
+                {
+                    stringNumbers = match.Groups[1].Value;
+                    splitNumbers = stringNumbers.Split(',');
+                    numbers = new int[splitNumbers.Length];
+                    for (int i = 0; i < splitNumbers.Length; i++)
+                    {
+                        numbers[i] = Int32.Parse(splitNumbers[i]);
+                    }
+                }
+                TreeNode doors = new TreeNode("Door sensors");
+                foreach (int sensor in numbers)
+                {
+                    doors.Nodes.Add("Senzor pin: " + sensor);
+                }
+                treeView.Nodes.Add(doors);
+
+                // Expand all childs
+                treeView.ExpandAll();
+            }
+            catch
+            {
+                ;
+            }
         }
         #endregion Initialization
 
@@ -292,6 +300,7 @@ namespace SecurityControl
             {
                 try
                 {
+                    InitPorts();
                     Connection();
                 }
                 catch (Exception exception)

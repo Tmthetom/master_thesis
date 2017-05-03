@@ -1,6 +1,11 @@
 26. 04. 2017
  -> Vırobce odpovìdìl negativnì.
- -> 
+ -> Mám základ programu, funkèní komunikaèní protokol.
+ -> Zaøídit, aby arduino uchovávalo nastavení v sobì..
+ -> Udìlat lepší GUI, nejlépe Ribon rozhraní.
+ -> Monost pøipojení více arduin.
+ -> Dokumentace 10 a 15 stránek.
+ -> Aplikace na Android bude zatím fungovat pøes Bluetooth.
 
 11. 04. 2017
  -> Napsal jsem vırobci, èekám na odpovìï.
