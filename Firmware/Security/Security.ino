@@ -1,7 +1,7 @@
 /* Setting */
 
 const int baudRate = 9600;
-const int maxSenzors = 10;
+const int maxSensors = 10;
 const int maxSwitches = 10;
 const int maxBytesOfMessage = 200;
 
@@ -19,11 +19,11 @@ String stringSeparator = ",";
 String leftBracket = "(";
 String rightBracket = ")";
 
-// Senzor
-String stringSenzorCategory = "Senzor";
-String stringSenzorsCategory = "Senzors";
-String stringGetAllSenzors = "GetAllSenzors";
-String stringSetSenzorName = "SetSenzorName";
+// Sensor
+String stringSensorCategory = "Sensor";
+String stringSensorsCategory = "Sensors";
+String stringGetAllSensors = "GetAllSensors";
+String stringSetSensorName = "SetSensorName";
 
 // Switch
 String stringSwitchCategory = "Switch";
@@ -37,38 +37,39 @@ String stringChangeSwitchState = "ChangeSwitchState";
 
 // Communication
 String in = "";
+String out = "";
 boolean inComplete = false;
 
-// Senzor
-int pinSenzor[maxSenzors];
-String nameSenzor[maxSenzors];
+// Sensor
+int pinSensor[maxSensors];
+String nameSensor[maxSensors];
 
 // Switch
 int pinSwitch[maxSwitches];
-int stateSwitch[maxSwitches];				// Old value
-int stateSwitchCurrent[maxSwitches];		// Current value
+int stateSwitchOld[maxSwitches];
+int stateSwitchCurrent[maxSwitches];
 String nameSwitch[maxSwitches];
 
 /* Setup before start */
 
 void setup() {
 
-	// Senzors
-	pinSenzor[0] = 5;
-	nameSenzor[0] = "First doors senzor";
-	pinSenzor[1] = 6;
-	nameSenzor[1] = "Second door senzor";
-	setPinMode(pinSenzor, INPUT);
+	// Sensors
+	pinSensor[0] = 5;
+	nameSensor[0] = "First doors sensor";
+	pinSensor[1] = 6;
+	nameSensor[1] = "Second door sensor";
+	setPinMode(pinSensor, INPUT);
 
 	// Switches
 	pinSwitch[0] = 2;
 	nameSwitch[0] = "First led switch";
 	pinSwitch[1] = 3;
 	nameSwitch[1] = "Second led switch";
-	pinSwitch[1] = 4;
-	nameSwitch[1] = "Third led switch";
+	pinSwitch[2] = 4;
+	nameSwitch[2] = "Third led switch";
 	setPinMode(pinSwitch, OUTPUT);
-	readSwitchState(pinSwitch, stateSwitch);
+	readSwitchState(pinSwitch, stateSwitchOld);
 
 	// Communication
 	in.reserve(maxBytesOfMessage);
@@ -78,44 +79,47 @@ void setup() {
 /* Main program loop */
 
 void loop() {
-	// Send Switch state changed
+
+	// Check if switch state changed
 	checkSwitchStateChangedAndSendIfTrue();
 
-	// Read Switch
-	readSerialGetAllSwitches();
-	
-	// Read Senzors
-	readSerialGetAllSenzors();
+	// Communication
+	readSerialAndRespond();
 }
 
+/* Read serial message and respond*/
 void readSerialAndRespond() {
 	if (inComplete && in.length() != 0) {
+		if (in.equalsIgnoreCase(stringGetAllSwitches)) readSerialGetAllSwitches();
+		else if (false) readSerialGetAllSensors();
+		else sendMessageNotRecognized();
 
-
-		// Clear incoming message:
 		in = "";
 		inComplete = false;
 	}
 }
 
+/* Check if all switches wanted */
 void readSerialGetAllSwitches() {
 	if (in.equalsIgnoreCase(stringGetAllSwitches)) {
-		Serial.println(
-			stringSwitchesCategory + leftBracket
-
-		);
-
-		String out = "Leds[";                                           // Add start of out
-		for (int i = 0; i < sizeof(leds) / sizeof(int); i++) {            // Foreach led
-			out += String(leds[i]) + ',';
+		out = stringSwitchesCategory + leftBracket;												// Name of category
+		for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
+			if (pinSwitch[i] != NULL) {
+				out +=
+					leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+					stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
+					stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
+					stringState + stringEquals + String(stateSwitchCurrent[i]) + rightBracket		// State
+					;
+			}
 		}
-		out = out.substring(0, out.length() - 1);                         // Cut last comma
-		out += ']';                                                     // Add end of out
-		Serial.println(out);                                            // Send it
+		out += rightBracket;
+		Serial.println(out);
 	}
 }
 
-void readSerialGetAllSenzors() {
+/* Check if all sensors wanterd*/
+void readSerialGetAllSensors() {
 	;
 }
 
@@ -124,23 +128,22 @@ void checkSwitchStateChangedAndSendIfTrue() {
 	readSwitchState(pinSwitch, stateSwitchCurrent);
 	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
 		if (pinSwitch[i] != NULL) {
-			if (stateSwitchCurrent[i] != stateSwitch[i]) {
+			if (stateSwitchCurrent[i] != stateSwitchOld[i]) {
 				Serial.println(
-					// Name of category
-					stringSwitchCategory + leftBracket +
-
-					// Id
-					stringSeparator + stringEquals + String(i) + stringSeparator +
-
-					// Pin 
-					stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +
-
-					// State
-					stringState + stringEquals + String(stateSwitchCurrent[i]) + rightBracket
+					stringSwitchCategory + leftBracket + stringSeparator +						// Name of category
+					stringId + stringEquals + stringEquals + String(i) + stringSeparator +		// Id
+					stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +			// Pin 
+					stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +		// Name
+					stringState + stringEquals + String(stateSwitchCurrent[i]) + rightBracket	// State
 				);
 			}
 		}
 	}
+}
+
+/* If command not recognized renspond to sender */
+void sendMessageNotRecognized() {
+	Serial.println("Command '" + in + "' not recognized.");
 }
 
 /* Read current switch state [HIGH,LOW] */
