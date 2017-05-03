@@ -21,11 +21,13 @@ String rightBracket = ")";
 
 // Senzor
 String stringSenzorCategory = "Senzor";
+String stringSenzorsCategory = "Senzors";
 String stringGetAllSenzors = "GetAllSenzors";
 String stringSetSenzorName = "SetSenzorName";
 
 // Switch
 String stringSwitchCategory = "Switch";
+String stringSwitchesCategory = "Switches";
 String stringGetAllSwitches = "GetAllSwitches";
 String stringSetSwitchState = "SetSwitchState";
 String stringSetSwitchName = "SetSwitchName";
@@ -76,11 +78,45 @@ void setup() {
 /* Main program loop */
 
 void loop() {
+	// Send Switch state changed
 	checkSwitchStateChangedAndSendIfTrue();
+
+	// Read Switch
+	readSerialGetAllSwitches();
+	
+	// Read Senzors
+	readSerialGetAllSenzors();
 }
 
 void readSerialAndRespond() {
+	if (inComplete && in.length() != 0) {
 
+
+		// Clear incoming message:
+		in = "";
+		inComplete = false;
+	}
+}
+
+void readSerialGetAllSwitches() {
+	if (in.equalsIgnoreCase(stringGetAllSwitches)) {
+		Serial.println(
+			stringSwitchesCategory + leftBracket
+
+		);
+
+		String out = "Leds[";                                           // Add start of out
+		for (int i = 0; i < sizeof(leds) / sizeof(int); i++) {            // Foreach led
+			out += String(leds[i]) + ',';
+		}
+		out = out.substring(0, out.length() - 1);                         // Cut last comma
+		out += ']';                                                     // Add end of out
+		Serial.println(out);                                            // Send it
+	}
+}
+
+void readSerialGetAllSenzors() {
+	;
 }
 
 /* Check switch state changed */
