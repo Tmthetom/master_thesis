@@ -1,3 +1,4 @@
+
 /* Setting */
 
 const int baudRate = 9600;
@@ -14,6 +15,7 @@ String stringPin = "Pin";
 String stringName = "Name";
 String stringState = "State";
 String stringSeparator = ",";
+String stringOk = "OK";
 
 // Functions
 String leftBracket = "(";
@@ -32,6 +34,12 @@ String stringGetAllSwitches = "GetAllSwitches";
 String stringSetSwitchState = "SetSwitchState";
 String stringSetSwitchName = "SetSwitchName";
 String stringChangeSwitchState = "ChangeSwitchState";
+
+// Error
+String stringError = "ERROR: ";
+String stringErrorIdNull = stringError + "Id is not defined.";
+String stringErrorValueNotChanged = stringError + "Value not changed.";
+String stringErrorValueSame = stringError + "Value is same.";
 
 /* Variables */
 
@@ -59,7 +67,7 @@ void setup() {
 	pinSensor[1] = 9;
 	nameSensor[1] = "Second door sensor";
 	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(int), INPUT);
-	readSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
 
 	// Switches
 	pinSwitch[0] = 2;
@@ -88,8 +96,12 @@ void loop() {
 /* Read serial message and respond */
 void readSerialAndRespond() {
 	if (inComplete && in.length() != 0) {
-		if (in.equalsIgnoreCase(stringGetAllSwitches)) readSerialGetAllSwitches();
-		else if (in.equalsIgnoreCase(stringGetAllSensors)) readSerialGetAllSensors();
+		
+		// Sensors
+		if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
+
+		else if (in.equalsIgnoreCase(stringGetAllSwitches)) getAllSwitches();
+		else if (in.startsWith(stringSetSwitchState)) setSwitchState();
 		else sendMessageNotRecognized();
 
 		in = "";
@@ -97,25 +109,8 @@ void readSerialAndRespond() {
 	}
 }
 
-/* Check if all switches wanted */
-void readSerialGetAllSwitches() {
-	out = stringSwitchesCategory + leftBracket;													// Name of category
-	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
-		if (pinSwitch[i] != NULL) {
-			out +=
-				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
-				stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
-				stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
-				stringState + stringEquals + String(readSwitchState(i)) + rightBracket			// State
-				;
-		}
-	}
-	out += rightBracket;
-	Serial.println(out);
-}
-
-/* Check if all sensors wanted */
-void readSerialGetAllSensors() {
+/* Send all sensors */
+void getAllSensors() {
 	out = stringSensorsCategory + leftBracket;													// Name of category
 	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
 		if (pinSensor[i] != NULL) {
@@ -131,9 +126,60 @@ void readSerialGetAllSensors() {
 	Serial.println(out);
 }
 
+
+/* Send all switches */
+void getAllSwitches() {
+	out = stringSwitchesCategory + leftBracket;													// Name of category
+	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
+		if (pinSwitch[i] != NULL) {
+			out +=
+				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+				stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
+				stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
+				stringState + stringEquals + String(getSwitchState(i)) + rightBracket			// State
+				;
+		}
+	}
+	out += rightBracket;
+	Serial.println(out);
+}
+
+/* Set switch state */
+void setSwitchState() {
+
+	// Get wanted switch and state
+	String stringBefore = in.substring(in.indexOf('(') + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, in.indexOf(')'));			// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);								// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();								// Get Id
+	int val = stringAfter.substring(sep + 1).toInt();							// Get Value
+
+	// Get current values
+	if (pinSwitch[id] == NULL) {
+		Serial.println(stringErrorIdNull);
+		return;
+	}
+	int beforeState = getSwitchState(id);
+	if (beforeState == val) {
+		Serial.println(stringErrorValueSame);
+		return;
+	}
+
+	// Do Switch
+	digitalWrite(pinSwitch[id], (val == 1) ? HIGH : LOW);
+	int afterState = getSwitchState(id);
+	if (beforeState == afterState) {
+		Serial.println(stringErrorValueNotChanged);
+		return;
+	}
+
+	// Send OK
+	Serial.println(stringOk);
+}
+
 /* Check sensor state changed */
 void checkSensorStateChangedAndSendIfTrue() {
-	readSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorNew);
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorNew);
 	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
 		if (pinSensor[i] != NULL) {
 			if (stateSensorOld[i] != stateSensorNew[i]) {
@@ -155,15 +201,15 @@ void sendMessageNotRecognized() {
 	Serial.println("Command '" + in + "' not recognized.");
 }
 
-/* Read all sensors state [HIGH,LOW] */
-void readSensorsState(int pinSensors[], int size, int stateSensors[]) {
+/* Get all sensors state [HIGH,LOW] */
+void getSensorsState(int pinSensors[], int size, int stateSensors[]) {
 	for (int i = 0; i < size; i++) {
 		if (pinSensors[i] != NULL) stateSensors[i] = digitalRead(pinSensors[i]);
 	}
 }
 
-/* Read current selected switch state [HIGH,LOW] */
-int readSwitchState(int id) {
+/* Get current selected switch state [HIGH,LOW] */
+int getSwitchState(int id) {
 	if (pinSwitch[id] != NULL) return digitalRead(pinSwitch[id]);
 }
 
@@ -186,20 +232,3 @@ void serialEvent() {
 		}
 	}
 }
-
-/*
-// Set led state
-else if (string.startsWith("SetLed")) {
-// Parse data
-String middle = string.substring(string.indexOf('[') + 1);        // Get text after '['
-String data = middle.substring(0, middle.indexOf(']'));         // Get text before ']'
-int sep = data.indexOf(separator);                              // Get index of ';'
-int pin = data.substring(0, sep).toInt();
-int val = data.substring(sep + 1).toInt();
-
-// Use data
-digitalWrite(pin, (val == 1) ? HIGH : LOW);
-Serial.println("Pin[" + String(pin) + "] = [" + String(val) + "]");
-}
-
-*/
