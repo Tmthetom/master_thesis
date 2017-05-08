@@ -124,7 +124,7 @@
             // 
             // timerConnectionCheck
             // 
-            this.timerConnectionCheck.Interval = 1100;
+            this.timerConnectionCheck.Interval = 1000;
             this.timerConnectionCheck.Tick += new System.EventHandler(this.TimerConnectionCheck_Tick);
             // 
             // Connection

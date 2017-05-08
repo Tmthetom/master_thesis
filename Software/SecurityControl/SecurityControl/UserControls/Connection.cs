@@ -147,6 +147,9 @@ namespace SecurityControl.UserControls
             Connect();
         }
 
+        private int timerConnected = 1100;
+        private int timerNotConnected = 1000;
+
         /// <summary>
         /// Connection checker
         /// </summary>
@@ -154,27 +157,23 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void TimerConnectionCheck_Tick(object sender, EventArgs e)
         {
-            int minute = 1100;
-            int second = 1000;
-
             // If connection lost or not connected
             if (!myConnection.IsOpen())
             {
-                if (timerConnectionCheck.Interval == minute)
+                if (timerConnectionCheck.Interval == timerConnected)  // But was connected before
                 {
                     functions.Notification_Balloon("Connectino lost",
                     "Cannot connect to selected port",
-                    SecurityControl.Properties.Resources.icon);
+                    Properties.Resources.icon);
+                    timerConnectionCheck.Interval = timerNotConnected;  // Every selected time check ports
                 }
-
                 InitPorts();  // Scan for ports
-                timerConnectionCheck.Interval = second;  // Every 1 second check ports
             }
 
             // If connected 
-            else if (timerConnectionCheck.Interval != minute)  // But was not connected before
+            else if (timerConnectionCheck.Interval != timerConnected)  // But was not connected before
             {
-                timerConnectionCheck.Interval = minute;  // Every one minute check connection
+                timerConnectionCheck.Interval = timerConnected;  // Every selected time check connection
             }
         }
 
