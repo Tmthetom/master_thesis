@@ -51,7 +51,7 @@
             // 
             this.labelCurrentVersion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelCurrentVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
-            this.labelCurrentVersion.Location = new System.Drawing.Point(228, 353);
+            this.labelCurrentVersion.Location = new System.Drawing.Point(224, 346);
             this.labelCurrentVersion.Name = "labelCurrentVersion";
             this.labelCurrentVersion.Size = new System.Drawing.Size(233, 17);
             this.labelCurrentVersion.TabIndex = 4;
@@ -62,7 +62,7 @@
             // 
             this.labelContact.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelContact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
-            this.labelContact.Location = new System.Drawing.Point(228, 201);
+            this.labelContact.Location = new System.Drawing.Point(224, 194);
             this.labelContact.Name = "labelContact";
             this.labelContact.Size = new System.Drawing.Size(233, 17);
             this.labelContact.TabIndex = 5;
@@ -73,7 +73,7 @@
             // 
             this.labelVersion.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelVersion.ForeColor = System.Drawing.Color.White;
-            this.labelVersion.Location = new System.Drawing.Point(228, 384);
+            this.labelVersion.Location = new System.Drawing.Point(224, 390);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(233, 17);
             this.labelVersion.TabIndex = 6;
@@ -84,7 +84,7 @@
             // 
             this.labelContactEmail.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelContactEmail.ForeColor = System.Drawing.Color.White;
-            this.labelContactEmail.Location = new System.Drawing.Point(228, 280);
+            this.labelContactEmail.Location = new System.Drawing.Point(224, 273);
             this.labelContactEmail.Name = "labelContactEmail";
             this.labelContactEmail.Size = new System.Drawing.Size(233, 17);
             this.labelContactEmail.TabIndex = 7;
@@ -95,7 +95,7 @@
             // 
             this.labelContactNumber.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelContactNumber.ForeColor = System.Drawing.Color.White;
-            this.labelContactNumber.Location = new System.Drawing.Point(228, 247);
+            this.labelContactNumber.Location = new System.Drawing.Point(224, 240);
             this.labelContactNumber.Name = "labelContactNumber";
             this.labelContactNumber.Size = new System.Drawing.Size(233, 17);
             this.labelContactNumber.TabIndex = 8;
