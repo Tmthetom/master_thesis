@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SecurityControl.Arduino;
 using System.IO.Ports;
 using System.Text.RegularExpressions;
 
@@ -15,8 +14,11 @@ namespace SecurityControl
 {
     public partial class FormMain : Form
     {
+        static Arduino.Connection myConnection = new Arduino.Connection();
+        UserControls.Overview overview = new UserControls.Overview();
+        UserControls.Settings settings = new UserControls.Settings();
+        UserControls.Connection connection = new UserControls.Connection(myConnection);
         UserControls.About about = new UserControls.About();
-        UserControls.Connection connection = new UserControls.Connection();
 
         public FormMain()
         {
@@ -30,6 +32,37 @@ namespace SecurityControl
             this.Close();
         }
 
+        /// <summary>
+        /// Menu Overview button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BunifuFlatButtonOverview_Click(object sender, EventArgs e)
+        {
+            panelBody.Controls.Clear();
+            panelBody.Controls.Add(overview);
+            overview.Dock = DockStyle.Fill;
+            overview.Show();
+        }
+
+        /// <summary>
+        /// Menu Settings button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BunifuFlatButtonSettings_Click(object sender, EventArgs e)
+        {
+            panelBody.Controls.Clear();
+            panelBody.Controls.Add(settings);
+            settings.Dock = DockStyle.Fill;
+            settings.Show();
+        }
+
+        /// <summary>
+        /// Menu Connection button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BunifuFlatButtonConnection_Click(object sender, EventArgs e)
         {
             panelBody.Controls.Clear();
@@ -38,6 +71,11 @@ namespace SecurityControl
             connection.Show();
         }
 
+        /// <summary>
+        /// Menu About button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BunifuFlatButtonAbout_Click(object sender, EventArgs e)
         {
             panelBody.Controls.Clear();

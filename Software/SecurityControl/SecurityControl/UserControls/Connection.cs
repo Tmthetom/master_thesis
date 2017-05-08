@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
-using SecurityControl.Functions;
 
 namespace SecurityControl.UserControls
 {
@@ -16,14 +15,16 @@ namespace SecurityControl.UserControls
     {
         #region Initialization
 
-        Arduino.Connection arduino = new Arduino.Connection();
+        Arduino.Connection myConnection;
         Functions.Functions functions = new Functions.Functions();
 
-        public Connection()
+        public Connection(Arduino.Connection myConnection)
         {
+            this.myConnection = myConnection;
             InitializeComponent();
             InitializeValues();
-            FirstConnection();
+            Connect();
+            timerConnectionCheck.Enabled = true;
         }
 
         /// <summary>
@@ -40,10 +41,23 @@ namespace SecurityControl.UserControls
         /// </summary>
         private void InitPorts()
         {
+            // Get ports
             string[] ports = SerialPort.GetPortNames();
-            bunifuDropdownPort.Clear();
-            foreach (string port in ports) bunifuDropdownPort.AddItem(port);
-            if (ports.Length > 0) bunifuDropdownPort.selectedIndex = 0;
+
+            // Count is not working
+            int numberOfPorts = 0;
+            foreach (string port in bunifuDropdownPort.Items)
+            {
+                numberOfPorts++;
+            }
+
+            // Save new ports their are not same
+            if (ports.Length != numberOfPorts)
+            {
+                bunifuDropdownPort.Clear();
+                foreach (string port in ports) bunifuDropdownPort.AddItem(port);
+                if (ports.Length > 0) bunifuDropdownPort.selectedIndex = 0;
+            }
         }
 
         /// <summary>
@@ -84,27 +98,10 @@ namespace SecurityControl.UserControls
             }
         }
 
-        /// <summary>
-        /// First connection try, without error report
-        /// </summary>
-        private void FirstConnection()
-        {
-            try
-            {
-                Connect();
-                functions.Notification_Balloon("Connection completed", 
-                    "Successfully connected to " + arduino.GetPort() + " with " + arduino.GetBaudRate() + " baud rate.",
-                    SecurityControl.Properties.Resources.icon);
-            }
-            catch
-            {
-                ;
-            }
-        }
-
         #endregion Initialization
 
-        #region Method
+        #region Connection
+
         /// <summary>
         /// Connect to selected Port with selected BaudRate
         /// </summary>
@@ -113,10 +110,7 @@ namespace SecurityControl.UserControls
             try
             {
                 // Close old connection
-                arduino.Close();
-
-                // Inform about connecting
-
+                myConnection.Close();
 
                 // Get selected Port
                 string port = bunifuDropdownPort.selectedValue;
@@ -125,17 +119,65 @@ namespace SecurityControl.UserControls
                 int baudRate = Int32.Parse(bunifuDropdownBaudRate.selectedValue);
 
                 // Try to connect
-                arduino.SetConnection(port, baudRate);
-                arduino.Open();
+                myConnection.SetConnection(port, baudRate);
+                myConnection.Open();
 
                 // Initialize form after connection
 
+                // Inform about successfull connection
+                functions.Notification_Balloon("Connection completed",
+                    "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
+                    SecurityControl.Properties.Resources.icon);
             }
             catch
             {
-                throw;
+                functions.Notification_Balloon("Connectino failed",
+                    "Cannot connect to selected port",
+                    SecurityControl.Properties.Resources.icon);
             }
         }
-        #endregion Method
+
+        /// <summary>
+        /// Connect to selected port with selected baudRate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BunifuFlatButton1_Click(object sender, EventArgs e)
+        {
+            Connect();
+        }
+
+        /// <summary>
+        /// Connection checker
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TimerConnectionCheck_Tick(object sender, EventArgs e)
+        {
+            int minute = 1100;
+            int second = 1000;
+
+            // If connection lost or not connected
+            if (!myConnection.IsOpen())
+            {
+                if (timerConnectionCheck.Interval == minute)
+                {
+                    functions.Notification_Balloon("Connectino lost",
+                    "Cannot connect to selected port",
+                    SecurityControl.Properties.Resources.icon);
+                }
+
+                InitPorts();  // Scan for ports
+                timerConnectionCheck.Interval = second;  // Every 1 second check ports
+            }
+
+            // If connected 
+            else if (timerConnectionCheck.Interval != minute)  // But was not connected before
+            {
+                timerConnectionCheck.Interval = minute;  // Every one minute check connection
+            }
+        }
+
+        #endregion Connection
     }
 }

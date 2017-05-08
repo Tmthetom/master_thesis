@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bunifuFlatButton1 = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuDropdownPort = new Bunifu.Framework.UI.BunifuDropdown();
             this.bunifuDropdownBaudRate = new Bunifu.Framework.UI.BunifuDropdown();
             this.labelPort = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.timerConnectionCheck = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // bunifuFlatButton1
@@ -68,6 +70,7 @@
             this.bunifuFlatButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuFlatButton1.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButton1.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuFlatButton1.Click += new System.EventHandler(this.BunifuFlatButton1_Click);
             // 
             // bunifuDropdownPort
             // 
@@ -119,6 +122,11 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Baud rate:";
             // 
+            // timerConnectionCheck
+            // 
+            this.timerConnectionCheck.Interval = 1100;
+            this.timerConnectionCheck.Tick += new System.EventHandler(this.TimerConnectionCheck_Tick);
+            // 
             // Connection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,5 +151,6 @@
         private Bunifu.Framework.UI.BunifuDropdown bunifuDropdownBaudRate;
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timerConnectionCheck;
     }
 }

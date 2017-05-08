@@ -70,7 +70,7 @@ namespace SecurityControl.Functions
                 Icon = icon,
                 Visible = true
             };
-            balloon.ShowBalloonTip(3000, title, text, ToolTipIcon.Info);
+            balloon.ShowBalloonTip(3000, title, text, ToolTipIcon.None);
             balloon.Dispose();
         }
 

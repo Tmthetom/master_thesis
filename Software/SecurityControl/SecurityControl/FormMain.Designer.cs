@@ -165,6 +165,7 @@
             this.bunifuFlatButtonSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuFlatButtonSettings.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButtonSettings.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuFlatButtonSettings.Click += new System.EventHandler(this.BunifuFlatButtonSettings_Click);
             // 
             // pictureBoxLogo
             // 
@@ -209,6 +210,7 @@
             this.bunifuFlatButtonOverview.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuFlatButtonOverview.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButtonOverview.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuFlatButtonOverview.Click += new System.EventHandler(this.BunifuFlatButtonOverview_Click);
             // 
             // panelBody
             // 
