@@ -39,6 +39,7 @@ String stringChangeSwitchState = "ChangeSwitchState";
 String stringError = "ERROR: ";
 String stringErrorIdNull = stringError + "Id is not defined.";
 String stringErrorValueNotChanged = stringError + "Value not changed.";
+String stringErrorNameSame = stringError + "Name is same.";
 String stringErrorValueSame = stringError + "Value is same.";
 
 /* Variables */
@@ -99,9 +100,10 @@ void readSerialAndRespond() {
 		
 		// Sensors
 		if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
-
 		else if (in.equalsIgnoreCase(stringGetAllSwitches)) getAllSwitches();
 		else if (in.startsWith(stringSetSwitchState)) setSwitchState();
+		else if (in.startsWith(stringSetSensorName)) setSensorName();
+		else if (in.startsWith(stringSetSwitchName)) setSwitchName();
 		else sendMessageNotRecognized();
 
 		in = "";
@@ -126,6 +128,41 @@ void getAllSensors() {
 	Serial.println(out);
 }
 
+/* Set sensor name */
+void setSensorName() {
+
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();										// Get Id
+	String name = stringAfter.substring(sep + 1);										// Get Value
+	
+	
+	// Check if exists
+	if (pinSensor[id] == NULL) {
+		Serial.println(stringErrorIdNull);
+		return;
+	}
+
+	// Get current name
+	String before = nameSensor[id];
+	if (before == name) {
+		Serial.println(stringErrorNameSame);
+		return;
+	}
+
+	// Do rename
+	nameSensor[id] = name;
+	String after = nameSensor[id];
+	if (before == after) {
+		Serial.println(stringErrorValueNotChanged);
+		return;
+	}
+
+	// Send OK
+	Serial.println(stringOk);
+}
 
 /* Send all switches */
 void getAllSwitches() {
@@ -144,31 +181,70 @@ void getAllSwitches() {
 	Serial.println(out);
 }
 
-/* Set switch state */
-void setSwitchState() {
+/* Set sensor name */
+void setSwitchName() {
 
-	// Get wanted switch and state
-	String stringBefore = in.substring(in.indexOf('(') + 1);					// Get text after '('
-	String stringAfter = stringBefore.substring(0, in.indexOf(')'));			// Get text before ')'
-	int sep = stringAfter.indexOf(stringSeparator);								// Get index of separator
-	int id = stringAfter.substring(0, sep).toInt();								// Get Id
-	int val = stringAfter.substring(sep + 1).toInt();							// Get Value
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();										// Get Id
+	String name = stringAfter.substring(sep + 1);										// Get Value
 
-	// Get current values
+	Serial.println(stringAfter);
+
+	// Check if exists
 	if (pinSwitch[id] == NULL) {
 		Serial.println(stringErrorIdNull);
 		return;
 	}
-	int beforeState = getSwitchState(id);
-	if (beforeState == val) {
+
+	// Get current name
+	String before = nameSwitch[id];
+	if (before == name) {
+		Serial.println(stringErrorNameSame);
+		return;
+	}
+
+	// Do rename
+	nameSwitch[id] = name;
+	String after = nameSwitch[id];
+	if (before == after) {
+		Serial.println(stringErrorValueNotChanged);
+		return;
+	}
+
+	// Send OK
+	Serial.println(stringOk);
+}
+
+/* Set switch state */
+void setSwitchState() {
+
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();										// Get Id
+	int val = stringAfter.substring(sep + 1).toInt();									// Get Value
+	
+	// Check if sensor exists
+	if (pinSwitch[id] == NULL) {
+		Serial.println(stringErrorIdNull);
+		return;
+	}
+
+	// Get current values
+	int before = getSwitchState(id);
+	if (before == val) {
 		Serial.println(stringErrorValueSame);
 		return;
 	}
 
 	// Do Switch
 	digitalWrite(pinSwitch[id], (val == 1) ? HIGH : LOW);
-	int afterState = getSwitchState(id);
-	if (beforeState == afterState) {
+	int after = getSwitchState(id);
+	if (before == after) {
 		Serial.println(stringErrorValueNotChanged);
 		return;
 	}
