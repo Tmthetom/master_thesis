@@ -15,6 +15,9 @@ namespace SecurityControl
 {
     public partial class FormMain : Form
     {
+        UserControls.About about = new UserControls.About();
+        UserControls.Connection connection = new UserControls.Connection();
+
         public FormMain()
         {
             InitializeComponent();
@@ -25,6 +28,22 @@ namespace SecurityControl
         private void BunifuImageButtonExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void BunifuFlatButtonConnection_Click(object sender, EventArgs e)
+        {
+            panelBody.Controls.Clear();
+            panelBody.Controls.Add(connection);
+            connection.Dock = DockStyle.Fill;
+            connection.Show();
+        }
+
+        private void BunifuFlatButtonAbout_Click(object sender, EventArgs e)
+        {
+            panelBody.Controls.Clear();
+            panelBody.Controls.Add(about);
+            about.Dock = DockStyle.Fill;
+            about.Show();
         }
     }
 }

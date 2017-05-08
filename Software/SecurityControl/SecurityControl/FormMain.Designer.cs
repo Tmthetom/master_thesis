@@ -39,7 +39,8 @@
             this.panelHeader = new System.Windows.Forms.Panel();
             this.bunifuImageButtonExit = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuCustomLabelHeader = new Bunifu.Framework.UI.BunifuCustomLabel();
-            this.bunifuDragControl = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.bunifuDragControlHeader = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.bunifuDragControlHeaderText = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.panelHeader.SuspendLayout();
@@ -93,6 +94,7 @@
             this.bunifuFlatButtonAbout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuFlatButtonAbout.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButtonAbout.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuFlatButtonAbout.Click += new System.EventHandler(this.BunifuFlatButtonAbout_Click);
             // 
             // bunifuFlatButtonConnection
             // 
@@ -127,6 +129,7 @@
             this.bunifuFlatButtonConnection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuFlatButtonConnection.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButtonConnection.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuFlatButtonConnection.Click += new System.EventHandler(this.BunifuFlatButtonConnection_Click);
             // 
             // bunifuFlatButtonSettings
             // 
@@ -252,12 +255,19 @@
             this.bunifuCustomLabelHeader.TabIndex = 0;
             this.bunifuCustomLabelHeader.Text = "Technical University of Liberec - Security control";
             // 
-            // bunifuDragControl
+            // bunifuDragControlHeader
             // 
-            this.bunifuDragControl.Fixed = true;
-            this.bunifuDragControl.Horizontal = true;
-            this.bunifuDragControl.TargetControl = this.panelHeader;
-            this.bunifuDragControl.Vertical = true;
+            this.bunifuDragControlHeader.Fixed = true;
+            this.bunifuDragControlHeader.Horizontal = true;
+            this.bunifuDragControlHeader.TargetControl = this.panelHeader;
+            this.bunifuDragControlHeader.Vertical = true;
+            // 
+            // bunifuDragControlHeaderText
+            // 
+            this.bunifuDragControlHeaderText.Fixed = true;
+            this.bunifuDragControlHeaderText.Horizontal = true;
+            this.bunifuDragControlHeaderText.TargetControl = this.bunifuCustomLabelHeader;
+            this.bunifuDragControlHeaderText.Vertical = true;
             // 
             // FormMain
             // 
@@ -293,7 +303,8 @@
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonConnection;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabelHeader;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButtonExit;
-        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl;
+        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlHeader;
+        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlHeaderText;
     }
 }
 
