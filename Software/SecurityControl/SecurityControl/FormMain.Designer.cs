@@ -29,154 +29,271 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.treeView = new System.Windows.Forms.TreeView();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItemConnection = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemPort = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemBaudRate = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonSend = new System.Windows.Forms.Button();
-            this.textBoxOutput = new System.Windows.Forms.TextBox();
-            this.textBoxInput = new System.Windows.Forms.TextBox();
-            this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.connectDisconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip.SuspendLayout();
-            this.menuStrip.SuspendLayout();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.bunifuFlatButtonAbout = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.bunifuFlatButtonConnection = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.bunifuFlatButtonSettings = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.bunifuFlatButtonOverview = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.panelBody = new System.Windows.Forms.Panel();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.bunifuImageButtonExit = new Bunifu.Framework.UI.BunifuImageButton();
+            this.bunifuCustomLabelHeader = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuDragControl = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButtonExit)).BeginInit();
             this.SuspendLayout();
             // 
-            // statusStrip
+            // panelMenu
             // 
-            this.statusStrip.BackColor = System.Drawing.Color.DarkRed;
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 488);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(874, 22);
-            this.statusStrip.TabIndex = 0;
-            this.statusStrip.Text = "statusStrip";
+            this.panelMenu.BackColor = System.Drawing.SystemColors.Window;
+            this.panelMenu.Controls.Add(this.bunifuFlatButtonAbout);
+            this.panelMenu.Controls.Add(this.bunifuFlatButtonConnection);
+            this.panelMenu.Controls.Add(this.bunifuFlatButtonSettings);
+            this.panelMenu.Controls.Add(this.pictureBoxLogo);
+            this.panelMenu.Controls.Add(this.bunifuFlatButtonOverview);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(0, 39);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(245, 496);
+            this.panelMenu.TabIndex = 6;
             // 
-            // toolStripStatusLabel
+            // bunifuFlatButtonAbout
             // 
-            this.toolStripStatusLabel.ForeColor = System.Drawing.Color.White;
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(95, 17);
-            this.toolStripStatusLabel.Text = "Not connected...";
+            this.bunifuFlatButtonAbout.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.bunifuFlatButtonAbout.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonAbout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuFlatButtonAbout.BorderRadius = 0;
+            this.bunifuFlatButtonAbout.ButtonText = "About";
+            this.bunifuFlatButtonAbout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButtonAbout.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButtonAbout.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonAbout.Iconimage = null;
+            this.bunifuFlatButtonAbout.Iconimage_right = null;
+            this.bunifuFlatButtonAbout.Iconimage_right_Selected = null;
+            this.bunifuFlatButtonAbout.Iconimage_Selected = null;
+            this.bunifuFlatButtonAbout.IconMarginLeft = 0;
+            this.bunifuFlatButtonAbout.IconMarginRight = 0;
+            this.bunifuFlatButtonAbout.IconRightVisible = true;
+            this.bunifuFlatButtonAbout.IconRightZoom = 0D;
+            this.bunifuFlatButtonAbout.IconVisible = true;
+            this.bunifuFlatButtonAbout.IconZoom = 90D;
+            this.bunifuFlatButtonAbout.IsTab = true;
+            this.bunifuFlatButtonAbout.Location = new System.Drawing.Point(0, 424);
+            this.bunifuFlatButtonAbout.Name = "bunifuFlatButtonAbout";
+            this.bunifuFlatButtonAbout.Normalcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonAbout.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.bunifuFlatButtonAbout.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButtonAbout.selected = false;
+            this.bunifuFlatButtonAbout.Size = new System.Drawing.Size(246, 49);
+            this.bunifuFlatButtonAbout.TabIndex = 3;
+            this.bunifuFlatButtonAbout.Text = "About";
+            this.bunifuFlatButtonAbout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuFlatButtonAbout.Textcolor = System.Drawing.Color.Black;
+            this.bunifuFlatButtonAbout.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             // 
-            // treeView
+            // bunifuFlatButtonConnection
             // 
-            this.treeView.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView.Location = new System.Drawing.Point(0, 24);
-            this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(264, 464);
-            this.treeView.TabIndex = 1;
+            this.bunifuFlatButtonConnection.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.bunifuFlatButtonConnection.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonConnection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuFlatButtonConnection.BorderRadius = 0;
+            this.bunifuFlatButtonConnection.ButtonText = "Connection";
+            this.bunifuFlatButtonConnection.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButtonConnection.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButtonConnection.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonConnection.Iconimage = null;
+            this.bunifuFlatButtonConnection.Iconimage_right = null;
+            this.bunifuFlatButtonConnection.Iconimage_right_Selected = null;
+            this.bunifuFlatButtonConnection.Iconimage_Selected = null;
+            this.bunifuFlatButtonConnection.IconMarginLeft = 0;
+            this.bunifuFlatButtonConnection.IconMarginRight = 0;
+            this.bunifuFlatButtonConnection.IconRightVisible = true;
+            this.bunifuFlatButtonConnection.IconRightZoom = 0D;
+            this.bunifuFlatButtonConnection.IconVisible = true;
+            this.bunifuFlatButtonConnection.IconZoom = 90D;
+            this.bunifuFlatButtonConnection.IsTab = true;
+            this.bunifuFlatButtonConnection.Location = new System.Drawing.Point(0, 339);
+            this.bunifuFlatButtonConnection.Name = "bunifuFlatButtonConnection";
+            this.bunifuFlatButtonConnection.Normalcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonConnection.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.bunifuFlatButtonConnection.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButtonConnection.selected = false;
+            this.bunifuFlatButtonConnection.Size = new System.Drawing.Size(246, 49);
+            this.bunifuFlatButtonConnection.TabIndex = 2;
+            this.bunifuFlatButtonConnection.Text = "Connection";
+            this.bunifuFlatButtonConnection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuFlatButtonConnection.Textcolor = System.Drawing.Color.Black;
+            this.bunifuFlatButtonConnection.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             // 
-            // menuStrip
+            // bunifuFlatButtonSettings
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectDisconnectToolStripMenuItem,
-            this.toolStripMenuItemConnection});
-            this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(874, 24);
-            this.menuStrip.TabIndex = 2;
-            this.menuStrip.Text = "menuStrip1";
+            this.bunifuFlatButtonSettings.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.bunifuFlatButtonSettings.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuFlatButtonSettings.BorderRadius = 0;
+            this.bunifuFlatButtonSettings.ButtonText = "Settings";
+            this.bunifuFlatButtonSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButtonSettings.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButtonSettings.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonSettings.Iconimage = null;
+            this.bunifuFlatButtonSettings.Iconimage_right = null;
+            this.bunifuFlatButtonSettings.Iconimage_right_Selected = null;
+            this.bunifuFlatButtonSettings.Iconimage_Selected = null;
+            this.bunifuFlatButtonSettings.IconMarginLeft = 0;
+            this.bunifuFlatButtonSettings.IconMarginRight = 0;
+            this.bunifuFlatButtonSettings.IconRightVisible = true;
+            this.bunifuFlatButtonSettings.IconRightZoom = 0D;
+            this.bunifuFlatButtonSettings.IconVisible = true;
+            this.bunifuFlatButtonSettings.IconZoom = 90D;
+            this.bunifuFlatButtonSettings.IsTab = true;
+            this.bunifuFlatButtonSettings.Location = new System.Drawing.Point(0, 284);
+            this.bunifuFlatButtonSettings.Name = "bunifuFlatButtonSettings";
+            this.bunifuFlatButtonSettings.Normalcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonSettings.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.bunifuFlatButtonSettings.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButtonSettings.selected = false;
+            this.bunifuFlatButtonSettings.Size = new System.Drawing.Size(246, 49);
+            this.bunifuFlatButtonSettings.TabIndex = 1;
+            this.bunifuFlatButtonSettings.Text = "Settings";
+            this.bunifuFlatButtonSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuFlatButtonSettings.Textcolor = System.Drawing.Color.Black;
+            this.bunifuFlatButtonSettings.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             // 
-            // toolStripMenuItemConnection
+            // pictureBoxLogo
             // 
-            this.toolStripMenuItemConnection.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemPort,
-            this.toolStripMenuItemBaudRate});
-            this.toolStripMenuItemConnection.Name = "toolStripMenuItemConnection";
-            this.toolStripMenuItemConnection.Size = new System.Drawing.Size(61, 20);
-            this.toolStripMenuItemConnection.Text = "Settings";
+            this.pictureBoxLogo.Image = global::SecurityControl.Properties.Resources.FM_ctverce;
+            this.pictureBoxLogo.Location = new System.Drawing.Point(63, 53);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(120, 120);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLogo.TabIndex = 3;
+            this.pictureBoxLogo.TabStop = false;
             // 
-            // toolStripMenuItemPort
+            // bunifuFlatButtonOverview
             // 
-            this.toolStripMenuItemPort.Name = "toolStripMenuItemPort";
-            this.toolStripMenuItemPort.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemPort.Text = "Port";
+            this.bunifuFlatButtonOverview.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.bunifuFlatButtonOverview.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonOverview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuFlatButtonOverview.BorderRadius = 0;
+            this.bunifuFlatButtonOverview.ButtonText = "Overview";
+            this.bunifuFlatButtonOverview.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButtonOverview.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButtonOverview.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonOverview.Iconimage = null;
+            this.bunifuFlatButtonOverview.Iconimage_right = null;
+            this.bunifuFlatButtonOverview.Iconimage_right_Selected = null;
+            this.bunifuFlatButtonOverview.Iconimage_Selected = null;
+            this.bunifuFlatButtonOverview.IconMarginLeft = 0;
+            this.bunifuFlatButtonOverview.IconMarginRight = 0;
+            this.bunifuFlatButtonOverview.IconRightVisible = true;
+            this.bunifuFlatButtonOverview.IconRightZoom = 0D;
+            this.bunifuFlatButtonOverview.IconVisible = true;
+            this.bunifuFlatButtonOverview.IconZoom = 90D;
+            this.bunifuFlatButtonOverview.IsTab = true;
+            this.bunifuFlatButtonOverview.Location = new System.Drawing.Point(0, 229);
+            this.bunifuFlatButtonOverview.Name = "bunifuFlatButtonOverview";
+            this.bunifuFlatButtonOverview.Normalcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonOverview.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.bunifuFlatButtonOverview.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButtonOverview.selected = false;
+            this.bunifuFlatButtonOverview.Size = new System.Drawing.Size(246, 49);
+            this.bunifuFlatButtonOverview.TabIndex = 0;
+            this.bunifuFlatButtonOverview.Text = "Overview";
+            this.bunifuFlatButtonOverview.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuFlatButtonOverview.Textcolor = System.Drawing.Color.Black;
+            this.bunifuFlatButtonOverview.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             // 
-            // toolStripMenuItemBaudRate
+            // panelBody
             // 
-            this.toolStripMenuItemBaudRate.Name = "toolStripMenuItemBaudRate";
-            this.toolStripMenuItemBaudRate.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemBaudRate.Text = "BaudRate";
+            this.panelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBody.Location = new System.Drawing.Point(245, 39);
+            this.panelBody.Name = "panelBody";
+            this.panelBody.Size = new System.Drawing.Size(705, 496);
+            this.panelBody.TabIndex = 4;
             // 
-            // buttonSend
+            // panelHeader
             // 
-            this.buttonSend.Location = new System.Drawing.Point(270, 212);
-            this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(592, 36);
-            this.buttonSend.TabIndex = 3;
-            this.buttonSend.Text = "Send";
-            this.buttonSend.UseVisualStyleBackColor = true;
-            this.buttonSend.Click += new System.EventHandler(this.ButtonSend_Click);
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.panelHeader.Controls.Add(this.bunifuImageButtonExit);
+            this.panelHeader.Controls.Add(this.bunifuCustomLabelHeader);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(950, 39);
+            this.panelHeader.TabIndex = 0;
             // 
-            // textBoxOutput
+            // bunifuImageButtonExit
             // 
-            this.textBoxOutput.Location = new System.Drawing.Point(263, 254);
-            this.textBoxOutput.Multiline = true;
-            this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxOutput.Size = new System.Drawing.Size(611, 234);
-            this.textBoxOutput.TabIndex = 4;
+            this.bunifuImageButtonExit.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuImageButtonExit.Image = global::SecurityControl.Properties.Resources.multiply;
+            this.bunifuImageButtonExit.ImageActive = null;
+            this.bunifuImageButtonExit.InitialImage = null;
+            this.bunifuImageButtonExit.Location = new System.Drawing.Point(918, 9);
+            this.bunifuImageButtonExit.Name = "bunifuImageButtonExit";
+            this.bunifuImageButtonExit.Size = new System.Drawing.Size(20, 20);
+            this.bunifuImageButtonExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.bunifuImageButtonExit.TabIndex = 0;
+            this.bunifuImageButtonExit.TabStop = false;
+            this.bunifuImageButtonExit.Zoom = 20;
+            this.bunifuImageButtonExit.Click += new System.EventHandler(this.BunifuImageButtonExit_Click);
             // 
-            // textBoxInput
+            // bunifuCustomLabelHeader
             // 
-            this.textBoxInput.Location = new System.Drawing.Point(263, 24);
-            this.textBoxInput.Multiline = true;
-            this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(611, 182);
-            this.textBoxInput.TabIndex = 5;
+            this.bunifuCustomLabelHeader.AutoSize = true;
+            this.bunifuCustomLabelHeader.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuCustomLabelHeader.ForeColor = System.Drawing.Color.White;
+            this.bunifuCustomLabelHeader.Location = new System.Drawing.Point(12, 9);
+            this.bunifuCustomLabelHeader.Name = "bunifuCustomLabelHeader";
+            this.bunifuCustomLabelHeader.Size = new System.Drawing.Size(356, 20);
+            this.bunifuCustomLabelHeader.TabIndex = 0;
+            this.bunifuCustomLabelHeader.Text = "Technical University of Liberec - Security control";
             // 
-            // connectDisconnectToolStripMenuItem
+            // bunifuDragControl
             // 
-            this.connectDisconnectToolStripMenuItem.Name = "connectDisconnectToolStripMenuItem";
-            this.connectDisconnectToolStripMenuItem.Size = new System.Drawing.Size(128, 20);
-            this.connectDisconnectToolStripMenuItem.Text = "Connect/Disconnect";
-            this.connectDisconnectToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItemConnect_Click);
+            this.bunifuDragControl.Fixed = true;
+            this.bunifuDragControl.Horizontal = true;
+            this.bunifuDragControl.TargetControl = this.panelHeader;
+            this.bunifuDragControl.Vertical = true;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 510);
-            this.Controls.Add(this.textBoxInput);
-            this.Controls.Add(this.textBoxOutput);
-            this.Controls.Add(this.buttonSend);
-            this.Controls.Add(this.treeView);
-            this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(950, 535);
+            this.Controls.Add(this.panelBody);
+            this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelHeader);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SecurityControl";
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
+            this.Text = "FormMain";
+            this.panelMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButtonExit)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
-        private System.Windows.Forms.TreeView treeView;
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemConnection;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPort;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemBaudRate;
-        private System.Windows.Forms.Button buttonSend;
-        private System.Windows.Forms.TextBox textBoxOutput;
-        private System.Windows.Forms.TextBox textBoxInput;
-        private System.IO.Ports.SerialPort serialPort;
-        private System.Windows.Forms.ToolStripMenuItem connectDisconnectToolStripMenuItem;
+        private System.Windows.Forms.Panel panelMenu;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonOverview;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.Panel panelBody;
+        private System.Windows.Forms.Panel panelHeader;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonSettings;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonAbout;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonConnection;
+        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabelHeader;
+        private Bunifu.Framework.UI.BunifuImageButton bunifuImageButtonExit;
+        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl;
     }
 }
 
