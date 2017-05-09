@@ -1,3 +1,12 @@
+03. 05. 2017
+-> Odevzdání textu do 25. kvìtna, jeden výtisk, kroužková vazba.
+-> Finální projekt pøinést na flashdisku se vším.
+-> Abstrakt, úvod, teorie max 3 stránky, popis systému, závìr.
+-> Pøíští týden napsat jak jsem postoupil.
+-> 13. týden pøedvést reálnou aplikaci.
+-> Senzory na spinací a rozpínací.
+-> Dostal jsem GSM/GPRS + PIR + dveøní èidlo.
+
 26. 04. 2017
  -> Výrobce odpovìdìl negativnì.
  -> Mám základ programu, funkèní komunikaèní protokol.
