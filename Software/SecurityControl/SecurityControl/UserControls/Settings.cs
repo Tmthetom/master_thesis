@@ -16,5 +16,10 @@ namespace SecurityControl.UserControls
         {
             InitializeComponent();
         }
+
+        private void bunifuiOSSwitch1_OnValueChange(object sender, EventArgs e)
+        {
+
+        }
     }
 }

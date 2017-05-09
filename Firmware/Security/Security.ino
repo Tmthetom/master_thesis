@@ -1,4 +1,6 @@
 
+#pragma region Initialization
+
 /* Setting */
 
 const int baudRate = 9600;
@@ -14,6 +16,7 @@ String stringId = "Id";
 String stringPin = "Pin";
 String stringName = "Name";
 String stringState = "State";
+String stringType = "Type";
 String stringSeparator = ",";
 String stringOk = "OK";
 
@@ -53,6 +56,7 @@ boolean inComplete = false;
 int pinSensor[maxSensors];
 int stateSensorOld[maxSensors];
 int stateSensorNew[maxSensors];
+bool typeSensor[maxSensors];  // true = push-to-make, false = push-to-break
 String nameSensor[maxSensors];
 
 // Switch
@@ -64,25 +68,26 @@ void setup() {
 
 	// Sensors
 	pinSensor[0] = 8;
-	nameSensor[0] = "First door sensor";
-	pinSensor[1] = 9;
-	nameSensor[1] = "Second door sensor";
+	nameSensor[0] = "Main Door Sensor";
+	typeSensor[0] = false;  // Normaly open type = NO = Push to break
 	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(int), INPUT);
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
 
 	// Switches
-	pinSwitch[0] = 2;
-	nameSwitch[0] = "First led switch";
-	pinSwitch[1] = 3;
-	nameSwitch[1] = "Second led switch";
-	pinSwitch[2] = 4;
-	nameSwitch[2] = "Third led switch";
+	pinSwitch[0] = 3;
+	nameSwitch[0] = "Right Led Switch";
+	pinSwitch[1] = 4;
+	nameSwitch[1] = "Left Led Switch";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(int), OUTPUT);
 
 	// Communication
 	in.reserve(maxBytesOfMessage);
 	Serial.begin(baudRate);
 }
+
+#pragma endregion
+
+#pragma region Main program loops
 
 /* Main program loop */
 void loop() {
@@ -111,6 +116,12 @@ void readSerialAndRespond() {
 	}
 }
 
+#pragma endregion
+
+#pragma region Public
+
+#pragma region Getters
+
 /* Send all sensors */
 void getAllSensors() {
 	out = stringSensorsCategory + leftBracket;													// Name of category
@@ -128,6 +139,27 @@ void getAllSensors() {
 	Serial.println(out);
 }
 
+/* Send all switches */
+void getAllSwitches() {
+	out = stringSwitchesCategory + leftBracket;													// Name of category
+	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
+		if (pinSwitch[i] != NULL) {
+			out +=
+				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+				stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
+				stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
+				stringState + stringEquals + String(getSwitchState(i)) + rightBracket			// State
+				;
+		}
+	}
+	out += rightBracket;
+	Serial.println(out);
+}
+
+#pragma endregion
+
+#pragma region Setters
+
 /* Set sensor name */
 void setSensorName() {
 
@@ -137,9 +169,9 @@ void setSensorName() {
 	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
 	int id = stringAfter.substring(0, sep).toInt();										// Get Id
 	String name = stringAfter.substring(sep + 1);										// Get Value
-	
-	
-	// Check if exists
+
+
+																						// Check if exists
 	if (pinSensor[id] == NULL) {
 		Serial.println(stringErrorIdNull);
 		return;
@@ -162,23 +194,6 @@ void setSensorName() {
 
 	// Send OK
 	Serial.println(stringOk);
-}
-
-/* Send all switches */
-void getAllSwitches() {
-	out = stringSwitchesCategory + leftBracket;													// Name of category
-	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
-		if (pinSwitch[i] != NULL) {
-			out +=
-				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
-				stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
-				stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
-				stringState + stringEquals + String(getSwitchState(i)) + rightBracket			// State
-				;
-		}
-	}
-	out += rightBracket;
-	Serial.println(out);
 }
 
 /* Set sensor name */
@@ -227,8 +242,8 @@ void setSwitchState() {
 	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
 	int id = stringAfter.substring(0, sep).toInt();										// Get Id
 	int val = stringAfter.substring(sep + 1).toInt();									// Get Value
-	
-	// Check if sensor exists
+
+																						// Check if sensor exists
 	if (pinSwitch[id] == NULL) {
 		Serial.println(stringErrorIdNull);
 		return;
@@ -253,29 +268,13 @@ void setSwitchState() {
 	Serial.println(stringOk);
 }
 
-/* Check sensor state changed */
-void checkSensorStateChangedAndSendIfTrue() {
-	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorNew);
-	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
-		if (pinSensor[i] != NULL) {
-			if (stateSensorOld[i] != stateSensorNew[i]) {
-				stateSensorOld[i] = stateSensorNew[i];
-				Serial.println(
-					stringSensorCategory + leftBracket +										// Name of category
-					stringId + stringEquals + stringEquals + String(i) + stringSeparator +		// Id
-					stringPin + stringEquals + String(pinSensor[i]) + stringSeparator +			// Pin 
-					stringName + stringEquals + String(nameSensor[i]) + stringSeparator +		// Name
-					stringState + stringEquals + String(stateSensorOld[i]) + rightBracket		// State
-				);
-			}
-		}
-	}
-}
+#pragma endregion
 
-/* If command not recognized renspond to sender */
-void sendMessageNotRecognized() {
-	Serial.println("Command '" + in + "' not recognized.");
-}
+#pragma endregion
+
+#pragma region Private
+
+#pragma region Getters
 
 /* Get all sensors state [HIGH,LOW] */
 void getSensorsState(int pinSensors[], int size, int stateSensors[]) {
@@ -289,12 +288,25 @@ int getSwitchState(int id) {
 	if (pinSwitch[id] != NULL) return digitalRead(pinSwitch[id]);
 }
 
+#pragma endregion
+
+#pragma region Setters
+
 /* Set pin mode [INPUT/OUTPUT] */
 void setPinMode(int pins[], int size, int mode) {
 	if (mode != INPUT && mode != OUTPUT) return;
 	for (int i = 0; i < size; i++) {
 		if (pins[i] != NULL) pinMode(pins[i], mode);
 	}
+}
+
+#pragma endregion
+
+#pragma region Communication
+
+/* If command not recognized renspond to sender */
+void sendMessageNotRecognized() {
+	Serial.println("Command '" + in + "' not recognized.");
 }
 
 /* Serial interrput */
@@ -308,3 +320,28 @@ void serialEvent() {
 		}
 	}
 }
+
+#pragma endregion
+
+#pragma region Autocheck fuctions
+
+/* Check sensor state changed */
+void checkSensorStateChangedAndSendIfTrue() {
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorNew);
+	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
+		if (pinSensor[i] != NULL) {
+			if (stateSensorOld[i] != stateSensorNew[i]) {
+				stateSensorOld[i] = stateSensorNew[i];
+				Serial.println(
+					stringSensorCategory + leftBracket +										// Name of category
+					stringId + stringEquals + stringEquals + String(i) + stringSeparator +		// Id
+					stringState + stringEquals + String(stateSensorOld[i]) + rightBracket		// State
+				);
+			}
+		}
+	}
+}
+
+#pragma endregion
+
+#pragma endregion

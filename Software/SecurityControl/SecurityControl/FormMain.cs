@@ -14,23 +14,22 @@ namespace SecurityControl
 {
     public partial class FormMain : Form
     {
-        static Arduino.Connection myConnection = new Arduino.Connection();
-        UserControls.Overview overview = new UserControls.Overview();
-        UserControls.Settings settings = new UserControls.Settings();
-        UserControls.Connection connection = new UserControls.Connection(myConnection);
-        UserControls.About about = new UserControls.About();
+
+        #region Initialization
 
         public FormMain()
         {
             InitializeComponent();
-            //bunifuFlatButtonOverview.
-            //bunifuTransition1.ShowSync(bunifuFlatButtonOverview);
         }
 
-        private void BunifuImageButtonExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion Initialization
+
+        #region User Interface
+
+        UserControls.Overview overview = new UserControls.Overview();
+        UserControls.Settings settings = new UserControls.Settings();
+        UserControls.Connection connection = new UserControls.Connection(myConnection);
+        UserControls.About about = new UserControls.About();
 
         /// <summary>
         /// Menu Overview button
@@ -83,5 +82,61 @@ namespace SecurityControl
             about.Dock = DockStyle.Fill;
             about.Show();
         }
+
+        /// <summary>
+        /// Exit button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BunifuImageButtonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion User Interface
+
+        #region Communication
+
+        static Arduino.Connection myConnection = new Arduino.Connection();
+
+        /// <summary>
+        /// What method is called, when data is recieved
+        /// </summary>
+        private void InitDataReciever()
+        {
+            myConnection.SetDataReciever(SerialPort_DataReceived);
+        }
+
+        private void ButtonSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort mySerial = sender as SerialPort;
+                string indata = mySerial.ReadExisting();
+
+                MethodInvoker action = delegate
+                { /*textBoxOutput.Text += indata;*/ };
+                //textBoxOutput.BeginInvoke(action);
+            }
+            catch
+            {
+                ;
+            }
+        }
+
+        #endregion Communication
+
     }
 }
