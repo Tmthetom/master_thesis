@@ -29,6 +29,23 @@ namespace SecurityControl.Functions
         /// </summary>
         /// <param name="title">Title of notification</param>
         /// <param name="text">Text in notification</param>
+        /// <param name="icon">Icon in notification</param>
+        public void Notification_Balloon(string text, Icon icon)
+        {
+            NotifyIcon balloon = new NotifyIcon()
+            {
+                Icon = icon,
+                Visible = true
+            };
+            balloon.ShowBalloonTip(3000, "", text, ToolTipIcon.None);
+            balloon.Dispose();
+        }
+
+        /// <summary>
+        /// Popup balloon notification (Windows 10 only)
+        /// </summary>
+        /// <param name="title">Title of notification</param>
+        /// <param name="text">Text in notification</param>
         public void Notification_Balloon(string title, string text)
         {
             NotifyIcon balloon = new NotifyIcon()
