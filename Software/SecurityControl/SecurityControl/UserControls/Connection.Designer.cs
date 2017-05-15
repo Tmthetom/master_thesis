@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.bunifuFlatButton1 = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.bunifuConnectionButton = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuDropdownPort = new Bunifu.Framework.UI.BunifuDropdown();
             this.bunifuDropdownBaudRate = new Bunifu.Framework.UI.BunifuDropdown();
             this.labelPort = new System.Windows.Forms.Label();
@@ -37,40 +37,40 @@
             this.timerConnectionCheck = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // bunifuFlatButton1
+            // bunifuConnectionButton
             // 
-            this.bunifuFlatButton1.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
-            this.bunifuFlatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
-            this.bunifuFlatButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuFlatButton1.BorderRadius = 0;
-            this.bunifuFlatButton1.ButtonText = "Connect";
-            this.bunifuFlatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuFlatButton1.DisabledColor = System.Drawing.Color.Gray;
-            this.bunifuFlatButton1.Iconcolor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButton1.Iconimage = null;
-            this.bunifuFlatButton1.Iconimage_right = null;
-            this.bunifuFlatButton1.Iconimage_right_Selected = null;
-            this.bunifuFlatButton1.Iconimage_Selected = null;
-            this.bunifuFlatButton1.IconMarginLeft = 0;
-            this.bunifuFlatButton1.IconMarginRight = 0;
-            this.bunifuFlatButton1.IconRightVisible = true;
-            this.bunifuFlatButton1.IconRightZoom = 0D;
-            this.bunifuFlatButton1.IconVisible = true;
-            this.bunifuFlatButton1.IconZoom = 90D;
-            this.bunifuFlatButton1.IsTab = false;
-            this.bunifuFlatButton1.Location = new System.Drawing.Point(230, 332);
-            this.bunifuFlatButton1.Name = "bunifuFlatButton1";
-            this.bunifuFlatButton1.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
-            this.bunifuFlatButton1.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
-            this.bunifuFlatButton1.OnHoverTextColor = System.Drawing.Color.White;
-            this.bunifuFlatButton1.selected = false;
-            this.bunifuFlatButton1.Size = new System.Drawing.Size(241, 48);
-            this.bunifuFlatButton1.TabIndex = 0;
-            this.bunifuFlatButton1.Text = "Connect";
-            this.bunifuFlatButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuFlatButton1.Textcolor = System.Drawing.Color.Black;
-            this.bunifuFlatButton1.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bunifuFlatButton1.Click += new System.EventHandler(this.BunifuFlatButton1_Click);
+            this.bunifuConnectionButton.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(139)))), ((int)(((byte)(87)))));
+            this.bunifuConnectionButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
+            this.bunifuConnectionButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuConnectionButton.BorderRadius = 0;
+            this.bunifuConnectionButton.ButtonText = "Connect";
+            this.bunifuConnectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuConnectionButton.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuConnectionButton.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuConnectionButton.Iconimage = null;
+            this.bunifuConnectionButton.Iconimage_right = null;
+            this.bunifuConnectionButton.Iconimage_right_Selected = null;
+            this.bunifuConnectionButton.Iconimage_Selected = null;
+            this.bunifuConnectionButton.IconMarginLeft = 0;
+            this.bunifuConnectionButton.IconMarginRight = 0;
+            this.bunifuConnectionButton.IconRightVisible = true;
+            this.bunifuConnectionButton.IconRightZoom = 0D;
+            this.bunifuConnectionButton.IconVisible = true;
+            this.bunifuConnectionButton.IconZoom = 90D;
+            this.bunifuConnectionButton.IsTab = false;
+            this.bunifuConnectionButton.Location = new System.Drawing.Point(230, 332);
+            this.bunifuConnectionButton.Name = "bunifuConnectionButton";
+            this.bunifuConnectionButton.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
+            this.bunifuConnectionButton.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.bunifuConnectionButton.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuConnectionButton.selected = false;
+            this.bunifuConnectionButton.Size = new System.Drawing.Size(241, 48);
+            this.bunifuConnectionButton.TabIndex = 0;
+            this.bunifuConnectionButton.Text = "Connect";
+            this.bunifuConnectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuConnectionButton.Textcolor = System.Drawing.Color.Black;
+            this.bunifuConnectionButton.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuConnectionButton.Click += new System.EventHandler(this.BunifuConnecionButton_Click);
             // 
             // bunifuDropdownPort
             // 
@@ -136,7 +136,7 @@
             this.Controls.Add(this.labelPort);
             this.Controls.Add(this.bunifuDropdownBaudRate);
             this.Controls.Add(this.bunifuDropdownPort);
-            this.Controls.Add(this.bunifuFlatButton1);
+            this.Controls.Add(this.bunifuConnectionButton);
             this.Name = "Connection";
             this.Size = new System.Drawing.Size(705, 496);
             this.ResumeLayout(false);
@@ -146,7 +146,7 @@
 
         #endregion
 
-        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButton1;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuConnectionButton;
         private Bunifu.Framework.UI.BunifuDropdown bunifuDropdownPort;
         private Bunifu.Framework.UI.BunifuDropdown bunifuDropdownBaudRate;
         private System.Windows.Forms.Label labelPort;

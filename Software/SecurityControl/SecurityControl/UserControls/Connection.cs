@@ -125,15 +125,38 @@ namespace SecurityControl.UserControls
                 // Initialize form after connection
 
                 // Inform about successfull connection
-                functions.Notification_Balloon("Connection completed",
+                functions.Notification_Balloon("Connected",
                     "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
-                    SecurityControl.Properties.Resources.icon);
+                    Properties.Resources.icon);
             }
             catch
             {
                 functions.Notification_Balloon("Connectino failed",
-                    "Cannot connect to selected port",
-                    SecurityControl.Properties.Resources.icon);
+                    "Cannot connect to selected port, please check connection and try it again.",
+                    Properties.Resources.icon);
+            }
+        }
+
+        /// <summary>
+        /// Connect to selected Port with selected BaudRate
+        /// </summary>
+        private void Disonnect()
+        {
+            try
+            {
+                // Close old connection
+                myConnection.Close();
+
+                // Inform about successfull connection
+                functions.Notification_Balloon("Disconnected",
+                    "Successfully disconected from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
+                    Properties.Resources.icon);
+            }
+            catch
+            {
+                functions.Notification_Balloon("Disconnection failed",
+                    "Cannot disconnect from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate. Please check connection and try it again.",
+                    Properties.Resources.icon);
             }
         }
 
@@ -142,9 +165,17 @@ namespace SecurityControl.UserControls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BunifuFlatButton1_Click(object sender, EventArgs e)
+        private void BunifuConnecionButton_Click(object sender, EventArgs e)
         {
-            Connect();
+            if (bunifuConnectionButton.Text.Equals("Connect")) {
+                Connect();
+            }
+            else
+            {
+                Disonnect();
+                timerConnectionCheck.Interval = timerNotConnected;  // Set to not connected
+                bunifuConnectionButton.Text = "Connect";
+            }
         }
 
         private int timerConnected = 1100;
@@ -160,20 +191,25 @@ namespace SecurityControl.UserControls
             // If connection lost or not connected
             if (!myConnection.IsOpen())
             {
-                if (timerConnectionCheck.Interval == timerConnected)  // But was connected before
+                // Scan for ports
+                InitPorts();
+
+                // Check if was connected before
+                if (timerConnectionCheck.Interval == timerConnected)
                 {
                     functions.Notification_Balloon("Connectino lost",
-                    "Cannot connect to selected port",
-                    Properties.Resources.icon);
-                    timerConnectionCheck.Interval = timerNotConnected;  // Every selected time check ports
+                        "Arduino connection was lost, please check connection and try to connect manually.",
+                        Properties.Resources.icon);
+                    timerConnectionCheck.Interval = timerNotConnected;  // Set to not connected
+                    bunifuConnectionButton.Text = "Connect";
                 }
-                InitPorts();  // Scan for ports
             }
 
             // If connected 
             else if (timerConnectionCheck.Interval != timerConnected)  // But was not connected before
             {
-                timerConnectionCheck.Interval = timerConnected;  // Every selected time check connection
+                timerConnectionCheck.Interval = timerConnected;  // Set to connected
+                bunifuConnectionButton.Text = "Disconnect";
             }
         }
 
