@@ -30,6 +30,7 @@ String stringSensorsCategory = "Sensors";
 String stringGetAllSensors = "GetAllSensors";
 String stringSetSensorName = "SetSensorName";
 String stringSetSensorPin = "SetSensorPin";
+String stringSetSensorType = "SetSensorType";
 String stringAddSensor = "AddSensor";
 String stringDeleteSensor = "DeleteSensor";
 
@@ -107,14 +108,18 @@ void readSerialAndRespond() {
 		// Sensors
 		if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
 		else if (in.startsWith(stringSetSensorName)) setSensorName();
+		else if (in.startsWith(stringSetSensorPin)) setSensorPin();
+		else if (in.startsWith(stringSetSensorType)) setSensorType();
+		else if (in.startsWith(stringAddSensor)) addSensor();
+		else if (in.startsWith(stringDeleteSensor)) deleteSensor();
 
 		// Switches 
 		else if (in.equalsIgnoreCase(stringGetAllSwitches)) getAllSwitches();
 		else if (in.startsWith(stringSetSwitchState)) setSwitchState();
 		else if (in.startsWith(stringSetSwitchName)) setSwitchName();
-		else if (in.startsWith(stringSetSwitchPin)) SetSwitchPin();
-		else if (in.startsWith(stringAddSwitch)) AddSwitch();
-		else if (in.startsWith(stringDeleteSwitch)) DeleteSwitch();
+		else if (in.startsWith(stringSetSwitchPin)) setSwitchPin();
+		else if (in.startsWith(stringAddSwitch)) addSwitch();
+		else if (in.startsWith(stringDeleteSwitch)) deleteSwitch();
 
 		// Not recognized
 		else sendMessageNotRecognized();
@@ -208,6 +213,171 @@ void setSensorName() {
 	Serial.println(stringOk);
 }
 
+/* Set sensor pin */
+void setSensorPin() {
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();										// Get Id
+	int val = stringAfter.substring(sep + 1).toInt();									// Get Value
+
+	// Check if exists
+	if (pinSensor[id] == NULL) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Check if value not same
+	int before = pinSensor[id];
+	if (before == val) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Do change
+	pinSensor[id] = val;
+
+	// Check if changed
+	int after = pinSensor[id];
+	if (before == after) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Check new state
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
+
+	// Send OK
+	pinMode(before, INPUT);			// Old pin to Input
+	pinMode(val, OUTPUT);			// New pin to Output
+	Serial.println(stringOk);
+}
+
+/* Set sensor type */
+void setSensorType() {
+
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();										// Get Id
+	int val = stringAfter.substring(sep + 1).toInt();									// Get Value
+
+	// Check if exists
+	if (pinSensor[id] == NULL) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Set state
+	digitalWrite(pinSensor[id], (val == 1) ? HIGH : LOW);
+
+
+	// Send OK
+	Serial.println(stringOk);
+}
+
+/* Add sensor */
+void addSensor() {
+
+	// Get wanted Pin
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep1 = stringAfter.indexOf(stringSeparator);									// Get index of separator
+	int pin = stringAfter.substring(0, sep1).toInt();									// Get Id
+	int sep2;
+	String s;
+
+	// Name
+	s = stringAfter.substring(sep1 + 1);												// String from current separator to end
+	sep2 = s.indexOf(stringSeparator);													// Get index of another separator
+	String name = s.substring(0, sep2);													// Get Value
+	sep1 = sep2;																		// Save position of last separator as first
+
+	// Type
+	s = s.substring(sep1 + 1);															// String from current separator to end
+	sep2 = s.indexOf(stringSeparator);													// Get index of another separator
+	int type = s.substring(0, sep2).toInt();											// Get Value
+	sep1 = sep2;																		// Save position of last separator as first
+
+	// Find free space, get ID and set Pin
+	int id = -1;
+	bool set = false;
+	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
+		if (pinSensor[i] == NULL) {
+			id = i;
+			pinSensor[i] = pin;
+			set = true;
+			break;
+		}
+	}
+
+	// Check if free space founded
+	if (!set) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Check if pin setted
+	int pinAfter = pinSensor[id];
+	if (pinAfter != pin) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Set name
+	nameSensor[id] = name;
+
+	// Check if name setted
+	String nameAfter = nameSensor[id];
+	if (!nameAfter.equals(name)) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Set type
+	typeSensor[id] = (type == 1) ? true : false;
+
+	// Check new sensor
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
+
+	// Send OK
+	pinMode(pin, OUTPUT);			// New pin to Output
+	Serial.println(stringOk);
+}
+
+/* Delete sensor */
+void deleteSensor() {
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int id = stringAfter.toInt();														// Get Value
+
+	// Check if exists
+	if (pinSensor[id] == NULL) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Delete pin
+	int pin = pinSensor[id];
+	pinSensor[id] = NULL;
+
+	// Delete name
+	nameSensor[id] = "";
+
+	// Delete type
+	typeSensor[id] = false;
+
+	// Delete states
+	stateSensorOld[id] = NULL;
+	stateSensorNew[id] = NULL;
+
+	// Send OK
+	Serial.println(stringOk);
+}
+
 /* Add Sensor */
 void AddSensor() {
 
@@ -292,7 +462,7 @@ void setSwitchState() {
 }
 
 /* Set switch pin */
-void SetSwitchPin() {
+void setSwitchPin() {
 	
 	// Get wanted id and value
 	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
@@ -331,7 +501,7 @@ void SetSwitchPin() {
 }
 
 /* Add Switch */
-void AddSwitch() {
+void addSwitch() {
 	
 	// Get wanted Pin
 	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
@@ -344,20 +514,20 @@ void AddSwitch() {
 	// Name
 	s = stringAfter.substring(sep1 + 1);												// String from current separator to end
 	sep2 = s.indexOf(stringSeparator);													// Get index of another separator
-	String name = s.substring(sep1 + 1, sep2);											// Get Value
+	String name = s.substring(0, sep2);													// Get Value
 	sep1 = sep2;																		// Save position of last separator as first
 
 	// State
 	s = s.substring(sep1 + 1);															// String from current separator to end
 	sep2 = s.indexOf(stringSeparator);													// Get index of another separator
-	int state = s.substring(sep1 + 1, sep2).toInt();									// Get Value
+	int state = s.substring(0, sep2).toInt();											// Get Value
 	sep1 = sep2;																		// Save position of last separator as first
 
 	// Find free space, get ID and set Pin
-	int id;
+	int id = -1;
 	bool set = false;
 	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
-		if (pinSwitch[i] != NULL) {
+		if (pinSwitch[i] == NULL) {
 			id = i;
 			pinSwitch[i] = pin;
 			set = true;
@@ -404,8 +574,29 @@ void AddSwitch() {
 }
 
 /* Delete Switch*/
-void DeleteSwitch() {
-	;
+void deleteSwitch() {
+
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int id = stringAfter.toInt();														// Get Value
+
+	// Check if exists
+	if (pinSwitch[id] == NULL) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Delete pin
+	int pin = pinSwitch[id];
+	pinSwitch[id] = NULL;
+
+	// Delete name
+	nameSwitch[id] = "";
+
+	// Send OK
+	pinMode(pin, INPUT);			// New pin to Input
+	Serial.println(stringOk);
 }
 
 #pragma endregion
