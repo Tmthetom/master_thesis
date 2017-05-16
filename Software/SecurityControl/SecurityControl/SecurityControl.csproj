@@ -99,6 +99,12 @@
     <Compile Include="UserControls\Sensor.Designer.cs">
       <DependentUpon>Sensor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SensorSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SensorSettings.Designer.cs">
+      <DependentUpon>SensorSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Settings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +116,12 @@
     </Compile>
     <Compile Include="UserControls\Switch.Designer.cs">
       <DependentUpon>Switch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SwitchSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SwitchSettings.Designer.cs">
+      <DependentUpon>SwitchSettings.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormConnection.resx">
       <DependentUpon>FormConnection.cs</DependentUpon>
@@ -142,11 +154,17 @@
     <EmbeddedResource Include="UserControls\Sensor.resx">
       <DependentUpon>Sensor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SensorSettings.resx">
+      <DependentUpon>SensorSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Switch.resx">
       <DependentUpon>Switch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SwitchSettings.resx">
+      <DependentUpon>SwitchSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

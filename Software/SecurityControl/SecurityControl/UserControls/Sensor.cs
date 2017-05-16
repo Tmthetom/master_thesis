@@ -12,6 +12,7 @@ namespace SecurityControl.UserControls
 {
     public partial class Sensor : UserControl
     {
+        FormMain myParent;
         Arduino.Operations myOperations;
         public int Id { get; private set; } = 0;
         public int Pin { get; private set; } = 0;
@@ -22,16 +23,18 @@ namespace SecurityControl.UserControls
         /// <summary>
         /// Create new Sensor visual component
         /// </summary>
+        /// <param name="parent">Main form</param>
         /// <param name="operations">Operations for Arduino</param>
         /// <param name="pin">Id</param>
         /// <param name="pin">Pin</param>
         /// <param name="name">Custom name</param>
         /// <param name="state">Current state</param>
         /// <param name="type">Type of sensor (true = push-to-make, false = push-to-break)</param>
-        public Sensor(Arduino.Operations operations, int id, int pin, string name, bool state, bool type)
+        public Sensor(FormMain parent, Arduino.Operations operations, int id, int pin, string name, bool state, bool type)
         {
             InitializeComponent();
 
+            myParent = parent;
             myOperations = operations;
             SetId(id);
             SetPin(pin);
@@ -87,6 +90,20 @@ namespace SecurityControl.UserControls
             this.Type = type;
             if (type) labelSensorType.Text = "Push to make type";
             else labelSensorType.Text = "Push to break type";
+        }
+
+        /// <summary>
+        /// Show sensor settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PictureBoxSettings_Click(object sender, EventArgs e)
+        {
+            SensorSettings sensorSettings = new SensorSettings(myParent);
+            myParent.panelBody.Controls.Clear();
+            myParent.panelBody.Controls.Add(sensorSettings);
+            sensorSettings.Dock = DockStyle.Fill;
+            sensorSettings.Show();
         }
     }
 }

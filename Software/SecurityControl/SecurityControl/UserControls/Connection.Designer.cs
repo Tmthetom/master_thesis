@@ -69,7 +69,7 @@
             this.bunifuConnectionButton.Text = "Connect";
             this.bunifuConnectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuConnectionButton.Textcolor = System.Drawing.Color.Black;
-            this.bunifuConnectionButton.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuConnectionButton.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.bunifuConnectionButton.Click += new System.EventHandler(this.BunifuConnecionButton_Click);
             // 
             // bunifuDropdownPort
@@ -103,22 +103,22 @@
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelPort.ForeColor = System.Drawing.Color.White;
-            this.labelPort.Location = new System.Drawing.Point(111, 142);
+            this.labelPort.Location = new System.Drawing.Point(111, 145);
             this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(40, 18);
+            this.labelPort.Size = new System.Drawing.Size(35, 16);
             this.labelPort.TabIndex = 3;
             this.labelPort.Text = "Port:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(111, 211);
+            this.label1.Location = new System.Drawing.Point(111, 212);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 18);
+            this.label1.Size = new System.Drawing.Size(69, 16);
             this.label1.TabIndex = 4;
             this.label1.Text = "Baud rate:";
             // 

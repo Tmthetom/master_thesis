@@ -17,9 +17,22 @@ namespace SecurityControl
 
         #region Initialization
 
+        public UserControls.Connection connection;
+        public UserControls.Overview overview;
+        public UserControls.Settings settings;
+        public UserControls.About about;
+
         public FormMain()
         {
             InitializeComponent();
+
+            // Initialisation
+            connection = new UserControls.Connection(this, myConnection);
+            overview = new UserControls.Overview(this, myConnection);
+            settings = new UserControls.Settings();
+            about = new UserControls.About();
+
+            // Select First Menu Item
             bunifuFlatButtonOverview.selected = true;
             BunifuFlatButtonOverview_Click(this, new EventArgs());
         }
@@ -27,11 +40,6 @@ namespace SecurityControl
         #endregion Initialization
 
         #region User Interface
-
-        UserControls.Connection connection = new UserControls.Connection(myConnection);
-        UserControls.Overview overview = new UserControls.Overview(myConnection);
-        UserControls.Settings settings = new UserControls.Settings();
-        UserControls.About about = new UserControls.About();
 
         /// <summary>
         /// Menu Overview button

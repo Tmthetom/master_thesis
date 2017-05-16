@@ -12,6 +12,7 @@ namespace SecurityControl.UserControls
 {
     public partial class Switch : UserControl
     {
+        FormMain myParent;
         Arduino.Operations myOperations;
         public int Id { get; private set; } = 0;
         public int Pin { get; private set; } = 0;
@@ -21,15 +22,17 @@ namespace SecurityControl.UserControls
         /// <summary>
         /// Create new Switch visual component
         /// </summary>
+        /// <param name="parent">Main form</param>
         /// <param name="operations">Operations for Arduino</param>
         /// <param name="pin">Id</param>
         /// <param name="pin">Pin</param>
         /// <param name="name">Custom name</param>
         /// <param name="state">Current state</param>
-        public Switch(Arduino.Operations operations, int id, int pin, string name, bool state)
+        public Switch(FormMain parent, Arduino.Operations operations, int id, int pin, string name, bool state)
         {
             InitializeComponent();
 
+            myParent = parent;
             myOperations = operations;
             SetId(id);
             SetPin(pin);
@@ -83,6 +86,20 @@ namespace SecurityControl.UserControls
         private void BunifuSwitchState_OnValueChange(object sender, EventArgs e)
         {
             myOperations.SetSwitchState(Id, bunifuSwitchState.Value);
+        }
+
+        /// <summary>
+        /// Show sensor settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PictureBoxSettings_Click(object sender, EventArgs e)
+        {
+            SwitchSettings switchSettings = new SwitchSettings(myParent);
+            myParent.panelBody.Controls.Clear();
+            myParent.panelBody.Controls.Add(switchSettings);
+            switchSettings.Dock = DockStyle.Fill;
+            switchSettings.Show();
         }
     }
 }

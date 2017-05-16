@@ -8,14 +8,16 @@ namespace SecurityControl.Arduino
     {
         #region Initialisation
 
+        FormMain myParent;
         Connection myConnection;
 
         /// <summary>
         /// Initialise operations with connection
         /// </summary>
         /// <param name="connection">Arduino connection</param>
-        public Operations(Connection connection)
+        public Operations(FormMain parent, Connection connection)
         {
+            this.myParent = parent;
             this.myConnection = connection;
         }
 
@@ -48,7 +50,7 @@ namespace SecurityControl.Arduino
                     bool state = (Int32.Parse(match.Groups[4].Value) == 0) ? false : true;
                     bool type = (Int32.Parse(match.Groups[5].Value) == 0) ? false : true;
 
-                    sensors.Add(new UserControls.Sensor(this, id, pin, name, state, type));
+                    sensors.Add(new UserControls.Sensor(myParent, this, id, pin, name, state, type));
                 }
             }
 
@@ -79,7 +81,7 @@ namespace SecurityControl.Arduino
                     String name = match.Groups[3].Value;
                     bool state = (Int32.Parse(match.Groups[4].Value) == 0) ? false : true;
 
-                    switches.Add(new UserControls.Switch(this, id, pin, name, state));
+                    switches.Add(new UserControls.Switch(myParent, this, id, pin, name, state));
                 }
             }
 

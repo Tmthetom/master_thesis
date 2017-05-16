@@ -138,7 +138,7 @@
             this.bunifuFlatButtonSettings.BackColor = System.Drawing.Color.Transparent;
             this.bunifuFlatButtonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bunifuFlatButtonSettings.BorderRadius = 0;
-            this.bunifuFlatButtonSettings.ButtonText = "Settings";
+            this.bunifuFlatButtonSettings.ButtonText = "Features";
             this.bunifuFlatButtonSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bunifuFlatButtonSettings.DisabledColor = System.Drawing.Color.Gray;
             this.bunifuFlatButtonSettings.Iconcolor = System.Drawing.Color.Transparent;
@@ -161,7 +161,7 @@
             this.bunifuFlatButtonSettings.selected = false;
             this.bunifuFlatButtonSettings.Size = new System.Drawing.Size(246, 49);
             this.bunifuFlatButtonSettings.TabIndex = 1;
-            this.bunifuFlatButtonSettings.Text = "Settings";
+            this.bunifuFlatButtonSettings.Text = "Features";
             this.bunifuFlatButtonSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuFlatButtonSettings.Textcolor = System.Drawing.Color.Black;
             this.bunifuFlatButtonSettings.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -300,7 +300,6 @@
         private System.Windows.Forms.Panel panelMenu;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonOverview;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
-        private System.Windows.Forms.Panel panelBody;
         private System.Windows.Forms.Panel panelHeader;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonSettings;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonAbout;
@@ -309,6 +308,7 @@
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButtonExit;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlHeader;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlHeaderText;
+        public System.Windows.Forms.Panel panelBody;
     }
 }
 

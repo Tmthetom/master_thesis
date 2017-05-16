@@ -12,6 +12,7 @@ namespace SecurityControl.UserControls
 {
     public partial class Overview : UserControl
     {
+        FormMain myParent;
         Arduino.Connection myConnection;
         Arduino.Operations myOperations;
         int currentTop = 25;
@@ -21,11 +22,13 @@ namespace SecurityControl.UserControls
         /// Initialise overview with connection
         /// </summary>
         /// <param name="connection">Arduino connection</param>
-        public Overview(Arduino.Connection connection)
+        /// <param name="parent">Parent of this form</param>
+        public Overview(FormMain parent, Arduino.Connection connection)
         {
             InitializeComponent();
+            myParent = parent;
             this.myConnection = connection;
-            myOperations = new Arduino.Operations(myConnection);
+            myOperations = new Arduino.Operations(myParent, myConnection);
             InitialiseComponents();
         }
 
@@ -34,8 +37,23 @@ namespace SecurityControl.UserControls
         /// </summary>
         public void InitialiseComponents()
         {
-            AddSensors(myOperations.GetAllSensors());
-            AddSwitches(myOperations.GetAllSwitches());
+            try
+            {
+                List<UserControls.Sensor> sensors = myOperations.GetAllSensors();
+                List<UserControls.Switch> switches = myOperations.GetAllSwitches();
+
+                //if (sensors.Count < 1 && switches.Count < 1) this.Controls.Clear();
+
+                AddSensors(sensors);
+                AddSwitches(switches);
+            }
+            catch
+            {
+
+            }
+            List<UserControls.Sensor> s = new List<Sensor>();
+            s.Add(new Sensor(myParent, myOperations, 0, 1, "Sensor numero uno", false, false));
+            AddSensors(s);
         }
 
         /// <summary>

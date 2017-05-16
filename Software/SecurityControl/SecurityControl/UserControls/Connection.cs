@@ -15,15 +15,17 @@ namespace SecurityControl.UserControls
     {
         #region Initialization
 
+        FormMain myParent;
         Arduino.Connection myConnection;
         Functions.Functions myFunctions = new Functions.Functions();
 
-        public Connection(Arduino.Connection myConnection)
+        public Connection(FormMain parent, Arduino.Connection myConnection)
         {
             this.myConnection = myConnection;
             InitializeComponent();
             InitializeValues();
             Connect();
+            myParent = parent;
             timerConnectionCheck.Enabled = true;
         }
 
@@ -124,6 +126,7 @@ namespace SecurityControl.UserControls
 
                 // Initialize form after connection
 
+
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Connected",
                     "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
@@ -210,6 +213,7 @@ namespace SecurityControl.UserControls
             {
                 timerConnectionCheck.Interval = timerConnected;  // Set to connected
                 bunifuConnectionButton.Text = "Disconnect";
+                myParent.overview.InitialiseComponents();
             }
         }
 

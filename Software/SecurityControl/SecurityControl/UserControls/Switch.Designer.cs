@@ -79,12 +79,13 @@
             // 
             this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.settings;
-            this.pictureBoxSettings.Location = new System.Drawing.Point(597, 6);
+            this.pictureBoxSettings.Location = new System.Drawing.Point(600, 8);
             this.pictureBoxSettings.Name = "pictureBoxSettings";
-            this.pictureBoxSettings.Size = new System.Drawing.Size(33, 32);
+            this.pictureBoxSettings.Size = new System.Drawing.Size(30, 27);
             this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxSettings.TabIndex = 24;
             this.pictureBoxSettings.TabStop = false;
+            this.pictureBoxSettings.Click += new System.EventHandler(this.PictureBoxSettings_Click);
             // 
             // Switch
             // 
