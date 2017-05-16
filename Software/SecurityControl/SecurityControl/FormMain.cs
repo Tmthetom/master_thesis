@@ -20,6 +20,8 @@ namespace SecurityControl
         public FormMain()
         {
             InitializeComponent();
+            bunifuFlatButtonOverview.selected = true;
+            BunifuFlatButtonOverview_Click(this, new EventArgs());
         }
 
         #endregion Initialization

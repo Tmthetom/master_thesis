@@ -12,17 +12,36 @@ namespace SecurityControl.UserControls
 {
     public partial class Overview : UserControl
     {
-        Arduino.Connection myConnection = null;
-        Arduino.Operations myOperations = new Arduino.Operations();
+        Arduino.Connection myConnection;
+        Arduino.Operations myOperations;
         int currentTop = 25;
         int indentLeft = 35;
 
+        /// <summary>
+        /// Initialise overview with connection
+        /// </summary>
+        /// <param name="connection">Arduino connection</param>
         public Overview(Arduino.Connection connection)
         {
             InitializeComponent();
             this.myConnection = connection;
+            myOperations = new Arduino.Operations(myConnection);
+            InitialiseComponents();
         }
 
+        /// <summary>
+        /// Initialise components
+        /// </summary>
+        public void InitialiseComponents()
+        {
+            AddSensors(myOperations.GetAllSensors());
+            AddSwitches(myOperations.GetAllSwitches());
+        }
+
+        /// <summary>
+        /// Add switches into panel
+        /// </summary>
+        /// <param name="switches">List of switches</param>
         public void AddSwitches(List<UserControls.Switch> switches)
         {
             foreach (UserControls.Switch mySwitch in switches)
@@ -34,6 +53,10 @@ namespace SecurityControl.UserControls
             }
         }
 
+        /// <summary>
+        /// Add sensors into panel
+        /// </summary>
+        /// <param name="sensors">List of panels</param>
         public void AddSensors(List<UserControls.Sensor> sensors)
         {
             foreach (UserControls.Sensor mySensor in sensors)
@@ -43,12 +66,6 @@ namespace SecurityControl.UserControls
                 this.Controls.Add(mySensor);
                 currentTop += mySensor.Height;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddSensors(myOperations.GetAllSensors(myConnection));
-            AddSwitches(myOperations.GetAllSwitches(myConnection));
         }
     }
 }

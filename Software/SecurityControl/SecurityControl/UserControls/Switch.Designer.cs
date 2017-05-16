@@ -71,6 +71,7 @@
             this.bunifuSwitchState.Size = new System.Drawing.Size(43, 25);
             this.bunifuSwitchState.TabIndex = 15;
             this.bunifuSwitchState.Value = false;
+            this.bunifuSwitchState.OnValueChange += new System.EventHandler(this.BunifuSwitchState_OnValueChange);
             // 
             // Switch
             // 

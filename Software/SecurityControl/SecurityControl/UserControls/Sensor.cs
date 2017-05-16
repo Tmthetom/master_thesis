@@ -12,6 +12,7 @@ namespace SecurityControl.UserControls
 {
     public partial class Sensor : UserControl
     {
+        Arduino.Operations myOperations;
         public int Id { get; private set; } = 0;
         public int Pin { get; private set; } = 0;
         public string CustomName { get; private set; } = "";
@@ -21,15 +22,17 @@ namespace SecurityControl.UserControls
         /// <summary>
         /// Create new Sensor visual component
         /// </summary>
+        /// <param name="operations">Operations for Arduino</param>
         /// <param name="pin">Id</param>
         /// <param name="pin">Pin</param>
         /// <param name="name">Custom name</param>
         /// <param name="state">Current state</param>
         /// <param name="type">Type of sensor (true = push-to-make, false = push-to-break)</param>
-        public Sensor(int id, int pin, string name, bool state, bool type)
+        public Sensor(Arduino.Operations operations, int id, int pin, string name, bool state, bool type)
         {
             InitializeComponent();
 
+            myOperations = operations;
             SetId(id);
             SetPin(pin);
             SetCustomName(name);

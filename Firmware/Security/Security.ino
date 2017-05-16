@@ -29,6 +29,7 @@ String stringSensorCategory = "Sensor";
 String stringSensorsCategory = "Sensors";
 String stringGetAllSensors = "GetAllSensors";
 String stringSetSensorName = "SetSensorName";
+String stringSetSensorPin = "SetSensorPin";
 
 // Switch
 String stringSwitchCategory = "Switch";
@@ -36,7 +37,7 @@ String stringSwitchesCategory = "Switches";
 String stringGetAllSwitches = "GetAllSwitches";
 String stringSetSwitchState = "SetSwitchState";
 String stringSetSwitchName = "SetSwitchName";
-String stringChangeSwitchState = "ChangeSwitchState";
+String stringSetSwitchPin = "SetSwitchPin";
 
 // Error
 String stringError = "ERROR: ";

@@ -12,6 +12,7 @@ namespace SecurityControl.UserControls
 {
     public partial class Switch : UserControl
     {
+        Arduino.Operations myOperations;
         public int Id { get; private set; } = 0;
         public int Pin { get; private set; } = 0;
         public string CustomName { get; private set; }  = "";
@@ -20,14 +21,16 @@ namespace SecurityControl.UserControls
         /// <summary>
         /// Create new Switch visual component
         /// </summary>
+        /// <param name="operations">Operations for Arduino</param>
         /// <param name="pin">Id</param>
         /// <param name="pin">Pin</param>
         /// <param name="name">Custom name</param>
         /// <param name="state">Current state</param>
-        public Switch(int id, int pin, string name, bool state)
+        public Switch(Arduino.Operations operations, int id, int pin, string name, bool state)
         {
             InitializeComponent();
 
+            myOperations = operations;
             SetId(id);
             SetPin(pin);
             SetCustomName(name);
@@ -70,6 +73,16 @@ namespace SecurityControl.UserControls
         {
             this.State = newState;
             bunifuSwitchState.Value = newState;
+        }
+
+        /// <summary>
+        /// When user want to change switch state
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BunifuSwitchState_OnValueChange(object sender, EventArgs e)
+        {
+            myOperations.SetSwitchState(Id, bunifuSwitchState.Value);
         }
     }
 }
