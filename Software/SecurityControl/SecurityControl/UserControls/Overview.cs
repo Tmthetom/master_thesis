@@ -51,9 +51,6 @@ namespace SecurityControl.UserControls
             {
 
             }
-            List<UserControls.Sensor> s = new List<Sensor>();
-            s.Add(new Sensor(myParent, myOperations, 0, 1, "Sensor numero uno", false, false));
-            AddSensors(s);
         }
 
         /// <summary>

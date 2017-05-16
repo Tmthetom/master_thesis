@@ -20,6 +20,14 @@ namespace SecurityControl.UserControls
             myParent = parent;
             mySensor = sensor;
             InitializeComponent();
+            Fill();
+        }
+
+        private void Fill()
+        {
+            bunifuMaterialTextboxName.Text = mySensor.CustomName;
+            bunifuMaterialTextboxPin.Text = mySensor.Pin.ToString();
+            bunifuDropdownType.selectedIndex = (mySensor.Type == false) ? 0 : 1;
         }
 
         private void BunifuBackButton_Click(object sender, EventArgs e)
