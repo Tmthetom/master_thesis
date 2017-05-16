@@ -13,10 +13,12 @@ namespace SecurityControl.UserControls
     public partial class SensorSettings : UserControl
     {
         FormMain myParent;
+        Sensor mySensor;
 
-        public SensorSettings(FormMain parent)
+        public SensorSettings(FormMain parent, Sensor sensor)
         {
             myParent = parent;
+            mySensor = sensor;
             InitializeComponent();
         }
 

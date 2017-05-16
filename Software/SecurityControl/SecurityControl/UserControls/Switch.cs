@@ -95,7 +95,7 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void PictureBoxSettings_Click(object sender, EventArgs e)
         {
-            SwitchSettings switchSettings = new SwitchSettings(myParent);
+            SwitchSettings switchSettings = new SwitchSettings(myParent, this);
             myParent.panelBody.Controls.Clear();
             myParent.panelBody.Controls.Add(switchSettings);
             switchSettings.Dock = DockStyle.Fill;

@@ -13,10 +13,12 @@ namespace SecurityControl.UserControls
     public partial class SwitchSettings : UserControl
     {
         FormMain myParent;
+        Switch mySwitch;
 
-        public SwitchSettings(FormMain parent)
+        public SwitchSettings(FormMain parent, Switch switcher)
         {
             myParent = parent;
+            mySwitch = switcher;
             InitializeComponent();
         }
 
