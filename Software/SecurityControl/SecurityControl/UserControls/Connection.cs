@@ -16,7 +16,7 @@ namespace SecurityControl.UserControls
         #region Initialization
 
         Arduino.Connection myConnection;
-        Functions.Functions functions = new Functions.Functions();
+        Functions.Functions myFunctions = new Functions.Functions();
 
         public Connection(Arduino.Connection myConnection)
         {
@@ -125,13 +125,13 @@ namespace SecurityControl.UserControls
                 // Initialize form after connection
 
                 // Inform about successfull connection
-                functions.Notification_Balloon("Connected",
+                myFunctions.Notification_Balloon("Connected",
                     "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
                     Properties.Resources.icon);
             }
             catch
             {
-                functions.Notification_Balloon("Connectino failed",
+                myFunctions.Notification_Balloon("Connectino failed",
                     "Cannot connect to selected port, please check connection and try it again.",
                     Properties.Resources.icon);
             }
@@ -148,13 +148,13 @@ namespace SecurityControl.UserControls
                 myConnection.Close();
 
                 // Inform about successfull connection
-                functions.Notification_Balloon("Disconnected",
+                myFunctions.Notification_Balloon("Disconnected",
                     "Successfully disconected from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
                     Properties.Resources.icon);
             }
             catch
             {
-                functions.Notification_Balloon("Disconnection failed",
+                myFunctions.Notification_Balloon("Disconnection failed",
                     "Cannot disconnect from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate. Please check connection and try it again.",
                     Properties.Resources.icon);
             }
@@ -197,7 +197,7 @@ namespace SecurityControl.UserControls
                 // Check if was connected before
                 if (timerConnectionCheck.Interval == timerConnected)
                 {
-                    functions.Notification_Balloon("Connectino lost",
+                    myFunctions.Notification_Balloon("Connectino lost",
                         "Arduino connection was lost, please check connection and try to connect manually.",
                         Properties.Resources.icon);
                     timerConnectionCheck.Interval = timerNotConnected;  // Set to not connected

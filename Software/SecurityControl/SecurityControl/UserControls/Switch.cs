@@ -12,30 +12,60 @@ namespace SecurityControl.UserControls
 {
     public partial class Switch : UserControl
     {
+        public int Id { get; private set; } = 0;
         public int Pin { get; private set; } = 0;
         public string CustomName { get; private set; }  = "";
         public bool State { get; private set; } = false;
 
-        public Switch(int pin, string name, bool state)
+        /// <summary>
+        /// Create new Switch visual component
+        /// </summary>
+        /// <param name="pin">Id</param>
+        /// <param name="pin">Pin</param>
+        /// <param name="name">Custom name</param>
+        /// <param name="state">Current state</param>
+        public Switch(int id, int pin, string name, bool state)
         {
             InitializeComponent();
 
+            SetId(id);
             SetPin(pin);
-            SetName(name);
+            SetCustomName(name);
             SetState(state);
         }
 
+        /// <summary>
+        /// Change id
+        /// </summary>
+        /// <param name="newId">New id</param>
+        public void SetId(int newId)
+        {
+            this.Id = newId;
+        }
+
+        /// <summary>
+        /// Change pin
+        /// </summary>
+        /// <param name="newPin">New pin</param>
         public void SetPin(int newPin)
         {
             this.Pin = newPin;
         }
 
-        public void SetName(string newName)
+        /// <summary>
+        /// Change custom name
+        /// </summary>
+        /// <param name="newCustomName">New custom name</param>
+        public void SetCustomName(string newCustomName)
         {
-            this.CustomName = newName;
-            labelSwitchName.Text = newName;
+            this.CustomName = newCustomName;
+            labelSwitchName.Text = newCustomName;
         }
 
+        /// <summary>
+        /// Change current state
+        /// </summary>
+        /// <param name="newState">New current state</param>
         public void SetState(bool newState)
         {
             this.State = newState;

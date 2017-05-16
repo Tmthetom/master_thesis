@@ -26,9 +26,9 @@ namespace SecurityControl
 
         #region User Interface
 
-        UserControls.Overview overview = new UserControls.Overview();
-        UserControls.Settings settings = new UserControls.Settings();
         UserControls.Connection connection = new UserControls.Connection(myConnection);
+        UserControls.Overview overview = new UserControls.Overview(myConnection);
+        UserControls.Settings settings = new UserControls.Settings();
         UserControls.About about = new UserControls.About();
 
         /// <summary>

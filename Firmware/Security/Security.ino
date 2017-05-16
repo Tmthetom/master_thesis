@@ -131,7 +131,8 @@ void getAllSensors() {
 				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
 				stringPin + stringEquals + String(pinSensor[i]) + stringSeparator +				// Pin 
 				stringName + stringEquals + String(nameSensor[i]) + stringSeparator +			// Name
-				stringState + stringEquals + String(stateSensorOld[i]) + rightBracket			// State
+				stringState + stringEquals + String(stateSensorOld[i]) + stringSeparator + 		// State
+				stringType + stringEquals + String(typeSensor[i]) + rightBracket				// Type
 				;
 		}
 	}
@@ -327,6 +328,7 @@ void serialEvent() {
 
 /* Check sensor state changed */
 void checkSensorStateChangedAndSendIfTrue() {
+	/*
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorNew);
 	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
 		if (pinSensor[i] != NULL) {
@@ -339,7 +341,7 @@ void checkSensorStateChangedAndSendIfTrue() {
 				);
 			}
 		}
-	}
+	}*/
 }
 
 #pragma endregion

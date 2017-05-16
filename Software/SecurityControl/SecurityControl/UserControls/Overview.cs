@@ -12,46 +12,43 @@ namespace SecurityControl.UserControls
 {
     public partial class Overview : UserControl
     {
+        Arduino.Connection myConnection = null;
+        Arduino.Operations myOperations = new Arduino.Operations();
         int currentTop = 25;
         int indentLeft = 35;
 
-        public Overview()
+        public Overview(Arduino.Connection connection)
         {
             InitializeComponent();
+            this.myConnection = connection;
         }
 
-        public void AddSwitch(int pin, string name, bool state)
+        public void AddSwitches(List<UserControls.Switch> switches)
         {
-            Switch newSwitch = new Switch(pin, name, state)
+            foreach (UserControls.Switch mySwitch in switches)
             {
-                Top = currentTop,
-                Left = indentLeft
-            };
-            this.Controls.Add(newSwitch);
-
-            currentTop += newSwitch.Height;
+                mySwitch.Top = currentTop;
+                mySwitch.Left = indentLeft;
+                this.Controls.Add(mySwitch);
+                currentTop += mySwitch.Height;
+            }
         }
 
-        public void AddSensor(int pin, string name, bool state, bool type)
+        public void AddSensors(List<UserControls.Sensor> sensors)
         {
-            Sensor newSwitch = new Sensor(pin, name, state, type)
+            foreach (UserControls.Sensor mySensor in sensors)
             {
-                Top = currentTop,
-                Left = indentLeft
-            };
-            this.Controls.Add(newSwitch);
-
-            currentTop += newSwitch.Height;
+                mySensor.Top = currentTop;
+                mySensor.Left = indentLeft;
+                this.Controls.Add(mySensor);
+                currentTop += mySensor.Height;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AddSwitch(0, "Testing switch", true);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            AddSensor(0, "Testing sensor", true, true);
+            AddSensors(myOperations.GetAllSensors(myConnection));
+            AddSwitches(myOperations.GetAllSwitches(myConnection));
         }
     }
 }

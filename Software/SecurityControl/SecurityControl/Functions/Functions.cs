@@ -7,7 +7,7 @@ namespace SecurityControl.Functions
 {
     class Functions
     {
-        /* Last updated 08. 05. 2017 */
+        /* Last updated 16. 05. 2017 */
 
         #region Notification Ballooon
 
@@ -17,9 +17,11 @@ namespace SecurityControl.Functions
         /// <param name="text">Text in notification</param>
         public void Notification_Balloon(string text)
         {
-            NotifyIcon balloon = new NotifyIcon();
-            balloon.Icon = SystemIcons.Application;
-            balloon.Visible = true;
+            NotifyIcon balloon = new NotifyIcon()
+            {
+                Icon = SystemIcons.Application,
+                Visible = true
+            };
             balloon.ShowBalloonTip(3000, "", text, ToolTipIcon.Info);
             balloon.Dispose();
         }

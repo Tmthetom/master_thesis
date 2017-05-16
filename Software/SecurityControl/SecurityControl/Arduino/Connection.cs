@@ -57,8 +57,8 @@ namespace SecurityControl.Arduino
         /// <summary>
         /// Set connection parametres
         /// </summary>
-        /// <param name="port"></param>
-        /// <param name="baudRate"></param>
+        /// <param name="port">Port to connect</param>
+        /// <param name="baudRate">Speed to connect with</param>
         public void SetConnection(string port, int baudRate)
         {
             mySerial.PortName = port;

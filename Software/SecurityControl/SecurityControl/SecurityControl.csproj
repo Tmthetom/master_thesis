@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arduino\Connection.cs" />
+    <Compile Include="Arduino\Operations.cs" />
     <Compile Include="FormConnection.cs">
       <SubType>Form</SubType>
     </Compile>
