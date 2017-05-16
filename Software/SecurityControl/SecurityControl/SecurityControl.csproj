@@ -173,5 +173,8 @@
   <ItemGroup>
     <None Include="Resources\FM_ctverce.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

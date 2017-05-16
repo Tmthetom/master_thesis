@@ -32,6 +32,8 @@
             this.bunifuSeparator = new Bunifu.Framework.UI.BunifuSeparator();
             this.labelSwitchName = new System.Windows.Forms.Label();
             this.bunifuSwitchState = new Bunifu.Framework.UI.BunifuiOSSwitch();
+            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuSeparator
@@ -73,16 +75,29 @@
             this.bunifuSwitchState.Value = false;
             this.bunifuSwitchState.OnValueChange += new System.EventHandler(this.BunifuSwitchState_OnValueChange);
             // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.settings;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(597, 6);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(33, 32);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSettings.TabIndex = 24;
+            this.pictureBoxSettings.TabStop = false;
+            // 
             // Switch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.Controls.Add(this.pictureBoxSettings);
             this.Controls.Add(this.labelSwitchName);
             this.Controls.Add(this.bunifuSwitchState);
             this.Controls.Add(this.bunifuSeparator);
             this.Name = "Switch";
             this.Size = new System.Drawing.Size(630, 78);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,5 +108,6 @@
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator;
         private System.Windows.Forms.Label labelSwitchName;
         private Bunifu.Framework.UI.BunifuiOSSwitch bunifuSwitchState;
+        private System.Windows.Forms.PictureBox pictureBoxSettings;
     }
 }

@@ -33,6 +33,8 @@
             this.labelSensorName = new System.Windows.Forms.Label();
             this.labelSensorType = new System.Windows.Forms.Label();
             this.bunifuSensorState = new Bunifu.Framework.UI.BunifuiOSSwitch();
+            this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuSeparator
@@ -63,7 +65,7 @@
             // 
             this.labelSensorType.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelSensorType.ForeColor = System.Drawing.Color.White;
-            this.labelSensorType.Location = new System.Drawing.Point(477, 13);
+            this.labelSensorType.Location = new System.Drawing.Point(377, 13);
             this.labelSensorType.Name = "labelSensorType";
             this.labelSensorType.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelSensorType.Size = new System.Drawing.Size(153, 17);
@@ -86,17 +88,30 @@
             this.bunifuSensorState.TabIndex = 22;
             this.bunifuSensorState.Value = false;
             // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.settings;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(597, 6);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(33, 32);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSettings.TabIndex = 23;
+            this.pictureBoxSettings.TabStop = false;
+            // 
             // Sensor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.Controls.Add(this.pictureBoxSettings);
             this.Controls.Add(this.bunifuSensorState);
             this.Controls.Add(this.labelSensorType);
             this.Controls.Add(this.labelSensorName);
             this.Controls.Add(this.bunifuSeparator);
             this.Name = "Sensor";
             this.Size = new System.Drawing.Size(630, 78);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -108,5 +123,6 @@
         private System.Windows.Forms.Label labelSensorName;
         private System.Windows.Forms.Label labelSensorType;
         private Bunifu.Framework.UI.BunifuiOSSwitch bunifuSensorState;
+        private System.Windows.Forms.PictureBox pictureBoxSettings;
     }
 }
