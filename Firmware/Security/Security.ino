@@ -30,6 +30,8 @@ String stringSensorsCategory = "Sensors";
 String stringGetAllSensors = "GetAllSensors";
 String stringSetSensorName = "SetSensorName";
 String stringSetSensorPin = "SetSensorPin";
+String stringAddSensor = "AddSensor";
+String stringDeleteSensor = "DeleteSensor";
 
 // Switch
 String stringSwitchCategory = "Switch";
@@ -38,13 +40,11 @@ String stringGetAllSwitches = "GetAllSwitches";
 String stringSetSwitchState = "SetSwitchState";
 String stringSetSwitchName = "SetSwitchName";
 String stringSetSwitchPin = "SetSwitchPin";
+String stringAddSwitch = "AddSwitch";
+String stringDeleteSwitch = "DeleteSwitch";
 
 // Error
-String stringError = "ERROR: ";
-String stringErrorIdNull = stringError + "Id is not defined.";
-String stringErrorValueNotChanged = stringError + "Value not changed.";
-String stringErrorNameSame = stringError + "Name is same.";
-String stringErrorValueSame = stringError + "Value is same.";
+String stringError = "ERROR";
 
 /* Variables */
 
@@ -106,10 +106,17 @@ void readSerialAndRespond() {
 		
 		// Sensors
 		if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
+		else if (in.startsWith(stringSetSensorName)) setSensorName();
+
+		// Switches 
 		else if (in.equalsIgnoreCase(stringGetAllSwitches)) getAllSwitches();
 		else if (in.startsWith(stringSetSwitchState)) setSwitchState();
-		else if (in.startsWith(stringSetSensorName)) setSensorName();
 		else if (in.startsWith(stringSetSwitchName)) setSwitchName();
+		else if (in.startsWith(stringSetSwitchPin)) SetSwitchPin();
+		else if (in.startsWith(stringAddSwitch)) AddSwitch();
+		else if (in.startsWith(stringDeleteSwitch)) DeleteSwitch();
+
+		// Not recognized
 		else sendMessageNotRecognized();
 
 		in = "";
@@ -162,6 +169,8 @@ void getAllSwitches() {
 
 #pragma region Setters
 
+#pragma region Sensor
+
 /* Set sensor name */
 void setSensorName() {
 
@@ -172,31 +181,41 @@ void setSensorName() {
 	int id = stringAfter.substring(0, sep).toInt();										// Get Id
 	String name = stringAfter.substring(sep + 1);										// Get Value
 
-
-																						// Check if exists
+	// Check if exists
 	if (pinSensor[id] == NULL) {
-		Serial.println(stringErrorIdNull);
+		Serial.println(stringError);
 		return;
 	}
 
-	// Get current name
+	// Check if value not same
 	String before = nameSensor[id];
 	if (before == name) {
-		Serial.println(stringErrorNameSame);
+		Serial.println(stringError);
 		return;
 	}
 
 	// Do rename
 	nameSensor[id] = name;
+
+	// Check if changed
 	String after = nameSensor[id];
 	if (before == after) {
-		Serial.println(stringErrorValueNotChanged);
+		Serial.println(stringError);
 		return;
 	}
 
 	// Send OK
 	Serial.println(stringOk);
 }
+
+/* Add Sensor */
+void AddSensor() {
+
+}
+
+#pragma endregion
+
+#pragma region Switch
 
 /* Set sensor name */
 void setSwitchName() {
@@ -208,26 +227,26 @@ void setSwitchName() {
 	int id = stringAfter.substring(0, sep).toInt();										// Get Id
 	String name = stringAfter.substring(sep + 1);										// Get Value
 
-	Serial.println(stringAfter);
-
 	// Check if exists
 	if (pinSwitch[id] == NULL) {
-		Serial.println(stringErrorIdNull);
+		Serial.println(stringError);
 		return;
 	}
 
-	// Get current name
+	// Check if value not same
 	String before = nameSwitch[id];
 	if (before == name) {
-		Serial.println(stringErrorNameSame);
+		Serial.println(stringError);
 		return;
 	}
 
 	// Do rename
 	nameSwitch[id] = name;
+
+	// Check if changed
 	String after = nameSwitch[id];
 	if (before == after) {
-		Serial.println(stringErrorValueNotChanged);
+		Serial.println(stringError);
 		return;
 	}
 
@@ -245,30 +264,151 @@ void setSwitchState() {
 	int id = stringAfter.substring(0, sep).toInt();										// Get Id
 	int val = stringAfter.substring(sep + 1).toInt();									// Get Value
 
-																						// Check if sensor exists
+	// Check if exists
 	if (pinSwitch[id] == NULL) {
-		Serial.println(stringErrorIdNull);
+		Serial.println(stringError);
 		return;
 	}
 
-	// Get current values
+	// Check if value not same
 	int before = getSwitchState(id);
 	if (before == val) {
-		Serial.println(stringErrorValueSame);
+		Serial.println(stringError);
 		return;
 	}
 
 	// Do Switch
 	digitalWrite(pinSwitch[id], (val == 1) ? HIGH : LOW);
+
+	// Check if changed
 	int after = getSwitchState(id);
 	if (before == after) {
-		Serial.println(stringErrorValueNotChanged);
+		Serial.println(stringError);
 		return;
 	}
 
 	// Send OK
 	Serial.println(stringOk);
 }
+
+/* Set switch pin */
+void SetSwitchPin() {
+	
+	// Get wanted id and value
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep = stringAfter.indexOf(stringSeparator);										// Get index of separator
+	int id = stringAfter.substring(0, sep).toInt();										// Get Id
+	int val = stringAfter.substring(sep + 1).toInt();									// Get Value
+
+	// Check if exists
+	if (pinSwitch[id] == NULL) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Check if value not same
+	int before = pinSwitch[id];
+	if (before == val) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Do change
+	pinSwitch[id] = val;
+
+	// Check if changed
+	int after = pinSwitch[id];
+	if (before == after) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Send OK
+	pinMode(before, INPUT);			// Old pin to Input
+	pinMode(val, OUTPUT);			// New pin to Output
+	Serial.println(stringOk);
+}
+
+/* Add Switch */
+void AddSwitch() {
+	
+	// Get wanted Pin
+	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
+	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
+	int sep1 = stringAfter.indexOf(stringSeparator);									// Get index of separator
+	int pin = stringAfter.substring(0, sep1).toInt();									// Get Id
+	int sep2;
+	String s;
+
+	// Name
+	s = stringAfter.substring(sep1 + 1);												// String from current separator to end
+	sep2 = s.indexOf(stringSeparator);													// Get index of another separator
+	String name = s.substring(sep1 + 1, sep2);											// Get Value
+	sep1 = sep2;																		// Save position of last separator as first
+
+	// State
+	s = s.substring(sep1 + 1);															// String from current separator to end
+	sep2 = s.indexOf(stringSeparator);													// Get index of another separator
+	int state = s.substring(sep1 + 1, sep2).toInt();									// Get Value
+	sep1 = sep2;																		// Save position of last separator as first
+
+	// Find free space, get ID and set Pin
+	int id;
+	bool set = false;
+	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
+		if (pinSwitch[i] != NULL) {
+			id = i;
+			pinSwitch[i] = pin;
+			set = true;
+			break;
+		}
+	}
+
+	// Check if free space founded
+	if (!set) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Check if pin setted
+	int pinAfter = pinSwitch[id];
+	if (pinAfter != pin) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Set name
+	nameSwitch[id] = name;
+
+	// Check if name setted
+	String nameAfter = nameSwitch[id];
+	if (!nameAfter.equals(name)) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Set state
+	digitalWrite(pin, (state == 1) ? HIGH : LOW);
+
+	// Check if changed
+	int stateAfter = getSwitchState(id);
+	if (state != stateAfter) {
+		Serial.println(stringError);
+		return;
+	}
+
+	// Send OK
+	pinMode(pin, OUTPUT);			// New pin to Output
+	Serial.println(stringOk);
+}
+
+/* Delete Switch*/
+void DeleteSwitch() {
+	;
+}
+
+#pragma endregion
 
 #pragma endregion
 
