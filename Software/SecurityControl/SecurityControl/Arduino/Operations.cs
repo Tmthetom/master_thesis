@@ -101,33 +101,58 @@ namespace SecurityControl.Arduino
         /// <param name="name">New name</param>
         public void SetSensorName(int id, String name)
         {
-            throw new NotImplementedException();
+            if (id > -1 && id < 100)
+                myConnection.Send("SetSwitchName(" + id + "," + name + ")");
         }
 
         /// <summary>
-        /// Set pin of switch id
+        /// Set pin of sensor id
         /// </summary>
         /// <param name="id">id</param>
         /// <param name="pin">new pin</param>
         public void SetSensorPin(int id, int pin)
         {
-            throw new NotImplementedException();
+            if (id > -1 && id < 100 && pin > 0 && pin < 100)
+                myConnection.Send("SetSwitchPin(" + id + "," + pin + ")");
+        }
+
+        /// <summary>
+        /// Set type of sensor id
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="type">true = push-to-make, false = push-to-break</param>
+        public void SetSensorType(int id, bool type)
+        {
+            if (id > -1 && id < 100)
+            {
+                int intType = (type == false) ? 0 : 1;
+                myConnection.Send("SetSwitchState(" + id + "," + intType + ")");
+            }
+        }
+
+
+        public void AddSensor()
+        {
+            if (pin > 0 && pin < 100)
+            {
+                int intState = (state == false) ? 0 : 1;  // 1 = HIGH, 0 = LOW
+                myConnection.Send("AddSwitch(" + pin + "," + name + "," + state + ")");
+            }
+        }
+
+        /// <summary>
+        /// Delete sensor
+        /// </summary>
+        /// <param name="id">Id</param>
+        public void DeleteSensor(int id)
+        {
+            if (id > -1 && id < 100)
+                myConnection.Send("DeleteSwitch(" + id + ")");
         }
 
         #endregion Sensor
 
         #region Switch
-
-        /// <summary>
-        /// Set state of switch id
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <param name="state">New state</param>
-        public void SetSwitchState(int id, bool state)
-        {
-            int intState = (state == false) ? 0 : 1;
-            myConnection.Send("SetSwitchState(" + id + "," + intState);
-        }
 
         /// <summary>
         /// Set name of switch id
@@ -136,7 +161,22 @@ namespace SecurityControl.Arduino
         /// <param name="name">New name</param>
         public void SetSwitchName(int id, String name)
         {
-            throw new NotImplementedException();
+            if (id > -1 && id < 100)
+                myConnection.Send("SetSwitchName(" + id + "," + name + ")");
+        }
+
+        /// <summary>
+        /// Set state of switch id
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="state">New state</param>
+        public void SetSwitchState(int id, bool state)
+        {
+            if (id > -1 && id < 100)
+            {
+                int intState = (state == false) ? 0 : 1;
+                myConnection.Send("SetSwitchState(" + id + "," + intState + ")");
+            }
         }
 
         /// <summary>
@@ -146,7 +186,33 @@ namespace SecurityControl.Arduino
         /// <param name="pin">New pin</param>
         public void SetSwitchPin(int id, int pin)
         {
-            throw new NotImplementedException();
+            if (id > -1 && id < 100 && pin > 0 && pin < 100)
+                myConnection.Send("SetSwitchPin(" + id + "," + pin + ")");
+        }
+
+        /// <summary>
+        /// Add switch
+        /// </summary>
+        /// <param name="pin">Pin</param>
+        /// <param name="name">Custom name</param>
+        /// <param name="state">true = High, false = Low</param>
+        public void AddSwitch(int pin, String name, bool state)
+        {
+            if (pin > 0 && pin < 100)
+            {
+                int intState = (state == false) ? 0 : 1;  // 1 = HIGH, 0 = LOW
+                myConnection.Send("AddSwitch(" + pin + "," + name + "," + state + ")");
+            }
+        }
+
+        /// <summary>
+        /// Delete switch
+        /// </summary>
+        /// <param name="id">Id</param>
+        public void DeleteSwitch(int id)
+        {
+            if (id > -1 && id < 100)
+                myConnection.Send("DeleteSwitch(" + id + ")");
         }
 
         #endregion Switch
