@@ -132,7 +132,7 @@ namespace SecurityControl.Arduino
         /// <returns>Answer for command</returns>
         public string ReadLine()
         {
-            return mySerial.ReadLine();
+            return mySerial.ReadLine().Trim();
         }
         #endregion Operations
     }

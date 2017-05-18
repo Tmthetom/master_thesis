@@ -18,7 +18,6 @@ String stringName = "Name";
 String stringState = "State";
 String stringType = "Type";
 String stringSeparator = ",";
-String stringOk = "OK";
 
 // Functions
 String leftBracket = "(";
@@ -44,7 +43,8 @@ String stringSetSwitchPin = "SetSwitchPin";
 String stringAddSwitch = "AddSwitch";
 String stringDeleteSwitch = "DeleteSwitch";
 
-// Error
+// Answers
+String stringOk = "OK";
 String stringError = "ERROR";
 
 /* Variables */

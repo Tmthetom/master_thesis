@@ -223,5 +223,18 @@ namespace SecurityControl.Arduino
         #endregion Switch
 
         #endregion Setters
+
+        #region Reader
+
+        /// <summary>
+        /// Read
+        /// </summary>
+        /// <returns></returns>
+        public string ReadLine()
+        {
+            return myConnection.ReadLine();
+        }
+
+        #endregion Reader
     }
 }

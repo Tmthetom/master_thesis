@@ -18,6 +18,7 @@ namespace SecurityControl.UserControls
         Sensor mySensor;
         Arduino.Operations myOperations;
         Functions.Functions myFunctions = new Functions.Functions();
+        String stringOk = "OK";
 
         public SensorSettings(FormMain parent, Sensor sensor, Arduino.Operations operations)
         {
@@ -65,8 +66,19 @@ namespace SecurityControl.UserControls
             String newName = bunifuMaterialTextboxName.Text.Trim();
             if (!newName.Equals(""))
             {
-                myFunctions.Notification_Balloon("Sensor name changed.", "Successfully changed name from " + mySensor.Name + " to " + newName + ".");
+                string oldName = mySensor.Name;
                 myOperations.SetSensorName(mySensor.Id, newName);
+
+                // Check response
+                string response = myOperations.ReadLine();
+                if (response.Equals(stringOk))
+                {
+                    myFunctions.Notification_Balloon("Sensor name changed", "Successfully changed name from " + oldName + " to " + newName + ".");
+                }
+                else
+                {
+                    myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+                }
             }
             else
             {
@@ -86,8 +98,19 @@ namespace SecurityControl.UserControls
                 int newPin = Int32.Parse(bunifuMaterialTextboxPin.Text);
                 if (newPin >= 0 && newPin <= 100)
                 {
-                    myFunctions.Notification_Balloon("Sensor pin changed.", "Successfully changed pin from " + mySensor.Pin + " to " + newPin + ".");
+                    int oldPin = mySensor.Pin;
                     myOperations.SetSensorPin(mySensor.Id, newPin);
+
+                    // Check response
+                    string response = myOperations.ReadLine();
+                    if (response.Equals(stringOk))
+                    {
+                        myFunctions.Notification_Balloon("Sensor pin changed", "Successfully changed pin from " + oldPin + " to " + newPin + ".");
+                    }
+                    else
+                    {
+                        myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+                    }
                 }
                 else
                 {
@@ -108,19 +131,40 @@ namespace SecurityControl.UserControls
         private void BunifuTypeChangeButton_Click(object sender, EventArgs e)
         {
             String newType = bunifuDropdownType.selectedValue;
+
             if (newType.Equals("Normaly closed type = NC = Push to make"))  // true = push-to-make
             {
-                myFunctions.Notification_Balloon("Sensor type changed.", "Successfully change type to '" + newType + "'.");
                 myOperations.SetSensorType(mySensor.Id, true);
+
+                // Check Response
+                string response = myOperations.ReadLine();
+                if (response.Equals(stringOk))
+                {
+                    myFunctions.Notification_Balloon("Sensor type changed", "Successfully change type to '" + newType + "'.");
+                }
+                else
+                {
+                    myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+                }
             }
             else if (newType.Equals("Normaly open type = NO = Push to break"))  // false = push-to-break
             {
-                myFunctions.Notification_Balloon("Sensor type changed.", "Successfully change type to '" + newType + "'.");
                 myOperations.SetSensorType(mySensor.Id, false);
+
+                // Check Response
+                string response = myOperations.ReadLine();
+                if (response.Equals(stringOk))
+                {
+                    myFunctions.Notification_Balloon("Sensor type changed", "Successfully change type to '" + newType + "'.");
+                }
+                else
+                {
+                    myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+                }
             }
             else
             {
-                myFunctions.Notification_Balloon("Cannot change type","Wrong type of sensor selected.");
+                myFunctions.Notification_Balloon("Cannot change type", "Wrong type of sensor selected.");
             }
         }
 
@@ -132,6 +176,19 @@ namespace SecurityControl.UserControls
         private void BunifuDeleteButton_Click(object sender, EventArgs e)
         {
             myOperations.DeleteSensor(mySensor.Id);
+            
+            // Check Response
+            string response = myOperations.ReadLine();
+            if (response.Equals(stringOk))
+            {
+                myFunctions.Notification_Balloon("Successfully deleted", "Sensor was deleted from Arduino.");
+            }
+            else
+            {
+                myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+            }
+
+            // Return back to Overview
             myParent.overview.InitialiseComponentsFromArduino();
             BunifuBackButton_Click(this, new EventArgs());
         }

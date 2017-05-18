@@ -18,6 +18,7 @@ namespace SecurityControl.UserControls
         Switch mySwitch;
         Arduino.Operations myOperations;
         Functions.Functions myFunctions = new Functions.Functions();
+        String stringOk = "OK";
 
         public SwitchSettings(FormMain parent, Switch switcher, Arduino.Operations operations)
         {
@@ -65,8 +66,19 @@ namespace SecurityControl.UserControls
             String newName = bunifuMaterialTextboxName.Text.Trim();
             if (!newName.Equals(""))
             {
-                myFunctions.Notification_Balloon("Sensor name changed.", "Successfully changed name from " + mySwitch.Name + " to " + newName + ".");
+                string oldName = mySwitch.Name;
                 myOperations.SetSensorName(mySwitch.Id, newName);
+
+                // Check response
+                string response = myOperations.ReadLine();
+                if (response.Equals(stringOk))
+                {
+                    myFunctions.Notification_Balloon("Sensor name changed", "Successfully changed name from " + oldName + " to " + newName + ".");
+                }
+                else
+                {
+                    myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+                }
             }
             else
             {
@@ -86,8 +98,19 @@ namespace SecurityControl.UserControls
                 int newPin = Int32.Parse(bunifuMaterialTextboxPin.Text);
                 if (newPin >= 0 && newPin <= 100)
                 {
-                    myFunctions.Notification_Balloon("Sensor pin changed.", "Successfully changed pin from " + mySwitch.Pin + " to " + newPin + ".");
+                    int oldPin = mySwitch.Pin;
                     myOperations.SetSensorPin(mySwitch.Id, newPin);
+
+                    // Check response
+                    string response = myOperations.ReadLine();
+                    if (response.Equals(stringOk))
+                    {
+                        myFunctions.Notification_Balloon("Sensor pin changed", "Successfully changed pin from " + oldPin + " to " + newPin + ".");
+                    }
+                    else
+                    {
+                        myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+                    }
                 }
                 else
                 {
@@ -108,6 +131,17 @@ namespace SecurityControl.UserControls
         private void BunifuSwitchState_OnValueChange(object sender, EventArgs e)
         {
             myOperations.SetSwitchState(mySwitch.Id, bunifuSwitchState.Value);
+
+            // Check response
+            string response = myOperations.ReadLine();
+            if (response.Equals(stringOk))
+            {
+                myFunctions.Notification_Balloon("Sensor state changed", "Successfully changed sensor state.");
+            }
+            else
+            {
+                myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+            }
         }
 
         /// <summary>
@@ -117,7 +151,20 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void BunifuDeleteButton_Click(object sender, EventArgs e)
         {
-            myOperations.DeleteSensor(mySwitch.Id);
+            myOperations.DeleteSwitch(mySwitch.Id);
+
+            // Check Response
+            string response = myOperations.ReadLine();
+            if (response.Equals(stringOk))
+            {
+                myFunctions.Notification_Balloon("Successfully deleted", "Switch was deleted from Arduino.");
+            }
+            else
+            {
+                myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+            }
+
+            // Return back to Overview
             myParent.overview.InitialiseComponentsFromArduino();
             BunifuBackButton_Click(this, new EventArgs());
         }

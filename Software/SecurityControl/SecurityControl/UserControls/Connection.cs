@@ -135,14 +135,12 @@ namespace SecurityControl.UserControls
 
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Connected",
-                    "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
-                    Properties.Resources.icon);
+                    "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.");
             }
             catch
             {
                 myFunctions.Notification_Balloon("Connection failed",
-                    "Cannot connect to selected port, please check connection and try it again.",
-                    Properties.Resources.icon);
+                    "Cannot connect to selected port, please check connection and try it again.");
             }
         }
 
@@ -158,14 +156,12 @@ namespace SecurityControl.UserControls
 
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Disconnected",
-                    "Successfully disconected from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.",
-                    Properties.Resources.icon);
+                    "Successfully disconected from " + myConnection.GetPort() + ".");
             }
             catch
             {
                 myFunctions.Notification_Balloon("Disconnection failed",
-                    "Cannot disconnect from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate. Please check connection and try it again.",
-                    Properties.Resources.icon);
+                    "Cannot disconnect from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate. Please check connection and try it again.");
             }
         }
 
@@ -207,8 +203,7 @@ namespace SecurityControl.UserControls
                 if (timerConnectionCheck.Interval == timerConnected)
                 {
                     myFunctions.Notification_Balloon("Connectino lost",
-                        "Arduino connection was lost, please check connection and try to connect manually.",
-                        Properties.Resources.icon);
+                        "Arduino connection was lost, please check connection and try to connect manually.");
                     timerConnectionCheck.Interval = timerNotConnected;  // Set to not connected
                     bunifuConnectionButton.Text = "Connect";
                 }

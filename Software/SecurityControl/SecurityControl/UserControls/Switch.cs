@@ -14,10 +14,12 @@ namespace SecurityControl.UserControls
     {
         FormMain myParent;
         Arduino.Operations myOperations;
+        Functions.Functions myFunctions = new Functions.Functions();
         public int Id { get; private set; } = 0;
         public int Pin { get; private set; } = 0;
         public string CustomName { get; private set; }  = "";
         public bool State { get; private set; } = false;
+        String stringOk = "OK";
 
         /// <summary>
         /// Create new Switch visual component
@@ -86,6 +88,17 @@ namespace SecurityControl.UserControls
         private void BunifuSwitchState_OnValueChange(object sender, EventArgs e)
         {
             myOperations.SetSwitchState(Id, bunifuSwitchState.Value);
+
+            // Check response
+            string response = myOperations.ReadLine();
+            if (response.Equals(stringOk))
+            {
+                myFunctions.Notification_Balloon("Sensor state changed", "Successfully changed sensor state.");
+            }
+            else
+            {
+                myFunctions.Notification_Balloon("Operation error", "There was an error in selected operation.");
+            }
         }
 
         /// <summary>
