@@ -99,7 +99,7 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void PictureBoxSettings_Click(object sender, EventArgs e)
         {
-            SensorSettings sensorSettings = new SensorSettings(myParent, this);
+            SensorSettings sensorSettings = new SensorSettings(myParent, this, myOperations);
             myParent.panelBody.Controls.Clear();
             myParent.panelBody.Controls.Add(sensorSettings);
             sensorSettings.Dock = DockStyle.Fill;

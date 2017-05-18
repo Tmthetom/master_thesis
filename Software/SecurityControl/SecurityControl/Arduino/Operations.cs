@@ -102,7 +102,7 @@ namespace SecurityControl.Arduino
         public void SetSensorName(int id, String name)
         {
             if (id > -1 && id < 100)
-                myConnection.Send("SetSwitchName(" + id + "," + name + ")");
+                myConnection.Send("SetSensorName(" + id + "," + name + ")");
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace SecurityControl.Arduino
         public void SetSensorPin(int id, int pin)
         {
             if (id > -1 && id < 100 && pin > 0 && pin < 100)
-                myConnection.Send("SetSwitchPin(" + id + "," + pin + ")");
+                myConnection.Send("SetSensorPin(" + id + "," + pin + ")");
         }
 
         /// <summary>
@@ -126,17 +126,22 @@ namespace SecurityControl.Arduino
             if (id > -1 && id < 100)
             {
                 int intType = (type == false) ? 0 : 1;
-                myConnection.Send("SetSwitchState(" + id + "," + intType + ")");
+                myConnection.Send("SetSensorType(" + id + "," + intType + ")");
             }
         }
 
-
-        public void AddSensor()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pin">Pin</param>
+        /// <param name="name">Custom name</param>
+        /// <param name="type">true = push-to-make, false = push-to-break</param>
+        public void AddSensor(int pin, String name, bool type)
         {
             if (pin > 0 && pin < 100)
             {
-                int intState = (state == false) ? 0 : 1;  // 1 = HIGH, 0 = LOW
-                myConnection.Send("AddSwitch(" + pin + "," + name + "," + state + ")");
+                int intType = (type == true) ? 1 : 0;  // 1 = HIGH, 0 = LOW
+                myConnection.Send("AddSensor(" + pin + "," + name + "," + intType + ")");
             }
         }
 
@@ -147,7 +152,7 @@ namespace SecurityControl.Arduino
         public void DeleteSensor(int id)
         {
             if (id > -1 && id < 100)
-                myConnection.Send("DeleteSwitch(" + id + ")");
+                myConnection.Send("DeleteSensor(" + id + ")");
         }
 
         #endregion Sensor
@@ -174,7 +179,7 @@ namespace SecurityControl.Arduino
         {
             if (id > -1 && id < 100)
             {
-                int intState = (state == false) ? 0 : 1;
+                int intState = (state == true) ? 1 : 0;
                 myConnection.Send("SetSwitchState(" + id + "," + intState + ")");
             }
         }
@@ -200,7 +205,7 @@ namespace SecurityControl.Arduino
         {
             if (pin > 0 && pin < 100)
             {
-                int intState = (state == false) ? 0 : 1;  // 1 = HIGH, 0 = LOW
+                int intState = (state == true) ? 1 : 0;  // 1 = HIGH, 0 = LOW
                 myConnection.Send("AddSwitch(" + pin + "," + name + "," + state + ")");
             }
         }

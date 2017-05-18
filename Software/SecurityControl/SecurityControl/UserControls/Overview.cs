@@ -42,7 +42,8 @@ namespace SecurityControl.UserControls
                 List<UserControls.Sensor> sensors = myOperations.GetAllSensors();
                 List<UserControls.Switch> switches = myOperations.GetAllSwitches();
 
-                //if (sensors.Count < 1 && switches.Count < 1) this.Controls.Clear();
+                this.Controls.Clear();
+                currentTop = 25;
 
                 AddSensors(sensors);
                 AddSwitches(switches);

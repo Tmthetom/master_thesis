@@ -78,7 +78,7 @@
             // pictureBoxSettings
             // 
             this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.settings;
+            this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.controls;
             this.pictureBoxSettings.Location = new System.Drawing.Point(600, 8);
             this.pictureBoxSettings.Name = "pictureBoxSettings";
             this.pictureBoxSettings.Size = new System.Drawing.Size(30, 27);

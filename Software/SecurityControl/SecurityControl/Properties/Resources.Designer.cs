@@ -63,6 +63,16 @@ namespace SecurityControl.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap controls {
+            get {
+                object obj = ResourceManager.GetObject("controls", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FM_ctverce {
             get {
                 object obj = ResourceManager.GetObject("FM_ctverce", resourceCulture);

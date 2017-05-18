@@ -125,7 +125,7 @@ namespace SecurityControl.UserControls
                 myConnection.Open();
 
                 // Initialize form after connection
-
+                myParent.overview.InitialiseComponents();
 
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Connected",
@@ -213,7 +213,6 @@ namespace SecurityControl.UserControls
             {
                 timerConnectionCheck.Interval = timerConnected;  // Set to connected
                 bunifuConnectionButton.Text = "Disconnect";
-                myParent.overview.InitialiseComponents();
             }
         }
 

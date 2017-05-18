@@ -32,8 +32,8 @@
             this.bunifuSeparator = new Bunifu.Framework.UI.BunifuSeparator();
             this.labelSensorName = new System.Windows.Forms.Label();
             this.labelSensorType = new System.Windows.Forms.Label();
-            this.bunifuSensorState = new Bunifu.Framework.UI.BunifuiOSSwitch();
             this.pictureBoxSettings = new System.Windows.Forms.PictureBox();
+            this.bunifuSensorState = new Bunifu.Framework.UI.BunifuiOSSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSettings)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +73,18 @@
             this.labelSensorType.Text = "Type of Sensor";
             this.labelSensorType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // pictureBoxSettings
+            // 
+            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.controls;
+            this.pictureBoxSettings.Location = new System.Drawing.Point(600, 8);
+            this.pictureBoxSettings.Name = "pictureBoxSettings";
+            this.pictureBoxSettings.Size = new System.Drawing.Size(30, 27);
+            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxSettings.TabIndex = 23;
+            this.pictureBoxSettings.TabStop = false;
+            this.pictureBoxSettings.Click += new System.EventHandler(this.PictureBoxSettings_Click);
+            // 
             // bunifuSensorState
             // 
             this.bunifuSensorState.BackColor = System.Drawing.Color.Transparent;
@@ -87,18 +99,6 @@
             this.bunifuSensorState.Size = new System.Drawing.Size(43, 25);
             this.bunifuSensorState.TabIndex = 22;
             this.bunifuSensorState.Value = false;
-            // 
-            // pictureBoxSettings
-            // 
-            this.pictureBoxSettings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxSettings.Image = global::SecurityControl.Properties.Resources.settings;
-            this.pictureBoxSettings.Location = new System.Drawing.Point(600, 8);
-            this.pictureBoxSettings.Name = "pictureBoxSettings";
-            this.pictureBoxSettings.Size = new System.Drawing.Size(30, 27);
-            this.pictureBoxSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxSettings.TabIndex = 23;
-            this.pictureBoxSettings.TabStop = false;
-            this.pictureBoxSettings.Click += new System.EventHandler(this.PictureBoxSettings_Click);
             // 
             // Sensor
             // 

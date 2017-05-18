@@ -110,7 +110,14 @@ namespace SecurityControl.Arduino
         /// <param name="command">Command string</param>
         public void Send(string command)
         {
-            mySerial.WriteLine(command);
+            try
+            {
+                mySerial.WriteLine(command);
+            }
+            catch
+            {
+                ;
+            }
         }
 
         /// <summary>
