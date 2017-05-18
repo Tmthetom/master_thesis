@@ -75,6 +75,12 @@
     <Compile Include="UserControls\Connection.Designer.cs">
       <DependentUpon>Connection.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\EmtyArduino.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EmtyArduino.Designer.cs">
+      <DependentUpon>EmtyArduino.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Overview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Connection.resx">
       <DependentUpon>Connection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EmtyArduino.resx">
+      <DependentUpon>EmtyArduino.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Overview.resx">
       <DependentUpon>Overview.cs</DependentUpon>

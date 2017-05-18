@@ -44,8 +44,15 @@ namespace SecurityControl.UserControls
                 this.Controls.Clear();
                 currentTop = 25;
 
-                AddSensors(sensors);
-                AddSwitches(switches);
+                if (sensors.Count == 0 && switches.Count == 0)
+                {
+                    AddEmptyWarning();
+                }
+                else
+                {
+                    AddSensors(sensors);
+                    AddSwitches(switches);
+                }
             }
             catch (Exception e)
             {
@@ -81,6 +88,19 @@ namespace SecurityControl.UserControls
                 this.Controls.Add(mySensor);
                 currentTop += mySensor.Height;
             }
+        }
+
+        /// <summary>
+        /// Add label with empty Arduino warning
+        /// </summary>
+        public void AddEmptyWarning()
+        {
+            UserControls.EmtyArduino emptyArduino = new UserControls.EmtyArduino();
+
+            emptyArduino.Top = currentTop;
+            emptyArduino.Left = indentLeft;
+            this.Controls.Add(emptyArduino);
+            currentTop += emptyArduino.Height;
         }
     }
 }

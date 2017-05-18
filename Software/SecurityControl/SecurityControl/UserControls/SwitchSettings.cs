@@ -67,13 +67,14 @@ namespace SecurityControl.UserControls
             if (!newName.Equals(""))
             {
                 string oldName = mySwitch.Name;
-                myOperations.SetSensorName(mySwitch.Id, newName);
+                myOperations.SetSwitchName(mySwitch.Id, newName);
 
                 // Check response
                 string response = myOperations.ReadLine();
                 if (response.Equals(stringOk))
                 {
                     myFunctions.Notification_Balloon("Sensor name changed", "Successfully changed name from " + oldName + " to " + newName + ".");
+                    myParent.overview.InitialiseComponentsFromArduino();
                 }
                 else
                 {
@@ -99,13 +100,14 @@ namespace SecurityControl.UserControls
                 if (newPin >= 0 && newPin <= 100)
                 {
                     int oldPin = mySwitch.Pin;
-                    myOperations.SetSensorPin(mySwitch.Id, newPin);
+                    myOperations.SetSwitchPin(mySwitch.Id, newPin);
 
                     // Check response
                     string response = myOperations.ReadLine();
                     if (response.Equals(stringOk))
                     {
                         myFunctions.Notification_Balloon("Sensor pin changed", "Successfully changed pin from " + oldPin + " to " + newPin + ".");
+                        myParent.overview.InitialiseComponentsFromArduino();
                     }
                     else
                     {
@@ -137,6 +139,7 @@ namespace SecurityControl.UserControls
             if (response.Equals(stringOk))
             {
                 myFunctions.Notification_Balloon("Sensor state changed", "Successfully changed sensor state.");
+                myParent.overview.InitialiseComponentsFromArduino();
             }
             else
             {
@@ -158,6 +161,7 @@ namespace SecurityControl.UserControls
             if (response.Equals(stringOk))
             {
                 myFunctions.Notification_Balloon("Successfully deleted", "Switch was deleted from Arduino.");
+                myParent.overview.InitialiseComponentsFromArduino();
             }
             else
             {
@@ -165,7 +169,6 @@ namespace SecurityControl.UserControls
             }
 
             // Return back to Overview
-            myParent.overview.InitialiseComponentsFromArduino();
             BunifuBackButton_Click(this, new EventArgs());
         }
 

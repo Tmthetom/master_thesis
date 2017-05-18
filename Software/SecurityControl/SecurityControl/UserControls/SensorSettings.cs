@@ -74,6 +74,7 @@ namespace SecurityControl.UserControls
                 if (response.Equals(stringOk))
                 {
                     myFunctions.Notification_Balloon("Sensor name changed", "Successfully changed name from " + oldName + " to " + newName + ".");
+                    myParent.overview.InitialiseComponentsFromArduino();
                 }
                 else
                 {
@@ -106,6 +107,7 @@ namespace SecurityControl.UserControls
                     if (response.Equals(stringOk))
                     {
                         myFunctions.Notification_Balloon("Sensor pin changed", "Successfully changed pin from " + oldPin + " to " + newPin + ".");
+                        myParent.overview.InitialiseComponentsFromArduino();
                     }
                     else
                     {
@@ -141,6 +143,7 @@ namespace SecurityControl.UserControls
                 if (response.Equals(stringOk))
                 {
                     myFunctions.Notification_Balloon("Sensor type changed", "Successfully change type to '" + newType + "'.");
+                    myParent.overview.InitialiseComponentsFromArduino();
                 }
                 else
                 {
@@ -156,6 +159,7 @@ namespace SecurityControl.UserControls
                 if (response.Equals(stringOk))
                 {
                     myFunctions.Notification_Balloon("Sensor type changed", "Successfully change type to '" + newType + "'.");
+                    myParent.overview.InitialiseComponentsFromArduino();
                 }
                 else
                 {
@@ -182,6 +186,7 @@ namespace SecurityControl.UserControls
             if (response.Equals(stringOk))
             {
                 myFunctions.Notification_Balloon("Successfully deleted", "Sensor was deleted from Arduino.");
+                myParent.overview.InitialiseComponentsFromArduino();
             }
             else
             {
@@ -189,7 +194,6 @@ namespace SecurityControl.UserControls
             }
 
             // Return back to Overview
-            myParent.overview.InitialiseComponentsFromArduino();
             BunifuBackButton_Click(this, new EventArgs());
         }
 
