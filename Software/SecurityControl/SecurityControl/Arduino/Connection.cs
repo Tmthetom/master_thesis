@@ -4,9 +4,10 @@ namespace SecurityControl.Arduino
 {
     public class Connection
     {
+        #region Initialisation
+
         private SerialPort mySerial = new SerialPort();
 
-        #region Connection
         /// <summary>
         /// Create new serial connection without parametres
         /// </summary>
@@ -14,6 +15,10 @@ namespace SecurityControl.Arduino
         {
             ;
         }
+
+        #endregion Initialisation
+
+        #region Connection
 
         /// <summary>
         /// Create new serial connection
@@ -104,6 +109,7 @@ namespace SecurityControl.Arduino
         #endregion Connection
 
         #region Operations
+
         /// <summary>
         /// Send command into serial
         /// </summary>

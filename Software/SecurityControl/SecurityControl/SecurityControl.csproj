@@ -54,18 +54,6 @@
   <ItemGroup>
     <Compile Include="Arduino\Connection.cs" />
     <Compile Include="Arduino\Operations.cs" />
-    <Compile Include="FormConnection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormConnection.Designer.cs">
-      <DependentUpon>FormConnection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormMain2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain2.Designer.cs">
-      <DependentUpon>FormMain2.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,12 +111,6 @@
     <Compile Include="UserControls\SwitchSettings.Designer.cs">
       <DependentUpon>SwitchSettings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormConnection.resx">
-      <DependentUpon>FormConnection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain2.resx">
-      <DependentUpon>FormMain2.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

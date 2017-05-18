@@ -21,11 +21,17 @@ namespace SecurityControl.UserControls
 
         public Connection(FormMain parent, Arduino.Connection myConnection)
         {
-            this.myConnection = myConnection;
             InitializeComponent();
-            InitializeValues();
-            Connect();
+
+            // Initialisation
+            this.myConnection = myConnection;
             myParent = parent;
+            InitializeValues();
+
+            // Connection
+            Connect();
+
+            // Autocheck
             timerConnectionCheck.Enabled = true;
         }
 
@@ -125,7 +131,7 @@ namespace SecurityControl.UserControls
                 myConnection.Open();
 
                 // Initialize form after connection
-                myParent.overview.InitialiseComponents();
+                myParent.overview.InitialiseComponentsFromArduino();
 
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Connected",
@@ -134,7 +140,7 @@ namespace SecurityControl.UserControls
             }
             catch
             {
-                myFunctions.Notification_Balloon("Connectino failed",
+                myFunctions.Notification_Balloon("Connection failed",
                     "Cannot connect to selected port, please check connection and try it again.",
                     Properties.Resources.icon);
             }

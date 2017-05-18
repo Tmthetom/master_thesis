@@ -27,10 +27,12 @@ namespace SecurityControl
             InitializeComponent();
 
             // Initialisation
-            connection = new UserControls.Connection(this, myConnection);
             overview = new UserControls.Overview(this, myConnection);
             settings = new UserControls.Settings();
             about = new UserControls.About();
+
+            // Connection to Arduino
+            connection = new UserControls.Connection(this, myConnection);
 
             // Select First Menu Item
             bunifuFlatButtonOverview.selected = true;

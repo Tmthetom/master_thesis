@@ -132,12 +132,10 @@ namespace SecurityControl.UserControls
         private void BunifuDeleteButton_Click(object sender, EventArgs e)
         {
             myOperations.DeleteSensor(mySensor.Id);
-            myParent.overview.InitialiseComponents();
+            myParent.overview.InitialiseComponentsFromArduino();
             BunifuBackButton_Click(this, new EventArgs());
         }
 
         #endregion Buttons
-
-
     }
 }

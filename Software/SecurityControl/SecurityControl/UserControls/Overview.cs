@@ -29,13 +29,12 @@ namespace SecurityControl.UserControls
             myParent = parent;
             this.myConnection = connection;
             myOperations = new Arduino.Operations(myParent, myConnection);
-            InitialiseComponents();
         }
 
         /// <summary>
         /// Initialise components
         /// </summary>
-        public void InitialiseComponents()
+        public void InitialiseComponentsFromArduino()
         {
             try
             {
@@ -48,9 +47,9 @@ namespace SecurityControl.UserControls
                 AddSensors(sensors);
                 AddSwitches(switches);
             }
-            catch
+            catch (Exception e)
             {
-
+                MessageBox.Show(e.Message);
             }
         }
 
