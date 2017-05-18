@@ -378,11 +378,6 @@ void deleteSensor() {
 	Serial.println(stringOk);
 }
 
-/* Add Sensor */
-void AddSensor() {
-
-}
-
 #pragma endregion
 
 #pragma region Switch
