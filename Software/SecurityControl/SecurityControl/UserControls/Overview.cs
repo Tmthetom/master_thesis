@@ -28,6 +28,7 @@ namespace SecurityControl.UserControls
         public Overview(FormMain parent, Arduino.Connection connection)
         {
             InitializeComponent();
+
             myParent = parent;
             this.myConnection = connection;
             myOperations = new Arduino.Operations(myParent, myConnection);
@@ -40,12 +41,15 @@ namespace SecurityControl.UserControls
         {
             try
             {
+                // Get objects
                 List<UserControls.Sensor> sensors = myOperations.GetAllSensors();
                 List<UserControls.Switch> switches = myOperations.GetAllSwitches();
 
+                // Reset form
                 this.Controls.Clear();
                 currentTop = 25;
 
+                // Add objects
                 if (sensors.Count == 0 && switches.Count == 0)
                 {
                     AddEmptyWarning();

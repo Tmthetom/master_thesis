@@ -22,10 +22,11 @@ namespace SecurityControl.UserControls
 
         public SwitchSettings(FormMain parent, Switch switcher, Arduino.Operations operations)
         {
+            InitializeComponent();
+
             myParent = parent;
             mySwitch = switcher;
             myOperations = operations;
-            InitializeComponent();
             Fill();
         }
 
@@ -66,6 +67,14 @@ namespace SecurityControl.UserControls
             String newName = bunifuMaterialTextboxName.Text.Trim();
             if (!newName.Equals(""))
             {
+                // Check maximum length
+                if (newName.Length > 20)
+                {
+                    myFunctions.Notification_Balloon("Cannot change name", "Maximum length of name is 20 characters.");
+                    return;
+                }
+
+                // Do Set
                 string oldName = mySwitch.Name;
                 myOperations.SetSwitchName(mySwitch.Id, newName);
 

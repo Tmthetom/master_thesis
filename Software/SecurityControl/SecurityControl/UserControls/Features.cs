@@ -12,12 +12,19 @@ namespace SecurityControl.UserControls
 {
     public partial class Features : UserControl
     {
-
         #region Initialisation
 
-        public Features()
+        FormMain myParent;
+        Arduino.Connection myConnection;
+        Arduino.Operations myOperations;
+
+        public Features(FormMain parent, Arduino.Connection connection)
         {
             InitializeComponent();
+
+            myParent = parent;
+            this.myConnection = connection;
+            myOperations = new Arduino.Operations(myParent, myConnection);
         }
 
         /// <summary>
@@ -51,7 +58,11 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void ButtonAddSensor_Click(object sender, EventArgs e)
         {
-
+            AddSensor addSensor = new AddSensor(myParent, myOperations);
+            myParent.panelBody.Controls.Clear();
+            myParent.panelBody.Controls.Add(addSensor);
+            addSensor.Dock = DockStyle.Fill;
+            addSensor.Show();
         }
 
         /// <summary>
@@ -65,6 +76,5 @@ namespace SecurityControl.UserControls
         }
 
         #endregion Functions
-
     }
 }

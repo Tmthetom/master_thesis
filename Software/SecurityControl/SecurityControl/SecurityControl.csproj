@@ -69,6 +69,12 @@
     <Compile Include="UserControls\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AddSensor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\AddSensor.Designer.cs">
+      <DependentUpon>AddSensor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Connection.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\AddSensor.resx">
+      <DependentUpon>AddSensor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Connection.resx">
       <DependentUpon>Connection.cs</DependentUpon>

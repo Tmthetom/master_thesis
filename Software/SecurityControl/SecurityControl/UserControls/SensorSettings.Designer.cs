@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.bunifuBackButton = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuMaterialTextboxName = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.labelName = new System.Windows.Forms.Label();
@@ -41,17 +40,6 @@
             this.bunifuTypeChangeButton = new Bunifu.Framework.UI.BunifuFlatButton();
             this.labelType = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(-15, -15);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // bunifuBackButton
             // 
@@ -334,7 +322,6 @@
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.bunifuMaterialTextboxName);
             this.Controls.Add(this.bunifuBackButton);
-            this.Controls.Add(this.radioButton1);
             this.Name = "SensorSettings";
             this.Size = new System.Drawing.Size(705, 496);
             this.ResumeLayout(false);
@@ -343,7 +330,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.RadioButton radioButton1;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuBackButton;
         private Bunifu.Framework.UI.BunifuMaterialTextbox bunifuMaterialTextboxName;
         private System.Windows.Forms.Label labelName;

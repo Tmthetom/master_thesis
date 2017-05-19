@@ -22,10 +22,11 @@ namespace SecurityControl.UserControls
 
         public SensorSettings(FormMain parent, Sensor sensor, Arduino.Operations operations)
         {
+            InitializeComponent();
+
             myParent = parent;
             mySensor = sensor;
             myOperations = operations;
-            InitializeComponent();
             Fill();
         }
 
@@ -66,6 +67,14 @@ namespace SecurityControl.UserControls
             String newName = bunifuMaterialTextboxName.Text.Trim();
             if (!newName.Equals(""))
             {
+                // Check maximum length
+                if (newName.Length > 20)
+                {
+                    myFunctions.Notification_Balloon("Cannot change name", "Maximum length of name is 20 characters.");
+                    return;
+                }
+
+                // Do Set
                 string oldName = mySensor.Name;
                 myOperations.SetSensorName(mySensor.Id, newName);
 

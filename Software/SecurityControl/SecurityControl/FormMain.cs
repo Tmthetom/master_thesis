@@ -28,7 +28,7 @@ namespace SecurityControl
 
             // Initialisation
             overview = new UserControls.Overview(this, myConnection);
-            features = new UserControls.Features();
+            features = new UserControls.Features(this, myConnection);
             about = new UserControls.About();
 
             // Connection to Arduino

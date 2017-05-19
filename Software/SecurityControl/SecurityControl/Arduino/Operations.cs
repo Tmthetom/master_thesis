@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace SecurityControl.Arduino
 {
@@ -37,7 +38,7 @@ namespace SecurityControl.Arduino
             // Get
             myConnection.Send("GetAllSensors");
             String inString = myConnection.ReadLine();
-            Regex regex = new Regex(@"\(Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z ]+),State = ([0-1]),Type = ([0-1])\)");
+            Regex regex = new Regex(@"\(Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1]),Type = ([0-1])\)");
 
             // Parse
             foreach (Match match in regex.Matches(inString))
@@ -54,6 +55,8 @@ namespace SecurityControl.Arduino
                 }
             }
 
+            MessageBox.Show(inString);
+
             return sensors;
         }
 
@@ -69,7 +72,7 @@ namespace SecurityControl.Arduino
             // Get
             myConnection.Send("GetAllSwitches");
             String inString = myConnection.ReadLine();
-            Regex regex = new Regex(@"\(Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z ]+),State = ([0-1])\)");
+            Regex regex = new Regex(@"\(Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1])\)");
 
             // Parse
             foreach (Match match in regex.Matches(inString))
