@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
+using System.Management;
 
 namespace SecurityControl.UserControls
 {
@@ -59,12 +60,52 @@ namespace SecurityControl.UserControls
                 numberOfPorts++;
             }
 
-            // Save new ports their are not same
+            // Save new ports if their are not same
             if (ports.Length != numberOfPorts)
             {
                 bunifuDropdownPort.Clear();
                 foreach (string port in ports) bunifuDropdownPort.AddItem(port);
                 if (ports.Length > 0) bunifuDropdownPort.selectedIndex = 0;
+            }
+        }
+
+        /// <summary>
+        /// Autocalled when selected port changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BunifuDropdownPort_onItemSelected(object sender, EventArgs e)
+        {
+            GetDeviceName(bunifuDropdownPort.selectedValue);
+        }
+
+        /// <summary>
+        /// Get device name on selected port
+        /// </summary>
+        /// <param name="portName">Port name</param>
+        private void GetDeviceName(string portName)
+        {
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
+                {
+                    string[] portnames = SerialPort.GetPortNames();
+                    List<ManagementBaseObject> ports = searcher.Get().Cast<ManagementBaseObject>().ToList();
+
+                    foreach (ManagementBaseObject port in ports)
+                    {
+                        if (port["DeviceID"].ToString().Equals(portName))
+                        {
+                            labelDeviceName.Text = port["Description"].ToString();  // Hint: Win32_SerialPort class
+                            break;
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+                ;
             }
         }
 
@@ -135,7 +176,7 @@ namespace SecurityControl.UserControls
 
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Connected",
-                    "Successfully connected to " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.");
+                    "Successfully connected to " + (labelDeviceName.Text.Equals("") ? "device" : labelDeviceName.Text) + " at " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.");
             }
             catch
             {
@@ -156,12 +197,12 @@ namespace SecurityControl.UserControls
 
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Disconnected",
-                    "Successfully disconected from " + myConnection.GetPort() + ".");
+                    "Successfully disconected from " + (labelDeviceName.Text.Equals("") ? "device" : labelDeviceName.Text) + " at " + myConnection.GetPort() + ".");
             }
             catch
             {
                 myFunctions.Notification_Balloon("Disconnection failed",
-                    "Cannot disconnect from " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate. Please check connection and try it again.");
+                    "Cannot disconnect from " + (labelDeviceName.Text.Equals("") ? "device" : labelDeviceName.Text) + " at " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate. Please check connection and try it again.");
             }
         }
 

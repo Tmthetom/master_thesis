@@ -99,11 +99,11 @@
     <Compile Include="UserControls\SensorSettings.Designer.cs">
       <DependentUpon>SensorSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Settings.cs">
+    <Compile Include="UserControls\Features.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <Compile Include="UserControls\Features.Designer.cs">
+      <DependentUpon>Features.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Switch.cs">
       <SubType>UserControl</SubType>
@@ -148,8 +148,8 @@
     <EmbeddedResource Include="UserControls\SensorSettings.resx">
       <DependentUpon>SensorSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Features.resx">
+      <DependentUpon>Features.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Switch.resx">
       <DependentUpon>Switch.cs</DependentUpon>
@@ -187,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\controls.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

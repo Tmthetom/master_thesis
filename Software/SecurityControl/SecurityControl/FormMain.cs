@@ -19,7 +19,7 @@ namespace SecurityControl
 
         public UserControls.Connection connection;
         public UserControls.Overview overview;
-        public UserControls.Settings settings;
+        public UserControls.Features features;
         public UserControls.About about;
 
         public FormMain()
@@ -28,7 +28,7 @@ namespace SecurityControl
 
             // Initialisation
             overview = new UserControls.Overview(this, myConnection);
-            settings = new UserControls.Settings();
+            features = new UserControls.Features();
             about = new UserControls.About();
 
             // Connection to Arduino
@@ -57,20 +57,20 @@ namespace SecurityControl
         }
 
         /// <summary>
-        /// Menu Settings button
+        /// Features menu button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BunifuFlatButtonSettings_Click(object sender, EventArgs e)
+        private void BunifuFlatButtonFeatures_Click(object sender, EventArgs e)
         {
             panelBody.Controls.Clear();
-            panelBody.Controls.Add(settings);
-            settings.Dock = DockStyle.Fill;
-            settings.Show();
+            panelBody.Controls.Add(features);
+            features.Dock = DockStyle.Fill;
+            features.Show();
         }
 
         /// <summary>
-        /// Menu Connection button
+        /// Connection menu button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -83,7 +83,7 @@ namespace SecurityControl
         }
 
         /// <summary>
-        /// Menu About button
+        /// About menu button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

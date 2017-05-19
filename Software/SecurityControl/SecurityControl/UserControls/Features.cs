@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SecurityControl.UserControls
 {
-    public partial class Settings : UserControl
+    public partial class Features : UserControl
     {
-        public Settings()
+        public Features()
         {
             InitializeComponent();
         }

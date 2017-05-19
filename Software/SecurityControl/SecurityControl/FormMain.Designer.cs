@@ -33,7 +33,7 @@
             this.panelMenu = new System.Windows.Forms.Panel();
             this.bunifuFlatButtonAbout = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuFlatButtonConnection = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.bunifuFlatButtonSettings = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.bunifuFlatButtonFeatures = new Bunifu.Framework.UI.BunifuFlatButton();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.bunifuFlatButtonOverview = new Bunifu.Framework.UI.BunifuFlatButton();
             this.panelBody = new System.Windows.Forms.Panel();
@@ -53,7 +53,7 @@
             this.panelMenu.BackColor = System.Drawing.SystemColors.Window;
             this.panelMenu.Controls.Add(this.bunifuFlatButtonAbout);
             this.panelMenu.Controls.Add(this.bunifuFlatButtonConnection);
-            this.panelMenu.Controls.Add(this.bunifuFlatButtonSettings);
+            this.panelMenu.Controls.Add(this.bunifuFlatButtonFeatures);
             this.panelMenu.Controls.Add(this.pictureBoxLogo);
             this.panelMenu.Controls.Add(this.bunifuFlatButtonOverview);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -132,40 +132,40 @@
             this.bunifuFlatButtonConnection.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.bunifuFlatButtonConnection.Click += new System.EventHandler(this.BunifuFlatButtonConnection_Click);
             // 
-            // bunifuFlatButtonSettings
+            // bunifuFlatButtonFeatures
             // 
-            this.bunifuFlatButtonSettings.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
-            this.bunifuFlatButtonSettings.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButtonSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuFlatButtonSettings.BorderRadius = 0;
-            this.bunifuFlatButtonSettings.ButtonText = "Features";
-            this.bunifuFlatButtonSettings.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuFlatButtonSettings.DisabledColor = System.Drawing.Color.Gray;
-            this.bunifuFlatButtonSettings.Iconcolor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButtonSettings.Iconimage = null;
-            this.bunifuFlatButtonSettings.Iconimage_right = null;
-            this.bunifuFlatButtonSettings.Iconimage_right_Selected = null;
-            this.bunifuFlatButtonSettings.Iconimage_Selected = null;
-            this.bunifuFlatButtonSettings.IconMarginLeft = 0;
-            this.bunifuFlatButtonSettings.IconMarginRight = 0;
-            this.bunifuFlatButtonSettings.IconRightVisible = true;
-            this.bunifuFlatButtonSettings.IconRightZoom = 0D;
-            this.bunifuFlatButtonSettings.IconVisible = true;
-            this.bunifuFlatButtonSettings.IconZoom = 90D;
-            this.bunifuFlatButtonSettings.IsTab = true;
-            this.bunifuFlatButtonSettings.Location = new System.Drawing.Point(0, 284);
-            this.bunifuFlatButtonSettings.Name = "bunifuFlatButtonSettings";
-            this.bunifuFlatButtonSettings.Normalcolor = System.Drawing.Color.Transparent;
-            this.bunifuFlatButtonSettings.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
-            this.bunifuFlatButtonSettings.OnHoverTextColor = System.Drawing.Color.White;
-            this.bunifuFlatButtonSettings.selected = false;
-            this.bunifuFlatButtonSettings.Size = new System.Drawing.Size(246, 49);
-            this.bunifuFlatButtonSettings.TabIndex = 1;
-            this.bunifuFlatButtonSettings.Text = "Features";
-            this.bunifuFlatButtonSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuFlatButtonSettings.Textcolor = System.Drawing.Color.Black;
-            this.bunifuFlatButtonSettings.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bunifuFlatButtonSettings.Click += new System.EventHandler(this.BunifuFlatButtonSettings_Click);
+            this.bunifuFlatButtonFeatures.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.bunifuFlatButtonFeatures.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonFeatures.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuFlatButtonFeatures.BorderRadius = 0;
+            this.bunifuFlatButtonFeatures.ButtonText = "Features";
+            this.bunifuFlatButtonFeatures.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuFlatButtonFeatures.DisabledColor = System.Drawing.Color.Gray;
+            this.bunifuFlatButtonFeatures.Iconcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonFeatures.Iconimage = null;
+            this.bunifuFlatButtonFeatures.Iconimage_right = null;
+            this.bunifuFlatButtonFeatures.Iconimage_right_Selected = null;
+            this.bunifuFlatButtonFeatures.Iconimage_Selected = null;
+            this.bunifuFlatButtonFeatures.IconMarginLeft = 0;
+            this.bunifuFlatButtonFeatures.IconMarginRight = 0;
+            this.bunifuFlatButtonFeatures.IconRightVisible = true;
+            this.bunifuFlatButtonFeatures.IconRightZoom = 0D;
+            this.bunifuFlatButtonFeatures.IconVisible = true;
+            this.bunifuFlatButtonFeatures.IconZoom = 90D;
+            this.bunifuFlatButtonFeatures.IsTab = true;
+            this.bunifuFlatButtonFeatures.Location = new System.Drawing.Point(0, 284);
+            this.bunifuFlatButtonFeatures.Name = "bunifuFlatButtonFeatures";
+            this.bunifuFlatButtonFeatures.Normalcolor = System.Drawing.Color.Transparent;
+            this.bunifuFlatButtonFeatures.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
+            this.bunifuFlatButtonFeatures.OnHoverTextColor = System.Drawing.Color.White;
+            this.bunifuFlatButtonFeatures.selected = false;
+            this.bunifuFlatButtonFeatures.Size = new System.Drawing.Size(246, 49);
+            this.bunifuFlatButtonFeatures.TabIndex = 1;
+            this.bunifuFlatButtonFeatures.Text = "Features";
+            this.bunifuFlatButtonFeatures.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuFlatButtonFeatures.Textcolor = System.Drawing.Color.Black;
+            this.bunifuFlatButtonFeatures.TextFont = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bunifuFlatButtonFeatures.Click += new System.EventHandler(this.BunifuFlatButtonFeatures_Click);
             // 
             // pictureBoxLogo
             // 
@@ -301,7 +301,7 @@
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonOverview;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.Panel panelHeader;
-        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonSettings;
+        private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonFeatures;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonAbout;
         private Bunifu.Framework.UI.BunifuFlatButton bunifuFlatButtonConnection;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabelHeader;
