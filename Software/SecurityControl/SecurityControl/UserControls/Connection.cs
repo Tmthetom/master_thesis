@@ -202,9 +202,9 @@ namespace SecurityControl.UserControls
         }
 
         /// <summary>
-        /// Connect to selected Port with selected BaudRate
+        /// Disconnect currently opened connection
         /// </summary>
-        private void Disonnect()
+        private void Disconnect()
         {
             try
             {
@@ -238,7 +238,7 @@ namespace SecurityControl.UserControls
             }
             else
             {
-                Disonnect();
+                Disconnect();
                 timerConnectionCheck.Interval = timerNotConnected;  // Set to not connected
                 bunifuConnectionButton.Text = "Connect";
             }
@@ -267,6 +267,10 @@ namespace SecurityControl.UserControls
                         "Arduino connection was lost, please check connection and try to connect manually.");
                     timerConnectionCheck.Interval = timerNotConnected;  // Set to not connected
                     bunifuConnectionButton.Text = "Connect";
+
+                    // Lock forms
+                    myParent.overview.NotConnected();
+                    myParent.features.NotConnected();
                 }
             }
 

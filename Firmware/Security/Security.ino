@@ -7,6 +7,7 @@ const int baudRate = 9600;
 const int maxSensors = 10;
 const int maxSwitches = 10;
 const int maxBytesOfMessage = 200;
+const int maxNameLength = 30;
 
 /* Strings */
 
@@ -68,6 +69,9 @@ String nameSwitch[maxSwitches];
 /* Setup before start */
 void setup() {
 
+	// Allocation
+	in.reserve(maxBytesOfMessage);
+
 	// Sensors
 	pinSensor[0] = 8;
 	nameSensor[0] = "Main Door Sensor";
@@ -83,7 +87,6 @@ void setup() {
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(int), OUTPUT);
 
 	// Communication
-	in.reserve(maxBytesOfMessage);
 	Serial.begin(baudRate);
 }
 
