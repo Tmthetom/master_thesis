@@ -12,6 +12,8 @@ namespace SecurityControl.UserControls
 {
     public partial class Overview : UserControl
     {
+        #region Initialisation
+
         FormMain myParent;
         Arduino.Connection myConnection;
         Arduino.Operations myOperations;
@@ -64,7 +66,7 @@ namespace SecurityControl.UserControls
         /// Add switches into panel
         /// </summary>
         /// <param name="switches">List of switches</param>
-        public void AddSwitches(List<UserControls.Switch> switches)
+        private void AddSwitches(List<UserControls.Switch> switches)
         {
             foreach (UserControls.Switch mySwitch in switches)
             {
@@ -79,7 +81,7 @@ namespace SecurityControl.UserControls
         /// Add sensors into panel
         /// </summary>
         /// <param name="sensors">List of panels</param>
-        public void AddSensors(List<UserControls.Sensor> sensors)
+        private void AddSensors(List<UserControls.Sensor> sensors)
         {
             foreach (UserControls.Sensor mySensor in sensors)
             {
@@ -93,14 +95,37 @@ namespace SecurityControl.UserControls
         /// <summary>
         /// Add label with empty Arduino warning
         /// </summary>
-        public void AddEmptyWarning()
+        private void AddEmptyWarning()
         {
-            UserControls.EmtyArduino emptyArduino = new UserControls.EmtyArduino();
-
-            emptyArduino.Top = currentTop;
-            emptyArduino.Left = indentLeft;
+            UserControls.EmtyArduino emptyArduino = new UserControls.EmtyArduino()
+            {
+                Top = currentTop,
+                Left = indentLeft
+            };
             this.Controls.Add(emptyArduino);
             currentTop += emptyArduino.Height;
         }
+
+        /// <summary>
+        /// When program not connected
+        /// </summary>
+        public void NotConnected()
+        {
+            this.Controls.Clear();
+            NotConnected labelNotConneted = new NotConnected();
+            this.Controls.Add(labelNotConneted);
+            labelNotConneted.Dock = DockStyle.Fill;
+            labelNotConneted.Show();
+        }
+
+        /// <summary>
+        /// When program connected
+        /// </summary>
+        public void Connected()
+        {
+            ;
+        }
+
+        #endregion Initialisation
     }
 }

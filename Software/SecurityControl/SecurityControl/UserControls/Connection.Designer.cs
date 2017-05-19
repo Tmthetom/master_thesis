@@ -157,7 +157,7 @@
             this.labelDeviceName.AutoSize = true;
             this.labelDeviceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelDeviceName.ForeColor = System.Drawing.Color.White;
-            this.labelDeviceName.Location = new System.Drawing.Point(10, 10);
+            this.labelDeviceName.Location = new System.Drawing.Point(8, 10);
             this.labelDeviceName.Name = "labelDeviceName";
             this.labelDeviceName.Size = new System.Drawing.Size(0, 16);
             this.labelDeviceName.TabIndex = 9;

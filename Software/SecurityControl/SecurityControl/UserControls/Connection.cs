@@ -171,6 +171,10 @@ namespace SecurityControl.UserControls
                 myConnection.SetConnection(port, baudRate);
                 myConnection.Open();
 
+                // Unlock forms
+                myParent.overview.Connected();
+                myParent.features.Connected();
+
                 // Initialize form after connection
                 myParent.overview.InitialiseComponentsFromArduino();
 
@@ -178,10 +182,22 @@ namespace SecurityControl.UserControls
                 myFunctions.Notification_Balloon("Connected",
                     "Successfully connected to " + (labelDeviceName.Text.Equals("") ? "device" : labelDeviceName.Text) + " at " + myConnection.GetPort() + " with " + myConnection.GetBaudRate() + " baud rate.");
             }
-            catch
+            catch (Exception exception)
             {
-                myFunctions.Notification_Balloon("Connection failed",
+                if (exception.Message.Contains("InvalidArgument"))
+                {
+                    myFunctions.Notification_Balloon("Connection failed",
+                    "No device founded, please check connection and try it again.");
+                }
+                else
+                {
+                    myFunctions.Notification_Balloon("Connection failed",
                     "Cannot connect to selected port, please check connection and try it again.");
+                }
+
+                // Lock forms
+                myParent.overview.NotConnected();
+                myParent.features.NotConnected();
             }
         }
 
@@ -198,6 +214,10 @@ namespace SecurityControl.UserControls
                 // Inform about successfull connection
                 myFunctions.Notification_Balloon("Disconnected",
                     "Successfully disconected from " + (labelDeviceName.Text.Equals("") ? "device" : labelDeviceName.Text) + " at " + myConnection.GetPort() + ".");
+
+                // Lock forms
+                myParent.overview.NotConnected();
+                myParent.features.NotConnected();
             }
             catch
             {
