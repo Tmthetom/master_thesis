@@ -153,7 +153,7 @@ void getAllSensors() {
 	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
 		if (pinSensor[i] != NULL) {
 			out +=
-				String(leftBracket) + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+				String(leftBracket) + stringId + stringEquals + String(i) + stringSeparator + 	// ID
 				stringPin + stringEquals + String(pinSensor[i]) + stringSeparator +				// Pin 
 				stringName + stringEquals + String(nameSensor[i]) + stringSeparator +			// Name
 				stringState + stringEquals + String(stateSensorOld[i]) + stringSeparator + 		// State
@@ -171,7 +171,7 @@ void getAllSwitches() {
 	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
 		if (pinSwitch[i] != NULL) {
 			out +=
-				String(leftBracket) + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+				String(leftBracket) + stringId + stringEquals + String(i) + stringSeparator + 	// ID
 				stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
 				stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
 				stringState + stringEquals + String(getSwitchState(i)) + rightBracket			// State
@@ -261,8 +261,8 @@ void setSensorPin() {
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
 
 	// Send OK
-	pinMode(before, INPUT);			// Old pin to Input
-	pinMode(val, OUTPUT);			// New pin to Output
+	pinMode(before, OUTPUT);			// Old pin to Output
+	pinMode(val, INPUT);			// New pin to Input
 	Serial.println(stringOk);
 }
 
@@ -358,7 +358,7 @@ void addSensor() {
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
 
 	// Send OK
-	pinMode(pin, OUTPUT);			// New pin to Output
+	pinMode(pin, INPUT);			// New pin to INPUT
 	Serial.println(stringOk);
 }
 
@@ -666,20 +666,22 @@ void serialEvent() {
 
 /* Check sensor state changed */
 void checkSensorStateChangedAndSendIfTrue() {
-	/*
+	
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorNew);
 	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
 		if (pinSensor[i] != NULL) {
+			Serial.println(String(i) + ", " + String(pinSensor[i]) + ", old: " + String(stateSensorOld[i]) + ", new: " + stateSensorNew[i]);
+			delay(500);
 			if (stateSensorOld[i] != stateSensorNew[i]) {
 				stateSensorOld[i] = stateSensorNew[i];
 				Serial.println(
-					stringSensorCategory + leftBracket +										// Name of category
-					stringId + stringEquals + stringEquals + String(i) + stringSeparator +		// Id
+					String(stringSensorCategory) + leftBracket +										// Name of category
+					String(stringId) + stringEquals + String(i) + stringSeparator +				// Id
 					stringState + stringEquals + String(stateSensorOld[i]) + rightBracket		// State
 				);
 			}
 		}
-	}*/
+	}
 }
 
 #pragma endregion
