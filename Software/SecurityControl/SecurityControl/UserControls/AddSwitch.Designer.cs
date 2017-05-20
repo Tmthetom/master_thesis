@@ -1,6 +1,6 @@
 ﻿namespace SecurityControl.UserControls
 {
-    partial class AddSensor
+    partial class AddSwitch
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddSwitch));
             this.labelName = new System.Windows.Forms.Label();
             this.buttonBack = new Bunifu.Framework.UI.BunifuFlatButton();
             this.buttonAdd = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.dropDownType = new Bunifu.Framework.UI.BunifuDropdown();
-            this.labelType = new System.Windows.Forms.Label();
+            this.Status = new System.Windows.Forms.Label();
             this.labelPin = new System.Windows.Forms.Label();
             this.textboxPin = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.label1 = new System.Windows.Forms.Label();
             this.textboxName = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.SwitchState = new Bunifu.Framework.UI.BunifuiOSSwitch();
             this.SuspendLayout();
             // 
             // labelName
@@ -47,7 +48,7 @@
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(222, 22);
             this.labelName.TabIndex = 42;
-            this.labelName.Text = "New Sensor";
+            this.labelName.Text = "New Switch";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonBack
@@ -120,33 +121,17 @@
             this.buttonAdd.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
-            // dropDownType
+            // Status
             // 
-            this.dropDownType.BackColor = System.Drawing.Color.Transparent;
-            this.dropDownType.BorderRadius = 3;
-            this.dropDownType.ForeColor = System.Drawing.Color.White;
-            this.dropDownType.Items = new string[] {
-        "Normaly open type = NO = Push to break",
-        "Normaly closed type = NC = Push to make"};
-            this.dropDownType.Location = new System.Drawing.Point(176, 259);
-            this.dropDownType.Name = "dropDownType";
-            this.dropDownType.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
-            this.dropDownType.onHoverColor = System.Drawing.Color.Black;
-            this.dropDownType.selectedIndex = -1;
-            this.dropDownType.Size = new System.Drawing.Size(486, 35);
-            this.dropDownType.TabIndex = 57;
-            // 
-            // labelType
-            // 
-            this.labelType.AutoSize = true;
-            this.labelType.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelType.ForeColor = System.Drawing.Color.White;
-            this.labelType.Location = new System.Drawing.Point(35, 267);
-            this.labelType.Name = "labelType";
-            this.labelType.Size = new System.Drawing.Size(36, 17);
-            this.labelType.TabIndex = 56;
-            this.labelType.Text = "Type";
-            this.labelType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Status.AutoSize = true;
+            this.Status.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Status.ForeColor = System.Drawing.Color.White;
+            this.Status.Location = new System.Drawing.Point(35, 267);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(46, 17);
+            this.Status.TabIndex = 56;
+            this.Status.Text = "Status";
+            this.Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelPin
             // 
@@ -210,13 +195,27 @@
             this.textboxName.TabIndex = 52;
             this.textboxName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // AddSensor
+            // SwitchState
+            // 
+            this.SwitchState.BackColor = System.Drawing.Color.Transparent;
+            this.SwitchState.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SwitchState.BackgroundImage")));
+            this.SwitchState.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SwitchState.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SwitchState.Location = new System.Drawing.Point(619, 263);
+            this.SwitchState.Name = "SwitchState";
+            this.SwitchState.OffColor = System.Drawing.Color.Gray;
+            this.SwitchState.OnColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(202)))), ((int)(((byte)(94)))));
+            this.SwitchState.Size = new System.Drawing.Size(43, 25);
+            this.SwitchState.TabIndex = 57;
+            this.SwitchState.Value = false;
+            // 
+            // AddSwitch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
-            this.Controls.Add(this.dropDownType);
-            this.Controls.Add(this.labelType);
+            this.Controls.Add(this.SwitchState);
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.labelPin);
             this.Controls.Add(this.textboxPin);
             this.Controls.Add(this.label1);
@@ -224,7 +223,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.buttonBack);
-            this.Name = "AddSensor";
+            this.Name = "AddSwitch";
             this.Size = new System.Drawing.Size(705, 496);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -235,11 +234,11 @@
         private System.Windows.Forms.Label labelName;
         private Bunifu.Framework.UI.BunifuFlatButton buttonBack;
         private Bunifu.Framework.UI.BunifuFlatButton buttonAdd;
-        private Bunifu.Framework.UI.BunifuDropdown dropDownType;
-        private System.Windows.Forms.Label labelType;
+        private System.Windows.Forms.Label Status;
         private System.Windows.Forms.Label labelPin;
         private Bunifu.Framework.UI.BunifuMaterialTextbox textboxPin;
         private System.Windows.Forms.Label label1;
         private Bunifu.Framework.UI.BunifuMaterialTextbox textboxName;
+        private Bunifu.Framework.UI.BunifuiOSSwitch SwitchState;
     }
 }

@@ -62,7 +62,7 @@
             this.bunifuBackButton.IconVisible = true;
             this.bunifuBackButton.IconZoom = 90D;
             this.bunifuBackButton.IsTab = false;
-            this.bunifuBackButton.Location = new System.Drawing.Point(230, 429);
+            this.bunifuBackButton.Location = new System.Drawing.Point(240, 429);
             this.bunifuBackButton.Name = "bunifuBackButton";
             this.bunifuBackButton.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
             this.bunifuBackButton.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));

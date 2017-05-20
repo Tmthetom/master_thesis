@@ -72,7 +72,11 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void ButtonAddSwitch_Click(object sender, EventArgs e)
         {
-
+            AddSwitch addSwitch = new AddSwitch(myParent, myOperations);
+            myParent.panelBody.Controls.Clear();
+            myParent.panelBody.Controls.Add(addSwitch);
+            addSwitch.Dock = DockStyle.Fill;
+            addSwitch.Show();
         }
 
         #endregion Functions

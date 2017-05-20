@@ -1,59 +1,67 @@
 
 #pragma region Initialization
 
+/*
+TODO: Fix memory leaks from String (object) arrays.
+... Until fixed, maxSensors|maxSwitches set to 6.
+ -> nameSensor
+ -> nameSwitch
+*/
+
 /* Setting */
 
-const int baudRate = 9600;
-const int maxSensors = 10;
-const int maxSwitches = 10;
-const int maxBytesOfMessage = 200;
-const int maxNameLength = 30;
+#define baudRate 9600
+#define maxSensors 6
+#define maxSwitches 6
+#define maxBytesOfMessageIn 100
+#define maxBytesOfMessageOut 500  // Encrease this, when maximum number of devices encreased.
+#define maxNameLength 30
 
 /* Strings */
 
 // Common
-String stringEquals = " = ";
-String stringId = "Id";
-String stringPin = "Pin";
-String stringName = "Name";
-String stringState = "State";
-String stringType = "Type";
-String stringSeparator = ",";
+const char stringEquals[] = " = ";
+const char stringId[] = "Id";
+const char stringPin[] = "Pin";
+const char stringName[] = "Name";
+const char stringState[] = "State";
+const char stringType[] = "Type";
+const char stringSeparator[] = ",";
 
 // Functions
-String leftBracket = "(";
-String rightBracket = ")";
+const char leftBracket = '(';
+const char rightBracket = ')';
 
 // Sensor
-String stringSensorCategory = "Sensor";
-String stringSensorsCategory = "Sensors";
-String stringGetAllSensors = "GetAllSensors";
-String stringSetSensorName = "SetSensorName";
-String stringSetSensorPin = "SetSensorPin";
-String stringSetSensorType = "SetSensorType";
-String stringAddSensor = "AddSensor";
-String stringDeleteSensor = "DeleteSensor";
+const char stringSensorCategory[] = "Sensor";
+const char stringSensorsCategory[] = "Sensors";
+const char stringGetAllSensors[] = "GetAllSensors";
+const char stringSetSensorName[] = "SetSensorName";
+const char stringSetSensorPin[] = "SetSensorPin";
+const char stringSetSensorType[] = "SetSensorType";
+const char stringAddSensor[] = "AddSensor";
+const char stringDeleteSensor[] = "DeleteSensor";
 
 // Switch
-String stringSwitchCategory = "Switch";
-String stringSwitchesCategory = "Switches";
-String stringGetAllSwitches = "GetAllSwitches";
-String stringSetSwitchState = "SetSwitchState";
-String stringSetSwitchName = "SetSwitchName";
-String stringSetSwitchPin = "SetSwitchPin";
-String stringAddSwitch = "AddSwitch";
-String stringDeleteSwitch = "DeleteSwitch";
+const char stringSwitchCategory[] = "Switch";
+const char stringSwitchesCategory[] = "Switches";
+const char stringGetAllSwitches[] = "GetAllSwitches";
+const char stringSetSwitchState[] = "SetSwitchState";
+const char stringSetSwitchName[] = "SetSwitchName";
+const char stringSetSwitchPin[] = "SetSwitchPin";
+const char stringAddSwitch[] = "AddSwitch";
+const char stringDeleteSwitch[] = "DeleteSwitch";
 
 // Answers
-String stringOk = "OK";
-String stringError = "ERROR";
+const char stringOk[] = "OK";
+const char stringError[] = "ERROR";
 
 /* Variables */
 
 // Communication
-String in = "";
-String out = "";
-boolean inComplete = false;
+String in;
+String out;
+bool inComplete = false;
 
 // Sensor
 int pinSensor[maxSensors];
@@ -70,7 +78,8 @@ String nameSwitch[maxSwitches];
 void setup() {
 
 	// Allocation
-	in.reserve(maxBytesOfMessage);
+	in.reserve(maxBytesOfMessageIn);
+	out.reserve(maxBytesOfMessageOut);
 
 	// Sensors
 	pinSensor[0] = 8;
@@ -144,7 +153,7 @@ void getAllSensors() {
 	for (int i = 0; i < sizeof(pinSensor) / sizeof(int); i++) {
 		if (pinSensor[i] != NULL) {
 			out +=
-				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+				String(leftBracket) + stringId + stringEquals + String(i) + stringSeparator + 			// ID
 				stringPin + stringEquals + String(pinSensor[i]) + stringSeparator +				// Pin 
 				stringName + stringEquals + String(nameSensor[i]) + stringSeparator +			// Name
 				stringState + stringEquals + String(stateSensorOld[i]) + stringSeparator + 		// State
@@ -162,7 +171,7 @@ void getAllSwitches() {
 	for (int i = 0; i < sizeof(pinSwitch) / sizeof(int); i++) {
 		if (pinSwitch[i] != NULL) {
 			out +=
-				leftBracket + stringId + stringEquals + String(i) + stringSeparator + 			// ID
+				String(leftBracket) + stringId + stringEquals + String(i) + stringSeparator + 			// ID
 				stringPin + stringEquals + String(pinSwitch[i]) + stringSeparator +				// Pin 
 				stringName + stringEquals + String(nameSwitch[i]) + stringSeparator +			// Name
 				stringState + stringEquals + String(getSwitchState(i)) + rightBracket			// State

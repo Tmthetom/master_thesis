@@ -62,7 +62,7 @@
             this.bunifuConnectionButton.IconVisible = true;
             this.bunifuConnectionButton.IconZoom = 90D;
             this.bunifuConnectionButton.IsTab = false;
-            this.bunifuConnectionButton.Location = new System.Drawing.Point(230, 429);
+            this.bunifuConnectionButton.Location = new System.Drawing.Point(240, 429);
             this.bunifuConnectionButton.Name = "bunifuConnectionButton";
             this.bunifuConnectionButton.Normalcolor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
             this.bunifuConnectionButton.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
