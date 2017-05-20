@@ -17,14 +17,30 @@ namespace SecurityControl
 
         #region Initialization
 
+        // Fuctions
+        Functions.Functions myFunctions = new Functions.Functions();
+
+        // Controls
         public UserControls.Connection connection;
         public UserControls.Overview overview;
         public UserControls.Features features;
         public UserControls.About about;
 
+        // Delegate
+        public delegate void AddDataDelegate(String myString);
+        public AddDataDelegate myDelegate;
+        public void AddDataMethod(String myString)
+        {
+            inData.AppendText(myString);
+        }
+
         public FormMain()
         {
             InitializeComponent();
+
+            // Event initialisation
+            InitDataReciever();
+            this.myDelegate = new AddDataDelegate(AddDataMethod);
 
             // Initialisation
             overview = new UserControls.Overview(this, myConnection);
@@ -38,7 +54,7 @@ namespace SecurityControl
             bunifuFlatButtonOverview.selected = true;
             BunifuFlatButtonOverview_Click(this, new EventArgs());
         }
-
+        
         #endregion Initialization
 
         #region User Interface
@@ -110,6 +126,8 @@ namespace SecurityControl
         #region Communication
 
         static Arduino.Connection myConnection = new Arduino.Connection();
+        String inString;
+        String message;
 
         /// <summary>
         /// What method is called, when data is recieved
@@ -117,30 +135,23 @@ namespace SecurityControl
         private void InitDataReciever()
         {
             myConnection.SetDataReciever(SerialPort_DataReceived);
+            inData.TextChanged += new EventHandler(SensorStateChanged);
         }
 
-        private void ButtonSend_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-
+        /// <summary>
+        /// Arduino event reciever
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
             {
-                SerialPort mySerial = sender as SerialPort;
-                string indata = mySerial.ReadExisting();
-
-                MethodInvoker action = delegate
-                { /*textBoxOutput.Text += indata;*/ };
-                //textBoxOutput.BeginInvoke(action);
+                if (myConnection.AutoReadLocked == false)
+                {
+                    inString = myConnection.ReadLine();
+                    inData.Invoke(this.myDelegate, new Object[] { inString });
+                }
             }
             catch
             {
@@ -150,5 +161,69 @@ namespace SecurityControl
 
         #endregion Communication
 
+        #region Autocalled functions
+
+        /// <summary>
+        /// Called when sensor state changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SensorStateChanged(object sender, EventArgs e)
+        {
+            message = inData.Text;
+            if (!message.Equals(""))
+            {
+                // Get sensor id and state
+                Regex regex = new Regex(@"\(Id = ([0-9]+),State = ([0-1])\)");
+                Match match = regex.Match(message);
+                if (!match.Success) return;
+                int id = 0;
+                bool state = false;
+                try
+                {
+                    id = Int32.Parse(match.Groups[1].Value);
+                    state = (Int32.Parse(match.Groups[2].Value) == 0) ? false : true; ;
+                }
+                catch
+                {
+                    return;
+                }
+
+                // Get all sensors
+                List < UserControls.Sensor > sensors = overview.myOperations.GetAllSensors();
+
+                // Find sensor in message
+                foreach (UserControls.Sensor sensor in sensors)
+                {
+                    if (sensor.Id == id)
+                    {
+                        // False = push-to-break = normally open
+                        if (sensor.Type == false && state == false)
+                        {
+                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor of type push-to-break (normally open) is now closed.");
+                        }
+                        else if (sensor.Type == false && state == true)
+                        {
+                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor of type push-to-break (normally open) is now opened (normal state).");
+                        }
+
+                        // True = push-to-make = normally closed
+                        else if (sensor.Type == true && state == true)  
+                        {
+                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor of type push-to-make (normally closed) is now opened.");
+                        }
+                        else
+                        {
+                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor of type push-to-make (normally closed) is now closed (normal state).");
+                        }
+                        break;
+                    }
+                }
+
+                inData.Text = "";
+            }
+        }
+
+        #endregion Autocalled functions
     }
 }

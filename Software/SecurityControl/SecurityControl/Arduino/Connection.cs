@@ -7,6 +7,7 @@ namespace SecurityControl.Arduino
         #region Initialisation
 
         private SerialPort mySerial = new SerialPort();
+        public bool AutoReadLocked { get; private set; } = false;
 
         /// <summary>
         /// Create new serial connection without parametres
@@ -118,6 +119,7 @@ namespace SecurityControl.Arduino
         {
             try
             {
+                AutoReadLocked = true;
                 mySerial.WriteLine(command);
             }
             catch
@@ -132,7 +134,9 @@ namespace SecurityControl.Arduino
         /// <returns>Answer for command</returns>
         public string ReadLine()
         {
-            return mySerial.ReadLine().Trim();
+            string output = mySerial.ReadLine().Trim();
+            AutoReadLocked = false;
+            return output;
         }
         #endregion Operations
     }

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.inData = new System.Windows.Forms.TextBox();
             this.bunifuFlatButtonAbout = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuFlatButtonConnection = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuFlatButtonFeatures = new Bunifu.Framework.UI.BunifuFlatButton();
@@ -51,6 +52,7 @@
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.SystemColors.Window;
+            this.panelMenu.Controls.Add(this.inData);
             this.panelMenu.Controls.Add(this.bunifuFlatButtonAbout);
             this.panelMenu.Controls.Add(this.bunifuFlatButtonConnection);
             this.panelMenu.Controls.Add(this.bunifuFlatButtonFeatures);
@@ -61,6 +63,16 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(245, 496);
             this.panelMenu.TabIndex = 6;
+            // 
+            // inData
+            // 
+            this.inData.Location = new System.Drawing.Point(10, -20);
+            this.inData.Multiline = true;
+            this.inData.Name = "inData";
+            this.inData.Size = new System.Drawing.Size(234, 10);
+            this.inData.TabIndex = 4;
+            this.inData.Visible = false;
+            this.inData.TextChanged += new System.EventHandler(this.SensorStateChanged);
             // 
             // bunifuFlatButtonAbout
             // 
@@ -287,6 +299,7 @@
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.panelMenu.ResumeLayout(false);
+            this.panelMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
@@ -309,6 +322,7 @@
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlHeader;
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlHeaderText;
         public System.Windows.Forms.Panel panelBody;
+        private System.Windows.Forms.TextBox inData;
     }
 }
 

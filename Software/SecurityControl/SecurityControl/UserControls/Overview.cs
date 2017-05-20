@@ -16,7 +16,7 @@ namespace SecurityControl.UserControls
 
         FormMain myParent;
         Arduino.Connection myConnection;
-        Arduino.Operations myOperations;
+        public Arduino.Operations myOperations;
         int currentTop = 25;
         int indentLeft = 35;
 

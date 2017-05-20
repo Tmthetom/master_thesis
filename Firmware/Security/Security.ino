@@ -1,6 +1,6 @@
 
 /*
-TODO: Fix memory leaks from String (object) arrays.
+TODO: Fix memory leaks from String (object) arrays using reserve.
 ... Until fixed, maxSensors|maxSwitches set to 6.
 -> nameSensor
 -> nameSwitch
@@ -10,9 +10,10 @@ TODO: Consider memory saving using PROGMEM
 
 #pragma region Initialization
 
-/* Include memory library */
+/* Include libraries */
 
-#include <avr/pgmspace.h>
+//#include <avr/pgmspace.h>
+#include <EEPROM.h>
 
 /* Setting */
 
@@ -682,7 +683,7 @@ void checkSensorStateChangedAndSendIfTrue() {
 					String(stringId) + stringEquals + String(i) + stringSeparator +				// Id
 					stringState + stringEquals + String(stateSensorOld[i]) + rightBracket		// State
 				);
-				delay(100);
+				delay(300);
 			}
 		}
 	}
