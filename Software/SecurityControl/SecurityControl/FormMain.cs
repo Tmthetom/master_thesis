@@ -14,7 +14,6 @@ namespace SecurityControl
 {
     public partial class FormMain : Form
     {
-
         #region Initialization
 
         // Fuctions
