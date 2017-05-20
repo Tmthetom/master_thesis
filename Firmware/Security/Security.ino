@@ -1,12 +1,12 @@
 
-#pragma region Initialization
-
 /*
 TODO: Fix memory leaks from String (object) arrays.
 ... Until fixed, maxSensors|maxSwitches set to 6.
- -> nameSensor
- -> nameSwitch
+-> nameSensor
+-> nameSwitch
 */
+
+#pragma region Initialization
 
 /* Setting */
 
@@ -327,6 +327,7 @@ void addSensor() {
 
 	// Check if free space founded
 	if (!set) {
+		pinSensor[id] = NULL;
 		Serial.println(stringError);
 		return;
 	}
@@ -334,6 +335,7 @@ void addSensor() {
 	// Check if pin setted
 	int pinAfter = pinSensor[id];
 	if (pinAfter != pin) {
+		pinSensor[id] = NULL;
 		Serial.println(stringError);
 		return;
 	}
@@ -344,6 +346,7 @@ void addSensor() {
 	// Check if name setted
 	String nameAfter = nameSensor[id];
 	if (!nameAfter.equals(name)) {
+		pinSensor[id] = NULL;
 		Serial.println(stringError);
 		return;
 	}
@@ -351,7 +354,7 @@ void addSensor() {
 	// Set type
 	typeSensor[id] = (type == 1) ? true : false;
 
-	// Check new sensor
+	// Read new sensor state
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(int), stateSensorOld);
 
 	// Send OK
@@ -544,6 +547,7 @@ void addSwitch() {
 
 	// Check if free space founded
 	if (!set) {
+		pinSwitch[id] = NULL;
 		Serial.println(stringError);
 		return;
 	}
@@ -551,6 +555,7 @@ void addSwitch() {
 	// Check if pin setted
 	int pinAfter = pinSwitch[id];
 	if (pinAfter != pin) {
+		pinSwitch[id] = NULL;
 		Serial.println(stringError);
 		return;
 	}
@@ -561,19 +566,13 @@ void addSwitch() {
 	// Check if name setted
 	String nameAfter = nameSwitch[id];
 	if (!nameAfter.equals(name)) {
+		pinSwitch[id] = NULL;
 		Serial.println(stringError);
 		return;
 	}
 
 	// Set state
-	digitalWrite(pin, (state == 1) ? HIGH : LOW);
-
-	// Check if changed
-	int stateAfter = getSwitchState(id);
-	if (state != stateAfter) {
-		Serial.println(stringError);
-		return;
-	}
+	digitalWrite(pin, ((state == 1) ? HIGH : LOW));
 
 	// Send OK
 	pinMode(pin, OUTPUT);			// New pin to Output

@@ -34,7 +34,7 @@ namespace SecurityControl.UserControls
         #region Buttons
 
         /// <summary>
-        /// Add new Sensor button
+        /// Add new Switch button
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

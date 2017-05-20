@@ -55,8 +55,6 @@ namespace SecurityControl.Arduino
                 }
             }
 
-            MessageBox.Show(inString);
-
             return sensors;
         }
 
@@ -209,7 +207,7 @@ namespace SecurityControl.Arduino
             if (pin > 0 && pin < 100)
             {
                 int intState = (state == true) ? 1 : 0;  // 1 = HIGH, 0 = LOW
-                myConnection.Send("AddSwitch(" + pin + "," + name + "," + state + ")");
+                myConnection.Send("AddSwitch(" + pin + "," + name + "," + intState + ")");
             }
         }
 
