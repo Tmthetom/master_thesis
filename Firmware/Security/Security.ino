@@ -90,16 +90,17 @@ void setup() {
 
 	// Sensors
 	pinSensor[0] = 8;
-	nameSensor[0] = "Main Door Sensor";
+	nameSensor[0] = "Door Sensor";
 	typeSensor[0] = false;  // Normaly open type = NO = Push to break
+	pinSensor[1] = 7;
+	nameSensor[1] = "PIR Sensor";
+	typeSensor[1] = true;  // Normaly close type = NC = Push to make
 	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
 
 	// Switches
-	pinSwitch[0] = 3;
-	nameSwitch[0] = "Right Led Switch";
-	pinSwitch[1] = 4;
-	nameSwitch[1] = "Left Led Switch";
+	pinSwitch[0] = 6;
+	nameSwitch[0] = "Led Switch";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
 
 	// Communication
