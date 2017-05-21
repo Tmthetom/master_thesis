@@ -169,7 +169,13 @@ namespace SecurityControl
         /// <param name="e"></param>
         private void SensorStateChanged(object sender, EventArgs e)
         {
+            // Read message
             message = inData.Text;
+
+            // Check if user want notification
+            if (!features.switchShowSensorStateChanged.Value) return;
+
+            // Parse data
             if (!message.Equals(""))
             {
                 // Get sensor id and state
@@ -203,17 +209,23 @@ namespace SecurityControl
                         }
                         else if (sensor.Type == false && state == true)
                         {
-                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-break (normally open) is now opened (normal state).");
+                            // Check if user want to normal state notification
+                            if (features.switchShowSensorStateChangedToNormal.Value) {
+                                myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-break (normally open) is now opened (normal state).");
+                            }
                         }
 
                         // True = push-to-make = normally closed
-                        else if (sensor.Type == true && state == true)  
+                        else if (sensor.Type == true && state == true)
                         {
                             myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-make (normally closed) is now opened.");
                         }
                         else
                         {
-                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-make (normally closed) is now closed (normal state).");
+                            // Check if user want to normal state notification
+                            if (features.switchShowSensorStateChangedToNormal.Value) {
+                                myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-make (normally closed) is now closed (normal state).");
+                            }
                         }
 
                         // Reload form

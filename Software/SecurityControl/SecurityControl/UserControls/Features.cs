@@ -32,8 +32,11 @@ namespace SecurityControl.UserControls
         /// </summary>
         public void NotConnected()
         {
-            buttonAddSensor.Visible = false;
-            buttonAddSwitch.Visible = false;
+            foreach (Control control in this.Controls)
+            {
+                control.Visible = false;
+            }
+
             labelNotConnected.Visible = true;
         }
 
@@ -42,8 +45,11 @@ namespace SecurityControl.UserControls
         /// </summary>
         public void Connected()
         {
-            buttonAddSensor.Visible = true;
-            buttonAddSwitch.Visible = true;
+            foreach (Control control in this.Controls)
+            {
+                control.Visible = true;
+            }
+
             labelNotConnected.Visible = false;
         }
 
@@ -77,6 +83,16 @@ namespace SecurityControl.UserControls
             myParent.panelBody.Controls.Add(addSwitch);
             addSwitch.Dock = DockStyle.Fill;
             addSwitch.Show();
+        }
+
+        /// <summary>
+        /// Reload all devices from Arduino
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonReloadDevices_Click(object sender, EventArgs e)
+        {
+            myParent.overview.InitialiseComponentsFromArduino();
         }
 
         #endregion Functions
