@@ -22,9 +22,9 @@ Děkuji vedoucí práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné ved
 \end{acknowledgement}
 
 \begin{abstractCZ}
+Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace (Windows) a s možností monitorování pomocí mobilní aplikace (Android). Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu. V úvodu jsou definovány základní pojmy a požadované vlastnosti. Následuje rešerše možných řešení, na jejichž základě jsou objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí zabezpečovací systém a zajišťuje komunikaci, a desktopová aplikace pro úplné řízení zabezpečovacího systému. Poslední část, tedy mobilní aplikace zůstává nedokončená.
 
 
-Práce se zabývá problematikou sledovacích zařízení pro osobní automobily. V úvodu je definován pojem sledovacího zařízení a požadovaných vlastností. Následuje rešerše aktuální situace na trhu a srovnání užitých konceptů pro realizaci sledovacích zařízení. Na základě rešerše je navržen koncept sledovacího zařízení pro osobní automobily s cílem vytvořit levné a spolehlivé zařízení pro střední a nižší třídu vozů. Výstupem práce je prototyp cílového zařízení, který demonstruje zvolené hardwarové i softwarové řešení.
 \end{abstractCZ}
 
 \vspace{2cm}
@@ -37,6 +37,7 @@ Práce se zabývá problematikou sledovacích zařízení pro osobní automobily
 \clearpage
 
 \begin{abbrList}
+\textbf{SMS} & Short message service, služba krátkých textových zpráv\\
 \textbf{GSM} & Groupe Spécial Mobile, globální systém pro mobilní komunikaci\\
 \textbf{GPRS} & General Packet Radio Service, služba pro přenos dat v mobilní síti\\
 \textbf{IDE} & Integrated development environment, integrované vývojové prostředí\\
@@ -46,18 +47,22 @@ Práce se zabývá problematikou sledovacích zařízení pro osobní automobily
 % Úvod
 
 \chapter{Úvod}
-Podnětem pro vytvoření této práce mi byl můj vlastní zájem o sledovací zařízení do vozidla, kdy jsem pátral po levném, kvalitním a jednoduše ovladatelném zařízení, jež naplní mé požadavky. Nejdříve jsem provedl průzkum českého trhu, kde jsem zjistil, že zařízení, která splňují mé požadavky, jsou cenově ohodnocena kolem 8 000 Kč, neboť všeobecně platí, že zařízení z dovozu jsou někdy i o polovinu levnější. Z tohoto důvodu jsem se rozhodl pro nákup z Číny. První zařízení za 500 Kč, které i přes oficiální informace o funkčnosti po celém světě, nebylo v České republice funkční, neboť mapové podklady na Evropu nebyly připraveny a odpovědi SMS chodily v čínském jazyce. Zároveň nebylo možné jej přepnout a i manuál byl pouze čínsky. Další pokus byl se zařízením za 1 000 Kč, kdy mapové podklady byly tentokrát přes mapy Google, a byly tedy funkční. Zařízení ale v SMS odpovídalo špatně srozumitelnými textovými řetězci, přesnost na stovky metrů byla nedostatečná a poloha byla tedy určena vždy o několik ulic vedle. Stále jsem hledal vhodné řešení dané situace, a proto jsem se rozhodl pro výrobu vlastního sledovacího zařízení, které by bylo možné pořídit v co nejnižší cenové hladině, ale s vlastnostmi náročnějších modelů, jež jsou v podstatně vyšší cenové relaci. Svým výzkumem jsem zjistil, že toto lze realizovat. K lepší motivaci k dokončení svého výzkumu, jsem se rozhodl, že v rámci své bakalářské práce provedu první etapu, tedy vytvoření funkčního prototypu a návrhu programové části.
+Téma bylo vypsáno doc. Ing. Josefem Chaloupkou, Ph.D. a zaujalo mne díky své tématické návaznosti na mou bakalářskou práci s názvem \uv{Koncept nízkonákladového sledovacího zařízení pro osobní automobily} \cite{Bachelor thesis}. V bakalářské práci jsem se věnoval vývoji sledovacího zařízení na založeného na platformě Arduino, které bylo komunikovalo pomocí SMS zpráv s mobilním telefonem. Dalším logickým krokem pro mne bylo, jak uvádím v závěru své bakalářské práce, řízení z desktopové aplikace, případně z mobilní aplikace, skrze mobilní datovou síť. Po konzultaci s vedoucím jsem byl obeznámen s tím, že tato práce mi nejen umožní navázat na předešlou práci bakalářskou, ale i prozkoumat možnosti využití starých, levných a nepoužívaných mobilních telefonů, jako náhradu za mnohdy drahé GPRS moduly. Myšlenka mě nadchnula, proto jsem se přihlásil o toto zadání.
 
 % Sledovací zařízení
 
-\chapter{Sledovací zařízení}
-Sledovací zařízení je přístroj, udávající svou vlastní polohu na planetě Zemi, pomocí zeměpisné šířky a délky. Poloha se určuje vzhledem k systému družic GPS, které obíhají rovnoměrně rozprostřeny na oběžné dráze země. Typicky slouží ke sledování osob, vozidel, či nákladu a jeho využití najdou jak běžní domácí uživatelé a bezpečnostní agentury, usilující o bezpečnost vozidel, podniky monitorující pohyb svého vozového parku (Fleet management), tak i  velké logistické společnosti, sledující pohyby zásilek nebo kontejnerů. Přesnost polohy je pro uživatelský sektor desítky metrů, zatímco autorizovaní uživatelé (americká armáda a vybrané spojenecké armády) mají k dispozici přesnost v jednotkách metrů. Vyšší přesnosti se dosahuje způsoby, jako jsou například mobilní sítě, jiné navigační systémy, matematické výpočty atd. Za ideálních podmínek lze přesnost zvýšit i na jednotky centimetrů. Přesnost vertikální je zpravidla 2x až 3x tak horší než zmiňovaná horizontální \cite{gpsCommon}.
+\chapter{Zabezpečovací systém}
+Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
 
-\section{Historie}
-Polohovací systém GPS je vojenský globální družicový systém \cite{what}, provozovaný Ministerstvem obrany Spojených států amerických. Projekt navazuje na předchozí NAVSTAR GPS a od roku 1978 bylo do dnešního dne vypuštěno celkem 32 družic. Družice nebyly vypouštěny pouze za účelem určování polohy pro navádění raket a dalších zařízení, ale také aby detekovaly vypuštění balistických raket a výbuchy jaderných bomb. Všechny satelity byly také vybaveny přesnými atomovými hodinami, které dnes dodávají přesný čas po celé zemi. Původně vojenský projekt se stal dostupným i pro neautorizované uživatele z finančních důvodů, aby nemusel být zrušen. V roce 1990 během války v Zálivu byla dočasně deaktivována dostupnost pro neautorizované uživatele a zapojena byla opět v roce 1991  \cite{guide}.
+\section{Ústředna}
+Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často býva vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustyckého (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
 
-\section{Přítomnost}
+\section{Ovladač}
 Satelitní systém GPS se stal synonymem pro sledovací zařízení a určování polohy a je celosvětově využíván ve všech lidských odvětvích. Nicméně dnes není jediným projektem poskytujícím zeměpisnou polohu. Od roku 2011 je k dispozici ruský armádní polohový systém GLONASS, který se vyznačuje stejnou přesností jako systém GPS \cite{glonass}. Pomalu, ale jistě se dostává do povědomí a většina nejnovějších mobilních zařízení umí komunikovat nejenom s GPS, ale také s GLONASS. Získáváním dat z více než jednoho systému satelitů, poskytuje výrazné zvýšení přesnosti polohy. Posledním, zatím nedokončeným, je evropský navigační systém Galileo, který má od roku 2012 nové sídlo v Praze. Částečně měl být funkční v roce 2015 (18 satelitů) a plně dokončen roku 2019/20 (30 satelitů). V roce 2014 však přišel systém o dvě nové družice, které měl vynést ruský nosič. Bohužel mu selhal poslední stupeň rakety a obě byly vyneseny na špatnou oběžnou dráhu, na které jsou dodnes. Později roku 2014 byla vypuštěna první družice na správnou oběžnou dráhu, ale přesto byl poté projekt pozastaven do doby, než se vyřeší, jak do systému zapojit družice na špatné oběžné dráze \cite{gps}.
+
+\section{Detektor}
+
+\section{Komunikátor}
 
 % Požadované vlastnosti
 
@@ -719,6 +724,15 @@ Vývoj sledovacího zařízení má před sebou ještě dlouhou cestu do fináln
 
 \addcontentsline{toc}{chapter}{Literatura}
 \begin{thebibliography}{10}
+\bibitem{Bachelor thesis}MORAVEC, Tomáš. Koncept nízkonákladového sledovacího zařízení pro osobní automobily: The concept of a low cost tracking device for personal cars. Liberec: Technická univerzita v Liberci, 2016.
+\bibitem{Security alarm}Security alarm. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://en.wikipedia.org/wiki/Security_alarm}
+\bibitem{Electronic security system}Elektronické zabezpečovací systémy [online]. , 1 [cit. 2017-05-23]. Dostupné z: \url{http://www.ezasys.cz/elektronicke-zabezpecovaci-systemy/}
+
+
+
+
+
+
 \bibitem{guide}A Guide To The Global Positioning System. Radioshack [online]. [cit. 2016-05-09]. Dostupné z: \url{http://support.radioshack.com/support\_tutorials/gps/gps\_tmline.htm}
 \bibitem{Arduino intro}Arduino introduction. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Guide/Introduction}
 \bibitem{Arduino lib}Arduino libraries. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Reference/Libraries}
