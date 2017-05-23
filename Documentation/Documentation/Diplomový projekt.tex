@@ -21,9 +21,10 @@
 Děkuji vedoucí práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné vedení a poskytnuté informace při zpracování magisterského projektu.
 \end{acknowledgement}
 
-\begin{abstractCZ}
-Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace (Windows) a s možností monitorování pomocí mobilní aplikace (Android). Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu. V úvodu jsou definovány základní pojmy a požadované vlastnosti. Následuje rešerše možných řešení, na jejichž základě jsou objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí zabezpečovací systém a zajišťuje komunikaci, a desktopová aplikace pro úplné řízení zabezpečovacího systému. Poslední část, tedy mobilní aplikace zůstává nedokončená.
+% Abstrakt
 
+\begin{abstractCZ}
+Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace (Windows) a s možností monitorování pomocí mobilní aplikace (Android). Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu. V úvodu jsou definovány základní pojmy a požadované vlastnosti, na jejichž základě byly objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí zabezpečovací systém a zajišťuje komunikaci, a desktopová aplikace pro úplné řízení zabezpečovacího systému. Poslední část, tedy mobilní aplikace zůstává nedokončená.
 
 \end{abstractCZ}
 
@@ -42,15 +43,17 @@ Práce se zabývá problematikou zabezpečovacího systému, postaveného na pla
 \textbf{GPRS} & General Packet Radio Service, služba pro přenos dat v mobilní síti\\
 \textbf{IDE} & Integrated development environment, integrované vývojové prostředí\\
 \textbf{LED} & Light-Emitting Diode, dioda emitující světlo\\
+\textbf{PIR} & Passive infrared sensor, infračervený sensor pohybu\\
+\textbf{LAN} & Local Area Network, místní počítačová síť\\
+\textbf{GBS} & Glass break detector, detektor rozbití skla\\
 \end{abbrList}
 
 % Úvod
 
 \chapter{Úvod}
-Téma bylo vypsáno doc. Ing. Josefem Chaloupkou, Ph.D. a zaujalo mne díky své tématické návaznosti na mou bakalářskou práci s názvem \uv{Koncept nízkonákladového sledovacího zařízení pro osobní automobily} \cite{Bachelor thesis}. V bakalářské práci jsem se věnoval vývoji sledovacího zařízení na založeného na platformě Arduino, které bylo komunikovalo pomocí SMS zpráv s mobilním telefonem. Dalším logickým krokem pro mne bylo, jak uvádím v závěru své bakalářské práce, řízení z desktopové aplikace, případně z mobilní aplikace, skrze mobilní datovou síť. Po konzultaci s vedoucím jsem byl obeznámen s tím, že tato práce mi nejen umožní navázat na předešlou práci bakalářskou, ale i prozkoumat možnosti využití starých, levných a nepoužívaných mobilních telefonů, jako náhradu za mnohdy drahé GPRS moduly. Myšlenka mě nadchnula, proto jsem se přihlásil o toto zadání.
+Téma bylo vypsáno doc. Ing. Josefem Chaloupkou, Ph.D. a zaujalo mne díky své tématické návaznosti na mou bakalářskou práci s názvem \uv{Koncept nízkonákladového sledovacího zařízení pro osobní automobily} \cite{Bachelor thesis}. V bakalářské práci jsem se věnoval vývoji sledovacího zařízení na založeného na platformě Arduino, které bylo komunikovalo pomocí SMS zpráv s mobilním telefonem. Dalším logickým krokem pro mne bylo, jak uvádím v závěru své bakalářské práce, řízení z desktopové aplikace, případně z mobilní aplikace, skrze mobilní datovou síť. Po konzultaci s vedoucím jsem byl obeznámen s tím, že tato práce mi nejen umožní navázat na předešlou práci bakalářskou, ale i prozkoumat možnosti využití starých, levných a nepoužívaných mobilních telefonů, jako náhradu za mnohdy drahé GPRS moduly. Nadchla mě myšlenka, že by bylo možné vzít starý nepoužívaný telefon, který má mnoho lidí ve vlastnictví, z důvodu neustálého obměňování za nejnovější modely, a nalézt pro něj smysluplné využití. Proto jsem se ihned přihlásil o toto zadání.
 
-% Sledovací zařízení
-
+% Zabezpečovací systém
 \chapter{Zabezpečovací systém}
 Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
 
@@ -58,51 +61,53 @@ Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace,
 Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často býva vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustyckého (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
 
 \section{Ovladač}
-Satelitní systém GPS se stal synonymem pro sledovací zařízení a určování polohy a je celosvětově využíván ve všech lidských odvětvích. Nicméně dnes není jediným projektem poskytujícím zeměpisnou polohu. Od roku 2011 je k dispozici ruský armádní polohový systém GLONASS, který se vyznačuje stejnou přesností jako systém GPS \cite{glonass}. Pomalu, ale jistě se dostává do povědomí a většina nejnovějších mobilních zařízení umí komunikovat nejenom s GPS, ale také s GLONASS. Získáváním dat z více než jednoho systému satelitů, poskytuje výrazné zvýšení přesnosti polohy. Posledním, zatím nedokončeným, je evropský navigační systém Galileo, který má od roku 2012 nové sídlo v Praze. Částečně měl být funkční v roce 2015 (18 satelitů) a plně dokončen roku 2019/20 (30 satelitů). V roce 2014 však přišel systém o dvě nové družice, které měl vynést ruský nosič. Bohužel mu selhal poslední stupeň rakety a obě byly vyneseny na špatnou oběžnou dráhu, na které jsou dodnes. Později roku 2014 byla vypuštěna první družice na správnou oběžnou dráhu, ale přesto byl poté projekt pozastaven do doby, než se vyřeší, jak do systému zapojit družice na špatné oběžné dráze \cite{gps}.
+Ovladač je prvek, který slouží k ovládání a případně též k programování ústředny. Dnešní alarmy je možné ovládat několika způsoby. Jako ovladač se nejčastěji používá klávesnice vybavená tlačítky, případně čtečkou (čipovými kartami a přívěšky) nebo též dálkové ovládání. U některých systémů se dá přes klávesnici provést nastavení celého systému. Klávesnice slouží k zastřežení i odstřežení systému \cite{Electronic security signalisation}. Dalšími způsoby je ovládání přes internet, kdy se většinou používá integrované webové rozhraní, ke kterému se uživatel může připojit po zadání hesla, nebo ovládání přes mobil (SMS příkazy) \cite{Bachelor thesis}.
 
 \section{Detektor}
+Detektor je prvkek systému, který je rozmístěn v hlídaném objektu a má za úkol reagovat aktivací při narušení (otevření, pohyb, rozbití atd.) a to tak, že tuto informaci předají ústředně, která ji následně zpracuje \cite{Electronic security signalisation}. Nejčastěji používané detektorové prvky jsou:
+
+\begin{itemize}
+\item Magnetický kontakt (dveřní čidlo)
+\item Detektor pohybu (PIR detektor)
+\item Detektor tříštění skla (GBS detektor)
+\item Detektor plynu
+\item Infra závora
+\end{itemize} 
 
 \section{Komunikátor}
+Komunikátor je zařízení, které předává mimo objekt informaci o narušení objektu, případně o odchylce od normálního provozního stavu zabezpečovacího systému \cite{Electronic security signalisation}. Nejčastější typy komunikátorů jsou:
+
+\begin{itemize}
+\item GSM komunikátor
+\item LAN komunikátor
+\item Telefonní komunikátor
+\item Komunikátor využívající radiové sítě s vyhrazenou frekvencí
+\end{itemize} 
 
 % Požadované vlastnosti
 
-\section{Požadované vlastnosti}
-V honu za kvalitním, ale levným sledovacím zařízením, je nutné nalézt kompromis mezi nízkou cenou a pohodlím zákazníka. K zajištění tohoto cíle je třeba vyzdvihnout vlastnosti, které neovlivní cenu, ale výrazně posílí funkčnost a tím i konkurenceschopnost zařízení. Následující vlastnosti pro mne budou hrát důležitou roli při výběru hardwarových součástek, stejně tak mi pomohou se zaměřit na části kódu, které potřebují být optimalizovány nejlépe.
+\chapter{Požadované vlastnosti}
+Z úvodní části je jasné, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu (hardware) a tyto prvky musí být řízeny ovladačem, v mém případě aplikací (software). V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení a jaká zařízení 
 
-\subsection{Cena}
-Koncept bude primárně zaměřen na minimalizaci případné výrobní ceny s ohledem na zachování všech funkcí, očekávaných od sledovacího zařízení. Aby byl produkt atraktivní, ale levný, je důležité kvalitní zpracování částí, které neovlivní konečnou cenu zařízení. Jedná se o programovou část, jež je slabým článkem většiny dostupných modelů, v kategorii nízkonákladových sledovacích zařízení. Dostupným modelem je v této práci myšleno sledovací zařízení, běžně dostupné v českých kamených, nebo internetových obchodech. Velkou úsporu peněz bude mít připojení na autobaterii, kde levné modely touto možností neoplývají a jsou cenově zatíženy drahými bateriemi, které jsou mnohdy tou nejdražší částí sledovacího zařízení. V závěrečné fázi se budu pokoušet odstranit přebytečné funkce, zbytečně komplikující provoz a přispívající k vyšší ceně.
+\section{Hardware}
 
-\subsection{Spolehlivost}
-Zařízení musí být spolehlivé a poskytovat požadované informace za jakýchkoliv podmínek a to i při nízké ceně vybavení. V případě poruchovosti u běžně dostupných modelů, když vynecháme faktory, které nelze ovlivnit, například nedostupný signál GPS nebo GSM sítě, je na vině buď ztráta signálu špatným umístěním ve vozidle (o správném umístění je nutné zákazníka informovat), vybití baterie, softwarová chyba která způsobí zacyklení, nebo při provádění různých operací ignoruje příchozí SMS. Proto je nutné číst a obsloužit všechny doručené SMS a informovat uživatele o všech skutečnostech, například o výpadku signálu, při žádosti o získání polohy.
+\subsection{Ústředna}
+
 
 \subsection{Bezpečnost}
-Žádný z dostupných modelů, v kategorii nízkonákladových zařízení, nemá možnost nastavení řídících čísel, nebo hesla pro obnovení, při jeho ztrátě. Kdyby případný zloděj zjistil telefonní číslo, ať už odposlechem poblíž vozidla, nebo z telefonu majitele, je schopný deaktivovat zařízení na dálku a odcizit vozidlo bez sebemenšího podezření majitele. Proto je nutné myslet na bezpečnost jak při pokusu o vypnutí z cizího čísla, tak při případném odpojení od zdroje napájení, které by ve finální verzi jistila integrovaná baterie o malé kapacitě, a zajistila by pouze odeslání varovné SMS. Je pravděpodobné, že při odpojení od baterie by bylo sledovací zařízení odstraněno z vozidla a delší výdrž by byla zbytečná. Díky tomu se dá ušetřit na ceně, která je z velké části tvořena potřebou velkých baterií.
+
 
 \subsection{Nenáročnost}
-Zařízení musí být nenáročné na údržbu, to znamená například výměnu, nebo dobíjení baterií. Baterie by měla být v ideálním případě připojena k autobaterii, která dodává energii i když je motor vozidla vypnutý. Na druhou stranu, jeho spotřeba nesmí ovlivnit chod vozu, například vybitím autobaterie. Taková situace může při déle vypnutém motoru nastat velice snadno, protože spotřeba při připojení do sítě GPS je extrémně vysoká. Řešením by mělo být připojení pouze do telefonní sítě GSM, kde se bude čekat na příkazy z autorizovaného telefonního čísla. V případě neoprávněného pohybu vozidla, nelze sledovat pohyb vozu pomocí GPS, protože spotřeba by byla příliš vysoká. Je nutné najít alternativní řešení v podobě jednoho z dostupných senzorů. Běžně využívané jsou vibrační senzory, nebo senzor zrychlení, tedy akcelerometr. Ty zajistí připojení do sítě GPS, pouze v případě pohybu a tedy i minimalizují spotřebu.
+
+
+\section{Software}
+
 
 \subsection{Vícejazyčnost}
-Z hlediska českého trhu, je nevýhodou všech nízkonákladových a většiny sledovacích zařízení střední třídy, orientace na pouze jediný jazyk a to anglický. Jazyka neznalý uživatel může být zmatený a v nestandardních situacích odkázaný pouze na manuál, které některé modely ani nemají. Většina dostupných modelů je přeprodejem čínských zařízení a zřídkakdy jsou k nim dodávány manuály v anglickém jazyce. Je tedy věcí přeprodejce, zda vytvoří český manuál. Není to problém pouze České republiky a vzhledem k tomu, že se jedná o jednoduchou softwarovou implementaci, základní komunikační rozhraní bude v českém jazyce s možností jednoduchého přepnutí na požadovanou jazykovou lokalizaci. Do finálního produktu bude pouze stačit nahrát dostatečné množství jazykových variant, které vzhledem k nízkému počtu textových řetězců a nenáročnosti jejich uložení v paměti, nebude mít žádný vliv na případnou cenu, která by jinak mohla být způsobena nutností navýšení paměti pro data.
+
 
 \subsection{Nastavitelnost}
-Další z nevýhod dostupných produktů je nemožnost jakéhokoliv vlastního nastavení či personalizace. Ať už se jedná o citlivost senzorů, počet potřebných satelitů pro určení polohy (čím méně satelitů, tím menší přesnost, ale větší šance na získání polohy při špatném signálu), nebo nastavení jednotlivých textových řetězců. Vždy je dobré, aby měl zákazník možnost si své zařízení přizpůsobit dle libosti. Tuto možnost mu zařízení bude nabízet a vzhledem k tomu, že implementace je čistě softwarová záležitost, nebude tím ovlivněna finální cena.
 
-\subsection{Přívětivost}
-SMS s řídícími příkazy musí být jednoduché, uživatelsky přívětivé a snadno zapamatovatelné, aby bylo pro zákazníka ovládání intuitivní a srozumitelné. Nejpřívětivější a nejjednodušší je to, co je pro uživatele nejpřirozenější, tedy běžná slova a věty, stejně tak sledovací zařízení by ve stejné formě mělo i odpovídat. Tedy komunikace mezi uživatelem a sledovacím zařízením by měla být formou konverzace. Například \uv{Kde jsi?}, odpověď: \uv{Probíhá lokalizace, poloha bude zaslána během několika minut}, později: \uv{Nacházím se na souřadnicích xxx}. Stejně tak instalace zařízení musí být jednoduchá a nesmí jí provázet komplikované nastavování. Vše by mělo fungovat při prvním spuštění automaticky.
-
-\section{Normy}
-S pomocí vedoucí práce jsem prostudoval stávající normy, za účel připravenosti na případné reálné použití. Prvním byla Ergonomie softwaru pro multimediální uživatelská rozhraní - Část 2: Multimediální navigace a ovládání, jejíž obsah ale neodpovídá mé práci, dále pak obecné normy pro elektrická zařízení do vozidel a zákon o podmínkách provozu vozidel, který se zabývá zejména homologací. Jejich studií bylo zjištěno, že mé sledovací zařízení žádnou z norem neporušuje a tato tvrzení bylo ověřena i po dokončení práce. Prostudované normy jsou zmíněny níže.
-
-\paragraph{Seznam zkoumaných norem:}
-\begin{itemize}
-\item ČSN EN ISO 14915-2 (833581)
-\item ČSN 30 4002 (304002)
-\item ČSN 30 4003 (304003)
-\item ČSN ISO 6722-3 (304004)
-\item ČSN 30 4011 (304011)
-\item ČSN EN 1648-1 (304020)
-\item ČSN EN 1648-2 (304020)
-\end{itemize} 
 
 % Situace na trhu
 
@@ -727,6 +732,8 @@ Vývoj sledovacího zařízení má před sebou ještě dlouhou cestu do fináln
 \bibitem{Bachelor thesis}MORAVEC, Tomáš. Koncept nízkonákladového sledovacího zařízení pro osobní automobily: The concept of a low cost tracking device for personal cars. Liberec: Technická univerzita v Liberci, 2016.
 \bibitem{Security alarm}Security alarm. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://en.wikipedia.org/wiki/Security_alarm}
 \bibitem{Electronic security system}Elektronické zabezpečovací systémy [online]. , 1 [cit. 2017-05-23]. Dostupné z: \url{http://www.ezasys.cz/elektronicke-zabezpecovaci-systemy/}
+\bibitem{Electronic security signalisation}Elektronická zabezpečovací signalizace. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Elektronick\%C3\%A1\_zabezpe\%C4\%8Dovac\%C3\%AD_signalizace}
+
 
 
 
