@@ -37,18 +37,21 @@
 \contentsline {subsection}{\numberline {4.3.3}API}{21}{subsection.4.3.3}
 \contentsline {subsection}{\numberline {4.3.4}Intern\IeC {\'\i } funkce}{21}{subsection.4.3.4}
 \contentsline {subsection}{\numberline {4.3.5}Notifikace}{21}{subsection.4.3.5}
+\contentsline {subsection}{\numberline {4.3.6}Chybov\IeC {\'a} hl\IeC {\'a}\IeC {\v s}en\IeC {\'\i }}{21}{subsection.4.3.6}
 \contentsline {chapter}{\numberline {5}Desktopov\IeC {\'a} aplikace}{22}{chapter.5}
 \contentsline {subsection}{\numberline {5.0.1}Blokov\IeC {\'e} sch\IeC {\'e}ma}{22}{subsection.5.0.1}
 \contentsline {subsection}{\numberline {5.0.2}P\IeC {\v r}ehled}{22}{subsection.5.0.2}
-\contentsline {subsection}{\numberline {5.0.3}Nastaven\IeC {\'\i } sensoru}{22}{subsection.5.0.3}
-\contentsline {subsection}{\numberline {5.0.4}Nastaven\IeC {\'\i } sp\IeC {\'\i }na\IeC {\v c}e}{22}{subsection.5.0.4}
-\contentsline {subsection}{\numberline {5.0.5}Funkce programu a nastaven\IeC {\'\i }}{22}{subsection.5.0.5}
-\contentsline {subsection}{\numberline {5.0.6}Notifikace}{22}{subsection.5.0.6}
-\contentsline {chapter}{\numberline {6}Mobiln\IeC {\'\i } aplikace}{23}{chapter.6}
-\contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{24}{chapter.7}
-\contentsline {chapter}{Literatura}{24}{chapter.7}
-\contentsline {chapter}{\numberline {A}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{27}{appendix.A}
-\contentsline {paragraph}{/Dokumentace}{27}{paragraph*.9}
-\contentsline {paragraph}{/Software}{27}{paragraph*.10}
-\contentsline {paragraph}{/Software/Dokumentace (Datasheets)}{27}{paragraph*.11}
-\contentsline {paragraph}{/Firmware/Firmware}{27}{paragraph*.12}
+\contentsline {subsection}{\numberline {5.0.3}P\IeC {\v r}ipojen\IeC {\'\i }}{23}{subsection.5.0.3}
+\contentsline {subsection}{\numberline {5.0.4}Nastaven\IeC {\'\i } sensoru}{24}{subsection.5.0.4}
+\contentsline {subsection}{\numberline {5.0.5}Nastaven\IeC {\'\i } sp\IeC {\'\i }na\IeC {\v c}e}{24}{subsection.5.0.5}
+\contentsline {subsection}{\numberline {5.0.6}Funkce programu a nastaven\IeC {\'\i }}{24}{subsection.5.0.6}
+\contentsline {subsection}{\numberline {5.0.7}Notifikace}{24}{subsection.5.0.7}
+\contentsline {paragraph}{P\IeC {\v r}ehled implementovan\IeC {\'y}ch notifikac\IeC {\'\i }:}{24}{paragraph*.8}
+\contentsline {chapter}{\numberline {6}Mobiln\IeC {\'\i } aplikace}{26}{chapter.6}
+\contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{27}{chapter.7}
+\contentsline {chapter}{Literatura}{27}{chapter.7}
+\contentsline {chapter}{\numberline {A}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{30}{appendix.A}
+\contentsline {paragraph}{/Dokumentace}{30}{paragraph*.10}
+\contentsline {paragraph}{/Software}{30}{paragraph*.11}
+\contentsline {paragraph}{/Software/Dokumentace (Datasheets)}{30}{paragraph*.12}
+\contentsline {paragraph}{/Firmware/Firmware}{30}{paragraph*.13}

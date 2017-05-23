@@ -258,6 +258,9 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 
 \subsection{Notifikace}
 
+\subsection{Chybová hlášení}
+
+
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
@@ -266,13 +269,59 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 
 \subsection{Přehled}
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/overview.png}
+\caption{Okno s přehledem jednotlivých komponent}
+\label{image}
+\end{center}
+\end{figure}
+
+\subsection{Připojení}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/connection.png}
+\caption{Okno s možností připojení/odpojení od řídící jednotky}
+\label{image}
+\end{center}
+\end{figure}
+
+
 \subsection{Nastavení sensoru}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/settings.png}
+\caption{Okno s nastavením komponenty (Senzor)}
+\label{image}
+\end{center}
+\end{figure}
 
 \subsection{Nastavení spínače}
 
 \subsection{Funkce programu a nastavení}
 
 \subsection{Notifikace}
+Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlášení, která slouží při upozornění uživatele na nějakou situaci. Například se jedná o změnu stavu pinů, chybové stavy řídící jednotky, nebo odpojení zabezpečovacího zařízení.
+
+\paragraph{Přehled implementovaných notifikací:}
+\begin{itemize}
+\item Připojení zabezpečovacího zařízení
+\item Odpojení zabezpečovacího zařízení
+\item Ztráta spojení zabezpečovacího zařízení
+\item Automatický pokus o připojení se nezdařil
+\item Stav spínače přenastaven
+\item Stav senzoru se změnil
+\item Interní chyba řídící jednotky
+\item Jméno se podařilo/nepodařilo změnit
+\item PIN se podařilo/nepodařilo změnit
+\item Typ senzoru se podařilo/nepodařilo změnit
+\item Nový sensor se podařilo/nepodařilo přidat
+\item Nový spínač se podařilo/nepodařilo přidat
+\item Komponenty arduina se podařilo/nepodařilo znovu načíst
+\item Nastavení notifikací změněno
+\end{itemize} 
 
 % Mobilní aplikace
 
