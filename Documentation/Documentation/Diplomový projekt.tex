@@ -31,42 +31,44 @@ Práce se zabývá problematikou zabezpečovacího systému, postaveného na pla
 \vspace{2cm}
 
 \begin{abstractEN}
-
+Not implemented yet.
 \end{abstractEN}
 
 \tableofcontents
 \clearpage
 
 \begin{abbrList}
-\textbf{SMS} & Short message service, služba krátkých textových zpráv\\
-\textbf{GSM} & Groupe Spécial Mobile, globální systém pro mobilní komunikaci\\
+\textbf{API} & Application Programming Interface, rozhraní pro přístup k aplikaci\\
+\textbf{GBS} & Glass break detector, detektor rozbití skla\\
 \textbf{GPRS} & General Packet Radio Service, služba pro přenos dat v mobilní síti\\
+\textbf{GSM} & Groupe Spécial Mobile, globální systém pro mobilní komunikaci\\
+\textbf{GUI} & Graphical User Interface, grafické uživatelské rozhraní\\
 \textbf{IDE} & Integrated development environment, integrované vývojové prostředí\\
+\textbf{LAN} & Local Area Network, místní počítačová síť\\
 \textbf{LED} & Light-Emitting Diode, dioda emitující světlo\\
 \textbf{PIR} & Passive infrared sensor, infračervený sensor pohybu\\
-\textbf{LAN} & Local Area Network, místní počítačová síť\\
-\textbf{GBS} & Glass break detector, detektor rozbití skla\\
-\textbf{API} & Application Programming Interface, rozhraní pro přístup k aplikaci\\
+\textbf{SMS} & Short message service, služba krátkých textových zpráv\\
 \textbf{USB} & Universal Serial Bus, univerzální sériová sběrnice\\
+
 \end{abbrList}
 
 % Úvod
 
 \chapter{Úvod}
-Téma bylo vypsáno doc. Ing. Josefem Chaloupkou, Ph.D. a zaujalo mne díky své tématické návaznosti na mou bakalářskou práci s názvem \uv{Koncept nízkonákladového sledovacího zařízení pro osobní automobily} \cite{Bachelor thesis}. V bakalářské práci jsem se věnoval vývoji sledovacího zařízení na založeného na platformě Arduino, které bylo komunikovalo pomocí SMS zpráv s mobilním telefonem. Dalším logickým krokem pro mne bylo, jak uvádím v závěru své bakalářské práce, řízení z desktopové aplikace, případně z mobilní aplikace, skrze mobilní datovou síť. Po konzultaci s vedoucím jsem byl obeznámen s tím, že tato práce mi nejen umožní navázat na předešlou práci bakalářskou, ale i prozkoumat možnosti využití starých, levných a nepoužívaných mobilních telefonů, jako náhradu za mnohdy drahé GPRS moduly. Nadchla mě myšlenka, že by bylo možné vzít starý nepoužívaný telefon, který má mnoho lidí ve vlastnictví, z důvodu neustálého obměňování za nejnovější modely, a nalézt pro něj smysluplné využití. Proto jsem se ihned přihlásil o toto zadání.
+Téma bylo vypsáno doc. Ing. Josefem Chaloupkou, Ph.D. a zaujalo mne díky své tematické návaznosti na mou bakalářskou práci s názvem \uv{Koncept nízkonákladového sledovacího zařízení pro osobní automobily} \cite{Bachelor thesis}. V bakalářské práci jsem se věnoval vývoji sledovacího zařízení založeného na platformě Arduino \cite{Arduino intro}, které komunikovalo pomocí SMS zpráv s mobilním telefonem v přirozené řeči. Dalším logickým krokem pro mne bylo, jak uvádím v závěru své bakalářské práce, řízení z desktopové aplikace, případně z mobilní aplikace, skrze mobilní datovou síť. Po konzultaci s vedoucím jsem byl obeznámen s tím, že tato práce mi nejen umožní navázat na předešlou bakalářskou práci, ale i prozkoumat možnosti využití těch nejlevnějších mobilních telefonů, podporujících datové přenosy, jako náhradu za mnohdy drahé GPRS moduly, které slouží pro přenos dat do Internetu skrze mobilní síť GSM (zkráceně mobilní datová síť). Nadchla mě myšlenka, že by bylo možné takto využít ty staré mobilní telefony, které má mnoho z nás stále schované doma, z důvodu trendu dnešní doby, kterým je obměňování za nejnovější modely. O téma jsem se tedy přihlásil nejen z důvodu tematické  návaznosti na mou bakalářskou práci, ale také proto, že mne obohatí o další nové zkušenosti, které mohu později využít v praxi. Mohu doplnit, že má bakalářská práce již vyústila ve spolupráci se společností Jablotron (BigClown Labs s.r.o.) a zájmu ze strany Škoda Auto, i proto se těším, kam mne nové poznatky dále posunou.
 
 % Zabezpečovací systém
 \chapter{Zabezpečovací systém}
 Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
 
 \section{Ústředna}
-Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často býva vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustyckého (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
+Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často bývá vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustického (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
 
 \section{Ovladač}
 Ovladač je prvek, který slouží k ovládání a případně též k programování ústředny. Dnešní alarmy je možné ovládat několika způsoby. Jako ovladač se nejčastěji používá klávesnice vybavená tlačítky, případně čtečkou (čipovými kartami a přívěšky) nebo též dálkové ovládání. U některých systémů se dá přes klávesnici provést nastavení celého systému. Klávesnice slouží k zastřežení i odstřežení systému \cite{Electronic security signalisation}. Dalšími způsoby je ovládání přes internet, kdy se většinou používá integrované webové rozhraní, ke kterému se uživatel může připojit po zadání hesla, nebo ovládání přes mobil (SMS příkazy) \cite{Bachelor thesis}.
 
 \section{Detektor}
-Detektor je prvkek systému, který je rozmístěn v hlídaném objektu a má za úkol reagovat aktivací při narušení (otevření, pohyb, rozbití atd.) a to tak, že tuto informaci předají ústředně, která ji následně zpracuje \cite{Electronic security signalisation}. Nejčastěji používané detektorové prvky jsou:
+Detektor je prvek systému, který je rozmístěn v hlídaném objektu a má za úkol reagovat aktivací při narušení (otevření, pohyb, rozbití atd.) a to tak, že tuto informaci předají ústředně, která ji následně zpracuje \cite{Electronic security signalisation}. Nejčastěji používané detektorové prvky jsou:
 
 \begin{itemize}
 \item Magnetický kontakt (dveřní čidlo)
@@ -89,36 +91,60 @@ Komunikátor je zařízení, které předává mimo objekt informaci o narušen�
 % Požadované vlastnosti a zvolené komponenty
 
 \chapter{Požadované vlastnosti a zvolené komponenty}
-V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení a jaké komponenty byly na jejich základě zvoleny.
+V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení, a jaké komponenty byly na jejich základě zvoleny.
 
 \section{Hardware}
-Z úvodní části je jasné, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
+Z úvodní části je zřejmé, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
 
 \subsection{Ústředna}
-Požadavky na ústřednu jsou takové, že musí být schopná komunikovat jak s desktopovou aplikací, tak s mobilní aplikací a zároveň musí řídit a zpracovávat jednotlivé komponenty. Zadání informuje o použití vývojové platformy Arduino, která je se svými periferiemi a čipem Atmega, více než vhodnou pro tyto účely. Firmware pro ústřednu bude psán v jazyku  C a C++ s nadstavbou Wiring (knihovny pro řízení hardwaru) \cite{Wiring}, vývojové prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}. Arduino Uno bylo zakoupeno v obchodu \url{arduino-shop.cz}.
+Požadavky na ústřednu jsou takové, že musí být schopná komunikovat jak s desktopovou aplikací, tak s mobilní aplikací a zároveň musí řídit a zpracovávat jednotlivé komponenty. Zadání informuje o použití vývojové platformy Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware pro ústřednu bude psán v jazyku  C a C++ s nadstavbou Wiring (knihovny pro řízení hardwaru) \cite{Wiring}, vývojové prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}.
 
 \paragraph{Zvolená ústředna:}
 \begin{itemize}
-\item Arduino Uno Rev3 (700 Kč s DPH)
-\end{itemize} 
+\item Arduino Uno Rev3 (700 Kč s DPH), (\url{arduino-shop.cz})
+\end{itemize}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/arduino.png}
+\caption{Vývojová platforma Arduino}
+\label{image}
+\end{center}
+\end{figure}
 
 \subsection{Detektory}
-Požadavky nejsou kladeny pouze na samotné detektory, ale také na spínače, kterými bude možné spínat různá zařízení. Jako spínací prvky není nutné volit jednotlivé komponenty, stačí připravit implementaci jejich spínání. V případě detektorů musí být možné připojit libovolý detektor, který lze nastavit jako spínací (normálně rozepnutý), nebo rozpínací (normálně sepnutý). Pro testovací účely byly zvoleny dva detektory, každý jednoho typu. Sensor PIR byl objednán z číny.
+Požadavky nejsou kladeny pouze na samotné detektory, ale také na spínače, kterými bude možné spínat různá zařízení. Jako spínací prvky není nutné volit jednotlivé komponenty, stačí připravit implementaci jejich spínání. V případě detektorů musí být možné připojit libovolný detektor, který lze nastavit jako spínací (normálně rozepnutý), nebo rozpínací (normálně sepnutý). Pro testovací účely byly zvoleny dva detektory, každý jednoho typu.
 
 \paragraph{Zvolené detektory:}
 \begin{itemize}
 \item Dveřní čidlo (rozpínací), (poskytl vedoucí)
-\item PIR detektor (spínací), (25 Kč s DPH)
+\item PIR detektor (spínací), (25 Kč s DPH), (\url{aliexpress.com})
 \end{itemize} 
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.3\textwidth]{images/PIR.jpg}
+\caption{Detektor pohybu (PIR detektor)}
+\label{image}
+\end{center}
+\end{figure}
+
 \subsection{Komunikátor}
-Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. Zadání jako hlavní komunikátor určuje mobilní telefon, pomocí kterého máme umožnit ústředně datové přenosy. Zvolen byl nový a zároveň nejlevnější mobilní telefon na trhu, kteý byl zakoupen z obchodu Alza.cz. Pro případ neúspěchu, při získávání zdrojů mobilního telefonu, byla zvolena alternativa v podobě GSM/GPRS modulu, který byl zakoupen z Číny, dodací doba této součástky, stejně jako na všechny ostatní, byla přes jeden kalendářní měsíc.
+Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. Zadání jako hlavní komunikátor určuje mobilní telefon, pomocí kterého máme umožnit ústředně datové přenosy. Zvolen byl nový a zároveň nejlevnější mobilní telefon na trhu. Pro případ neúspěchu, při získávání zdrojů mobilního telefonu, byla zvolena alternativa v podobě GSM/GPRS modulu, který byl zakoupen z Číny, dodací doba této součástky, stejně jako na všechny ostatní, byla přes jeden kalendářní měsíc.
 
 \paragraph{Zvolené komunikátory:}
 \begin{itemize}
-\item Mobilní telefon STK R45i Black (449 Kč s DPH)
-\item GSM/GPRS modul (290 Kč s DPH)
+\item Mobilní telefon STK R45i Black (449 Kč s DPH), (\url{alza.cz})
+\item GSM/GPRS modul (290 Kč s DPH), (\url{aliexpress.com})
 \end{itemize} 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/gprs.png}
+\caption{Komunikační modul GSM/GPRS - SIM808}
+\label{image}
+\end{center}
+\end{figure}
 
 \section{Software (Ovladač)}
 Výše zmíněné prvky musí  být řízeny ovladačem, v mém případě aplikací jak desktopovou tak mobilní. Proto bude následující část rozdělena do těchto dvou částí.
@@ -157,7 +183,7 @@ Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bu
 Následující část pojednává o snaze využít GSM/GPRS modulu integrovaném v mobilním telefonu. Práce na této části zabrali přibližně dva měsíce, proto bude rozdělena do více částí.
 
 \subsection{Možné postupy}
-První úkolem bylo, jak by bylo možné tyto zdroje z mobilního telefonu získat. Průzkumem existujících prací a internetu jsem mohl tento problém rozdělit na dvě kategorie. Chytré telefony a klasické telefony. U chytrých telefonů není získání těchto zdrojů problém, stačí napsat software, který tyto zdroje poskytne přes port USB a tím je problém vyřešen. Klasické telefony se dělí do dvou podkategorií. Telefony s dokumentací s API a poté telefon bez API a dokumentace. Některé starší telefony měli otevřené dokumentace a některá dokonce i API přímo pro tyto účely (Motorola, Nokia), pro tyto mobilní telefony existuje internet plný návodů jak se dostat ke zdrojům které chceme, nicméně takových modelů je opravdu malé množství. Poslední kategorií jsou mobilní telefony bez otevřených dokumentací a bez API, která by zpřístupňovala chtěné zdroje mobilního telefonu. Pro tyto mobilní telefony jsem nenalezl žádné dostupné řešení, přitom jsou to telefony nejrozšířenější a tím se staly pro tento projekt zajímavými.
+První úkolem bylo, jak by bylo možné tyto zdroje z mobilního telefonu získat. Průzkumem existujících prací a internetu jsem mohl tento problém rozdělit na dvě kategorie. Chytré telefony a klasické telefony. U chytrých telefonů není získání těchto zdrojů problém, stačí napsat software, který tyto zdroje poskytne přes port USB a tím je problém vyřešen. Klasické telefony se dělí do dvou podkategorií. Telefony s dokumentací s API a poté telefon bez API a dokumentace. Některé starší telefony měli otevřené dokumentace a některá dokonce i API přímo pro tyto účely (Motorola, Nokia), pro tyto mobilní telefony existuje internet plný návodů, jak se dostat ke zdrojům které chceme, nicméně takových modelů je opravdu malé množství. Poslední kategorií jsou mobilní telefony bez otevřených dokumentací a bez API, která by zpřístupňovala chtěné zdroje mobilního telefonu. Pro tyto mobilní telefony jsem nenalezl žádné dostupné řešení, přitom jsou to telefony nejrozšířenější a tím se staly pro tento projekt zajímavými.
 
 \paragraph{Varianty telefonů:}
 \begin{itemize}
@@ -167,7 +193,7 @@ První úkolem bylo, jak by bylo možné tyto zdroje z mobilního telefonu získ
 \end{itemize} 
 
 \subsection{Výběr telefonu}
-Prvním úkolem bylo vybrání vhodného kandidáta pro tyto účely. Nutné bylo tedy zvolit telefon pro které zatím není problém vyřešen. Po provedení průzkumu trhu jsem zjistil, že je možné vybírat jak z bazarových kousků, tak z nových. Zajimavým zjištěním bylo, že ceny nových telefonů podporujícíh s funkcí GSM i GPRS startují na 450 Kč s DPH za kus. Bazarové kousky začínají na 600 Kč s DPH za kus. Vzhledem k nižší ceně, záruce a garanci funkčnosti bylo rozhodnuto pro nový kus.
+Prvním úkolem bylo vybrání vhodného kandidáta pro tyto účely. Bylo tedy nutné zvolit telefon, pro který zatím není problém vyřešen. Po provedení průzkumu trhu jsem zjistil, že je možné vybírat jak z bazarových kousků, tak z nových. Zajímavým zjištěním bylo, že ceny nových telefonů podporujících s funkcí GSM i GPRS startují na 450 Kč s DPH za kus. Bazarové kousky začínají na 600 Kč s DPH za kus. Vzhledem k nižší ceně, záruce a garanci funkčnosti bylo rozhodnuto pro nový kus.
 
 \subsection{První rozbor}
 Před obdržením obdržení zakoupeného telefonu následoval průzkum, zda existují dokumentace, zda se někdo pokoušel alespoň o něco podobného a tak dále. Výsledkem bylo, že kromě oficiálního letáku s velice obecnými parametry přístroje, neexistují žádné veřejné dokumentace ani rozbory zařízení. Ihned po obdržení jsem se tedy pustil do vlastního průzkumu.
@@ -181,7 +207,7 @@ Před obdržením obdržení zakoupeného telefonu následoval průzkum, zda exi
 \end{figure}
 
 \subsection{Kontaktování výrobce}
-Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého projektu a žádostí o poskytnutí dokumentačních podkladů. Napsal jsem celkem na 3 oddělení britské společnosti, přesněji na obchodní, podporu a servis. Mezitím jsem se pokusil o komunikaci s mobilním telefonem skrze USB, stejně jako to bylo možné u telefonů s API k těmto účelům, to se nepodařilo. Nakonec přišla schodná odpověď ze všech tří kontaktovaných oddělení, tedy že mi dokumentace neposkytnou.
+Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého projektu a žádostí o poskytnutí dokumentačních podkladů. Napsal jsem celkem na 3 oddělení britské společnosti, přesněji na obchodní, podporu a servis. Mezitím jsem se pokusil o komunikaci s mobilním telefonem skrze USB, stejně jako to bylo možné u telefonů s API k těmto účelům, to se nepodařilo. Nakonec přišla shodná odpověď ze všech tří kontaktovaných oddělení, tedy že mi dokumentace neposkytnou.
 
 \begin{figure}[H]
 \begin{center}
@@ -192,7 +218,7 @@ Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého pro
 \end{figure}
 
 \subsection{Hlubší rozbor}
-Bez dokumentací jsem musel začít zkoumat více do hloubky. Po konzultaci s vedoucím byl telefon rozebrán a zkoumán na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi jako jednou variantu podařilo nalézt servisní piny, které jsem se následně snašil analyzovat a skrze ně komunikovat s mobilním telefonem.
+Bez dokumentací jsem musel začít zkoumat více do hloubky. Po konzultaci s vedoucím byl telefon rozebrán a zkoumán na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi jako jednou variantu podařilo nalézt servisní piny, které jsem se následně snažil analyzovat a skrze ně komunikovat s mobilním telefonem.
 
 \begin{figure}[H]
 \begin{center}
@@ -203,13 +229,22 @@ Bez dokumentací jsem musel začít zkoumat více do hloubky. Po konzultaci s ve
 \end{figure}
 
 \subsection{Závěr rozboru}
-Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektráním analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Po dvouměsíčním zkoumání jsem musel celou věc uzavřít a oznámit vedoucímu, že tudy zřejmě cesta nevede. Od této části projektu bylo tedy upuštěno.
+Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním  analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Po dvouměsíčním zkoumání jsem musel celou věc uzavřít a oznámit vedoucímu, že tudy zřejmě cesta nevede. Od této části projektu bylo tedy upuštěno.
 
 \section{Zapojení}
 
 \subsection{Blokové schéma}
 
 \subsection{Výsledný prototyp}
+Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího systému. Obsahuje (zleva) řídící desku Arduino, jednu diody (LED) pro simulování spínacího prvku, dále diodu která signalizuje, zda je sepnutý senzor PIR, a naposledy diodu signalizující sepnutí dveřního čidla (vpravo). 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/board.png}
+\caption{Finální prototyp na nepájivém poly}
+\label{image}
+\end{center}
+\end{figure}
 
 \section{Firmware}
 
@@ -257,7 +292,7 @@ Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou inf
 \bibitem{Electronic security signalisation}Elektronická zabezpečovací signalizace. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Elektronick\%C3\%A1\_zabezpe\%C4\%8Dovac\%C3\%AD_signalizace}
 \bibitem{Wiring}Wiring [online]. [cit. 2016-05-08]. Dostupné z: \url{http://wiring.org.co/}
 \bibitem{Visual Micro}Visual Micro [online]. [cit. 2017-05-23]. Dostupné z: \url{http://www.visualmicro.com/}
-\bibitem{Arduino intro}Arduino introduction. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Guide/Introduction}
+\bibitem{Arduino intro}Arduino introduction. Arduino [online]. [cit. 2017-05-23]. Dostupné z: \url{https://www.arduino.cc/en/Guide/Introduction}
 \bibitem{Arduino lib}Arduino libraries. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Reference/Libraries}
 \bibitem{Arduino lang}Arduino programming language. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Reference/HomePage}
 \bibitem{Arduino schematic}ARDUINO LLC. Arduino Schematic [online]. 1 s. [cit. 2016-05-07]. Dostupné z: \url{https://www.arduino.cc/en/uploads/Main/Arduino\_Uno\_Rev3-schematic.pdf}
