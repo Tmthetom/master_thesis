@@ -248,10 +248,9 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 %\end{figure}
 
 \section{Firmware}
-Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro ptlaformu Arduino (čip ATmega) v programovacím jazyce C++, zapomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE.
+Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro ptlaformu Arduino (čip ATmega) v programovacím jazyce C++, zapomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE. 
 
-\subsection{Blokové schéma}
-Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení a přístupu k aplikaci aplikace.
+Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení a přístupu k aplikaci (API).
 
 \subsection{Nastavení}
 Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení nelze měnit pokud zařízení běží.
@@ -265,9 +264,6 @@ Inicializační část slouží k prvotnímu nastavení mikrokontroleru před sp
 \item Klíčová slova API
 \end{itemize} 
 
-\subsection{Interní funkce}
-Interní funkce slouží 
-
 \subsection{API}
 Jednotlivé parametry jsou odděleny čárkou a všechny jsou zapozdřeny kulatými závorkami, tedy \uv{(} a \uv{)}, ve výsledku potom \uv{SetSensor(10,5)}.
 
@@ -279,9 +275,9 @@ Jednotlivé parametry jsou odděleny čárkou a všechny jsou zapozdřeny kulat�
 Dotaz & Parametry & Popis & Vrací\\
 \hline
 \hline
-GetAllSensors() & Nemá & Dotaz vrátí list všech senzorů & id, pin, name, state \\
+GetAllSensors() & / & Vrací list všech senzorů & id, pin, name, state \\
 \hline
-GetAllSwitches() & Nemá & Dotaz vrátí list všech spínačů & id, pin, name, state \\
+GetAllSwitches() & / & Vrací list všech spínačů & id, pin, name, state \\
 \hline
 \end{tabular}
 \end{center}
@@ -332,6 +328,21 @@ DeleteSwitch() & id & Smazání spínače & OK, ERROR \\
 \end{table}
 
 U nastavovacích dotazů musí být \uv{id} a \uv{pin} číslo od 0 do 100, \uv{type} a \uv{state} musí být číselné hodnoty 0 (false) nebo 1 (true) a \uv{name} musí být maximálně 30 znaků dlouhé (30 bytů). Pro \uv{state} znamená 1 zapnuto, 0 vypnuto. Pro \uv{type} znamená 1 \uv{normálně vypnuto / push to make} a 0 \uv{normálně zapnuto / push to break}. Pokud jedna z podmínek nebude splněna, dotaz bude odmítnut. Parametr \uv{ID} lze získat pomocí příkazu \uv{GetAllSensors()} a \uv{GetAllSwitches} z již existujících zařízení.
+
+\paragraph{Ukázka přidání nového senzoru:}
+\begin{center}
+AddSensor(8, Muj novy senzor, 0)
+\end{center}
+
+\paragraph{Ukázka změny pinu senzoru:}
+\begin{center}
+SetSensorName(1, Moje nove jmeno senzoru)
+\end{center}
+
+\paragraph{Ukázka smazání spínače:}
+\begin{center}
+DeleteSwitch(1)
+\end{center}
 
 \subsection{Notifikace}
 Bezpečnostní zařízení má uložené všechny poslední stavy senzorů. Při každém průchodu hlavní smyčkou proběhne čtení, pomocí funkce \uv{checkSensorStateChangedAndSendIfTrue()} a pokud nový stav nesouhlasí se starým, je zaslána notifikace s ID zařízení a aktuálním stavem. Poté záleží na jedné z aplikací, jak informaci zpracuje.
