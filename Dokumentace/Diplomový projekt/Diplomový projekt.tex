@@ -24,7 +24,7 @@ Děkuji vedoucí práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné ved
 % Abstrakt
 
 \begin{abstractCZ}
-Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace a s možností monitorování pomocí mobilní aplikace. Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu. V úvodu jsou definovány základní pojmy a požadované vlastnosti, na jejichž základě byly objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí zabezpečovací systém a zajišťuje komunikaci, a desktopová aplikace pro úplné řízení zabezpečovacího systému. Poslední část, tedy mobilní aplikace zůstává nedokončená.
+Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace a s možností monitorování pomocí mobilní aplikace. Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu. V úvodu jsou definovány základní pojmy a požadované vlastnosti, na jejichž základě byly objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí a zajišťuje komunikaci, desktopová aplikace pro nastavení a monitorování, a mobilní aplikace pro samostnatné monitorování zabezpečovacího zařízení.
 
 \end{abstractCZ}
 
@@ -48,6 +48,7 @@ Not implemented yet.
 \textbf{LED} & Light-Emitting Diode, dioda emitující světlo\\
 \textbf{PIR} & Passive infrared sensor, infračervený sensor pohybu\\
 \textbf{SMS} & Short message service, služba krátkých textových zpráv\\
+\textbf{TUL} & Technical University of Liberec, Technická univerzita v Liberci\\
 \textbf{USB} & Universal Serial Bus, univerzální sériová sběrnice\\
 
 \end{abbrList}
@@ -212,7 +213,7 @@ Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého pro
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{images/response.png}
-\caption{Jednotná odpověď od společnosti STK}
+\caption{Odpověď od společnosti STK}
 \label{image}
 \end{center}
 \end{figure}
@@ -220,13 +221,13 @@ Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého pro
 \subsection{Hlubší rozbor}
 Bez dokumentací jsem musel začít zkoumat více do hloubky. Po konzultaci s vedoucím byl telefon rozebrán a zkoumán na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi jako jednou variantu podařilo nalézt servisní piny, které jsem se následně snažil analyzovat a skrze ně komunikovat s mobilním telefonem.
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{images/servicePins.png}
-\caption{Objevené servisní piny}
-\label{image}
-\end{center}
-\end{figure}
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[width=0.7\textwidth]{images/servicePins.png}
+%\caption{Objevené servisní piny}
+%\label{image}
+%\end{center}
+%\end{figure}
 
 \subsection{Závěr rozboru}
 Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním  analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Po dvouměsíčním zkoumání jsem musel celou věc uzavřít a oznámit vedoucímu, že tudy zřejmě cesta nevede. Od využití mobilního telefonu bylo tedy upuštěno.
@@ -238,15 +239,17 @@ Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou inf
 \subsection{Výsledný prototyp}
 Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího systému. Obsahuje (zleva) řídící desku Arduino, jednu diody (LED) pro simulování spínacího prvku, dále diodu která signalizuje, zda je sepnutý senzor PIR, a naposledy diodu signalizující sepnutí dveřního čidla (vpravo). 
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=\textwidth]{images/board.png}
-\caption{Finální prototyp na nepájivém poly}
-\label{image}
-\end{center}
-\end{figure}
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[width=\textwidth]{images/board.png}
+%\caption{Finální prototyp na nepájivém poly}
+%\label{image}
+%\end{center}
+%\end{figure}
 
 \section{Firmware}
+
+Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro ptlaformu Arduino (čip ATmega) v programovacím jazyce C++, zapomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE.
 
 \subsection{Blokové schéma}
 
@@ -260,24 +263,25 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 
 \subsection{Chybová hlášení}
 
-
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
 
-\subsection{Blokové schéma}
+Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), zapomocí IDE Visual Studio 2017.
 
-\subsection{Přehled}
+\section{Blokové schéma}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=\textwidth]{images/overview.png}
-\caption{Okno s přehledem jednotlivých komponent}
+\includegraphics[width=\textwidth]{vector/blokoveSchemaSecurityControl.pdf}
+\caption{Blokové schéma objektového návrhu aplikace}
 \label{image}
 \end{center}
 \end{figure}
 
-\subsection{Připojení}
+Kód aplikace je rozdělen do více spolu bloků, které spolu vzájemně komunikují. Arduino Connector slouží k napojení zabezpečovacího zařízení a využívá API poskytované zabezpečovacím zařízením, díky čemuž poskytuje funkce pro jednoduché zapisování a čtení do Arduina. Windows Forms poskytují grafické uživatelské rozhraní, základní logiku na propojení jednotlivých funkčních celků a notifikace pro uživatele. UserControls poskytují jednotlivé funkce aplikace, z nichž každá má své vlastní GUI, které se zobrazuje ve Windows Forms. Dále budou zmíněny pouze ty UserContorls, které jsou důležité pro pochopení ovládní aplikace. Design byl inspirovaný manuálem jednotného vizuálního stylu TUL \cite{TULVisual}.
+
+\section{Spojení}
 
 \begin{figure}[H]
 \begin{center}
@@ -287,8 +291,21 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 \end{center}
 \end{figure}
 
+Spojení slouží k připojení či odpojení od zabezpečovacího zařízení. Za běhu aplikace na pozadí hlídá, zda je připojení stále navázáno. Při ztrátě spojení ihned informuje uživatele a upravý chování celé aplikace. Spojení rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení.
 
-\subsection{Nastavení sensoru}
+\section{Přehled}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/overview.png}
+\caption{Okno s přehledem jednotlivých komponent}
+\label{image}
+\end{center}
+\end{figure}
+
+Přehled slouží pro zobrazení všech dostupných spínačů a senzorů, které jsou v zabezpečovacím zařízení dostupné. Obsah se generuje dynamicky pod sebe, lze tedy vytvořit neomezený počet zobrazených zařízení. Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze měnit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. V případě, že žádná zařízení neexistují, je uživatel upozorněn. Žádná data nejsou měněna v objektech uvnitř aplikace, ale změny jsou poslány do zabezpečovacího zařízení, po obdržení odpovědi se změní stav v aplikaci a uživatel je upozorněn.
+
+\section{Nastavení senzoru}
 
 \begin{figure}[H]
 \begin{center}
@@ -298,11 +315,26 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 \end{center}
 \end{figure}
 
-\subsection{Nastavení spínače}
+Nastavení senzoru slouží k změně interního nastavení uvnitř zabezpečovacího zařízení. Lze měnit název zařízení, pin na kterém se nachází a typ tohoto zařízení (rozpínací, spínací). Poslední funkcí je smazání zařízení.
 
-\subsection{Funkce programu a nastavení}
+\section{Nastavení spínače}
 
-\subsection{Notifikace}
+Nastavení je témeř identické s předchozím, lze měnit název, pin a místo typu zařízení lze přenastavit jeho stav.
+
+\section{Funkce programu a nastavení}
+
+Tato záložka zpřístupňuje různá nastavení a funkce, které nejsou běžně potřebné.
+
+\paragraph{Přehled funkcí:}
+\begin{itemize}
+\item Přidat nový senzor
+\item Přidat nový spínač
+\item Znovu načíst všechna data ze zabezpečovacího zařízení
+\item Zobrazovat notifikace, pokud se změní stav senzoru (přepínač)
+\item Zobrazovat notifikace, pokud se senzor navrátí do výchozího stavu (přepínač)
+\end{itemize} 
+
+\section{Notifikace}
 Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlášení, která slouží při upozornění uživatele na nějakou situaci. Například se jedná o změnu stavu pinů, chybové stavy řídící jednotky, nebo odpojení zabezpečovacího zařízení.
 
 \paragraph{Přehled implementovaných notifikací:}
@@ -317,7 +349,7 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 \item Jméno se podařilo/nepodařilo změnit
 \item PIN se podařilo/nepodařilo změnit
 \item Typ senzoru se podařilo/nepodařilo změnit
-\item Nový sensor se podařilo/nepodařilo přidat
+\item Nový senzor se podařilo/nepodařilo přidat
 \item Nový spínač se podařilo/nepodařilo přidat
 \item Komponenty arduina se podařilo/nepodařilo znovu načíst
 \item Nastavení notifikací změněno
@@ -326,6 +358,8 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 % Mobilní aplikace
 
 \chapter{Mobilní aplikace}
+
+Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zařízení, a není tedy možno měnit jakékoliv nastavení, k čemuž slouží desktopová aplikace. Aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, zapomocí IDE Android Studio 2.3.2.
 
 % Závěr
 
@@ -353,6 +387,9 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 \bibitem{SIMCOM SW}SIMCOM WIRELESS SOLUTIONS. SIM908 AT Command Manual [online]. Jinzhong, 2011, 249 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.dfrobot.com/image/data/TEL0051/3.0/SIM908\_AT\%20Command\%20Manua\_V1.01.pdf}
 \bibitem{SIMCOM HW}SIMCOM WIRELESS SOLUTIONS. SIM908 Hardware Design [online]. 2. Jinzhong, 2012, 53 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.niplesoft.net/blog/wp-content/uploads/2016/02/SIM908-Hardware-Design-V2.00-1.pdf}
 \bibitem{LaTeX}SATRAPA, Pavel. Stručný přehled příkazů LaTeXu [online]. 2011, 2 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-prehled.pdf}
+\bibitem{TULVisual}Manuál jednotného vizuálního stylu Technické univerzity v Liberci [online]. , 27 [cit. 2017-05-27]. Dostupné z: \url{http://www.ft.tul.cz/document/126}
+
+
 \end{thebibliography}
 
 % Příloha
@@ -364,13 +401,19 @@ Struktura a obsah adresářů je následující:
 \paragraph{/Dokumentace}\mbox{}\\\mbox{}\\
 Text bakalářské práce ve formátu pdf.
 
+\paragraph{/Hardware}\mbox{}\\\mbox{}\\
+Kompletní dokumentace s podklady k použitým sloučástkám, včetně fotografií.
+
 \paragraph{/Software}\mbox{}\\\mbox{}\\
-Zdrojové kódy rozděleny do více kategorií.
+Vyvinutý software a zdrojové kódy, rozděleny do více kategorií.
 
-\paragraph{/Software/Dokumentace (Datasheets)}\mbox{}\\\mbox{}\\
-Softwarová a hardwarová dokumentace použitých součástek.
+\paragraph{/Software/Security (Firmware)}\mbox{}\\\mbox{}\\
+Arduino aplikace, nahrané na desce zabezpečovacího zařízení.
 
-\paragraph{/Firmware/Firmware}\mbox{}\\\mbox{}\\
-Hlavní software, nahraný ve sledovacím zařízení.
+\paragraph{/Software/SecurityControl (Nastavení a monitoring)}\mbox{}\\\mbox{}\\
+Desktopová aplikace, sloužící k nastavení a monitorování zabezpečovacího zařízení.
+
+\paragraph{/Software/SecurityViewer (Monitoring)}\mbox{}\\\mbox{}\\
+Mobilní aplikace, sloužící k monitorování zabezpečovacího zařízení.
 
 \end{document}
