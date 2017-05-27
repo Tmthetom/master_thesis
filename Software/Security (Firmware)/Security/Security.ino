@@ -18,11 +18,11 @@ TODO: Consider memory saving using PROGMEM
 /* Setting */
 
 #define baudRate 9600
-#define maxSensors 6
-#define maxSwitches 6
+#define maxSensors 6  // Ideal size for Arduino memory, Atmega can stop working when number grows
+#define maxSwitches 6  // Ideal size for Arduino memory, Atmega can stop working when number grows
 #define maxBytesOfMessageIn 100
-#define maxBytesOfMessageOut 500  // Encrease this, when maximum number of devices encreased.
-#define maxNameLength 30
+#define maxBytesOfMessageOut 500  // Encrease this, when maximum number of devices encreased
+#define maxNameLength 30  // In bytes
 
 /* Strings */
 
@@ -157,7 +157,7 @@ void readSerialAndRespond() {
 
 /* Send all sensors */
 void getAllSensors() {
-	out = stringSensorsCategory + leftBracket;													// Name of category
+	out = String(stringSensorsCategory) + leftBracket;													// Name of category
 	for (uint8_t i = 0; i < sizeof(pinSensor) / sizeof(uint8_t); i++) {
 		if (pinSensor[i] != NULL) {
 			out +=
@@ -175,7 +175,7 @@ void getAllSensors() {
 
 /* Send all switches */
 void getAllSwitches() {
-	out = stringSwitchesCategory + leftBracket;													// Name of category
+	out = String(stringSwitchesCategory) + leftBracket;													// Name of category
 	for (uint8_t i = 0; i < sizeof(pinSwitch) / sizeof(uint8_t); i++) {
 		if (pinSwitch[i] != NULL) {
 			out +=

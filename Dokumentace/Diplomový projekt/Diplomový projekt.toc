@@ -34,27 +34,32 @@
 \contentsline {section}{\numberline {4.3}Firmware}{19}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Blokov\IeC {\'e} sch\IeC {\'e}ma}{20}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Nastaven\IeC {\'\i }}{20}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}API}{20}{subsection.4.3.3}
-\contentsline {subsection}{\numberline {4.3.4}Intern\IeC {\'\i } funkce}{20}{subsection.4.3.4}
-\contentsline {subsection}{\numberline {4.3.5}Notifikace}{20}{subsection.4.3.5}
-\contentsline {subsection}{\numberline {4.3.6}Chybov\IeC {\'a} hl\IeC {\'a}\IeC {\v s}en\IeC {\'\i }}{20}{subsection.4.3.6}
-\contentsline {chapter}{\numberline {5}Desktopov\IeC {\'a} aplikace}{21}{chapter.5}
-\contentsline {section}{\numberline {5.1}Blokov\IeC {\'e} sch\IeC {\'e}ma}{21}{section.5.1}
-\contentsline {section}{\numberline {5.2}Spojen\IeC {\'\i }}{22}{section.5.2}
-\contentsline {section}{\numberline {5.3}P\IeC {\v r}ehled}{23}{section.5.3}
-\contentsline {section}{\numberline {5.4}Nastaven\IeC {\'\i } senzoru}{24}{section.5.4}
-\contentsline {section}{\numberline {5.5}Nastaven\IeC {\'\i } sp\IeC {\'\i }na\IeC {\v c}e}{24}{section.5.5}
-\contentsline {section}{\numberline {5.6}Funkce programu a nastaven\IeC {\'\i }}{24}{section.5.6}
-\contentsline {paragraph}{P\IeC {\v r}ehled funkc\IeC {\'\i }:}{24}{paragraph*.8}
-\contentsline {section}{\numberline {5.7}Notifikace}{25}{section.5.7}
-\contentsline {paragraph}{P\IeC {\v r}ehled implementovan\IeC {\'y}ch notifikac\IeC {\'\i }:}{25}{paragraph*.9}
-\contentsline {chapter}{\numberline {6}Mobiln\IeC {\'\i } aplikace}{26}{chapter.6}
-\contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{27}{chapter.7}
-\contentsline {chapter}{Literatura}{27}{chapter.7}
-\contentsline {chapter}{\numberline {A}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{30}{appendix.A}
-\contentsline {paragraph}{/Dokumentace}{30}{paragraph*.11}
-\contentsline {paragraph}{/Hardware}{30}{paragraph*.12}
-\contentsline {paragraph}{/Software}{30}{paragraph*.13}
-\contentsline {paragraph}{/Software/Security (Firmware)}{30}{paragraph*.14}
-\contentsline {paragraph}{/Software/SecurityControl (Nastaven\IeC {\'\i } a monitoring)}{30}{paragraph*.15}
-\contentsline {paragraph}{/Software/SecurityViewer (Monitoring)}{30}{paragraph*.16}
+\contentsline {paragraph}{Nastavit lze:}{20}{paragraph*.8}
+\contentsline {subsection}{\numberline {4.3.3}Intern\IeC {\'\i } funkce}{20}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}API}{20}{subsection.4.3.4}
+\contentsline {paragraph}{Uk\IeC {\'a}zka vr\IeC {\'a}cen\IeC {\'y}ch senzor\IeC {\r u}:}{20}{paragraph*.9}
+\contentsline {paragraph}{Uk\IeC {\'a}zka vr\IeC {\'a}cen\IeC {\'y}ch sp\IeC {\'\i }na\IeC {\v c}\IeC {\r u}:}{21}{paragraph*.10}
+\contentsline {subsection}{\numberline {4.3.5}Notifikace}{21}{subsection.4.3.5}
+\contentsline {paragraph}{Uk\IeC {\'a}zka notifikace:}{21}{paragraph*.11}
+\contentsline {subsection}{\numberline {4.3.6}Chybov\IeC {\'a} hl\IeC {\'a}\IeC {\v s}en\IeC {\'\i }}{22}{subsection.4.3.6}
+\contentsline {paragraph}{Uk\IeC {\'a}zka nerozpozn\IeC {\'a}n\IeC {\'\i } p\IeC {\v r}\IeC {\'\i }kazu:}{22}{paragraph*.12}
+\contentsline {chapter}{\numberline {5}Desktopov\IeC {\'a} aplikace}{23}{chapter.5}
+\contentsline {section}{\numberline {5.1}Blokov\IeC {\'e} sch\IeC {\'e}ma}{23}{section.5.1}
+\contentsline {section}{\numberline {5.2}Spojen\IeC {\'\i }}{24}{section.5.2}
+\contentsline {section}{\numberline {5.3}P\IeC {\v r}ehled}{25}{section.5.3}
+\contentsline {section}{\numberline {5.4}Nastaven\IeC {\'\i } senzoru}{26}{section.5.4}
+\contentsline {section}{\numberline {5.5}Nastaven\IeC {\'\i } sp\IeC {\'\i }na\IeC {\v c}e}{26}{section.5.5}
+\contentsline {section}{\numberline {5.6}Funkce programu a nastaven\IeC {\'\i }}{26}{section.5.6}
+\contentsline {paragraph}{P\IeC {\v r}ehled funkc\IeC {\'\i }:}{26}{paragraph*.13}
+\contentsline {section}{\numberline {5.7}Notifikace}{27}{section.5.7}
+\contentsline {paragraph}{P\IeC {\v r}ehled implementovan\IeC {\'y}ch notifikac\IeC {\'\i }:}{27}{paragraph*.14}
+\contentsline {chapter}{\numberline {6}Mobiln\IeC {\'\i } aplikace}{28}{chapter.6}
+\contentsline {chapter}{\numberline {7}Z\IeC {\'a}v\IeC {\v e}r}{29}{chapter.7}
+\contentsline {chapter}{Literatura}{29}{chapter.7}
+\contentsline {chapter}{\numberline {A}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{32}{appendix.A}
+\contentsline {paragraph}{/Dokumentace}{32}{paragraph*.16}
+\contentsline {paragraph}{/Hardware}{32}{paragraph*.17}
+\contentsline {paragraph}{/Software}{32}{paragraph*.18}
+\contentsline {paragraph}{/Software/Security (Firmware)}{32}{paragraph*.19}
+\contentsline {paragraph}{/Software/SecurityControl (Nastaven\IeC {\'\i } a monitoring)}{32}{paragraph*.20}
+\contentsline {paragraph}{/Software/SecurityViewer (Monitoring)}{32}{paragraph*.21}

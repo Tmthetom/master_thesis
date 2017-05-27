@@ -248,25 +248,110 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 %\end{figure}
 
 \section{Firmware}
-
 Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro ptlaformu Arduino (čip ATmega) v programovacím jazyce C++, zapomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE.
 
 \subsection{Blokové schéma}
+Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení a přístupu k aplikaci aplikace.
 
 \subsection{Nastavení}
+Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení nelze měnit pokud zařízení běží.
 
-\subsection{API}
+\paragraph{Nastavit lze:}
+\begin{itemize}
+\item Komunikační rychlost (baudRate)
+\item Maximální počet senzorů
+\item Maximální počet spínačů
+\item Kódy chybových hlášek
+\item Klíčová slova API
+\end{itemize} 
 
 \subsection{Interní funkce}
+Interní funkce slouží 
+
+\subsection{API}
+Jednotlivé parametry jsou odděleny čárkou a všechny jsou zapozdřeny kulatými závorkami, tedy \uv{(} a \uv{)}, ve výsledku potom \uv{SetSensor(10,5)}.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c| c |}
+\hline
+Dotaz & Parametry & Popis & Vrací\\
+\hline
+\hline
+GetAllSensors() & Nemá & Dotaz vrátí list všech senzorů & id, pin, name, state \\
+\hline
+GetAllSwitches() & Nemá & Dotaz vrátí list všech spínačů & id, pin, name, state \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Tabulka API - Getters}
+\end{table}
+
+\paragraph{Ukázka vrácených senzorů:}
+\begin{center}
+Sensors((Id = 0,Pin = 8,Name = Door Sensor,State = 0,Type = 0)(Id = 1,Pin = 7,Name = PIR Sensor,State = 0,Type = 1))
+\end{center} 
+
+\paragraph{Ukázka vrácených spínačů:}
+\begin{center}
+Switches((Id = 0,Pin = 6,Name = Led Switch,State = 0))
+\end{center} 
+
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| l | c | c| c |}
+\hline
+Dotaz & Parametry & Popis & Vrací\\
+\hline
+\hline
+SetSensorName() & id, name & Změna jména senzoru & OK, ERROR \\
+\hline
+SetSwitchName() & id, name & Změna jména spínače & OK, ERROR \\
+\hline
+SetSensorPin() & id, pin & Změna pinu senzoru & OK, ERROR \\
+\hline
+SetSwitchPin() & id, pin & Změna pinu spínače & OK, ERROR \\
+\hline
+SetSensorType() & id, type & Změna typu senzoru & OK, ERROR \\
+\hline
+SetSwitchState() & id, state & Změna stavu spínače & OK, ERROR \\
+\hline
+AddSensor() & pin, name, type & Přidání nového senzoru & OK, ERROR \\
+\hline
+AddSwitch() & pin, name, state & Přidání nového spínače & OK, ERROR \\
+\hline
+DeleteSensor() & id & Smazání senzoru & OK, ERROR \\
+\hline
+DeleteSwitch() & id & Smazání spínače & OK, ERROR \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Tabulka API - Setters}
+\end{table}
+
+U nastavovacích dotazů musí být \uv{id} a \uv{pin} číslo od 0 do 100, \uv{type} a \uv{state} musí být číselné hodnoty 0 (false) nebo 1 (true) a \uv{name} musí být maximálně 30 znaků dlouhé (30 bytů). Pro \uv{state} znamená 1 zapnuto, 0 vypnuto. Pro \uv{type} znamená 1 \uv{normálně vypnuto / push to make} a 0 \uv{normálně zapnuto / push to break}. Pokud jedna z podmínek nebude splněna, dotaz bude odmítnut. Parametr \uv{ID} lze získat pomocí příkazu \uv{GetAllSensors()} a \uv{GetAllSwitches} z již existujících zařízení.
 
 \subsection{Notifikace}
+Bezpečnostní zařízení má uložené všechny poslední stavy senzorů. Při každém průchodu hlavní smyčkou proběhne čtení, pomocí funkce \uv{checkSensorStateChangedAndSendIfTrue()} a pokud nový stav nesouhlasí se starým, je zaslána notifikace s ID zařízení a aktuálním stavem. Poté záleží na jedné z aplikací, jak informaci zpracuje.
+
+\paragraph{Ukázka notifikace:}
+\begin{center}
+Sensor(Id = 1,State = 0)
+\end{center} 
 
 \subsection{Chybová hlášení}
+Původně byla chybová hlášení, při neúspěšném provedení operace nebo jiné chybě, tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Kontroluje se vždy zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Poslední chybouvou hláškou je, že příkaz nebyl rozpoznán, ten je navrácen, pokud příkaz nesplňuje kritéria tohoto API.
+
+\paragraph{Ukázka nerozpoznání příkazu:}
+\begin{center}
+Command 'SetSensor(15,5)' not recognized.
+\end{center} 
 
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
-
 Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), zapomocí IDE Visual Studio 2017.
 
 \section{Blokové schéma}
@@ -318,11 +403,9 @@ Přehled slouží pro zobrazení všech dostupných spínačů a senzorů, kter�
 Nastavení senzoru slouží k změně interního nastavení uvnitř zabezpečovacího zařízení. Lze měnit název zařízení, pin na kterém se nachází a typ tohoto zařízení (rozpínací, spínací). Poslední funkcí je smazání zařízení.
 
 \section{Nastavení spínače}
-
-Nastavení je témeř identické s předchozím, lze měnit název, pin a místo typu zařízení lze přenastavit jeho stav.
+Nastavení je témeř identické s předchozím, lze měnit název, pin, a místo typu zařízení lze přenastavit jeho stav.
 
 \section{Funkce programu a nastavení}
-
 Tato záložka zpřístupňuje různá nastavení a funkce, které nejsou běžně potřebné.
 
 \paragraph{Přehled funkcí:}
@@ -358,7 +441,6 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 % Mobilní aplikace
 
 \chapter{Mobilní aplikace}
-
 Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zařízení, a není tedy možno měnit jakékoliv nastavení, k čemuž slouží desktopová aplikace. Aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, zapomocí IDE Android Studio 2.3.2.
 
 % Závěr
@@ -388,6 +470,8 @@ Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zaříze
 \bibitem{SIMCOM HW}SIMCOM WIRELESS SOLUTIONS. SIM908 Hardware Design [online]. 2. Jinzhong, 2012, 53 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.niplesoft.net/blog/wp-content/uploads/2016/02/SIM908-Hardware-Design-V2.00-1.pdf}
 \bibitem{LaTeX}SATRAPA, Pavel. Stručný přehled příkazů LaTeXu [online]. 2011, 2 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-prehled.pdf}
 \bibitem{TULVisual}Manuál jednotného vizuálního stylu Technické univerzity v Liberci [online]. , 27 [cit. 2017-05-27]. Dostupné z: \url{http://www.ft.tul.cz/document/126}
+\bibitem{HTML1.1}FIELDING, R., UC IRVINE, J. GETTYS, et al. Hypertext Transfer Protocol -- HTTP/1.1 [online]. 1999, , 176 [cit. 2017-05-27]. Dostupné z: \url{http://www.ietf.org/rfc/rfc2616.txt}
+
 
 
 \end{thebibliography}
