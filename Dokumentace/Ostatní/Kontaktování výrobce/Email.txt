@@ -1,0 +1,10 @@
+Hello,
+
+iam student of Technical University of Liberec (Czech Republic) and iam working official school project, where iam trying to control (from different deviace) GSM, and other resources (microfon, speakers, etc.) from cheapest phones on market. As first phone i chose your STK R45i, witch is available in our bigges e-shop (Alza.cz). I would be very grateful, for providing any information, documentation or guide, that can help me with controling resources of phone, like AT commands for GSM, sended from computer. First i was trying to use USB commands, but seems there is no API for it, so i disassemble phone and now, iam trying to use ports, that are under the SIM2. These ports seems like for service purpose, i so i think they could be used, to control phone directly.
+
+I know its very unusual, but any information provided, could realy help with my school work. I provided my school email address, to be sure, iam realy university studen. Also here is university website http://www.tul.cz/en/, so you can check the school.
+
+Hope you will contant me soon, i can provide you any information you want.
+
+With regards,
+Tomáš Moravec
