@@ -18,7 +18,12 @@ namespace SecurityControl.Arduino
             switch (boardName)
             {
                 case "Arduino Uno": return ArduinoDefault();
+
                 case "Arduino Mega": return ArduinoMega();
+                case "Arduino Mega 2560": return ArduinoMega();
+
+                case "Genuino Mega": return ArduinoMega();
+                case "Genuino Mega 2560": return ArduinoMega();
 
                 default: return ArduinoDefault();
             }
@@ -26,7 +31,8 @@ namespace SecurityControl.Arduino
 
 
         /// <summary>
-        /// Arduino Mega
+        /// Arduino/Genuino Mega
+        /// Arduino/Genuino Mega 2560
         /// </summary>
         /// <returns></returns>
         private static string[] ArduinoMega()
@@ -76,16 +82,17 @@ namespace SecurityControl.Arduino
         }
 
         /// <summary>
-        /// Arduino Uno
-        /// Arduino Duemilanove
-        /// Arduino Diecimila 
-        /// Arduino Nano
-        /// Arduino NG
-        /// Arduino Mini
-        /// Arduino Extreme
-        /// Arduino USB
-        /// Arduino Bluetooth
-        /// Arduino Serial
+        /// Arduino/Genuino Uno
+        /// Arduino/Genuino Duemilanove
+        /// Arduino/Genuino Diecimila 
+        /// Arduino/Genuino Nano
+        /// Arduino/Genuino NG
+        /// Arduino/Genuino Mini
+        /// Arduino/Genuino Extreme
+        /// Arduino/Genuino USB
+        /// Arduino/Genuino Bluetooth
+        /// Arduino/Genuino Serial
+        /// Arduino/Genuino 101
         /// Severino
         /// </summary>
         /// <returns></returns>
