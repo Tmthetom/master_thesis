@@ -160,7 +160,7 @@ namespace SecurityControl
 
         #endregion Communication
 
-        #region Autocalled functions
+        #region Autocalled functions (Events from Arduino)
 
         /// <summary>
         /// Called when sensor state changed
@@ -171,9 +171,6 @@ namespace SecurityControl
         {
             // Read message
             message = inData.Text;
-
-            // Check if user want notification
-            if (!features.switchShowSensorStateChanged.Value) return;
 
             // Parse data
             if (!message.Equals(""))
@@ -205,26 +202,31 @@ namespace SecurityControl
                         // False = push-to-break = normally open
                         if (sensor.Type == false && state == false)
                         {
-                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-break (normally open) is now closed.");
+                            // Check if user want notification
+                            if (features.switchShowSensorStateChanged.Value)
+                                myFunctions.Notification_Balloon("Sensor state changed", "Sensor '" + sensor.CustomName + "' is now closed.");
                         }
                         else if (sensor.Type == false && state == true)
                         {
                             // Check if user want to normal state notification
                             if (features.switchShowSensorStateChangedToNormal.Value) {
-                                myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-break (normally open) is now opened (normal state).");
+                                if (features.switchShowSensorStateChanged.Value)
+                                    myFunctions.Notification_Balloon("Sensor state changed", "Sensor '" + sensor.CustomName + "' is now opened (normal state).");
                             }
                         }
 
                         // True = push-to-make = normally closed
                         else if (sensor.Type == true && state == true)
                         {
-                            myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-make (normally closed) is now opened.");
+                            if (features.switchShowSensorStateChanged.Value)
+                                myFunctions.Notification_Balloon("Sensor state changed", "Sensor '" + sensor.CustomName + "' is now opened.");
                         }
                         else
                         {
                             // Check if user want to normal state notification
                             if (features.switchShowSensorStateChangedToNormal.Value) {
-                                myFunctions.Notification_Balloon("Sensor state changed", "Sensor named " + sensor.CustomName + " of type push-to-make (normally closed) is now closed (normal state).");
+                                if (features.switchShowSensorStateChanged.Value)
+                                    myFunctions.Notification_Balloon("Sensor state changed", "Sensor '" + sensor.CustomName + "' is now closed (normal state).");
                             }
                         }
 
@@ -238,6 +240,6 @@ namespace SecurityControl
             }
         }
 
-        #endregion Autocalled functions
+        #endregion Autocalled functions (Events from Arduino)
     }
 }
