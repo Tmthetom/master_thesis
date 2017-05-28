@@ -290,8 +290,8 @@ void setSensorType() {
 		return;
 	}
 
-	// Set state
-	digitalWrite(pinSensor[id], (val == 1) ? HIGH : LOW);
+	// Set type
+	typeSensor[id] = (val == 1) ? true : false;
 
 
 	// Send OK
