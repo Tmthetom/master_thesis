@@ -11,13 +11,15 @@ namespace SecurityControl.Functions
 
         #region Notification Ballooon
 
+        NotifyIcon balloon;
+
         /// <summary>
         /// Popup balloon notification (Windows 10 only)
         /// </summary>
         /// <param name="text">Text in notification</param>
         public void Notification_Balloon(string text)
         {
-            NotifyIcon balloon = new NotifyIcon()
+            balloon = new NotifyIcon()
             {
                 Icon = SystemIcons.Application,
                 Visible = true
@@ -34,7 +36,7 @@ namespace SecurityControl.Functions
         /// <param name="icon">Icon in notification</param>
         public void Notification_Balloon(string text, Icon icon)
         {
-            NotifyIcon balloon = new NotifyIcon()
+            balloon = new NotifyIcon()
             {
                 Icon = icon,
                 Visible = true
@@ -50,7 +52,7 @@ namespace SecurityControl.Functions
         /// <param name="text">Text in notification</param>
         public void Notification_Balloon(string title, string text)
         {
-            NotifyIcon balloon = new NotifyIcon()
+            balloon = new NotifyIcon()
             {
                 Icon = SystemIcons.Application,
                 Visible = true
@@ -67,7 +69,7 @@ namespace SecurityControl.Functions
         /// <param name="showTime">How long will be notification visible</param>
         public void Notification_Balloon(string title, string text, int showTime)
         {
-            NotifyIcon balloon = new NotifyIcon()
+            balloon = new NotifyIcon()
             {
                 Icon = SystemIcons.Application,
                 Visible = true
@@ -84,7 +86,7 @@ namespace SecurityControl.Functions
         /// <param name="icon">Icon in notification</param>
         public void Notification_Balloon(string title, string text, Icon icon)
         {
-            NotifyIcon balloon = new NotifyIcon()
+            balloon = new NotifyIcon()
             {
                 Icon = icon,
                 Visible = true
@@ -102,7 +104,7 @@ namespace SecurityControl.Functions
         /// <param name="icon">Icon in notification</param>
         public void Notification_Balloon(string title, string text, int showTime, Icon icon)
         {
-            NotifyIcon balloon = new NotifyIcon()
+            balloon = new NotifyIcon()
             {
                 Icon = icon,
                 Visible = true
