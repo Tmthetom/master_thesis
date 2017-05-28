@@ -45,6 +45,8 @@ namespace SecurityControl.UserControls
             InitBaudRates();
         }
 
+        private int numberOfPorts = 0;
+
         /// <summary>
         /// Init ports for connection
         /// </summary>
@@ -53,19 +55,13 @@ namespace SecurityControl.UserControls
             // Get ports
             string[] ports = SerialPort.GetPortNames();
 
-            // Count is not working
-            int numberOfPorts = 0;
-            foreach (string port in bunifuDropdownPort.Items)
-            {
-                numberOfPorts++;
-            }
-
             // Save new ports if their are not same
             if (ports.Length != numberOfPorts)
             {
                 bunifuDropdownPort.Clear();
                 foreach (string port in ports) bunifuDropdownPort.AddItem(port);
                 if (ports.Length > 0) bunifuDropdownPort.selectedIndex = 0;
+                this.numberOfPorts = ports.Length;
             }
         }
 
@@ -253,8 +249,8 @@ namespace SecurityControl.UserControls
             }
         }
 
-        private int timerConnected = 1100;
-        private int timerNotConnected = 1000;
+        private static int timerConnected = 1100;
+        private static int timerNotConnected = 1000;
 
         /// <summary>
         /// Connection checker
