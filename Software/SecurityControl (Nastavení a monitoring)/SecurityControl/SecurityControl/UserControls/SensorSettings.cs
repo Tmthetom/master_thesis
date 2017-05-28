@@ -36,8 +36,10 @@ namespace SecurityControl.UserControls
         private void Fill()
         {
             bunifuMaterialTextboxName.Text = mySensor.CustomName;
-            bunifuMaterialTextboxPin.Text = mySensor.Pin.ToString();
             bunifuDropdownType.selectedIndex = (mySensor.Type == false) ? 0 : 1;
+
+            dropDownPin.Items = Arduino.BoardPins.GetPins(myParent.connection.GetDeviceName());
+            dropDownPin.selectedIndex = dropDownPin.Items.ToList().IndexOf(mySensor.Pin.ToString());
         }
 
         #endregion Initialisation
@@ -105,7 +107,7 @@ namespace SecurityControl.UserControls
         {
             try
             {
-                int newPin = Int32.Parse(bunifuMaterialTextboxPin.Text);
+                int newPin = Int32.Parse(dropDownPin.selectedValue.Trim());
                 if (newPin >= 0 && newPin <= 100)
                 {
                     int oldPin = mySensor.Pin;

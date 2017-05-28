@@ -76,14 +76,14 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void BunifuDropdownPort_onItemSelected(object sender, EventArgs e)
         {
-            GetDeviceName(bunifuDropdownPort.selectedValue);
+            SetDeviceName(bunifuDropdownPort.selectedValue);
         }
 
         /// <summary>
         /// Get device name on selected port
         /// </summary>
         /// <param name="portName">Port name</param>
-        private void GetDeviceName(string portName)
+        private void SetDeviceName(string portName)
         {
             try
             {
@@ -145,6 +145,15 @@ namespace SecurityControl.UserControls
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Return name of connected device
+        /// </summary>
+        /// <returns>Name of device</returns>
+        public string GetDeviceName()
+        {
+            return labelDeviceName.Text;
         }
 
         #endregion Initialization

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arduino\BoardPins.cs" />
     <Compile Include="Arduino\Connection.cs" />
     <Compile Include="Arduino\Operations.cs" />
     <Compile Include="FormMain.cs">

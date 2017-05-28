@@ -26,6 +26,9 @@ namespace SecurityControl.UserControls
             myParent = parent;
             myOperations = operations;
 
+            dropDownPin.Items = Arduino.BoardPins.GetPins(myParent.connection.GetDeviceName());
+
+            dropDownPin.selectedIndex = 0;
             dropDownType.selectedIndex = 0;
         }
 
@@ -56,7 +59,7 @@ namespace SecurityControl.UserControls
             int pin = -1;
             try
             {
-                pin = Int32.Parse(textboxPin.Text.Trim());
+                pin = Int32.Parse(dropDownPin.selectedValue.Trim());
             }
             catch
             {

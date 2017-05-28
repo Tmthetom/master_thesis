@@ -34,9 +34,9 @@
             this.dropDownType = new Bunifu.Framework.UI.BunifuDropdown();
             this.labelType = new System.Windows.Forms.Label();
             this.labelPin = new System.Windows.Forms.Label();
-            this.textboxPin = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.label1 = new System.Windows.Forms.Label();
             this.textboxName = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.dropDownPin = new Bunifu.Framework.UI.BunifuDropdown();
             this.SuspendLayout();
             // 
             // labelName
@@ -160,25 +160,6 @@
             this.labelPin.Text = "Pin";
             this.labelPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textboxPin
-            // 
-            this.textboxPin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textboxPin.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.textboxPin.ForeColor = System.Drawing.Color.White;
-            this.textboxPin.HintForeColor = System.Drawing.Color.White;
-            this.textboxPin.HintText = "";
-            this.textboxPin.isPassword = false;
-            this.textboxPin.LineFocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
-            this.textboxPin.LineIdleColor = System.Drawing.Color.Gray;
-            this.textboxPin.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(0)))), ((int)(((byte)(65)))));
-            this.textboxPin.LineThickness = 3;
-            this.textboxPin.Location = new System.Drawing.Point(176, 177);
-            this.textboxPin.Margin = new System.Windows.Forms.Padding(4);
-            this.textboxPin.Name = "textboxPin";
-            this.textboxPin.Size = new System.Drawing.Size(486, 44);
-            this.textboxPin.TabIndex = 54;
-            this.textboxPin.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -210,15 +191,31 @@
             this.textboxName.TabIndex = 52;
             this.textboxName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
+            // dropDownPin
+            // 
+            this.dropDownPin.BackColor = System.Drawing.Color.Transparent;
+            this.dropDownPin.BorderRadius = 3;
+            this.dropDownPin.ForeColor = System.Drawing.Color.White;
+            this.dropDownPin.Items = new string[] {
+        "Normaly open type = NO = Push to break",
+        "Normaly closed type = NC = Push to make"};
+            this.dropDownPin.Location = new System.Drawing.Point(176, 182);
+            this.dropDownPin.Name = "dropDownPin";
+            this.dropDownPin.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(31)))), ((int)(((byte)(32)))));
+            this.dropDownPin.onHoverColor = System.Drawing.Color.Black;
+            this.dropDownPin.selectedIndex = -1;
+            this.dropDownPin.Size = new System.Drawing.Size(486, 35);
+            this.dropDownPin.TabIndex = 58;
+            // 
             // AddSensor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(88)))), ((int)(((byte)(90)))));
+            this.Controls.Add(this.dropDownPin);
             this.Controls.Add(this.dropDownType);
             this.Controls.Add(this.labelType);
             this.Controls.Add(this.labelPin);
-            this.Controls.Add(this.textboxPin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textboxName);
             this.Controls.Add(this.buttonAdd);
@@ -238,8 +235,8 @@
         private Bunifu.Framework.UI.BunifuDropdown dropDownType;
         private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.Label labelPin;
-        private Bunifu.Framework.UI.BunifuMaterialTextbox textboxPin;
         private System.Windows.Forms.Label label1;
         private Bunifu.Framework.UI.BunifuMaterialTextbox textboxName;
+        private Bunifu.Framework.UI.BunifuDropdown dropDownPin;
     }
 }
