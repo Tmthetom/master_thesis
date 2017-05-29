@@ -12,7 +12,6 @@ public class ItemActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item);
 
-
         // Elements
         TextView textViewType = (TextView) findViewById(R.id.textViewType);
         TextView textViewName = (TextView) findViewById(R.id.textViewName);
