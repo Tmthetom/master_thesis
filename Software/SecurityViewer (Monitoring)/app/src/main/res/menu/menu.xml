@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/refresh"
+        android:title="@string/refresh"
+        android:icon="@drawable/ic_replay_white_24dp"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/create_new"
+                android:title="@string/settings_Notification" />
+        </menu>
+    </item>
+</menu>
