@@ -1,7 +1,7 @@
 \documentclass[FM,MP]{tulthesis}  % Magisterský projekt fakulty mechatroniky
 \usepackage[czech]{babel}  % Česká šablona dokumentu
 \usepackage[utf8]{inputenc}  % Česká diakritika
-\usepackage{graphicx}  % Tvorbě tabulek
+\usepackage{graphicx}  % Tvorba tabulek
 \usepackage{float}  % Ukotvení věcí na svém místě (obrázky, tabulky, grafy, ...)
 \usepackage{hyperref}  % Klikací odkazy v obsahu a referencích
 \usepackage{gensymb}  % Pro stupne celsia
@@ -24,14 +24,14 @@ Děkuji vedoucí práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné ved
 % Abstrakt
 
 \begin{abstractCZ}
-Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace a s možností monitorování pomocí mobilní aplikace. Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu. V úvodu jsou definovány základní pojmy a požadované vlastnosti, na jejichž základě byly objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí a zajišťuje komunikaci, desktopová aplikace pro nastavení a monitorování, a mobilní aplikace pro samostnatné monitorování zabezpečovacího zařízení.
+Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace a s možností monitorování pomocí mobilní aplikace. Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu, který by poskytoval přístup do sítě GSM. V úvodu jsou definovány základní pojmy a požadované vlastnosti, na jejichž základě byly objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí a zajišťuje komunikaci, desktopová aplikace pro nastavení a monitorování, a mobilní aplikace pro samostatné monitorování zabezpečovacího zařízení.
 
 \end{abstractCZ}
 
 \vspace{2cm}
 
 \begin{abstractEN}
-Not implemented yet.
+The thesis deals with the issue of the security system, based on the Arduino platform, controlled from the desktop application and with the possibility of monitoring using mobile application. Communication between the security system and the mobile application should be done with using a mobile phone, that would provide access to the GSM network. The introduction defines the basic terms and the required properties. Base on properties, individual components were ordered. The first part is devoted to trying to use mobile phone as an intermediary for connecting to a mobile data network. This path turned out to be blind, so the second alternative, communication using a separate GPRS module, was chosen. The outcome of this work is firmware that manages and provides communication, a desktop application for setting and monitoring, and mobile applications for independent monitoring of the security device.
 \end{abstractEN}
 
 \tableofcontents
@@ -221,13 +221,13 @@ Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého pro
 \subsection{Hlubší rozbor}
 Bez dokumentací jsem musel začít zkoumat více do hloubky. Po konzultaci s vedoucím byl telefon rozebrán a zkoumán na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi jako jednou variantu podařilo nalézt servisní piny, které jsem se následně snažil analyzovat a skrze ně komunikovat s mobilním telefonem.
 
-%\begin{figure}[H]
-%\begin{center}
-%\includegraphics[width=0.7\textwidth]{images/servicePins.png}
-%\caption{Objevené servisní piny}
-%\label{image}
-%\end{center}
-%\end{figure}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{images/servicePins.png}
+\caption{Objevené servisní piny}
+\label{image}
+\end{center}
+\end{figure}
 
 \subsection{Závěr rozboru}
 Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním  analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Po dvouměsíčním zkoumání jsem musel celou věc uzavřít a oznámit vedoucímu, že tudy zřejmě cesta nevede. Od využití mobilního telefonu bylo tedy upuštěno.
@@ -236,24 +236,32 @@ Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou inf
 
 \subsection{Blokové schéma}
 
-\subsection{Výsledný prototyp}
-Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího systému. Obsahuje (zleva) řídící desku Arduino, jednu diody (LED) pro simulování spínacího prvku, dále diodu která signalizuje, zda je sepnutý senzor PIR, a naposledy diodu signalizující sepnutí dveřního čidla (vpravo). 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{vector/blokoveSchemaHardware.pdf}
+\caption{Blokové schéma zapojení prototypu zabezpečovacího zařízení}
+\label{image}
+\end{center}
+\end{figure}
 
-%\begin{figure}[H]
-%\begin{center}
-%\includegraphics[width=\textwidth]{images/board.png}
-%\caption{Finální prototyp na nepájivém poly}
-%\label{image}
-%\end{center}
-%\end{figure}
+\subsection{Výsledný prototyp}
+Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího systému. Obsahuje (zleva) řídící desku Arduino, jednu diody (LED) pro simulování spínacího prvku, dále diodu která signalizuje, zda je sepnutý senzor PIR, a diodu signalizující sepnutí dveřního čidla (vpravo). 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/board.png}
+\caption{Finální prototyp na nepájivém poli}
+\label{image}
+\end{center}
+\end{figure}
 
 \section{Firmware}
-Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro ptlaformu Arduino (čip ATmega) v programovacím jazyce C++, zapomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE. 
+Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro platformu Arduino (čip ATmega) v programovacím jazyce C++, za pomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE. 
 
 Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení a přístupu k aplikaci (API).
 
 \subsection{Nastavení}
-Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení nelze měnit pokud zařízení běží.
+Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení nelze měnit, pokud zařízení běží.
 
 \paragraph{Nastavit lze:}
 \begin{itemize}
@@ -265,7 +273,7 @@ Inicializační část slouží k prvotnímu nastavení mikrokontroleru před sp
 \end{itemize} 
 
 \subsection{API}
-Jednotlivé parametry jsou odděleny čárkou a všechny jsou zapozdřeny kulatými závorkami, tedy \uv{(} a \uv{)}, ve výsledku potom \uv{SetSensor(10,5)}.
+Jednotlivé parametry jsou odděleny čárkou a všechny jsou zapouzdřeny kulatými závorkami, tedy \uv{(} a \uv{)}, ve výsledku potom \uv{SetSensor(10,5)}.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
@@ -353,7 +361,7 @@ Sensor(Id = 1,State = 0)
 \end{center} 
 
 \subsection{Chybová hlášení}
-Původně byla chybová hlášení, při neúspěšném provedení operace nebo jiné chybě, tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Kontroluje se vždy zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Poslední chybouvou hláškou je, že příkaz nebyl rozpoznán, ten je navrácen, pokud příkaz nesplňuje kritéria tohoto API.
+Původně byla chybová hlášení, při neúspěšném provedení operace nebo jiné chybě, tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Kontroluje se vždy zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Poslední chybovou hláškou je, že příkaz nebyl rozpoznán, ten je navrácen, pokud příkaz nesplňuje kritéria tohoto API.
 
 \paragraph{Ukázka nerozpoznání příkazu:}
 \begin{center}
@@ -363,7 +371,7 @@ Command 'SetSensor(15,5)' not recognized.
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
-Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), zapomocí IDE Visual Studio 2017.
+Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), za pomocí IDE Visual Studio 2017.
 
 \section{Blokové schéma}
 
@@ -375,7 +383,7 @@ Hlavním účelem desktopové aplikace je možnost kompletního nastavení a mon
 \end{center}
 \end{figure}
 
-Kód aplikace je rozdělen do více spolu bloků, které spolu vzájemně komunikují. Arduino Connector slouží k napojení zabezpečovacího zařízení a využívá API poskytované zabezpečovacím zařízením, díky čemuž poskytuje funkce pro jednoduché zapisování a čtení do Arduina. Windows Forms poskytují grafické uživatelské rozhraní, základní logiku na propojení jednotlivých funkčních celků a notifikace pro uživatele. UserControls poskytují jednotlivé funkce aplikace, z nichž každá má své vlastní GUI, které se zobrazuje ve Windows Forms. Dále budou zmíněny pouze ty UserContorls, které jsou důležité pro pochopení ovládní aplikace. Design byl inspirovaný manuálem jednotného vizuálního stylu TUL \cite{TULVisual}.
+Kód aplikace je rozdělen do více spolu bloků, které spolu vzájemně komunikují. Arduino Connector slouží k napojení zabezpečovacího zařízení a využívá API poskytované zabezpečovacím zařízením, díky čemuž poskytuje funkce pro jednoduché zapisování a čtení do Arduina. Windows Forms poskytují grafické uživatelské rozhraní, základní logiku na propojení jednotlivých funkčních celků a notifikace pro uživatele. UserControls poskytují jednotlivé funkce aplikace, z nichž každá má své vlastní GUI, které se zobrazuje ve Windows Forms. Dále budou zmíněny pouze ty UserContorls, které jsou důležité pro pochopení ovládání aplikace. Design byl inspirovaný manuálem jednotného vizuálního stylu TUL \cite{TULVisual}.
 
 \section{Spojení}
 
@@ -387,7 +395,7 @@ Kód aplikace je rozdělen do více spolu bloků, které spolu vzájemně komuni
 \end{center}
 \end{figure}
 
-Spojení slouží k připojení či odpojení od zabezpečovacího zařízení. Za běhu aplikace na pozadí hlídá, zda je připojení stále navázáno. Při ztrátě spojení ihned informuje uživatele a upravý chování celé aplikace. Spojení rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení.
+Spojení slouží k připojení či odpojení od zabezpečovacího zařízení. Za běhu aplikace na pozadí hlídá, zda je připojení stále navázáno. Při ztrátě spojení ihned informuje uživatele a upraví chování celé aplikace. Spojení rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení.
 
 \section{Přehled}
 
@@ -414,7 +422,7 @@ Přehled slouží pro zobrazení všech dostupných spínačů a senzorů, kter�
 Nastavení senzoru slouží k změně interního nastavení uvnitř zabezpečovacího zařízení. Lze měnit název zařízení, pin na kterém se nachází a typ tohoto zařízení (rozpínací, spínací). Výběr pinů závisí vždy na připojené desce, pro tento účel byl vytvořen kompletní seznam desek Arduino (USA) a Genuino (Evropa), dnes již znovu pouze Arduino, s kompletním seznamem pinů, které lze použít. Poslední funkcí je smazání zařízení.
 
 \section{Nastavení spínače}
-Nastavení je témeř identické s předchozím, lze měnit název, pin, a místo typu zařízení lze přenastavit jeho stav.
+Nastavení je téměř identické s předchozím, lze měnit název, pin, a místo typu zařízení lze přenastavit jeho stav.
 
 \section{Funkce programu a nastavení}
 Tato záložka zpřístupňuje různá nastavení a funkce, které nejsou běžně potřebné.
@@ -429,7 +437,7 @@ Tato záložka zpřístupňuje různá nastavení a funkce, které nejsou běžn
 \end{itemize} 
 
 \section{Notifikace}
-Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlášení, která slouží při upozornění uživatele na nějakou situaci. Například se jedná o změnu stavu pinů, chybové stavy řídící jednotky, nebo odpojení zabezpečovacího zařízení.
+Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlášení, která slouží při upozornění uživatele na nějakou situaci. Například se jedná o změnu stavu pinů, chybové stavy řídící jednotky, nebo odpojení zabezpečovacího zařízení. Notifikace se zachytávají v hlavním formu, v záložce \uv{Autocalled functions (Events from Arduino)}, pomocí eventů.
 
 \paragraph{Přehled implementovaných notifikací:}
 \begin{itemize}
@@ -452,11 +460,42 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 % Mobilní aplikace
 
 \chapter{Mobilní aplikace}
-Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zařízení, a není tedy možno měnit jakékoliv nastavení, k čemuž slouží desktopová aplikace. Aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, zapomocí IDE Android Studio 2.3.2.
+Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zařízení, a není tedy možno měnit jakékoliv nastavení, k čemuž slouží desktopová aplikace. Aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, za pomocí IDE Android Studio 2.3.2.
+
+\section{Přehled}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/app1.png}
+\caption{Okno s přehledem jednotlivých komponent}
+\label{image}
+\end{center}
+\end{figure}
+
+Stejně jako v případě desktopové aplikace, slouží přehled pro zobrazení všech dostupných spínačů a senzorů, které jsou v zabezpečovacím zařízení dostupné. Obsah se generuje dynamicky pod sebe, lze tedy vytvořit neomezený počet zobrazených zařízení. Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze zobrazit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. Žádná data nejsou měněna v objektech uvnitř aplikace, ale změny jsou poslány do zabezpečovacího zařízení, po obdržení odpovědi se změní stav v aplikaci a uživatel je upozorněn.
+
+\section{Interní nastavení}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/app2.png}
+\caption{Detailní přehled nastavení komponenty}
+\label{image}
+\end{center}
+\end{figure}
+
+Zobrazení interního nastavení jednotlivých komponent ukazuje méně důležité údaje. Vrátit se lze tlačítkem zpět, které má každý mobilní telefon se systémem Android implementované (ať už softwarově nebo hardwarově).
 
 % Závěr
 
 \chapter{Závěr}
+V úvodu jsem definoval základní pojmy a požadované vlastnosti sledovacího zařízení, které pro mě hrají důležitou roli při tvorbě zmíněného zařízení. Postupně jsem vysvětlil význam ústředny, ovladače, detektoru a komunikátoru, a ke každému z nich uvedl příklady. Následoval výběr hardwarových komponent, na základě požadovaných vlastností. Výběr každého zařízení jsem odůvodnil, uvedl jsem cenu a místo nákupu. Následně jsem definoval požadované vlastnosti pro desktopovou a mobilní aplikaci.
+
+V první praktické části své práce se zabývám možnými postupy pro využití mobilního telefonu, jakožto prostředníka pro komunikaci skrze sítě GSM. Nejdříve uvádím všechna možná řešení problému, následně volím řešení, které mě, i vedoucímu práce přišlo nejzajímavější. Jedná se o využití nejlevnějšího, nového telefonu, který je schopen komunikovat skrze sítě GSM/GPRS, toto řešení je velice málo probádáno. Následně objednávám nejlevnější dostupný telefon za 600 Kč s DPH. Po obdržení telefonu provádím rozbor telefonu, zkouším telefon využít pomocí USB, ale neúspěšně. Kontaktuji výrobce s žádostí o poskytnutí dokumentace k hardwaru, po týdnu se vrací negativní odpověď. Po konzultaci s vedoucím telefon rozeberu a pokouším se o ovládnutí telefonu pomocí servisních pinů. Ani tato varianta se nepodaří. Po několika měsíční práci jsem tuto cestu označil za slepou.
+
+Následně jsem vytvořil prototypovou desku, která simuluje reálné nasazení zabezpečovacího zařízení a je již napojena na GPRS modul, který nahrazuje mobilní telefon. Prototypová deska obsahuje dveřní čidlo, senzor PIR a spínací prvek. Pro desku jsem napsal Firmware, který je schopen plného řízení a zároveň komunikace s desktopovou a mobilní aplikací. Pro tyto účely jsem navrhnul API, pomocí kterého spolu zařízení komunikují. Následně jsem detailně zdokumentoval všechny podstatné věci, včetně detailního popisu API.
+
+Pro pohodlné nastavování zabezpečovacího zařízení jsem vytvořil aplikaci pro systém Windows, která umožňuje využít všechny funkce poskytované zabezpečovacím zařízením. Aplikaci delší dobu testuji a upravuji dle požadavků vedoucího práce. Pro vzhled aplikace jsem zvolil barvy z dokumentu pro jednotný vizuální styl Technické univerzity v Liberci \cite{TULVisual}. Nakonec jsem zdokumentoval všechny důležité funkce této aplikace.
+
+Jako poslední jsem naprogramoval monitorovací aplikaci pro Android, která umí zobrazovat stejné informace jako desktopová aplikace, ale neposkytuje možnost nastavování a provádění změn. Aplikaci se podařilo zprovoznit a otestovat na vzorových datech, nicméně reálná komunikace mezi zabezpečovacím zařízením a mobilní aplikací zůstala v době odevzdání práce nedokončena, z důvodu časové tísně.
 
 % Literatura
 
@@ -482,9 +521,6 @@ Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zaříze
 \bibitem{LaTeX}SATRAPA, Pavel. Stručný přehled příkazů LaTeXu [online]. 2011, 2 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-prehled.pdf}
 \bibitem{TULVisual}Manuál jednotného vizuálního stylu Technické univerzity v Liberci [online]. , 27 [cit. 2017-05-27]. Dostupné z: \url{http://www.ft.tul.cz/document/126}
 \bibitem{HTML1.1}FIELDING, R., UC IRVINE, J. GETTYS, et al. Hypertext Transfer Protocol -- HTTP/1.1 [online]. 1999, , 176 [cit. 2017-05-27]. Dostupné z: \url{http://www.ietf.org/rfc/rfc2616.txt}
-
-
-
 \end{thebibliography}
 
 % Příloha
