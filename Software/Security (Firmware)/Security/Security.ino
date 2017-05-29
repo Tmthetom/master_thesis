@@ -18,11 +18,11 @@ TODO: Consider memory saving using PROGMEM
 /* Setting */
 
 #define baudRate 9600
-#define maxSensors 6  // Ideal size for Arduino memory, Atmega can stop working when number grows
-#define maxSwitches 6  // Ideal size for Arduino memory, Atmega can stop working when number grows
+#define maxSensors 6  // Ideal size for Arduino memory, Atmega can stop working when number grows, when changing, call InitialFillMemory()
+#define maxSwitches 6  // Ideal size for Arduino memory, Atmega can stop working when number grows, when changing, call InitialFillMemory()
 #define maxBytesOfMessageIn 100
 #define maxBytesOfMessageOut 500  // Encrease this, when maximum number of devices encreased
-#define maxNameLength 30  // In bytes
+#define maxNameLength 30  // In bytes, when changing, call InitialFillMemory()
 
 /* Strings */
 
@@ -84,24 +84,12 @@ String nameSwitch[maxSwitches];
 /* Setup before start */
 void setup() {
 
+	// Read memory
+	InitialFillMemory();
+
 	// Allocation
 	in.reserve(maxBytesOfMessageIn);
 	out.reserve(maxBytesOfMessageOut);
-
-	// Sensors
-	pinSensor[0] = 8;
-	nameSensor[0] = "Door Sensor";
-	typeSensor[0] = false;  // Normaly open type = NO = Push to break
-	pinSensor[1] = 7;
-	nameSensor[1] = "PIR Sensor";
-	typeSensor[1] = true;  // Normaly close type = NC = Push to make
-	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
-	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
-
-	// Switches
-	pinSwitch[0] = 6;
-	nameSwitch[0] = "Led Switch";
-	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
 
 	// Communication
 	Serial.begin(baudRate);
@@ -686,6 +674,110 @@ void checkSensorStateChangedAndSendIfTrue() {
 				);
 				delay(300);
 			}
+		}
+	}
+}
+
+#pragma endregion
+
+#pragma region Memory
+
+int null = 255;
+
+void InitialFillMemory() {
+
+	// Clear memory
+	ClearMemory();
+
+	// Sensors
+	pinSensor[0] = 8;
+	nameSensor[0] = "Door Sensor";
+	typeSensor[0] = false;  // Normaly open type = NO = Push to break
+	pinSensor[1] = 7;
+	nameSensor[1] = "PIR Sensor";
+	typeSensor[1] = true;  // Normaly close type = NC = Push to make
+	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
+
+	// Switches
+	pinSwitch[0] = 6;
+	nameSwitch[0] = "Led Switch";
+	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
+	digitalWrite(6, HIGH);
+
+	int val;
+
+	// Pin Sensors
+	int address = 0;
+	for (int i = address; i < address + maxSensors; i++) {
+		val = (pinSensor[i] == NULL) ? null : pinSensor[i];
+		EEPROM.write(i, val);
+	}
+
+	// Pin Switches
+	address += maxSensors;
+	for (int i = address; i < address + maxSwitches; i++) {
+		val = (pinSwitch[i] == NULL) ? null : pinSwitch[i];
+		EEPROM.write(i, val);
+	}
+
+	// Type Sensors
+	address += maxSwitches;
+	for (int i = address; i < address + maxSensors; i++) {
+		val = (pinSensor[i] == NULL) ? null : typeSensor[i];
+		EEPROM.write(i, val);
+	}
+
+	// State Switches
+	address += maxSensors;
+	for (int i = address; i < address + maxSwitches; i++) {
+		val = (pinSensor[i] == NULL) ? null : getSwitchState(i);
+		EEPROM.write(i, val);
+	}
+}
+
+void ClearMemory() {
+	for (int i = 0; i < EEPROM.length(); i++) {
+		EEPROM.write(i, 0);
+	}
+}
+
+void ReadMemory() {
+
+	int val;
+
+	// Pin Sensors
+	int address = 0;
+	for (int i = address; i < address + maxSensors; i++) {
+		val = EEPROM.read(i);
+		pinSensor[i] = (val == null) ? NULL : val;
+	}
+
+	// Pin Switches
+	address += maxSensors;
+	for (int i = address; i < address + maxSwitches; i++) {
+		val = EEPROM.read(i);
+		pinSwitch[i] = (val == null) ? NULL : val;
+	}
+
+	// Type Sensors
+	address += maxSwitches;
+	for (int i = address; i < address + maxSensors; i++) {
+		val = EEPROM.read(i);
+		typeSensor[i] = (val == null) ? NULL : val;
+	}
+
+	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
+	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
+
+	// State Switches
+	address += maxSensors;
+	for (int i = address; i < address + maxSwitches; i++) {
+		val = EEPROM.read(i);
+
+		if (val != null) {
+			digitalWrite(i, val);
 		}
 	}
 }
