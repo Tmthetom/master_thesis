@@ -1,51 +1,73 @@
 package tul.securityviewer;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 class CustomAdapter extends ArrayAdapter<CustomListItem> {
+
+    private Context context;
+
     public CustomAdapter(Context context, ArrayList<CustomListItem> items) {
         super(context, R.layout.custom_row, items);
+        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get layout
+        ViewGroup myParent = parent;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
         View customView = layoutInflater.inflate(R.layout.custom_row, parent, false);
 
         // Get components
-        CustomListItem customListItem = getItem(position);
+        final CustomListItem customListItem = getItem(position);
         Switch mySwitch = (Switch) customView.findViewById(R.id.mySwitch);
         TextView textViewName = (TextView) customView.findViewById(R.id.textViewName);
-        //TextView textViewType = (TextView) customView.findViewById(R.id.textViewType);
 
         // Sensor
         if (customListItem.getType() == CustomListItem.Type.SENSOR){
             mySwitch.setEnabled(false);
-            //textViewType.setText(customListItem.getSensorType());
-        }
-
-        // Switch
-        else if (customListItem.getType() == CustomListItem.Type.SWITCH){
-            //textViewType.setText("");
         }
 
         // Same for switch and sensor
         mySwitch.setChecked(customListItem.getState());
         textViewName.setText(customListItem.getName());
 
+        // Image view click
+        ImageView imageView = (ImageView) customView.findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenItemDetail(customListItem);
+            }
+        });
+
         return customView;
+    }
+
+    // Open detail of selected item
+    void OpenItemDetail(CustomListItem item) {
+        Intent indent = new Intent(context, ItemActivity.class);
+
+        indent.putExtra("TYPE", item.getType().toString());
+        indent.putExtra("NAME", item.getName());
+        indent.putExtra("PIN", item.getPin() + "");
+        indent.putExtra("STATE", item.getState() ? "ON" : "OFF");
+        indent.putExtra("SENSORTYPE", item.getSensorType());
+
+        context.startActivity(indent);
     }
 }
