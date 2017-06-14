@@ -1,3 +1,21 @@
+29. 05. 2017
+-> Pøidáva volba pinu dle pøipojené desky
+-> Opraveno pøepínání typu senzoru
+-> Opraveno chybné zobrazení portù pøi více zaøízeních
+-> Opraveno duplicitní zobrazení portù
+-> Aplikace dokonèena
+-> Dokumentace dokonèena
+-> Prezentace: cíle, závìr, blokové schéma, využití telefonu nevyšlo
+-> Nabídka diplomové práce: web s vyhodnocením, meteostanice, sensory, teplomìry, srážkomìr
+
+23. 05. 2017
+-> Jméno je magisterský projekt
+-> Do práce musím vložit zadání
+-> Ceny mám uvádìt pouze orientaèní
+-> Mobilní aplikace bude v zadání
+-> Windows app musí být výbìr pinu dle desky
+-> Zmìna typu èidla nefunguje
+
 03. 05. 2017
 -> Odevzdání textu do 25. kvìtna, jeden výtisk, kroužková vazba.
 -> Finální projekt pøinést na flashdisku se vším.
