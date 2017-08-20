@@ -1,0 +1,3 @@
+Pro testování komunikace jsem použil TestArduino a TestGSM.
+
+Všechny desky musí mít spoleènou zem a napájení, jinak to nefunguje.
