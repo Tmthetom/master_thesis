@@ -1,3 +1,10 @@
 Pro testování komunikace jsem použil TestArduino a TestGSM.
 
-Všechny desky musí mít spoleènou zem a napájení, jinak to nefunguje.
+Všechny desky musí mít spoleènou zem, jinak nic spoleèného, jako tøeba komunikace, nefunguje.
+
+Pøi pøipojeném USB do Arduina jsem pøepojoval kabely a odpálil jsem Arduino :D 
+
+Pro odeslání SMS je potøeba udìlat:
+AT+CMGF=1
+AT+CMGS="228870634"
+Do Notepad++ udìlat Alt+026, zkopírovat ho a odeslat
