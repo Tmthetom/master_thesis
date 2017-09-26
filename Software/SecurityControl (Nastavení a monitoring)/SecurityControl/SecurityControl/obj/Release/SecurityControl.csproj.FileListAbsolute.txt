@@ -1,0 +1,10 @@
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\bin\Release\SecurityControl.exe.config
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\bin\Release\SecurityControl.exe
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\bin\Release\SecurityControl.pdb
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.FormConnection.resources
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.FormMain.resources
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.Properties.Resources.resources
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.csproj.GenerateResource.Cache
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.exe
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.pdb
+C:\Users\Tomáš Moravec\Documents\GitHub\master_project\Software\SecurityControl\SecurityControl\obj\Release\SecurityControl.csprojResolveAssemblyReference.cache
