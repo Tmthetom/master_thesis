@@ -71,7 +71,7 @@ namespace SecurityServer
             // Connection lost
             catch (SocketException)
             {
-                socket.Close();
+                //socket.Close();
                 clientSockets.Remove(socket);
                 logger.WriteLine("--- Client [" + socket.RemoteEndPoint + "] connection lost ---");
             }

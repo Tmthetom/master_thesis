@@ -1,6 +1,0 @@
-C:\Users\morav\Documents\GitHub\master_project\Software\SecurityServer (Komunikace Security a SecurityViewer)\SecurityServer\SecurityServer\bin\Debug\SecurityServer.exe.config
-C:\Users\morav\Documents\GitHub\master_project\Software\SecurityServer (Komunikace Security a SecurityViewer)\SecurityServer\SecurityServer\bin\Debug\SecurityServer.exe
-C:\Users\morav\Documents\GitHub\master_project\Software\SecurityServer (Komunikace Security a SecurityViewer)\SecurityServer\SecurityServer\bin\Debug\SecurityServer.pdb
-C:\Users\morav\Documents\GitHub\master_project\Software\SecurityServer (Komunikace Security a SecurityViewer)\SecurityServer\SecurityServer\obj\Debug\SecurityServer.csprojResolveAssemblyReference.cache
-C:\Users\morav\Documents\GitHub\master_project\Software\SecurityServer (Komunikace Security a SecurityViewer)\SecurityServer\SecurityServer\obj\Debug\SecurityServer.exe
-C:\Users\morav\Documents\GitHub\master_project\Software\SecurityServer (Komunikace Security a SecurityViewer)\SecurityServer\SecurityServer\obj\Debug\SecurityServer.pdb
