@@ -17,5 +17,12 @@ namespace SecurityServer
         {
             Console.Write("[" + DateTime.Now + "] " + message + Environment.NewLine);
         }
+
+        public void WriteLine(string message, ConsoleColor textColor)
+        {
+            Console.ForegroundColor = textColor;
+            WriteLine(message);
+            Console.ResetColor();
+        }
     }
 }

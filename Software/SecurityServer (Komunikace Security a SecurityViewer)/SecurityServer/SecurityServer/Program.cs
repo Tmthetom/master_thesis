@@ -47,7 +47,7 @@ namespace SecurityServer
             clientSockets.Add(socket);
             socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), socket);
             serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
-            logger.WriteLine("--- Client [" + socket.RemoteEndPoint + "] connected ---");
+            logger.WriteLine("Client [" + socket.RemoteEndPoint + "] connected", ConsoleColor.Green);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace SecurityServer
             {
                 //socket.Close();
                 clientSockets.Remove(socket);
-                logger.WriteLine("--- Client [" + socket.RemoteEndPoint + "] connection lost ---");
+                logger.WriteLine("Client [" + socket.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
             }
         }
 
