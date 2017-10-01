@@ -26,7 +26,7 @@ namespace SecurityServer
         }
 
         #region Data processing
-        private static void ProcessReceived(Socket client, string message)
+        private static void ProcessReceivedMessage(Socket client, string message)
         {
             // Mobile app (SecurityViewer)
             if (mobileApps.Contains(client))
@@ -43,32 +43,7 @@ namespace SecurityServer
             // Unknown clients
             else if (unknownClients.Contains(client))
             {
-                logger.WriteLine("[" + client.RemoteEndPoint + "]: " + message);
                 AssignRole(client, message);
-            }
-        } 
-
-        /// <summary>
-        /// Assign unknown client to one role
-        /// </summary>
-        /// <param name="client"></param>
-        /// <param name="message"></param>
-        private static void AssignRole(Socket client, string message)
-        {
-            // If control unit
-            if (message.ToLower().Equals("Security".ToLower()))
-            {
-                controlUnits.Add(client);  // Assign
-                unknownClients.Remove(client);  // Remove from old list
-                logger.WriteLine("Client [" + client.RemoteEndPoint + "] identified as control unit (Security)", ConsoleColor.Yellow);
-            }
-
-            // If mobile app
-            else if (message.ToLower().Equals("SecurityViewer".ToLower()))
-            {
-                mobileApps.Add(client);  // Assign
-                unknownClients.Remove(client);  // Remove from old list
-                logger.WriteLine("Client [" + client.RemoteEndPoint + "] identified as mobile app (SecurityViewer)", ConsoleColor.Yellow);
             }
         }
         #endregion Data processing
@@ -133,7 +108,7 @@ namespace SecurityServer
                 string message = Encoding.UTF8.GetString(dataBuffer).Trim();
 
                 // Process received data
-                ProcessReceived(client, message);
+                ProcessReceivedMessage(client, message);
 
                 // Start listening again
                 client.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), client);
@@ -142,13 +117,63 @@ namespace SecurityServer
             // Connection lost
             catch (SocketException)
             {
-                // Remove user from socket lists
-                if (unknownClients.Contains(client)) unknownClients.Remove(client);
-                if (mobileApps.Contains(client)) mobileApps.Remove(client);
-                if (controlUnits.Contains(client)) controlUnits.Remove(client);
+                ClientDisconnected(client);
+            }
+        }
 
-                // Notificate
+        /// <summary>
+        /// Assign unknown client to one role
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="message"></param>
+        private static void AssignRole(Socket client, string message)
+        {
+            // If control unit
+            if (message.ToLower().Equals("Security".ToLower()))
+            {
+                controlUnits.Add(client);  // Assign
+                unknownClients.Remove(client);  // Remove from old list
+                logger.WriteLine("Client [" + client.RemoteEndPoint + "] identified as control unit (Security)", ConsoleColor.Yellow);
+            }
+
+            // If mobile app
+            else if (message.ToLower().Equals("SecurityViewer".ToLower()))
+            {
+                mobileApps.Add(client);  // Assign
+                unknownClients.Remove(client);  // Remove from old list
+                logger.WriteLine("Client [" + client.RemoteEndPoint + "] identified as mobile app (SecurityViewer)", ConsoleColor.Yellow);
+            }
+
+            else
+            {
+                logger.WriteLine("Client [" + client.RemoteEndPoint + "]: " + message);
+            }
+        }
+
+        /// <summary>
+        /// When client disconnected
+        /// </summary>
+        private static void ClientDisconnected(Socket client)
+        {
+            // Unknown client
+            if (unknownClients.Contains(client))
+            {
+                unknownClients.Remove(client);
                 logger.WriteLine("Client [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
+            }
+
+            // Mobile app
+            else if (mobileApps.Contains(client))
+            {
+                mobileApps.Remove(client);
+                logger.WriteLine("Mobile app [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
+            }
+
+            // Control unit
+            else if (controlUnits.Contains(client))
+            {
+                controlUnits.Remove(client);
+                logger.WriteLine("Control unit [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
             }
         }
 
