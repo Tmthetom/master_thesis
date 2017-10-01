@@ -24,5 +24,10 @@ namespace Client
             WriteLine(message);
             Console.ResetColor();
         }
+
+        public void IntoFile(string message)
+        {
+            ;
+        }
     }
 }
