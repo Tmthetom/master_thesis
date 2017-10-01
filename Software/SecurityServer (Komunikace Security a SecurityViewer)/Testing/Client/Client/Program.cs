@@ -11,6 +11,9 @@ namespace Client
 {
     class Program
     {
+        private static IPAddress ip = IPAddress.Parse("81.200.57.24");
+        private static int port = 6666;
+
         private static Logger logger = new Logger();
         private static Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         private static byte[] buffer = new byte[clientSocket.SendBufferSize];
@@ -55,7 +58,8 @@ namespace Client
                 try
                 {
                     attempts++;
-                    clientSocket.Connect(IPAddress.Loopback, 6666);
+                    //clientSocket.Connect(IPAddress.Loopback, port);  // Internal network
+                    clientSocket.Connect(ip, port);  // Internet connection
                     logger.WriteLine("Successfully connected to [" + clientSocket.RemoteEndPoint + "] as unknown client", ConsoleColor.Green);
                     SendClientRole();
                 }
