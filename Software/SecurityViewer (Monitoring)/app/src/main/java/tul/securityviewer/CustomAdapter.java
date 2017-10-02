@@ -43,7 +43,7 @@ class CustomAdapter extends ArrayAdapter<CustomListItem> {
         mySwitch.setChecked(customListItem.getState());
         textViewName.setText(customListItem.getName());
 
-        // Image view click
+        // Image view click (Open item detail)
         ImageView imageView = (ImageView) customView.findViewById(R.id.imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

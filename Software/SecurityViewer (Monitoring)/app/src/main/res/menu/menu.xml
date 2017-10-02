@@ -13,8 +13,8 @@
         android:icon="@drawable/ic_more_vert_white_24dp"
         app:showAsAction="always">
         <menu>
-            <item android:id="@+id/create_new"
-                android:title="@string/settings_Notification" />
+            <item android:id="@+id/hide_notification"
+                android:title="@string/hide_notification" />
         </menu>
     </item>
 </menu>
