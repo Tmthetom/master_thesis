@@ -32,12 +32,14 @@ namespace SecurityServer
             if (mobileApps.Contains(client))
             {
                 logger.WriteLine("Mobile app [" + client.RemoteEndPoint + "]: " + message);
+                SendMessageToGroup(controlUnits, message);
             }
 
             // Control unit (Security)
             else if (controlUnits.Contains(client))
             {
                 logger.WriteLine("Control unit [" + client.RemoteEndPoint + "]: " + message);
+                SendMessageToGroup(mobileApps, message);
             }
 
             // Unknown clients
@@ -186,6 +188,18 @@ namespace SecurityServer
         {
             byte[] data = Encoding.UTF8.GetBytes(message.Trim());
             client.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallBack), client);
+        }
+
+        /// <summary>
+        /// Send message to certain group of clients
+        /// </summary>
+        /// <param name="client">To who we are sending</param>
+        /// <param name="message">Data to send</param>
+        private static void SendMessageToGroup(List<Socket> clients, string message)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message.Trim());
+            foreach (Socket client in clients)
+                client.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallBack), client);
         }
 
         /// <summary>
