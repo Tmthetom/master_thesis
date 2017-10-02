@@ -17,6 +17,8 @@ namespace Client
         private static Logger logger = new Logger();
         private static Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         private static byte[] buffer = new byte[clientSocket.SendBufferSize];
+        private static int receivedInt;
+        private static byte[] receivedData;
 
         static void Main(string[] args)
         {
@@ -37,9 +39,18 @@ namespace Client
             string message;
             while (true)
             {
+                
                 logger.Write("Send message: ");
                 message = Console.ReadLine();
                 SendMessage(message);
+
+                /*
+                Thread.Sleep(2000);
+                logger.WriteLine("Sending: Test");
+                SendMessage("Test");
+                */
+
+                ReceiveMessage();
             }
         }
 
@@ -47,6 +58,14 @@ namespace Client
         {
             buffer = Encoding.UTF8.GetBytes(message.Trim());
             clientSocket.Send(buffer);
+        }
+
+        private static void ReceiveMessage()
+        {
+            receivedInt = clientSocket.Receive(buffer);
+            receivedData = new byte[receivedInt];
+            Buffer.BlockCopy(buffer, 0, receivedData, 0, receivedInt);
+            logger.WriteLine("Received: " + Encoding.UTF8.GetString(receivedData).Trim());
         }
 
         private static void StartConnection()
