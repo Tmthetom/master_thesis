@@ -1,4 +1,4 @@
-package tul.securityviewer;
+package tul.securityviewer.CustomList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-class CustomAdapter extends ArrayAdapter<CustomListItem> {
+import tul.securityviewer.Activity.ItemDetailActivity;
+import tul.securityviewer.R;
+
+public class CustomAdapter extends ArrayAdapter<CustomListItem> {
 
     private Context context;
 
     public CustomAdapter(Context context, ArrayList<CustomListItem> items) {
-        super(context, R.layout.custom_row, items);
+        super(context, R.layout.custom_list_row, items);
         this.context = context;
     }
 
@@ -27,7 +30,7 @@ class CustomAdapter extends ArrayAdapter<CustomListItem> {
         // Get layout
         ViewGroup myParent = parent;
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        View customView = layoutInflater.inflate(R.layout.custom_row, parent, false);
+        View customView = layoutInflater.inflate(R.layout.custom_list_row, parent, false);
 
         // Get components
         final CustomListItem customListItem = getItem(position);
@@ -43,7 +46,7 @@ class CustomAdapter extends ArrayAdapter<CustomListItem> {
         mySwitch.setChecked(customListItem.getState());
         textViewName.setText(customListItem.getName());
 
-        // Image view click (Open item detail)
+        // Image view click (Open item_detail detail)
         ImageView imageView = (ImageView) customView.findViewById(R.id.imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +58,9 @@ class CustomAdapter extends ArrayAdapter<CustomListItem> {
         return customView;
     }
 
-    // Open detail of selected item
+    // Open detail of selected item_detail
     void OpenItemDetail(CustomListItem item) {
-        Intent indent = new Intent(context, ItemActivity.class);
+        Intent indent = new Intent(context, ItemDetailActivity.class);
 
         indent.putExtra("TYPE", item.getType().toString());
         indent.putExtra("NAME", item.getName());

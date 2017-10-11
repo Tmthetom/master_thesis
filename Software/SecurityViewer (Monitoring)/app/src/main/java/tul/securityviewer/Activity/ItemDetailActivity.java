@@ -1,4 +1,4 @@
-package tul.securityviewer;
+package tul.securityviewer.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
-public class ItemActivity extends FragmentActivity {
+import tul.securityviewer.CustomList.CustomListItem;
+import tul.securityviewer.R;
+
+public class ItemDetailActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item);
+        setContentView(R.layout.item_detail);
 
         // Elements
         TextView textViewType = (TextView) findViewById(R.id.textViewType);

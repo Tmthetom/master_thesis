@@ -1,0 +1,52 @@
+package tul.securityviewer.Communication;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import tul.securityviewer.CustomList.CustomListItem;
+
+public class DataParser {
+    public ArrayList<CustomListItem> Sensors (ArrayList<CustomListItem> items, String received) {
+        // Create a Pattern object
+        Pattern pattern = Pattern.compile("Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1]),Type = ([0-1])");
+
+        // Now create matcher object.
+        Matcher match  = pattern.matcher(received);
+        while (match.find()){
+            try{
+                int id = Integer.parseInt(match.group(1));
+                int pin = Integer.parseInt(match.group(2));
+                String name = match.group(3);
+                boolean state = (Integer.parseInt(match.group(4)) == 0) ? false : true;
+                boolean type = (Integer.parseInt(match.group(5)) == 0) ? false : true;
+
+                items.add(new CustomListItem(CustomListItem.Type.SENSOR, id, pin, name, state, type));
+            } catch (Exception exception){
+                ;
+            }
+        }
+        return items;
+    }
+
+    public ArrayList<CustomListItem> Switches (ArrayList<CustomListItem> items, String received) {
+        // Create a Pattern object
+        Pattern pattern = Pattern.compile("Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1])");
+
+        // Now create matcher object.
+        Matcher match  = pattern.matcher(received);
+        while (match.find()){
+            try{
+                int id = Integer.parseInt(match.group(1));
+                int pin = Integer.parseInt(match.group(2));
+                String name = match.group(3);
+                boolean state = (Integer.parseInt(match.group(4)) == 0) ? false : true;
+
+                items.add(new CustomListItem(CustomListItem.Type.SWITCH, id, pin, name, state));
+            } catch (Exception exception){
+                ;
+            }
+        }
+        return items;
+    }
+}

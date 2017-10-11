@@ -1,4 +1,4 @@
-package tul.securityviewer;
+package tul.securityviewer.CustomList;
 
 public class CustomListItem {
 
@@ -14,6 +14,7 @@ public class CustomListItem {
     private boolean state;
     private String sensorType;  // true = push-to-make, false = push-to-break
 
+    // Add sensor
     public CustomListItem(Type type, int id, int pin, String name, boolean state, boolean sensorType) {
         this.type = type;
         this.id = id;
@@ -30,6 +31,11 @@ public class CustomListItem {
         else{
             this.sensorType = "Push-to-break";
         }
+    }
+
+    // Add switch
+    public CustomListItem(Type type, int id, int pin, String name, boolean state) {
+        this(type, id, pin, name, state, false);
     }
 
     public Type getType() {
