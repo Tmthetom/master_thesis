@@ -3,12 +3,13 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace SecurityServer
 {
     class Program
     {
-        private static Logger logger = new Logger();  // Formating command line
+        private static Logger log = new Logger();  // Formating command line
         private static List<Socket> unknownClients = new List<Socket>();  // Not assignet clients yet
         private static List<Socket> mobileApps = new List<Socket>();  // SecurityViewer = Mobile app
         private static List<Socket> controlUnits = new List<Socket>();  // Security = Control unit
@@ -21,7 +22,7 @@ namespace SecurityServer
             }
             catch (Exception exception)
             {
-                logger.WriteLine(exception.Message);
+                log.WriteLine(exception.Message);
             }
         }
 
@@ -31,14 +32,14 @@ namespace SecurityServer
             // Mobile app (SecurityViewer)
             if (mobileApps.Contains(client))
             {
-                logger.WriteLine("Mobile app [" + client.RemoteEndPoint + "]: " + message);
+                log.WriteLine("Mobile app [" + client.RemoteEndPoint + "]: " + message);
                 SendMessageToGroup(controlUnits, message);
             }
 
             // Control unit (Security)
             else if (controlUnits.Contains(client))
             {
-                logger.WriteLine("Control unit [" + client.RemoteEndPoint + "]: " + message);
+                log.WriteLine("Control unit [" + client.RemoteEndPoint + "]: " + message);
                 SendMessageToGroup(mobileApps, message);
             }
 
@@ -61,16 +62,17 @@ namespace SecurityServer
         private static void StartServer()
         {
             // Settings
+            SetConsoleCtrlHandler(new HandlerRoutine(ConsoleCtrlCheck), true);
             Console.Title = "Server";
-            logger.WriteLine("Setting up server...");
+            log.WriteLine("Setting up server...");
             server.Bind(new IPEndPoint(IPAddress.Any, 6666));
 
             // Starting server
-            logger.WriteLine("Starting server...");
+            log.WriteLine("Starting server...");
             server.Listen(0);
             server.BeginAccept(new AsyncCallback(AcceptCallback), null);
-            logger.WriteLine("The server is running at " + server.LocalEndPoint);
-            logger.WriteLine("Waiting for a connection...");
+            log.WriteLine("The server is running at " + server.LocalEndPoint);
+            log.WriteLine("Waiting for a connection...");
 
             Console.ReadLine();
         }
@@ -85,7 +87,7 @@ namespace SecurityServer
             Socket client = server.EndAccept(AR);  // End request
             unknownClients.Add(client);  // Add to unknown clients
             client.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallBack), client);  // Start listening for communication
-            logger.WriteLine("Client [" + client.RemoteEndPoint + "] connected", ConsoleColor.Green);
+            log.WriteLine("Client [" + client.RemoteEndPoint + "] connected", ConsoleColor.Green);
 
             // Start accepting another connections
             server.BeginAccept(new AsyncCallback(AcceptCallback), null);
@@ -135,7 +137,7 @@ namespace SecurityServer
             {
                 controlUnits.Add(client);  // Assign
                 unknownClients.Remove(client);  // Remove from old list
-                logger.WriteLine("Client [" + client.RemoteEndPoint + "] identified as control unit (Security)", ConsoleColor.Yellow);
+                log.WriteLine("Client [" + client.RemoteEndPoint + "] identified as control unit (Security)", ConsoleColor.Yellow);
             }
 
             // If mobile app
@@ -143,12 +145,12 @@ namespace SecurityServer
             {
                 mobileApps.Add(client);  // Assign
                 unknownClients.Remove(client);  // Remove from old list
-                logger.WriteLine("Client [" + client.RemoteEndPoint + "] identified as mobile app (SecurityViewer)", ConsoleColor.Yellow);
+                log.WriteLine("Client [" + client.RemoteEndPoint + "] identified as mobile app (SecurityViewer)", ConsoleColor.Yellow);
             }
 
             else
             {
-                logger.WriteLine("Client [" + client.RemoteEndPoint + "]: " + message);
+                log.WriteLine("Client [" + client.RemoteEndPoint + "]: " + message);
             }
         }
 
@@ -161,21 +163,21 @@ namespace SecurityServer
             if (unknownClients.Contains(client))
             {
                 unknownClients.Remove(client);
-                logger.WriteLine("Client [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
+                log.WriteLine("Client [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
             }
 
             // Mobile app
             else if (mobileApps.Contains(client))
             {
                 mobileApps.Remove(client);
-                logger.WriteLine("Mobile app [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
+                log.WriteLine("Mobile app [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
             }
 
             // Control unit
             else if (controlUnits.Contains(client))
             {
                 controlUnits.Remove(client);
-                logger.WriteLine("Control unit [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
+                log.WriteLine("Control unit [" + client.RemoteEndPoint + "] disconnected", ConsoleColor.Red);
             }
         }
 
@@ -212,6 +214,62 @@ namespace SecurityServer
             socket.EndSend(AR);
         }
 
+        /// <summary>
+        /// Close all current connections
+        /// </summary>
+        private static void CloseAllConnections()
+        {
+            foreach (Socket user in unknownClients)
+            {
+                user.Shutdown(SocketShutdown.Both);
+                user.Close();
+            }
+
+            foreach (Socket user in mobileApps)
+            {
+                user.Shutdown(SocketShutdown.Both);
+                user.Close();
+            }
+
+            foreach (Socket user in controlUnits)
+            {
+                user.Shutdown(SocketShutdown.Both);
+                user.Close();
+            }
+        }
+
         #endregion Server part
+
+        #region Form closing event
+
+        // http://geekswithblogs.net/mrnat/archive/2004/09/23/11594.aspx
+
+        // Declare the SetConsoleCtrlHandler function
+        // as external and receiving a delegate.
+        [DllImport("Kernel32")]
+        public static extern bool SetConsoleCtrlHandler(HandlerRoutine Handler, bool Add);
+
+        // A delegate type to be used as the handler routine 
+        // for SetConsoleCtrlHandler.
+        public delegate bool HandlerRoutine(CtrlTypes CtrlType);
+
+        // An enumerated type for the control messages
+        // sent to the handler routine.
+        public enum CtrlTypes
+        {
+            CTRL_C_EVENT = 0,
+            CTRL_BREAK_EVENT,
+            CTRL_CLOSE_EVENT,
+            CTRL_LOGOFF_EVENT = 5,
+            CTRL_SHUTDOWN_EVENT
+        }
+
+        private static bool ConsoleCtrlCheck(CtrlTypes ctrlType)
+        {
+            CloseAllConnections();
+            return true;
+        }
+
+        #endregion Form closing event
     }
 }
