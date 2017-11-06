@@ -7,9 +7,12 @@ import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.net.Socket;
 import java.util.ArrayList;
 
-import tul.securityviewer.Communication.Connection;
+import tul.securityviewer.Communication.ClientTest01;
+import tul.securityviewer.Communication.ClientTest;
+import tul.securityviewer.Communication.ClientTest03;
 import tul.securityviewer.Communication.DataParser;
 import tul.securityviewer.Communication.Notification;
 import tul.securityviewer.CustomList.CustomAdapter;
@@ -18,7 +21,7 @@ import tul.securityviewer.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    Connection connection;
+    ClientTest03 clientTest;
     DataParser dataParser;
     Notification notification = new Notification(this);
 
@@ -31,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         // Startup TCP/IP communication thread
-        connection = new Connection(IP, PORT, this);
+        clientTest = new ClientTest03(IP, PORT, this);
+        clientTest.Send("security");
     }
 
     // Create option settings_menu in right up corner
@@ -47,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.refresh:
                 //notification.Toast("Refresh is not implemented yet");
-                createTestingItems();
+                //createTestingItems();
+                clientTest.Close();
                 return true;
             case R.id.hide_notification:
                 notification.Toast("Hide notification is not implemented yet");
@@ -78,7 +83,11 @@ public class MainActivity extends AppCompatActivity {
     private void createParsedTestingItems(){
         // Add items into list
         ArrayList<CustomListItem> items = new ArrayList<>();
-        dataParser.Sensors(items, "(Id = 2,Pin = 6,Name = Testovaci senzor,State = 0,Type = 0),(Id = 3,Pin = 8,Name = Testovaci senzor 2,State = 1,Type = 0),(Id = 4,Pin = 6,Name = Testovaci senzor 3,State = 0,Type = 0)");
+        dataParser.Sensors(items,
+            "(Id = 2,Pin = 6,Name = Testovaci senzor 1,State = 0,Type = 0)," +
+            "(Id = 3,Pin = 8,Name = Testovaci senzor 2,State = 1,Type = 0)," +
+            "(Id = 4,Pin = 6,Name = Testovaci senzor 3,State = 0,Type = 0)"
+        );
 
         // Set listView adapter
         ListView listView = (ListView) findViewById(R.id.listView);

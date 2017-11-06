@@ -8,93 +8,79 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class Connection {
+public class ClientTest {
     Handler UIHandler;
-    Thread thread = null;
+    Thread thread;
 
     private String IP;
     private int PORT;
     private Notification notification;
-    private String buffer;
 
-    public Connection(String ipAddress, int port, Context activity) {
+    public ClientTest(String ipAddress, int port, Context activity) {
         notification = new Notification(activity);
 
-        // Setup TCP/IP
+        // Setup destination
         this.IP = ipAddress;
         this.PORT = port;
 
-        // Startup TCP/IP communication thread
-        this.thread = new Thread(new ThreadClient());
-        this.thread.start();
+        // ???
         UIHandler = new Handler();
+
+        // Startup TCP/IP communication thread
+        this.thread = new Thread(new InitializeConnection());
+        this.thread.start();
     }
 
     // Send message to server
-    public void Send(String message){
-        ;
+    public void Send(String message) {
+        /*
+        ClientTest02 messageSender = new ClientTest02();
+        messageSender.execute(message);*/
     }
 
-    // Read messages from server
-    public String Read(){
-        while(){
-
-        }
-    }
-
-    // Called when message received
-    private class MessageReceived implements Runnable {
-        private String message;
-        private MessageReceived(String message) {
-            this.message = message;
-        }
-
-        @Override
-        public void run() {
-            notification.Toast("Message: " + message);
-        }
-    }
 
     // TCP/IP client
-    private class ThreadClient implements Runnable {
+    private class InitializeConnection implements Runnable {
         @Override
         public void run() {
-            Socket socket = null;
-
             try {
+                // Setup destination
                 InetAddress serverAddress = InetAddress.getByName(IP);
-                socket = new Socket(serverAddress, PORT);
+                Socket socket = new Socket(serverAddress, PORT);
 
                 ThreadCommunication threadCommunication = new ThreadCommunication(socket);
                 new Thread(threadCommunication).start();
                 return;
+
             } catch (Exception exception){
-                notification.Toast("ThreadClient exception: " + exception.getMessage());
+                notification.Toast("InitializeConnection run exception: " + exception.getMessage());
             }
         }
     }
 
     // TCP/IP communication
     private class ThreadCommunication implements Runnable {
+
         private Socket clientSocket;
-        private BufferedReader input;
+        private BufferedReader bufferedReader;
 
         private ThreadCommunication(Socket clientSocket){
             this.clientSocket = clientSocket;
             try {
                 // Message received
-                this.buffer
-                this.input = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
+                //this.buffer
+                this.bufferedReader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
             } catch (Exception exception) {
                 notification.Toast("ThreadCommunication create exception: " + exception.getMessage());
             }
         }
 
+        // Started after main methods
         @Override
         public void run() {
             while (!Thread.currentThread().isInterrupted()){
                 try{
-                    String read = input.readLine();
+                    String read = bufferedReader.readLine();
                     if (read != null) {
                         UIHandler.post(new MessageReceived(read));
                     }
@@ -107,6 +93,22 @@ public class Connection {
                     notification.Toast("ThreadCommunication run exception: " + exception.getMessage());
                 }
             }
+        }
+    }
+
+    // Called when message received
+    private class MessageReceived implements Runnable {
+
+        private String message;
+
+        private MessageReceived(String message) {
+            this.message = message;
+        }
+
+        // Started after main methods
+        @Override
+        public void run() {
+            notification.Toast("Message: " + message);
         }
     }
 }
