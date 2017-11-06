@@ -11,7 +11,8 @@ namespace Client
 {
     class Program
     {
-        private static IPAddress ip = IPAddress.Parse("81.200.57.24");
+        //private static IPAddress ip = IPAddress.Parse("81.200.57.24");
+        private static IPAddress ip = IPAddress.Parse("127.0.0.1");
         private static int port = 6666;
 
         private static Logger logger = new Logger();
