@@ -125,18 +125,18 @@ namespace Client
                         Console.Title = "Control unit (Security)";
                         break;
 
-                    case "3":       // Mobile app (SecurityViewer) [WRITE ONLY]
-                        Console.Title = "Mobile app (SecurityViewer) [WRITE ONLY]";
-                        break;
-                    case "4":       // Control unit (Security) [WRITE ONLY]
-                        Console.Title = "Control unit (Security) [WRITE ONLY]";
-                        break;
-
-                    case "5":       // Mobile app (SecurityViewer) [READ ONLY]
+                    case "3":       // Mobile app (SecurityViewer) [READ ONLY]
                         Console.Title = "Mobile app (SecurityViewer) [READ ONLY]";
                         break;
-                    case "6":       // Control unit (Security) [READ ONLY]
+                    case "4":       // Control unit (Security) [READ ONLY]
                         Console.Title = "Control unit (Security) [READ ONLY]";
+                        break;
+
+                    case "5":       // Mobile app (SecurityViewer) [WRITE ONLY]
+                        Console.Title = "Mobile app (SecurityViewer) [WRITE ONLY]";
+                        break;
+                    case "6":       // Control unit (Security) [WRITE ONLY]
+                        Console.Title = "Control unit (Security) [WRITE ONLY]";
                         break;
 
                     default:        // Role not selected
