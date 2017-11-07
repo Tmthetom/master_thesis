@@ -17,9 +17,8 @@ namespace Client
 
         private static Logger logger = new Logger();
         private static Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        private static byte[] buffer = new byte[clientSocket.SendBufferSize];
-        private static int receivedInt;
-        private static byte[] receivedData;
+        private static byte[] buffer = new byte[clientSocket.ReceiveBufferSize];
+        private static string receivedString;
 
         static void Main(string[] args)
         {
@@ -64,10 +63,36 @@ namespace Client
 
         private static void ReceiveMessage()
         {
-            receivedInt = clientSocket.Receive(buffer);
-            receivedData = new byte[receivedInt];
-            Buffer.BlockCopy(buffer, 0, receivedData, 0, receivedInt);
-            logger.WriteLine("Received: " + Encoding.UTF8.GetString(receivedData).Trim());
+            var buffer2 = new List<byte>();
+
+            while (clientSocket.Available > 0)
+            {
+                var currByte = new Byte[1];
+                var byteCounter = clientSocket.Receive(currByte, currByte.Length, SocketFlags.None);
+
+                if (byteCounter.Equals(1))
+                {
+                    buffer2.Add(currByte[0]);
+                }
+            }
+            
+            if (buffer2.Count > 0)
+            {
+                buffer = buffer2.ToArray();
+                receivedString = Encoding.UTF8.GetString(buffer);
+                logger.WriteLine("Received: " + receivedString);
+            }
+
+            /*
+             * private static int received;
+             * private static byte[] dataBuffer;
+             * 
+            received = clientSocket.Receive(buffer);
+            dataBuffer = new byte[received];
+            Buffer.BlockCopy(buffer, 0, dataBuffer, 0, received);
+            receivedString = Encoding.UTF8.GetString(dataBuffer).Trim();
+            logger.WriteLine("Received: " + receivedString);
+            */
         }
 
         private static void StartConnection()

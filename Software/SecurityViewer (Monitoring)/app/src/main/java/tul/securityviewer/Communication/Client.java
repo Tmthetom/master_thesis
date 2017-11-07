@@ -99,7 +99,7 @@ public class Client {
 
         @Override
         public void run() {
-            while(running){
+            //while(running){
                 try {
                     // Setup destination
                     InetAddress serverAddress = InetAddress.getByName(IP);
@@ -112,7 +112,7 @@ public class Client {
                 } catch (Exception exception){
                     notification.Toast("InitializeConnection run exception: " + exception.getMessage());
                 }
-            }
+            //}
         }
 
         public void terminate(){
@@ -140,6 +140,7 @@ public class Client {
                     if (message != null) {
                         UIHandler.post(new MessageReceived(message));
                     }
+
                     else{
                         thread = new Thread(new Thread());
                         thread.start();
