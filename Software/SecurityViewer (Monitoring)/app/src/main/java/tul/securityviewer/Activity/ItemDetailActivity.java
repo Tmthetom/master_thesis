@@ -45,6 +45,6 @@ public class ItemDetailActivity extends FragmentActivity {
     public void onBackPressed() {
         Intent intent = new Intent();  // Returning intent
         setResult(2, intent);  // Set result code and intent
-        finish();  // Close activity
+        finish();  // close activity
     }
 }

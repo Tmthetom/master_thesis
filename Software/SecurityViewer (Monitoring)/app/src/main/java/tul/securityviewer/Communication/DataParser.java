@@ -13,7 +13,7 @@ import tul.securityviewer.CustomList.CustomListItem;
  */
 
 public class DataParser {
-    public ArrayList<CustomListItem> Sensors (ArrayList<CustomListItem> items, String received) {
+    public ArrayList<CustomListItem> sensors(ArrayList<CustomListItem> items, String received) {
         // Create a Pattern object
         Pattern pattern = Pattern.compile("Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1]),Type = ([0-1])");
 
@@ -35,7 +35,7 @@ public class DataParser {
         return items;
     }
 
-    public ArrayList<CustomListItem> Switches (ArrayList<CustomListItem> items, String received) {
+    public ArrayList<CustomListItem> switches(ArrayList<CustomListItem> items, String received) {
         // Create a Pattern object
         Pattern pattern = Pattern.compile("Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1])");
 

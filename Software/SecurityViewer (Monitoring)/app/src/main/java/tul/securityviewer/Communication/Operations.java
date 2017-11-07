@@ -18,7 +18,7 @@ public class Operations {
     private List<CustomListItem> GetAllSensors(ArrayList<CustomListItem> items){
         String received = "";
 
-        dataParser.Sensors(items, received);
+        dataParser.sensors(items, received);
 
         return items;
     }
@@ -26,7 +26,7 @@ public class Operations {
     private List<CustomListItem> GetAllSwitches(ArrayList<CustomListItem> items){
         String received = "";
 
-        dataParser.Switches(items, received);
+        dataParser.switches(items, received);
 
         return items;
     }

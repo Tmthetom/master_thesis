@@ -9,10 +9,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class Client {
     Handler UIHandler;
     Thread thread;
+    InitializeConnection initializeConnection;
 
     private String IP;
     private int PORT;
@@ -36,8 +38,18 @@ public class Client {
         this.activity = activity;
 
         // Startup TCP/IP communication thread
-        this.thread = new Thread(new InitializeConnection());
+        initializeConnection = new InitializeConnection();
+        this.thread = new Thread(initializeConnection);
         this.thread.start();
+
+        // Initialize role
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (Exception exception){
+            notification.Toast("Sleep exception: " + exception.getMessage());
+        }
+        Send("SecurityViewer");
     }
 
     // Send message to server
@@ -67,12 +79,14 @@ public class Client {
         }
     }
 
-    // Close connection
-    public void Close() {
+    // close connection
+    public void close() {
         try {
+            initializeConnection.terminate();
+            thread.join();
             //if (clientSocket != null)    clientSocket.close();
             //if (streamIn != null)  streamIn.close();
-            if (streamOut != null) streamOut.close();
+            //if (streamOut != null) streamOut.close();
         }
         catch (Exception exception){
             notification.Toast("Closing exception: " + exception.getMessage());
@@ -81,20 +95,28 @@ public class Client {
 
     // TCP/IP client
     private class InitializeConnection implements Runnable {
+        private volatile boolean running = true;
+
         @Override
         public void run() {
-            try {
-                // Setup destination
-                InetAddress serverAddress = InetAddress.getByName(IP);
-                clientSocket = new Socket(serverAddress, PORT);
+            while(running){
+                try {
+                    // Setup destination
+                    InetAddress serverAddress = InetAddress.getByName(IP);
+                    clientSocket = new Socket(serverAddress, PORT);
 
-                ThreadCommunication threadCommunication = new ThreadCommunication();
-                new Thread(threadCommunication).start();
-                return;
+                    ThreadCommunication threadCommunication = new ThreadCommunication();
+                    new Thread(threadCommunication).start();
+                    return;
 
-            } catch (Exception exception){
-                notification.Toast("InitializeConnection run exception: " + exception.getMessage());
+                } catch (Exception exception){
+                    notification.Toast("InitializeConnection run exception: " + exception.getMessage());
+                }
             }
+        }
+
+        public void terminate(){
+            running = false;
         }
     }
 

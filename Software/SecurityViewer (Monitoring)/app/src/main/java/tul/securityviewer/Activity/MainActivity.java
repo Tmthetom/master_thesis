@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.refresh:
 
-
-                client.Close();
-
+                client.close();
 
                 return true;
             case R.id.hide_notification:
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private void createParsedTestingItems(){
         // Add items into list
         ArrayList<CustomListItem> items = new ArrayList<>();
-        dataParser.Sensors(items,
+        dataParser.sensors(items,
             "(Id = 2,Pin = 6,Name = Testovaci senzor 1,State = 0,Type = 0)," +
             "(Id = 3,Pin = 8,Name = Testovaci senzor 2,State = 1,Type = 0)," +
             "(Id = 4,Pin = 6,Name = Testovaci senzor 3,State = 0,Type = 0)"
