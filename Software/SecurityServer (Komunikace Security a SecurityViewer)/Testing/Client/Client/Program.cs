@@ -40,18 +40,19 @@ namespace Client
             string message;
             while (true)
             {
-                
-                logger.Write("Send message: ");
-                message = Console.ReadLine();
-                SendMessage(message);
+                // Writing
+                if (!Console.Title.Contains("READ ONLY"))
+                {
+                    logger.Write("Send message: ");
+                    message = Console.ReadLine();
+                    SendMessage(message);
+                }
 
-                /*
-                Thread.Sleep(2000);
-                logger.WriteLine("Sending: Test");
-                SendMessage("Test");
-                */
-
-                ReceiveMessage();
+                // Reading
+                if (!Console.Title.Contains("WRITE ONLY"))
+                {
+                    ReceiveMessage();
+                }
             }
         }
 
@@ -95,37 +96,55 @@ namespace Client
             string role = "-1";
             while (role.Equals("-1"))
             {
-                Console.WriteLine("Please select client role: ");
-                Console.WriteLine("\t 1 - for mobile app (SecurityViewer)");
-                Console.WriteLine("\t 2 - for control unit (Security)");
-                Console.WriteLine("\t 0 - for unknown client");
+                // Write menu
+                Console.WriteLine("Please select client role:");
+                Console.WriteLine();
+                Console.WriteLine("\t 1 - mobile app (SecurityViewer)");
+                Console.WriteLine("\t 2 - control unit (Security)");
+                Console.WriteLine();
+                Console.WriteLine("\t 3 - mobile app (SecurityViewer) \t [READ ONLY]");
+                Console.WriteLine("\t 4 - control unit (Security) \t\t [READ ONLY]");
+                Console.WriteLine();
+                Console.WriteLine("\t 5 - mobile app (SecurityViewer) \t [WRITE ONLY]");
+                Console.WriteLine("\t 6 - control unit (Security) \t\t [WRITE ONLY]");
+                Console.WriteLine();
+                Console.WriteLine("\t 0 - unknown client");
+                Console.WriteLine();
                 Console.Write("Selected role: ");
+
+                // Read answer
                 role = Console.ReadLine();
 
-                // Mobile app (SecurityViewer)
-                if (role.Equals("1"))
+                // Recognize answer
+                switch (role)
                 {
-                    Console.Title = "Mobile app (SecurityViewer)";
+                    case "1":       // Mobile app (SecurityViewer)
+                        Console.Title = "Mobile app (SecurityViewer)";
+                        break;
+                    case "2":       // Control unit (Security)
+                        Console.Title = "Control unit (Security)";
+                        break;
+
+                    case "3":       // Mobile app (SecurityViewer) [WRITE ONLY]
+                        Console.Title = "Mobile app (SecurityViewer) [WRITE ONLY]";
+                        break;
+                    case "4":       // Control unit (Security) [WRITE ONLY]
+                        Console.Title = "Control unit (Security) [WRITE ONLY]";
+                        break;
+
+                    case "5":       // Mobile app (SecurityViewer) [READ ONLY]
+                        Console.Title = "Mobile app (SecurityViewer) [READ ONLY]";
+                        break;
+                    case "6":       // Control unit (Security) [READ ONLY]
+                        Console.Title = "Control unit (Security) [READ ONLY]";
+                        break;
+
+                    default:        // Role not selected
+                        role = "-1";
+                        break;
                 }
 
-                // Control unit (Security)
-                else if (role.Equals("2"))
-                {
-                    Console.Title = "Control unit (Security)";
-                }
-
-                // Unknown client
-                else if (role.Equals("0"))
-                {
-                    Console.Title = "Client";
-                }
-
-                // Not selected
-                else
-                {
-                    role = "-1";
-                }
-
+                // Clear menu
                 Console.Clear();
             }
         }
@@ -133,14 +152,14 @@ namespace Client
         private static void SendClientRole()
         {
             // Mobile app (SecurityViewer)
-            if (Console.Title.Equals("Mobile app (SecurityViewer)"))
+            if (Console.Title.Contains("Mobile app (SecurityViewer)"))
             {
                 SendMessage("SecurityViewer");
                 logger.WriteLine("Client identified as mobile app (SecurityViewer)", ConsoleColor.Yellow);
             }
 
             // Control unit (Security)
-            else if (Console.Title.Equals("Control unit (Security)"))
+            else if (Console.Title.Contains("Control unit (Security)"))
             {
                 SendMessage("Security");
                 logger.WriteLine("Client identified as control unit (Security)", ConsoleColor.Yellow);
