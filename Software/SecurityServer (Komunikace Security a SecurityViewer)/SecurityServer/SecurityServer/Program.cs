@@ -9,6 +9,8 @@ namespace SecurityServer
 {
     class Program
     {
+        #region Initialization
+
         private static Logger log = new Logger();  // Formating command line
         private static List<Socket> unknownClients = new List<Socket>();  // Not assignet clients yet
         private static List<Socket> mobileApps = new List<Socket>();  // SecurityViewer = Mobile app
@@ -26,9 +28,20 @@ namespace SecurityServer
             }
         }
 
+        #endregion Initialization
+
         #region Data processing
+
+        /// <summary>
+        /// Process received message from client
+        /// </summary>
+        /// <param name="client">Client who send message</param>
+        /// <param name="message">Message from client to process</param>
         private static void ProcessReceivedMessage(Socket client, string message)
         {
+            // Check if client is connected
+            if (!IsConnected(client)) return;
+
             // Mobile app (SecurityViewer)
             if (mobileApps.Contains(client))
             {
@@ -49,6 +62,7 @@ namespace SecurityServer
                 AssignRole(client, message);
             }
         }
+
         #endregion Data processing
 
         #region Server part
@@ -128,8 +142,8 @@ namespace SecurityServer
         /// <summary>
         /// Assign unknown client to one role
         /// </summary>
-        /// <param name="client"></param>
-        /// <param name="message"></param>
+        /// <param name="client">Client checked for assign</param>
+        /// <param name="message">Message with role name</param>
         private static void AssignRole(Socket client, string message)
         {
             // If control unit
@@ -151,6 +165,29 @@ namespace SecurityServer
             else
             {
                 log.WriteLine("Client [" + client.RemoteEndPoint + "]: " + message);
+            }
+        }
+        
+        /// <summary>
+        /// Check if client is connected
+        /// </summary>
+        /// <returns>True when connected, false when disconnected</returns>
+        public static bool IsConnected(Socket client)
+        {
+            try
+            {
+                //return !(client.Poll(1, SelectMode.SelectRead) && client.Available == 0);
+                if ((client.Poll(1, SelectMode.SelectRead) && client.Available == 0))
+                {
+                    ClientDisconnected(client);
+                    return false;
+                }
+                return true;
+            }
+            catch (SocketException)
+            {
+                ClientDisconnected(client);
+                return false;
             }
         }
 
