@@ -12,7 +12,7 @@ namespace Client
     class Program
     {
         //private static IPAddress ip = IPAddress.Parse("81.200.57.24");
-        private static IPAddress ip = IPAddress.Parse("127.0.0.1");
+        private static IPAddress ip = IPAddress.Loopback;  // Internal network
         private static int port = 6666;
 
         private static Logger logger = new Logger();
@@ -78,7 +78,6 @@ namespace Client
                 try
                 {
                     attempts++;
-                    //clientSocket.Connect(IPAddress.Loopback, port);  // Internal network
                     clientSocket.Connect(ip, port);  // Internet connection
                     logger.WriteLine("Successfully connected to [" + clientSocket.RemoteEndPoint + "] as unknown client", ConsoleColor.Green);
                     SendClientRole();

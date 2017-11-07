@@ -7,12 +7,9 @@ import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import java.net.Socket;
 import java.util.ArrayList;
 
-import tul.securityviewer.Communication.ClientTest01;
-import tul.securityviewer.Communication.ClientTest;
-import tul.securityviewer.Communication.ClientTest03;
+import tul.securityviewer.Communication.Client;
 import tul.securityviewer.Communication.DataParser;
 import tul.securityviewer.Communication.Notification;
 import tul.securityviewer.CustomList.CustomAdapter;
@@ -21,7 +18,7 @@ import tul.securityviewer.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    ClientTest03 clientTest;
+    Client client;
     DataParser dataParser;
     Notification notification = new Notification(this);
 
@@ -34,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
 
         // Startup TCP/IP communication thread
-        clientTest = new ClientTest03(IP, PORT, this);
-        clientTest.Send("security");
+        client = new Client(IP, PORT, this);
     }
 
     // Create option settings_menu in right up corner
@@ -50,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.refresh:
-                //notification.Toast("Refresh is not implemented yet");
-                //createTestingItems();
-                clientTest.Close();
+
+
+                client.Close();
+
+
                 return true;
             case R.id.hide_notification:
                 notification.Toast("Hide notification is not implemented yet");
@@ -60,24 +58,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return true;
         }
-    }
-
-    private void createTestingItems(){
-        // Create testing items
-        CustomListItem item1 = new CustomListItem(CustomListItem.Type.SENSOR, 0, 3, "Door sensor", true, false);
-        CustomListItem item2 = new CustomListItem(CustomListItem.Type.SENSOR, 1, 5, "PIR sensor", false, true);
-        CustomListItem item3 = new CustomListItem(CustomListItem.Type.SWITCH, 2, 8, "Light switch", true, false);
-
-        // Add items into list
-        ArrayList<CustomListItem> items = new ArrayList<CustomListItem>();
-        items.add(item1);
-        items.add(item2);
-        items.add(item3);
-
-        // Set listView adapter
-        ListView listView = (ListView) findViewById(R.id.listView);
-        ListAdapter listAdapter = new CustomAdapter(this, items);
-        listView.setAdapter(listAdapter);
     }
 
     private void createParsedTestingItems(){

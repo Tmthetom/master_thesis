@@ -6,6 +6,12 @@ import java.util.regex.Pattern;
 
 import tul.securityviewer.CustomList.CustomListItem;
 
+/*
+"(Id = 2,Pin = 6,Name = Testing sensor 1,State = 0,Type = 0)," +
+"(Id = 3,Pin = 8,Name = Testing sensor 2,State = 1,Type = 0)," +
+"(Id = 4,Pin = 6,Name = Testing sensor 3,State = 0,Type = 0)"
+ */
+
 public class DataParser {
     public ArrayList<CustomListItem> Sensors (ArrayList<CustomListItem> items, String received) {
         // Create a Pattern object

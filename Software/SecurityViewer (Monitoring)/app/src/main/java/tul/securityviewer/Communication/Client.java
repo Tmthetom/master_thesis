@@ -10,19 +10,21 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class ClientTest03 {
+public class Client {
     Handler UIHandler;
     Thread thread;
 
     private String IP;
     private int PORT;
+
     private Notification notification;
     private Socket clientSocket;
+    private Context activity;
 
-    private BufferedReader streamIn;
-    public OutputStreamWriter streamOut;
+    private BufferedReader streamIn;  // Read string
+    private OutputStreamWriter streamOut;  // Send string
 
-    public ClientTest03(String ipAddress, int port, Context activity) {
+    public Client(String ipAddress, int port, Context activity) {
         notification = new Notification(activity);
 
         // Setup destination
@@ -31,6 +33,7 @@ public class ClientTest03 {
 
         // ???
         UIHandler = new Handler();
+        this.activity = activity;
 
         // Startup TCP/IP communication thread
         this.thread = new Thread(new InitializeConnection());
@@ -44,20 +47,36 @@ public class ClientTest03 {
             streamOut.flush();
         }
         catch (Exception exception){
-            notification.Toast("Notification exception: " + exception.getMessage());
+            notification.Toast("Send exception: " + exception.getMessage());
         }
     }
 
+    // Called when message received
+    private class MessageReceived implements Runnable {
+
+        private String message;
+
+        private MessageReceived(String message) {
+            this.message = message;
+        }
+
+        // Started after main methods
+        @Override
+        public void run() {
+            notification.Toast("Message: " + message);
+        }
+    }
+
+    // Close connection
     public void Close() {
         try {
-            if (clientSocket != null)    clientSocket.close();
-            if (streamIn != null)  streamIn.close();
+            //if (clientSocket != null)    clientSocket.close();
+            //if (streamIn != null)  streamIn.close();
             if (streamOut != null) streamOut.close();
         }
         catch (Exception exception){
             notification.Toast("Closing exception: " + exception.getMessage());
         }
-
     }
 
     // TCP/IP client
@@ -81,17 +100,10 @@ public class ClientTest03 {
 
     // TCP/IP communication
     private class ThreadCommunication implements Runnable {
-
-        //private BufferedReader streamIn;
-
         private ThreadCommunication(){
             try {
-                // Message received
-                streamIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-                // Message sending
-                streamOut = new OutputStreamWriter(clientSocket.getOutputStream());
-
+                streamIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));  // Message received
+                streamOut = new OutputStreamWriter(clientSocket.getOutputStream());  // Message sending
             } catch (Exception exception) {
                 notification.Toast("ThreadCommunication create exception: " + exception.getMessage());
             }
@@ -115,22 +127,6 @@ public class ClientTest03 {
                     notification.Toast("ThreadCommunication run exception: " + exception.getMessage());
                 }
             }
-        }
-    }
-
-    // Called when message received
-    private class MessageReceived implements Runnable {
-
-        private String message;
-
-        private MessageReceived(String message) {
-            this.message = message;
-        }
-
-        // Started after main methods
-        @Override
-        public void run() {
-            notification.Toast("Message: " + message);
         }
     }
 }
