@@ -1,0 +1,3 @@
+(Id = 2,Pin = 6,Name = Testing sensor 1,State = 0,Type = 0),(Id = 3,Pin = 8,Name = Testing sensor 2,State = 1,Type = 0),(Id = 4,Pin = 9,Name = Testing sensor 3,State = 0,Type = 0)
+
+(Id = 1,Pin = 2,Name = Testing switch 1,State = 0),(Id = 5,Pin = 3,Name = Testing switch 2,State = 1),(Id = 7,Pin = 5,Name = Testing switch 3,State = 0)

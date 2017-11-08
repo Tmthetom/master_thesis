@@ -3,12 +3,13 @@ package tul.securityviewer.Communication;
 import android.content.Context;
 import android.os.Handler;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
+
+import tul.securityviewer.Activity.MainActivity;
 
 public class Client {
     private Handler UIHandler;
@@ -20,27 +21,30 @@ public class Client {
 
     private Notification notification;
     private Socket clientSocket;
-    private Context activity;
+    private MainActivity mainActivity;  // Main activity with items
 
-    //private BufferedReader streamIn;  // Read string
     private InputStreamReader streamIn;  // Read string
     private OutputStreamWriter streamOut;  // Send string
 
-    public Client(String ipAddress, int port, Context activity) {
+    public Client(String ipAddress, int port, MainActivity activity) {
         notification = new Notification(activity);
 
         // Setup destination
         this.IP = ipAddress;
         this.PORT = port;
 
-        // ???
+        // To interact UI from thread (like Delegates from C#)
         UIHandler = new Handler();
-        this.activity = activity;
+        this.mainActivity = activity;
 
         // Startup TCP/IP communication thread
         initializeConnection = new InitializeConnection();
         this.thread = new Thread(initializeConnection);
         this.thread.start();
+
+        /*
+        HERE SHOULD BE CHECK, IF CONNECTION IS ESTABLISHED, INSTEAD OF JUST ONE SECOND DELAY
+         */
 
         // Initialize role
         try {
@@ -63,15 +67,6 @@ public class Client {
         }
     }
 
-    public char Read(){
-        try{
-            return (char)streamIn.read();
-        }
-        catch (Exception exception){
-            return '0';
-        }
-    }
-
     // Called when message received
     private class MessageReceived implements Runnable {
 
@@ -84,11 +79,15 @@ public class Client {
         // Started after main methods
         @Override
         public void run() {
-            notification.Toast("Message: " + message);
+            mainActivity.tryParseData(message);
         }
     }
 
-    // close connection
+    /*
+    THIS NEED TO BE FIXED, NOW IS PROBLEM WITH ORDER OF CLOSING
+     */
+
+    // Close connection
     public void close() {
         try {
             //initializeConnection.terminate();

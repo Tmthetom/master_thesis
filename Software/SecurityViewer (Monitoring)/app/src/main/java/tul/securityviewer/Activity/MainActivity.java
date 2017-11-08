@@ -10,7 +10,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import tul.securityviewer.Communication.Client;
-import tul.securityviewer.Communication.Connection;
 import tul.securityviewer.Communication.DataParser;
 import tul.securityviewer.Communication.Notification;
 import tul.securityviewer.CustomList.CustomAdapter;
@@ -20,12 +19,11 @@ import tul.securityviewer.R;
 public class MainActivity extends AppCompatActivity {
 
     Client client;
-    //Connection client;
-    DataParser dataParser;
+    DataParser dataParser = new DataParser();
     Notification notification = new Notification(this);
 
-    private String IP = "81.200.57.24";
-    private int PORT = 6666;
+    private String IP = "81.200.57.24";  // Address of SecurityServer
+    private int PORT = 6666;  // Port of SecurityServer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Startup TCP/IP communication thread
         client = new Client(IP, PORT, this);
-        //client = new Connection(IP, PORT, this);
     }
 
     // Create option settings_menu in right up corner
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh:
 
                 //client.close();
-                notification.Toast("" + client.Read());
+                createParsedTestingItems();
 
                 return true;
             case R.id.hide_notification:
@@ -63,13 +60,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createParsedTestingItems(){
-        // Add items into list
+
+        // Create empty list
         ArrayList<CustomListItem> items = new ArrayList<>();
+
+        // Add sensors
         dataParser.sensors(items,
-            "(Id = 2,Pin = 6,Name = Testovaci senzor 1,State = 0,Type = 0)," +
-            "(Id = 3,Pin = 8,Name = Testovaci senzor 2,State = 1,Type = 0)," +
-            "(Id = 4,Pin = 6,Name = Testovaci senzor 3,State = 0,Type = 0)"
+                "(Id = 2,Pin = 6,Name = Testing sensor 1,State = 0,Type = 0)," +
+                "(Id = 3,Pin = 8,Name = Testing sensor 2,State = 1,Type = 0)," +
+                "(Id = 4,Pin = 9,Name = Testing sensor 3,State = 0,Type = 0)"
         );
+
+        // Add switches
+        dataParser.switches(items,
+                "(Id = 1,Pin = 2,Name = Testing switch 1,State = 0)," +
+                "(Id = 5,Pin = 3,Name = Testing switch 2,State = 1)," +
+                "(Id = 7,Pin = 5,Name = Testing switch 3,State = 0)"
+        );
+
+        if (items.size() == 0) return;
+
+        // Set listView adapter
+        ListView listView = (ListView) findViewById(R.id.listView);
+        ListAdapter listAdapter = new CustomAdapter(this, items);
+        listView.setAdapter(listAdapter);
+    }
+
+    public void tryParseData(String data){
+        ArrayList<CustomListItem> items = new ArrayList<>();
+
+        // Try to parse sensors
+        dataParser.sensors(items, data);
+
+        // Try to parse switches, when no sensors founded
+        if (items.size() == 0) dataParser.switches(items, data);
 
         // Set listView adapter
         ListView listView = (ListView) findViewById(R.id.listView);
