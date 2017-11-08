@@ -53,7 +53,9 @@ namespace SecurityServer
             else if (controlUnits.Contains(client))
             {
                 log.WriteLine("Control unit [" + client.RemoteEndPoint + "]: " + message);
-                SendMessageToGroup(mobileApps, message);
+                SendMessageToGroup(mobileApps, message + "§");
+                // § is ending character and its recognized in mobile app
+                // This should be temporary solution and should be removed ASAP
             }
 
             // Unknown clients

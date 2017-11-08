@@ -10,6 +10,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import tul.securityviewer.Communication.Client;
+import tul.securityviewer.Communication.Connection;
 import tul.securityviewer.Communication.DataParser;
 import tul.securityviewer.Communication.Notification;
 import tul.securityviewer.CustomList.CustomAdapter;
@@ -19,6 +20,7 @@ import tul.securityviewer.R;
 public class MainActivity extends AppCompatActivity {
 
     Client client;
+    //Connection client;
     DataParser dataParser;
     Notification notification = new Notification(this);
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Startup TCP/IP communication thread
         client = new Client(IP, PORT, this);
+        //client = new Connection(IP, PORT, this);
     }
 
     // Create option settings_menu in right up corner
@@ -47,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.refresh:
 
-                client.close();
+                //client.close();
+                notification.Toast("" + client.Read());
 
                 return true;
             case R.id.hide_notification:
