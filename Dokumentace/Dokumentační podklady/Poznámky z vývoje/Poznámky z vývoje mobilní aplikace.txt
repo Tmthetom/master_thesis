@@ -5,7 +5,7 @@ Po 3 týdnech práce se podaøilo vyøešit, jak odesílat zprávy po pøipojení, bez zt
 Po mìsící se podaøilo vyøešit na stranì serveru, jak ošetøit výpadek mobilního zaøízení, které narozdíl od ostatních odpojených zaøízení vykazovalo známky timeout. Chyba byla v tom, že Android øádnì neukonèuje spojení a nastával Timeout. Ošetøeno v serveru pomocí metody Poll, která se stará právì o takovéto problémy a hlídá výpadky spojení, jelikož nic takového samo o sobì v TCPIP implementováno není, ani nic takového neimplementuje samotný socket.
 
 07. 11. 2017
-Servery byl ošetøen proti výpadkùm.
+Servery byl ošetøen proti výpadkùm ze strany mobilní aplikace, kdy server spadl pøi odpojení klienta mobilní aplikace, protože v Javì se ukonèuje socket spojení výpadkem :D Jednoduše nedá vìdìt serveru. Ošetøeno ètení timeout, které po urèitém poètu klienta odpojí na stranì serveru..
 
 08. 11. 2017
 Dnes se podaøilo obejít chybu, která nastala již pøed mìsícem, a nebylo možné jí opravit ani vrácením na pùvodní verzi... Jedná se o neznámou chybu, kdy pøi pokusu o pøeètení celého øádku z bufferu socketu, se ètení dostane do nekoneèné smyèky, stejnì tak problém nastává pokud se pokusím èíst EOL, která jakoby neexistovala a zpùsobovala tento problém. Stejnì tak jakmile se ètení dostalo na poslední znak, nastal stejný problém... Podaøilo se obejít tak, že posílám o jedne znak navíc, pokud ho detekuji, již dále neètu a ukonèím ètení o jeden krok døíve.
