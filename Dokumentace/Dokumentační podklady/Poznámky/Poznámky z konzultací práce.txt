@@ -1,0 +1,49 @@
+​Diplomová práce
+
+Konzultace - 16. 11. 2017
+
+Security (pracuji na):
+ - Změna ukládání do paměti, přechod z EEPROM na Flash
+ - Studování toho, co se vše změnilo oproti Arduino Uno.
+ 
+Security control (pracuji na):
+ - Přidání tlačítka aktualizace zobrazených dat
+ - Přidání tlačítka schování programu do lišty
+ - Přidání Arduino DUE do seznamu pinů
+ - Oprava toho, že se ne vždy zobrazí všechny senzory a spínače (možná bylo opraveno v novější verzi)
+ - Zmenšit počet hlášení a možná je někde logovat?
+ 
+Security viewer (pracuji na):
+ - Doladění komunikace a načítání dat
+ 
+Security server (pracuji na):
+- Možné logování historie, atd
+
+Security web (pracuji na):
+- Možné využití grafana?
+
+Aktuální podporované vstupy:
+ - Spínače (spínací/rozpínací): Světla, topení, ...
+ - Senzory: Pohybová čídla, dveřní čidlo, ...
+ 
+Plánované vstupy:
+ - Teploměr (analogový/digitální)?
+ - Tlakoměr?
+ - Vlhkoměr?
+ - Světlo (světlo/tma, nebo světlost)?
+ - Mikrovlnný senzor (pohyb za zdí)?
+ - CO2 (Oxid uhličitý)?
+ 
+Možný výstup:
+ - Reproduktor?
+ - Wifi?
+ 
+Otázky na vedoucího:
+ - Jak to vypadá se zadáním?
+ 
+Konzultace - 9. 11. 2017
+
+Responzivni web s grafy, prehledy a historii.
+Teplotni cidla, a pripojeni dalsich veci.
+Zadani sice resim pozde ale da se to udelat a Chaloupka pry vsechno zaridi sam.
+Studijni souhlasilo s pozdnim schvalenim prace zdarma.
