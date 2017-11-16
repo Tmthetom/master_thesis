@@ -13,7 +13,7 @@ TODO: Consider memory saving using PROGMEM
 /* Include libraries */
 
 //#include <avr/pgmspace.h>
-#include <EEPROM.h>
+//#include <EEPROM.h>
 
 /* Setting */
 
