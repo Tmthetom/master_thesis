@@ -1,0 +1,95 @@
+​Diplomovy projekt
+
+16.6.2017
+IPv6 ma verejnou IP - vyuzit?
+Mluvit na komisi
+Zkusit komunikaci
+
+29.5.2017
+Pridana volba pinu dle desky (vsechny desky Arduino a Genuino)
+Opraveno prepinani typu senzoru (chyba firmware)
+Opraveno to, ze byl port videt 2x
+Aplikace funguje
+Dokumentace napsala
+Web s vyhodnocenim, meteostanice, vyhodnoceni.
+Senzory, teplomery, srazkomery,
+Cile, zaver, nemluvit o resersi, blokove schema, teleofn jsem chtel vyuzil
+
+23.5.2017
+Jmeno je magistersky projekt?
+Vlozit do prace zadani?
+Zadani prace?
+Presna cena GSM modulu
+Davat vubec mobilni aplikaci do zadani?
+Volba pinu dle desky, nejpouzivanejsich desk
+Aplikace v pondeli i na Android
+Zmena typu cidla, nefunguje
+Odevzdani v pondeli
+
+3.5.2017
+Odevzdani do 25. Kvetna jeden vytisk, krouzkova vazba.
+Finalni projekt na flesce.
+Abstract
+Uvod
+Teorie max 3 stranky
+Popis systemu
+Zaver
+Pristi tyden napsat postup
+13 tyden predvest realnou aplikaci
+Senzory na spinaci a rozspinaci a switche
+Dostal jsem gsm a senzory
+
+26.4.2017
+Vyrobce odpovedel negativne
+Mam zaklad programu
+Funkcni komunikacni protokol
+Ribon rozhrani
+Arduino uchovat strings v arduinu
+Moznost vice arduin
+Dokumentace 10 az 15 stranek
+10 minutova prezentace
+Aplikace android zatim pres bluetooth
+
+11.4.2017
+Napsal jsem vyrobci
+Aplikace
+Tlacitka jako dverni cidla
+Konfigurace z pc, pojmenovani promennych, cisla pinu.
+Rizeni z telefonu taky aplikace, android, nebude umet konfigurovat. Prijmani informaci z cidel, poslech mikrofonu. GPRS nebo sms kontrola. Mozne vystupy, treba rele na spinani topeni.
+
+4.4.2017
+Zavolat, sms, vysledovat interval a cetnost.
+Napsat vyrobci.
+
+21.3.2017
+Dokumentace nic
+Pruzkum pouze stare telefony, napojeni na primo, telefony s Androidem pres aplikaci, nektere motorola meli usb api
+Muzu telefon rozebrat?
+
+14.3.2017
+Telefon objednan, prozkoumat, vse funguje.
+Mam sebou uctenku, tu mu dam
+Vypada to ze do telefonu nepujde napsat aplikace a dostat zdroje pres usb.
+Hodnoceni ucitelu
+
+7.3.2017
+449 Kc dluh skola za telefon
+Cidlo na dvere zatim jako jedine
+Objednat telefon
+Simkarta vyresit, klidne nejaka z trafiky
+Skola vsechno proplati
+Nakoupit a dat skole uctenku
+Muzu zacit telefon rozebirat a zprovoznovat gsm
+Zatim pouze gsm
+Otazky
+SIM?
+GPRS? Server?
+GSM? Rizeni pres sms
+
+28.2.2017
+Kolik stoji gsm, mobil levny
+Nejlevnejsi telefon bude pripojeny k arduinu pres to pujdou senzory a vse ovladane telefonem
+Priste reseni usb ovladani telefonu.
+Mikrofon, data, sms.
+Konzultace - Utery 12:45
+Android aplikace,
