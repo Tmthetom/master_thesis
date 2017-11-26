@@ -72,37 +72,7 @@ namespace SecurityControl.UserControls
         /// <param name="e"></param>
         private void BunifuDropdownPort_onItemSelected(object sender, EventArgs e)
         {
-            SetDeviceName(bunifuDropdownPort.selectedValue);
-        }
-
-        /// <summary>
-        /// Get device name on selected port
-        /// </summary>
-        /// <param name="portName">Port name</param>
-        private void SetDeviceName(string portName)
-        {
-            try
-            {
-                using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
-                {
-                    string[] portnames = SerialPort.GetPortNames();
-                    List<ManagementBaseObject> ports = searcher.Get().Cast<ManagementBaseObject>().ToList();
-
-                    foreach (ManagementBaseObject port in ports)
-                    {
-                        if (port["DeviceID"].ToString().Equals(portName))
-                        {
-                            labelDeviceName.Text = port["Description"].ToString();  // Hint: Win32_SerialPort class
-                            break;
-                        }
-                    }
-                }
-
-            }
-            catch
-            {
-                ;
-            }
+            labelDeviceName.Text = myFunctions.GetSerialDeviceName(bunifuDropdownPort.selectedValue);
         }
 
         /// <summary>

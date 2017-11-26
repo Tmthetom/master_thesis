@@ -2,12 +2,16 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Management;
+using System.IO.Ports;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SecurityControl.Functions
 {
     class Functions
     {
-        /* Last updated 16. 05. 2017 */
+        /* Last updated 26. 11. 2017 */
 
         #region Notification Ballooon
 
@@ -329,5 +333,38 @@ namespace SecurityControl.Functions
         }
 
         #endregion
+
+        #region SerialPort
+
+        /// <summary>
+        /// Get device name on selected port
+        /// </summary>
+        /// <param name="portName">COM Port name</param>
+        public string GetSerialDeviceName(string portName)
+        {
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
+                {
+                    string[] portnames = SerialPort.GetPortNames();
+                    List<ManagementBaseObject> ports = searcher.Get().Cast<ManagementBaseObject>().ToList();
+
+                    foreach (ManagementBaseObject port in ports)
+                    {
+                        if (port["DeviceID"].ToString().Equals(portName))
+                        {
+                            return port["Description"].ToString();  // Hint: Win32_SerialPort class
+                        }
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return "";  // Empty device name when no found or error
+        }
+
+        #endregion SerialPort
     }
 }

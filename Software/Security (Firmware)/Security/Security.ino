@@ -85,7 +85,22 @@ String nameSwitch[maxSwitches];
 void setup() {
 
 	// Read memory
-	InitialFillMemory();
+	//InitialFillMemory();
+	// Sensors
+	pinSensor[0] = 8;
+	nameSensor[0] = "Door Sensor";
+	typeSensor[0] = false;  // Normaly open type = NO = Push to break
+	pinSensor[1] = 7;
+	nameSensor[1] = "PIR Sensor";
+	typeSensor[1] = true;  // Normaly close type = NC = Push to make
+	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
+	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
+
+	// Switches
+	pinSwitch[0] = 6;
+	nameSwitch[0] = "Led Switch";
+	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
+	digitalWrite(6, HIGH);
 
 	// Allocation
 	in.reserve(maxBytesOfMessageIn);
@@ -681,7 +696,7 @@ void checkSensorStateChangedAndSendIfTrue() {
 #pragma endregion
 
 #pragma region Memory
-
+/*
 int null = 255;
 
 void InitialFillMemory() {
@@ -781,7 +796,7 @@ void ReadMemory() {
 		}
 	}
 }
-
+*/
 #pragma endregion
 
 #pragma endregion
