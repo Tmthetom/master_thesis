@@ -342,6 +342,7 @@ namespace SecurityControl.Functions
         /// <param name="portName">COM Port name</param>
         public string GetSerialDeviceName(string portName)
         {
+            // IF ERROR HERE, YOU NEED TO ADD MANAGEMENT TO YOUR PROJECT REFERENCES
             try
             {
                 using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
