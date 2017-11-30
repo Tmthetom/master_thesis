@@ -1,3 +1,9 @@
+28. 11. 2017
+https://www.skrblik.cz/telefon/predplacene-karty/#vodafone-karta-26
+
+29. 11. 2017
 Většina operátorů nabízí jistý počet dat na 30 dní, po 30 dnech o ně příjdete ať vyčerpáte nebo ne a musíte zaplatit částku znovu. Pouze T-Mobile má nabídku, kdy máte data na 1 rok, poté o ně příjdete, nicméně si účtuje 1 MB jako nejmenší jednotku. Přenesete tedy 10x 10-bytů, přenesli jste 100-bytů celkem? NE, přenesli jste 10x 1 MB, tedy 10 MB, protože 1 MB je nejmenší jednotka...
 
+30. 11. 2017
 Většina operátorů nabízí to, že pošlete 200 Kč (většina to má jako nejmenší částku) a poté si zaplatíte balíček třeba za 100 Kč a příští měsíc znovu 100 Kč, poté musíte poslat znovu 200 Kč, tedy je to v podstatě 100 Kč na měsíc.
+Nyní jsem zjistil, že existují M2M tarify, určené přesně pro tuto potřebu. Účtuje se pouze objem spotřebovaných dat a neexistuje nejmenší účtovaná jednotka.
