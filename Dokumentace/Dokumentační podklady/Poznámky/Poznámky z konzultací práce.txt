@@ -1,5 +1,17 @@
 ​Diplomová práce
 
+​Konzultace - 30. 11. 2017
+
+ - Odpadla (vedoucí není v Liberci)
+
+Konzultace - 23. 11. 2017
+
+ - 4x Teplomer a vsechno
+ - 4x Detektor deste
+ - 1x Senzor vlhkosti pudy
+ - 1x Arduino due
+ - Zjistit ktery operator je nejlevnejsi na sms a data, dobijeci SIM.... kolik to stoji.
+
 Konzultace - 16. 11. 2017
 
 Security (pracuji na):
