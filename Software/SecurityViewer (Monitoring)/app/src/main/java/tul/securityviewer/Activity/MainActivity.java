@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import tul.securityviewer.Communication.Client;
 import tul.securityviewer.Communication.DataParser;
 import tul.securityviewer.Communication.Notification;
+import tul.securityviewer.Communication.Operations;
 import tul.securityviewer.CustomList.CustomAdapter;
 import tul.securityviewer.CustomList.CustomListItem;
 import tul.securityviewer.R;
@@ -19,6 +20,7 @@ import tul.securityviewer.R;
 public class MainActivity extends AppCompatActivity {
 
     Client client;
+    Operations operations = new Operations();
     DataParser dataParser = new DataParser();
     Notification notification = new Notification(this);
 
@@ -46,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.refresh:
-
-                //client.close();
+                operations.getAllItems(client);
+                return true;
+            case R.id.send:
+                client.send("Testing message");
+                return true;
+            case R.id.testing_data:
                 createParsedTestingItems();
-
                 return true;
             case R.id.hide_notification:
-                notification.Toast("Hide notification is not implemented yet");
+                notification.toast("Hide notification is not implemented yet");
                 return true;
             default:
                 return true;
@@ -87,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tryParseData(String data){
+        notification.toast(data);
+
         ArrayList<CustomListItem> items = new ArrayList<>();
 
         // Try to parse sensors

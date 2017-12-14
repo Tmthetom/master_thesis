@@ -1,6 +1,5 @@
 package tul.securityviewer.Communication;
 
-import android.content.Context;
 import android.os.Handler;
 
 import java.io.InputStreamReader;
@@ -24,7 +23,7 @@ public class Client {
     private MainActivity mainActivity;  // Main activity with items
 
     private InputStreamReader streamIn;  // Read string
-    private OutputStreamWriter streamOut;  // Send string
+    private OutputStreamWriter streamOut;  // send string
 
     public Client(String ipAddress, int port, MainActivity activity) {
         notification = new Notification(activity);
@@ -47,23 +46,18 @@ public class Client {
          */
 
         // Initialize role
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        }
-        catch (Exception exception){
-            notification.Toast("Sleep exception: " + exception.getMessage());
-        }
-        Send("SecurityViewer");
+        sleep(1);
+        send("SecurityViewer");
     }
 
-    // Send message to server
-    public void Send(String message) {
+    // send message to server
+    public void send(String message) {
         try{
             streamOut.write(message);
             streamOut.flush();
         }
         catch (Exception exception){
-            notification.Toast("Send exception: " + exception.getMessage());
+            notification.toast("send exception: " + exception.getMessage());
         }
     }
 
@@ -83,6 +77,16 @@ public class Client {
         }
     }
 
+    // Sleep for set time
+    private void sleep(int seconds){
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        }
+        catch (Exception exception){
+            notification.toast("Sleep exception: " + exception.getMessage());
+        }
+    }
+
     /*
     THIS NEED TO BE FIXED, NOW IS PROBLEM WITH ORDER OF CLOSING
      */
@@ -97,7 +101,7 @@ public class Client {
             //if (streamOut != null) streamOut.close();
         }
         catch (Exception exception){
-            notification.Toast("Closing exception: " + exception.getMessage());
+            notification.toast("Closing exception: " + exception.getMessage());
         }
     }
 
@@ -118,7 +122,7 @@ public class Client {
                     return;
 
                 } catch (Exception exception){
-                    notification.Toast("InitializeConnection run exception: " + exception.getMessage());
+                    notification.toast("InitializeConnection run exception: " + exception.getMessage());
                 }
             //}
         }
@@ -136,7 +140,7 @@ public class Client {
                 streamIn = new InputStreamReader(clientSocket.getInputStream());  // Message received
                 streamOut = new OutputStreamWriter(clientSocket.getOutputStream());  // Message sending
             } catch (Exception exception) {
-                notification.Toast("ThreadCommunication create exception: " + exception.getMessage());
+                notification.toast("ThreadCommunication create exception: " + exception.getMessage());
             }
         }
 
@@ -148,7 +152,7 @@ public class Client {
 
                     /*
                      This part seems really problematic, when reading line or trying to read EOL,
-                     code seems to been stuck in infinite loop, like infinite reading. Fixeed with
+                     code seems to been stuck in infinite loop, like infinite reading. Fixed with
                      own final character, but its not best solution.
                       */
 
@@ -159,11 +163,11 @@ public class Client {
                     }
                     message = message.replace("§", "");
 
-                    // Send it to notification
+                    // send it to notification
                     UIHandler.post(new MessageReceived(message));
 
                 } catch (Exception exception) {
-                    notification.Toast("ThreadCommunication run exception: " + exception.getMessage());
+                    notification.toast("ThreadCommunication run exception: " + exception.getMessage());
                 }
             }
         }

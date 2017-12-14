@@ -2,32 +2,47 @@ package tul.securityviewer.Communication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import tul.securityviewer.CustomList.CustomListItem;
 
 public class Operations {
     DataParser dataParser = new DataParser();
 
-    public List<CustomListItem> GetAllItems(){
+    public List<CustomListItem> getAllItems(Client client){
         ArrayList<CustomListItem> items = new ArrayList<>();
-        GetAllSensors(items);
-        GetAllSwitches(items);
+        getAllSensors(client, items);
+        getAllSwitches(client, items);
         return items;
     }
 
-    private List<CustomListItem> GetAllSensors(ArrayList<CustomListItem> items){
+    private void getAllSensors(Client client, ArrayList<CustomListItem> items){
         String received = "";
+
+        client.send("GetAllSensors");
+        sleep(1);
+
 
         dataParser.sensors(items, received);
-
-        return items;
     }
 
-    private List<CustomListItem> GetAllSwitches(ArrayList<CustomListItem> items){
+    private void getAllSwitches(Client client, ArrayList<CustomListItem> items){
         String received = "";
 
-        dataParser.switches(items, received);
+        client.send("GetAllSwitches");
+        sleep(1);
 
-        return items;
+
+        dataParser.switches(items, received);
+    }
+
+    // Sleep for set time
+    private void sleep(int seconds){
+        try {
+            TimeUnit.SECONDS.sleep(seconds);
+        }
+        catch (Exception exception){
+            ;
+        }
     }
 }

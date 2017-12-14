@@ -10,7 +10,7 @@ public class Notification {
         this.context = context;
     }
 
-    public void Toast(String message){
+    public void toast(String message){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }
