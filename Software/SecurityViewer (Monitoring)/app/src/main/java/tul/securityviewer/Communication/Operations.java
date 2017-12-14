@@ -12,7 +12,7 @@ public class Operations {
     public List<CustomListItem> getAllItems(Client client){
         ArrayList<CustomListItem> items = new ArrayList<>();
         getAllSensors(client, items);
-        getAllSwitches(client, items);
+        //getAllSwitches(client, items);
         return items;
     }
 
@@ -20,8 +20,7 @@ public class Operations {
         String received = "";
 
         client.send("GetAllSensors");
-        sleep(1);
-
+        sleep(3);
 
         dataParser.sensors(items, received);
     }
@@ -30,8 +29,7 @@ public class Operations {
         String received = "";
 
         client.send("GetAllSwitches");
-        sleep(1);
-
+        sleep(3);
 
         dataParser.switches(items, received);
     }
