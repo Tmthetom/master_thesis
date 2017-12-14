@@ -3,6 +3,7 @@
     <string name="refresh">Refresh</string>
     <string name="settings">Settings</string>
     <string name="hide_notification">Hide notifications</string>
-    <string name="testing_data">Testing data</string>
-    <string name="send">Send message</string>
+    <string name="testing_data">Show testing data</string>
+    <string name="send_testing_message">Send testing message</string>
+    <string name="clear_items">Clear all</string>
 </resources>

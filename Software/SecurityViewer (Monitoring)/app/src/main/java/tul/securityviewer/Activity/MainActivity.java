@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Operations operations = new Operations();
     DataParser dataParser = new DataParser();
     Notification notification = new Notification(this);
+    ArrayList<CustomListItem> items = new ArrayList<>();;
 
     private String IP = "81.200.57.24";  // Address of SecurityServer
     private int PORT = 6666;  // Port of SecurityServer
@@ -48,9 +49,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.refresh:
+                items = new ArrayList<>();
                 operations.getAllItems(client);
                 return true;
-            case R.id.send:
+            case R.id.clear_items:
+                items = new ArrayList<>();
+                tryParseData("");
+                return true;
+            case R.id.send_testing_message:
                 client.send("Testing message");
                 return true;
             case R.id.testing_data:
@@ -93,14 +99,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void tryParseData(String data){
         notification.toast(data);
-
-        ArrayList<CustomListItem> items = new ArrayList<>();
+        int itemSize = items.size();
 
         // Try to parse sensors
         dataParser.sensors(items, data);
 
-        // Try to parse switches, when no sensors founded
-        if (items.size() == 0) dataParser.switches(items, data);
+        // Try to parse switches, if no sensors founded
+        if (itemSize == items.size()) dataParser.switches(items, data);
 
         // Set listView adapter
         ListView listView = (ListView) findViewById(R.id.listView);
