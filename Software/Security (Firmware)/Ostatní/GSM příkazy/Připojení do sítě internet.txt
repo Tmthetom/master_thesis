@@ -1,0 +1,16 @@
+Pro připojení TCP je potřeba udělat:
+AT+CIPSHUT
+AT+CIPMUX=0
+AT+CGATT=1
+AT+CSTT="internet"
+AT+CIICR
+AT+CIFSR
+AT+CIPSTART="TCP","81.200.57.24","6666"
+
+Pro odeslání dat je potřeba udělat:
+AT+CIPSEND
+... napsat text ...
+Do Notepad++ udělat Alt+026, zkopírovat ho a odeslat []
+
+Zjištění vlastní IP:
+AT+CIFSR

@@ -1,0 +1,5 @@
+Pro odeslání SMS je potřeba udělat:
+AT+CMGF=1
+AT+CMGS="776006865"
+... napsat text ...
+Do Notepad++ udělat Alt+026, zkopírovat ho a odeslat []
