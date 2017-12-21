@@ -11,7 +11,14 @@ namespace SecurityControl.Functions
 {
     class Functions
     {
-        /* Last updated 26. 11. 2017 */
+        /* Frequently used features
+         * 
+         * Author: Tomáš Moravec
+         * Phone:  +420 776 006 865
+         * Email:  moravec-tomas@seznam.cz
+         * 
+         * Last updated 20. 12. 2017
+         */
 
         #region Notification Ballooon
 
