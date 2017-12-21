@@ -11,7 +11,7 @@ public class Operations {
 
     public List<CustomListItem> getAllItems(Client client){
         ArrayList<CustomListItem> items = new ArrayList<>();
-        getAllSensors(client, items);
+        //getAllSensors(client, items);
         getAllSwitches(client, items);
         return items;
     }
@@ -20,7 +20,7 @@ public class Operations {
         String received = "";
 
         client.send("GetAllSensors");
-        sleep(3);
+        sleep(10);
 
         //dataParser.sensors(items, received);
     }
@@ -29,9 +29,14 @@ public class Operations {
         String received = "";
 
         client.send("GetAllSwitches");
-        sleep(3);
+        //sleep(3);
 
         //dataParser.switches(items, received);
+    }
+
+    public void setSwitchState(Client client, CustomListItem item){
+        item.switchState();
+        client.send("SetSwitchState(" + item.getId() + "," + ((item.getState() == true) ? 1 : 0) + ")");
     }
 
     // Sleep for set time

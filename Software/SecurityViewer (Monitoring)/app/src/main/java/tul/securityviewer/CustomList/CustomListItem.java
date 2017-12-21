@@ -61,4 +61,6 @@ public class CustomListItem {
     public String getSensorType() {
         return sensorType;
     }
+
+    public void switchState() { state = !state;}
 }

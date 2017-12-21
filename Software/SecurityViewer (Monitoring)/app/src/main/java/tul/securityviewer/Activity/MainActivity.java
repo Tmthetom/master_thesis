@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -79,37 +81,38 @@ public class MainActivity extends AppCompatActivity {
         dataParser.sensors(items,
                 "(Id = 2,Pin = 6,Name = Testing sensor 1,State = 0,Type = 0)," +
                 "(Id = 3,Pin = 8,Name = Testing sensor 2,State = 1,Type = 0)," +
-                "(Id = 4,Pin = 9,Name = Testing sensor 3,State = 0,Type = 0)"
-        );
+                "(Id = 4,Pin = 9,Name = Testing sensor 3,State = 0,Type = 0)");
 
         // Add switches
         dataParser.switches(items,
                 "(Id = 1,Pin = 2,Name = Testing switch 1,State = 0)," +
                 "(Id = 5,Pin = 3,Name = Testing switch 2,State = 1)," +
-                "(Id = 7,Pin = 5,Name = Testing switch 3,State = 0)"
-        );
+                "(Id = 7,Pin = 5,Name = Testing switch 3,State = 0)");
 
         if (items.size() == 0) return;
 
         // Set listView adapter
         ListView listView = (ListView) findViewById(R.id.listView);
-        ListAdapter listAdapter = new CustomAdapter(this, items);
+        ListAdapter listAdapter = new CustomAdapter(this, client, operations, items);
         listView.setAdapter(listAdapter);
     }
 
     public void tryParseData(String data){
         notification.toast(data);
-        int itemSize = items.size();
+        int startingItemSize = items.size();
 
         // Try to parse sensors
         dataParser.sensors(items, data);
 
         // Try to parse switches, if no sensors founded
-        if (itemSize == items.size()) dataParser.switches(items, data);
+        if (startingItemSize == items.size()) dataParser.switches(items, data);
+
+        // Try parse
+        //if (startingItemSize == items.size())
 
         // Set listView adapter
         ListView listView = (ListView) findViewById(R.id.listView);
-        ListAdapter listAdapter = new CustomAdapter(this, items);
+        ListAdapter listAdapter = new CustomAdapter(this, client, operations, items);
         listView.setAdapter(listAdapter);
     }
 }

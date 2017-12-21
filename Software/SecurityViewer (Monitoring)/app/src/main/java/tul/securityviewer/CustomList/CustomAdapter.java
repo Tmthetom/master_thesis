@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -13,15 +14,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import tul.securityviewer.Activity.ItemDetailActivity;
+import tul.securityviewer.Communication.Client;
+import tul.securityviewer.Communication.Operations;
 import tul.securityviewer.R;
 
 public class CustomAdapter extends ArrayAdapter<CustomListItem> {
 
     private Context context;
+    private Client client;
+    private Operations operations;
 
-    public CustomAdapter(Context context, ArrayList<CustomListItem> items) {
+    public CustomAdapter(Context context, Client client, Operations operations, ArrayList<CustomListItem> items) {
         super(context, R.layout.custom_list_row, items);
         this.context = context;
+        this.client = client;
+        this.operations = operations;
     }
 
     @Override
@@ -52,6 +59,14 @@ public class CustomAdapter extends ArrayAdapter<CustomListItem> {
             @Override
             public void onClick(View v) {
                 OpenItemDetail(customListItem);
+            }
+        });
+
+        // Switch click
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                operations.setSwitchState(client, customListItem);
             }
         });
 

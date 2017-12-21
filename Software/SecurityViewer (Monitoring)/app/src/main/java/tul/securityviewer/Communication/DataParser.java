@@ -53,4 +53,9 @@ public class DataParser {
             }
         }
     }
+
+    public void setSensor(){
+        // Create a Pattern object
+        Pattern pattern = Pattern.compile("Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1])");
+    }
 }

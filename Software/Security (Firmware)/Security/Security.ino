@@ -14,6 +14,7 @@ TODO: Consider memory saving using PROGMEM
 
 //#include <avr/pgmspace.h>
 //#include <EEPROM.h>
+//#include <SoftwareSerial.h>  // GSM communication
 
 /* Setting */
 
@@ -65,10 +66,22 @@ const static char stringError[] = "ERROR";
 
 /* Variables */
 
-// Communication
+// Communication common
 String in;
 String out;
+
+// Communication USB
 bool inComplete = false;
+
+// Communication GSM
+//SoftwareSerial gsm(10, 11); // RX, TX
+String arduinoReceived = "";  // Console text before received message
+String arduinoSending = "[-->] ";  // Console text before sended message
+int command = 0;  // Number of initialisation command in row
+int numberOfDots;  // For watingForIP, number of dots in IP
+bool watingForResponse = false;
+bool watingForIP = false;
+bool initCompleted = false;
 
 // Sensor
 uint8_t pinSensor[maxSensors];
@@ -86,28 +99,91 @@ void setup() {
 
 	// Read memory
 	//InitialFillMemory();
+
 	// Sensors
-	pinSensor[0] = 8;
+	/*
+	pinSensor[0] = 11;
 	nameSensor[0] = "Door Sensor";
 	typeSensor[0] = false;  // Normaly open type = NO = Push to break
-	pinSensor[1] = 7;
+
+	pinSensor[1] = 6;
 	nameSensor[1] = "PIR Sensor";
 	typeSensor[1] = true;  // Normaly close type = NC = Push to make
 	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
+	*/
 
 	// Switches
-	pinSwitch[0] = 6;
-	nameSwitch[0] = "Led Switch";
+	pinSwitch[0] = 5;
+	nameSwitch[0] = "Led Switch 1";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
-	digitalWrite(6, HIGH);
+	digitalWrite(pinSwitch[0], HIGH);
+
+	pinSwitch[1] = 6;
+	nameSwitch[1] = "Led Switch 2";
+	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
+	digitalWrite(pinSwitch[1], HIGH);
+
+	pinSwitch[2] = 7;
+	nameSwitch[2] = "Led Switch 3";
+	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
+	digitalWrite(pinSwitch[2], HIGH);
 
 	// Allocation
 	in.reserve(maxBytesOfMessageIn);
 	out.reserve(maxBytesOfMessageOut);
 
-	// Communication
+	// Connect USB communication
 	Serial.begin(baudRate);
+
+	// Connect GSM communication
+	Serial1.begin(baudRate);
+	sendCommand("AT");
+}
+
+/* Connect to server thru GSM */
+void connectToServer() {
+	switch (command) {
+
+		// Connection
+	case 0:
+		sendCommand("AT+CIPSHUT");
+		command++;
+		break;
+	case 1:
+		sendCommand("AT+CIPMUX=0");
+		command++;
+		break;
+	case 2:
+		sendCommand("AT+CGATT=1");
+		command++;
+		break;
+	case 3:
+		sendCommand("AT+CSTT=\"internet\"");
+		command++;
+		break;
+	case 4:
+		sendCommand("AT+CIICR");
+		command++;
+		break;
+	case 5:
+		sendCommand("AT+CIFSR");
+		watingForIP = true;
+		command++;
+		break;
+	case 6:
+		sendCommand("AT+CIPSTART=\"TCP\",\"81.200.57.24\",\"6666\"");
+		command++;
+		break;
+
+	// Authentication
+	case 7:
+		sendMessage("Security");
+		initCompleted = true;
+		break;
+	default:
+		;
+	}
 }
 
 #pragma endregion
@@ -122,12 +198,72 @@ void loop() {
 
 	// Communication
 	readSerialAndRespond();
+	readGsmAndRespond();
+}
+
+/* Read gsm message and respond */
+void readGsmAndRespond() {
+
+	// Wating for response
+	if (watingForResponse) {
+
+		// Response (GSM -> PC)
+		if (Serial1.available()) {
+
+			// Send received message to console
+			in = Serial1.readString();
+			in.trim();
+			Serial.println(arduinoReceived + in);
+
+			// Check if command runs OK
+			if (in.endsWith("OK")) {
+				watingForResponse = false;
+				Serial.println();
+			}
+			
+			// When wating for client IP, check if runs OK
+			else if (watingForIP) {
+				for (int i = 0; i < in.length(); i++) {
+					if (in.charAt(i) == '.') {
+						numberOfDots++;
+						Serial.println();
+					}
+				}
+				if (numberOfDots >= 3) {
+					watingForIP = false;
+					watingForResponse = false;
+				}
+				numberOfDots = 0;
+			}
+		}
+	}
+
+	// Initialisation
+	else {
+		if (initCompleted == false) connectToServer();
+		else {
+			// Read communication
+			if (Serial1.available()) {
+
+				in = Serial1.readString();
+				in.trim();
+				Serial.println(arduinoReceived + in);
+
+				// Sensors
+				if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
+
+				// Switches 
+				else if (in.equalsIgnoreCase(stringGetAllSwitches)) getAllSwitches();
+				else if (in.startsWith(stringSetSwitchState)) setSwitchState();
+			}
+		}
+	}
 }
 
 /* Read serial message and respond */
 void readSerialAndRespond() {
 	if (inComplete && in.length() != 0) {
-		
+
 		// Sensors
 		if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
 		else if (in.startsWith(stringSetSensorName)) setSensorName();
@@ -174,6 +310,7 @@ void getAllSensors() {
 	}
 	out += rightBracket;
 	Serial.println(out);
+	sendMessage(out);
 }
 
 /* Send all switches */
@@ -191,6 +328,7 @@ void getAllSwitches() {
 	}
 	out += rightBracket;
 	Serial.println(out);
+	sendMessage(out);
 }
 
 #pragma endregion
@@ -238,6 +376,7 @@ void setSensorName() {
 
 /* Set sensor pin */
 void setSensorPin() {
+
 	// Get wanted id and value
 	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
 	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
@@ -458,6 +597,7 @@ void setSwitchState() {
 	// Check if exists
 	if (pinSwitch[id] == NULL) {
 		Serial.println(stringError);
+		sendMessage(stringError);
 		return;
 	}
 
@@ -465,6 +605,7 @@ void setSwitchState() {
 	uint8_t before = getSwitchState(id);
 	if (before == val) {
 		Serial.println(stringError);
+		sendMessage(stringError);
 		return;
 	}
 
@@ -475,16 +616,18 @@ void setSwitchState() {
 	uint8_t after = getSwitchState(id);
 	if (before == after) {
 		Serial.println(stringError);
+		sendMessage(stringError);
 		return;
 	}
 
 	// Send OK
 	Serial.println(stringOk);
+	sendMessage(stringOk);
 }
 
 /* Set switch pin */
 void setSwitchPin() {
-	
+
 	// Get wanted id and value
 	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
 	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
@@ -523,7 +666,7 @@ void setSwitchPin() {
 
 /* Add Switch */
 void addSwitch() {
-	
+
 	// Get wanted Pin
 	String stringBefore = in.substring(in.indexOf(leftBracket) + 1);					// Get text after '('
 	String stringAfter = stringBefore.substring(0, stringBefore.indexOf(rightBracket));	// Get text before ')'
@@ -652,7 +795,7 @@ void setPinMode(uint8_t pins[], uint8_t size, uint8_t mode) {
 
 #pragma endregion
 
-#pragma region Communication
+#pragma region SecurityControl Communication
 
 /* If command not recognized renspond to sender */
 void sendMessageNotRecognized() {
@@ -673,6 +816,27 @@ void serialEvent() {
 
 #pragma endregion
 
+#pragma region SecurityViewer Communication
+
+void sendCommand(String command) {
+	Serial.println(arduinoSending + command);
+	Serial1.println(command);
+	watingForResponse = true;
+}
+
+void sendMessage(String message) {
+	Serial.println(arduinoSending + "AT+CIPSEND");
+	Serial1.println("AT+CIPSEND");
+	delay(1000);
+	Serial.println(arduinoSending + message);
+	Serial1.println(message);
+	delay(1000);
+	Serial1.println((char)26);
+	delay(1000);
+}
+
+#pragma endregion
+
 #pragma region Autocheck fuctions
 
 /* Check sensor state changed */
@@ -683,6 +847,11 @@ void checkSensorStateChangedAndSendIfTrue() {
 			if (stateSensorOld[i] != stateSensorNew[i]) {
 				stateSensorOld[i] = stateSensorNew[i];
 				Serial.println(
+					String(stringSensorCategory) + leftBracket +								// Name of category
+					String(stringId) + stringEquals + String(i) + stringSeparator +				// Id
+					stringState + stringEquals + String(stateSensorOld[i]) + rightBracket		// State
+				);
+				sendMessage(
 					String(stringSensorCategory) + leftBracket +								// Name of category
 					String(stringId) + stringEquals + String(i) + stringSeparator +				// Id
 					stringState + stringEquals + String(stateSensorOld[i]) + rightBracket		// State
