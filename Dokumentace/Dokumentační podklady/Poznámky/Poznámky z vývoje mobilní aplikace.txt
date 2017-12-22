@@ -9,3 +9,9 @@ Servery byl ošetøen proti výpadkùm ze strany mobilní aplikace, kdy server spadl 
 
 08. 11. 2017
 Dnes se podaøilo obejít chybu, která nastala již pøed mìsícem, a nebylo možné jí opravit ani vrácením na pùvodní verzi... Jedná se o neznámou chybu, kdy pøi pokusu o pøeètení celého øádku z bufferu socketu, se ètení dostane do nekoneèné smyèky, stejnì tak problém nastává pokud se pokusím èíst EOL, která jakoby neexistovala a zpùsobovala tento problém. Stejnì tak jakmile se ètení dostalo na poslední znak, nastal stejný problém... Podaøilo se obejít tak, že posílám o jedne znak navíc, pokud ho detekuji, již dále neètu a ukonèím ètení o jeden krok døíve.
+
+14. 12. 2017
+Dnes jsem obdržel dobíjecí kartu GoMobile, zatím jsem jí nezkoušel.
+
+20. 12. 2017
+Dnes jsem poprvé vyzkoušel dobíjecí kartu GoMobile a funguje jak má. Podaøilo se mi plnì zprovoznit komunikaci mobilní aplikace a Arduina tak, že Arduino posílá zprávy o zmìnách na senzorech do mobilní aplikace, která to øádnì zobrazuje a mobilní aplikace posílá žádosti o data, pøípadnì o zmìnu stavu spínaèe do Arduina. Dnes jsem také rozbil své Arduino DUE, které jsem napájel (staèí spoleèná zem, bohužel jsem to nevìdìl a mìl jsem propojené i napájení) z GSM modulu, který má napìtí 5V, zatímco Arduino DUE má provozní napìtí 3.3V, døíve to fungovalo proto, že klasické Arduino UNO má provozní napìtí také 5V.

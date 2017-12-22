@@ -28,3 +28,6 @@ AT+CIPSEND
 
 16. 11. 2017
 Vyzkoušeno Arduino DUE, zdá se že nefunguje knihovna EEPROM a bude nutné ukládání a naèítání z pamìti pøedìlat na FLASH.
+
+20. 12. 2017
+Dnes jsem rozbil své Arduino DUE, které jsem napájel (staèí spoleèná zem, bohužel jsem to nevìdìl a mìl jsem propojené i napájení) z GSM modulu, který má napìtí 5V, zatímco Arduino DUE má provozní napìtí 3.3V, døíve to fungovalo proto, že klasické Arduino UNO má provozní napìtí také 5V.

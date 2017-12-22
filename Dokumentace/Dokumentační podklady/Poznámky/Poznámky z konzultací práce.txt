@@ -1,35 +1,60 @@
 ​Diplomová práce
 
+Konzultace - 5. 1. 2017
+
+ - 22. 12. 2017 jsem obdržel čtyři objednané senzory (ty kombinované v jedné desce).
+
+Konzultace - 21. 12. 2017
+
+ - Říct o 30-ti minutovém hovoru s Vodafone.
+ - 14. 12. 2017 jsem obdržel GoMobile SIM (cena 300 Kč, z toho 100 Kč poštovné).
+ - 14. 12. 2017 jsem obdržel klon Arduino DUE, funguje jako originál.
+ - Problem byl opravdu s nedostatkem pameti, nyni jiz vse funguje jak ma.
+ - Moje arduino nefunguje... poskodil jsem ho 20. 12. 2017.
+ - Zatim dorazilo z Číny pouze Arduino DUE.
+ - Do příště mám trochu pracovat na textu práce.
+
+Konzultace - 14. 12. 2017
+
+ - Zrušena z důvodu nedokončení požadované ukázky.
+
+Konzultace - 7. 12. 2017
+
+ - 27. 11. 2017 jsem objednal všechny dohodnuté součástky za cenu 674 Kč.
+ - Udělal jsem průzkum všech operátorů a vybral ty nejlepší.
+ - Stále ještě zkoumám možnost M2M tarifů (T-Mobile, Vodafone), které slouží přímo pro IoT.
+ - Příště přinést předváděcí verzi s GoMobile kartou.
+
 ​Konzultace - 30. 11. 2017
 
- - Odpadla (vedoucí není v Liberci)
+ - Odpadla (vedoucí není v Liberci).
 
 Konzultace - 23. 11. 2017
 
- - 4x Teplomer a vsechno
- - 4x Detektor deste
- - 1x Senzor vlhkosti pudy
- - 1x Arduino due
+ - 4x Teplomer a vsechno.
+ - 4x Detektor deste.
+ - 1x Senzor vlhkosti pudy.
+ - 1x Arduino due.
  - Zjistit ktery operator je nejlevnejsi na sms a data, dobijeci SIM.... kolik to stoji.
 
 Konzultace - 16. 11. 2017
 
 Security (pracuji na):
- - Změna ukládání do paměti, přechod z EEPROM na Flash
+ - Změna ukládání do paměti, přechod z EEPROM na Flash.
  - Studování toho, co se vše změnilo oproti Arduino Uno.
  
 Security control (pracuji na):
- - Přidání tlačítka aktualizace zobrazených dat
- - Přidání tlačítka schování programu do lišty
- - Přidání Arduino DUE do seznamu pinů
- - Oprava toho, že se ne vždy zobrazí všechny senzory a spínače (možná bylo opraveno v novější verzi)
+ - Přidání tlačítka aktualizace zobrazených dat.
+ - Přidání tlačítka schování programu do lišty.
+ - Přidání Arduino DUE do seznamu pinů.
+ - Oprava toho, že se ne vždy zobrazí všechny senzory a spínače (možná bylo opraveno v novější verzi).
  - Zmenšit počet hlášení a možná je někde logovat?
  
 Security viewer (pracuji na):
- - Doladění komunikace a načítání dat
+ - Doladění komunikace a načítání dat.
  
 Security server (pracuji na):
-- Možné logování historie, atd
+- Možné logování historie, atd.
 
 Security web (pracuji na):
 - Možné využití grafana?
@@ -52,10 +77,17 @@ Možný výstup:
  
 Otázky na vedoucího:
  - Jak to vypadá se zadáním?
+ ​
+Odpovedi vedouciho:
+ - Grafana mozno pouzit.
+ - Mereni rychlosti vzduchu, srazkomer, teplomer analogovy, tlakomer.
+ - Wifi ne, server ano komunikace s webem.
+ - Priste cenova rozhvaha co objednat z ciny.
+ - Chaloupka do priste zjisti jestli mi skola da simkartu.
  
 Konzultace - 9. 11. 2017
 
-Responzivni web s grafy, prehledy a historii.
-Teplotni cidla, a pripojeni dalsich veci.
-Zadani sice resim pozde ale da se to udelat a Chaloupka pry vsechno zaridi sam.
-Studijni souhlasilo s pozdnim schvalenim prace zdarma.
+ - Responzivni web s grafy, prehledy a historii.
+ - Teplotni cidla, a pripojeni dalsich veci.
+ - Zadani sice resim pozde ale da se to udelat a Chaloupka pry vsechno zaridi sam.
+ - Studijni souhlasilo s pozdnim schvalenim prace zdarma.
