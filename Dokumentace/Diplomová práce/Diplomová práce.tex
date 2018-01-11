@@ -1,3 +1,5 @@
+% Nastavení dokumentu
+
 \documentclass[FM,DP]{tulthesis}  % Diplomová práce fakulty mechatroniky
 \usepackage[czech]{babel}  % Česká šablona dokumentu
 \usepackage[utf8]{inputenc}  % Česká diakritika
@@ -7,15 +9,21 @@
 \usepackage{gensymb}  % Pro stupne celsia
 \usepackage{url}  % Pro lomeni adres url
 
-\TULtitle{Zabezpečovací systém pomocí mobilního telefonu}{Security system using a mobile phone}
+% Titulní stránka
+
+\TULtitle{Inteligentní domovní systém}{Smart home system}
 \TULprogramme{N2610}{Elektrotechnika a informatika}{Electrical Engineering and Informatics}
 \TULbranch{1802T007}{Informační technologie}{Information Technology}
 \TULauthor{Bc. Tomáš Moravec}
 \TULsupervisor{doc. Ing. Josef Chaloupka, Ph.D.}
-\TULyear{2017}
+\TULyear{2018}
+
+% Prohlášení
 
 \begin{document}
 \ThesisStart{male}
+
+% Poděkování
 
 \begin{acknowledgement}
 Děkuji vedoucímu práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné vedení a poskytnuté informace při zpracování závěrečné diplomové práce.
@@ -24,15 +32,17 @@ Děkuji vedoucímu práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné v
 % Abstrakt
 
 \begin{abstractCZ}
-Práce se zabývá problematikou zabezpečovacího systému, postaveného na platformě Arduino, řízeného z desktopové aplikace a s možností monitorování pomocí mobilní aplikace. Komunikace mezi zabezpečovacím systémem a mobilní aplikací má být realizována pomocí mobilního telefonu, který by poskytoval přístup do sítě GSM. V úvodu jsou definovány základní pojmy a požadované vlastnosti, na jejichž základě byly objednány jednotlivé komponenty. První část práce je věnována snaze o využití mobilního telefonu, jako prostředníka pro připojení do mobilní datové sítě. Tato cesta se ukázala jako slepá a byla tedy zvolena druhá alternativa, komunikace pomocí samostatného GPRS modulu. Výstupem práce je firmware, který řídí a zajišťuje komunikaci, desktopová aplikace pro nastavení a monitorování, a mobilní aplikace pro samostatné monitorování zabezpečovacího zařízení.
+Práce se zabývá vytvořením inteligentního domovního systému, určenému ke zpracování dat z bezpečnostních a meteorologických čidel, a řízení vybraných domovních zařízení. Komplexní řešení zahrnuje jak samotný domovní systém, tak mobilní, webovou a desktopovou aplikaci. V úvodu jsou definovány základní pojmy a požadované vlastnosti. Následuje rešerše a výběr vhodných hardwarových a softwarových řešení. Ná základě rešerše je navržen koncept komplexního domovního systému, který je následně realizován v jednotlivých etapách. Výstupem práce je funkční cílové zařízení, které aplikuje zvolené hardwarové i softwarové řešení.
 
 \end{abstractCZ}
 
 \vspace{2cm}
 
 \begin{abstractEN}
-The thesis deals with the issue of the security system, based on the Arduino platform, controlled from the desktop application and with the possibility of monitoring using mobile application. Communication between the security system and the mobile application should be done with using a mobile phone, that would provide access to the GSM network. The introduction defines the basic terms and the required properties. Base on properties, individual components were ordered. The first part is devoted to trying to use mobile phone as an intermediary for connecting to a mobile data network. This path turned out to be blind, so the second alternative, communication using a separate GPRS module, was chosen. The outcome of this work is firmware that manages and provides communication, a desktop application for setting and monitoring, and mobile applications for independent monitoring of the security device.
+Not implemented yet.
 \end{abstractEN}
+
+% Seznam zkratek
 
 \tableofcontents
 \clearpage
@@ -56,11 +66,11 @@ The thesis deals with the issue of the security system, based on the Arduino pla
 % Úvod
 
 \chapter{Úvod}
-Téma bylo vypsáno doc. Ing. Josefem Chaloupkou, Ph.D. a zaujalo mne díky své tematické návaznosti na mou bakalářskou práci s názvem \uv{Koncept nízkonákladového sledovacího zařízení pro osobní automobily} \cite{Bachelor thesis}. V bakalářské práci jsem se věnoval vývoji sledovacího zařízení založeného na platformě Arduino \cite{Arduino intro}, které komunikovalo pomocí SMS zpráv s mobilním telefonem v přirozené řeči. Dalším logickým krokem pro mne bylo, jak uvádím v závěru své bakalářské práce, řízení z desktopové aplikace, případně z mobilní aplikace, skrze mobilní datovou síť. Po konzultaci s vedoucím jsem byl obeznámen s tím, že tato práce mi nejen umožní navázat na předešlou bakalářskou práci, ale i prozkoumat možnosti využití těch nejlevnějších mobilních telefonů, podporujících datové přenosy, jako náhradu za mnohdy drahé GPRS moduly, které slouží pro přenos dat do Internetu skrze mobilní síť GSM (zkráceně mobilní datová síť). Nadchla mě myšlenka, že by bylo možné takto využít ty staré mobilní telefony, které má mnoho z nás stále schované doma, z důvodu trendu dnešní doby, kterým je obměňování za nejnovější modely. O téma jsem se tedy přihlásil nejen z důvodu tematické  návaznosti na mou bakalářskou práci, ale také proto, že mne obohatí o další nové zkušenosti, které mohu později využít v praxi. Mohu doplnit, že má bakalářská práce již vyústila ve spolupráci se společností Jablotron (BigClown Labs s.r.o.) a zájmu ze strany Škoda Auto, i proto se těším, kam mě nové poznatky dále posunou.
+Not implemented yet.
 
 % Zabezpečovací systém
 \chapter{Zabezpečovací systém}
-Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
+Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní, či okenní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
 
 \section{Ústředna}
 Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často bývá vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustického (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
@@ -80,7 +90,7 @@ Detektor je prvek systému, který je rozmístěn v hlídaném objektu a má za 
 \end{itemize} 
 
 \section{Komunikátor}
-Komunikátor je zařízení, které předává mimo objekt informaci o narušení objektu, případně o odchylce od normálního provozního stavu zabezpečovacího systému \cite{Electronic security signalisation}. Nejčastější typy komunikátorů jsou:
+Komunikátor je zařízení, které odesílá informaci o narušení objektu, případně o odchylce od normálního provozního stavu zabezpečovacího systému \cite{Electronic security signalisation}. Nejčastější typy komunikátorů jsou:
 
 \begin{itemize}
 \item GSM komunikátor
@@ -176,9 +186,9 @@ Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bu
 \item Připojování a odpojování ke zvolené ústředně
 \end{itemize} 
 
-% Hardware a firmware
+% Domovní systém (hardware a firmware)
 
-\chapter{Hardware a firmware}
+\chapter{Domovní systém}
 
 \section{Využití mobilního telefonu}
 Následující část pojednává o snaze využít GSM/GPRS modulu integrovaném v mobilním telefonu. Práce na této části zabrali přibližně dva měsíce, proto bude rozdělena do více částí.
@@ -457,6 +467,11 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 \item Nastavení notifikací změněno
 \end{itemize} 
 
+% Komunikační server
+
+\chapter{Komunikační server}
+Not implemented yet.
+
 % Mobilní aplikace
 
 \chapter{Mobilní aplikace}
@@ -484,18 +499,15 @@ Stejně jako v případě desktopové aplikace, slouží přehled pro zobrazení
 
 Zobrazení interního nastavení jednotlivých komponent ukazuje méně důležité údaje. Vrátit se lze tlačítkem zpět, které má každý mobilní telefon se systémem Android implementované (ať už softwarově nebo hardwarově).
 
+% Webová aplikace
+
+\chapter{Webová aplikace}
+Not implemented yet.
+
 % Závěr
 
 \chapter{Závěr}
-V úvodu jsem definoval základní pojmy a požadované vlastnosti sledovacího zařízení, které pro mě hrají důležitou roli při tvorbě zmíněného zařízení. Postupně jsem vysvětlil význam ústředny, ovladače, detektoru a komunikátoru, a ke každému z nich uvedl příklady. Následoval výběr hardwarových komponent, na základě požadovaných vlastností. Výběr každého zařízení jsem odůvodnil, uvedl jsem cenu a místo nákupu. Následně jsem definoval požadované vlastnosti pro desktopovou a mobilní aplikaci.
-
-V první praktické části své práce se zabývám možnými postupy pro využití mobilního telefonu, jakožto prostředníka pro komunikaci skrze sítě GSM. Nejdříve uvádím všechna možná řešení problému, následně volím řešení, které mě, i vedoucímu práce přišlo nejzajímavější. Jedná se o využití nejlevnějšího, nového telefonu, který je schopen komunikovat skrze sítě GSM/GPRS, toto řešení je velice málo probádáno. Následně objednávám nejlevnější dostupný telefon za 600 Kč s DPH. Po obdržení telefonu provádím rozbor telefonu, zkouším telefon využít pomocí USB, ale neúspěšně. Kontaktuji výrobce s žádostí o poskytnutí dokumentace k hardwaru, po týdnu se vrací negativní odpověď. Po konzultaci s vedoucím telefon rozeberu a pokouším se o ovládnutí telefonu pomocí servisních pinů. Ani tato varianta se nepodaří. Po několika měsíční práci jsem tuto cestu označil za slepou.
-
-Následně jsem vytvořil prototypovou desku, která simuluje reálné nasazení zabezpečovacího zařízení a je již napojena na GPRS modul, který nahrazuje mobilní telefon. Prototypová deska obsahuje dveřní čidlo, senzor PIR a spínací prvek. Pro desku jsem napsal Firmware, který je schopen plného řízení a zároveň komunikace s desktopovou a mobilní aplikací. Pro tyto účely jsem navrhnul API, pomocí kterého spolu zařízení komunikují. Následně jsem detailně zdokumentoval všechny podstatné věci, včetně detailního popisu API.
-
-Pro pohodlné nastavování zabezpečovacího zařízení jsem vytvořil aplikaci pro systém Windows, která umožňuje využít všechny funkce poskytované zabezpečovacím zařízením. Aplikaci delší dobu testuji a upravuji dle požadavků vedoucího práce. Pro vzhled aplikace jsem zvolil barvy z dokumentu pro jednotný vizuální styl Technické univerzity v Liberci \cite{TULVisual}. Nakonec jsem zdokumentoval všechny důležité funkce této aplikace.
-
-Jako poslední jsem naprogramoval monitorovací aplikaci pro Android, která umí zobrazovat stejné informace jako desktopová aplikace, ale neposkytuje možnost nastavování a provádění změn. Aplikaci se podařilo zprovoznit a otestovat na vzorových datech, nicméně reálná komunikace mezi zabezpečovacím zařízením a mobilní aplikací zůstala v době odevzdání práce nedokončena, z důvodu časové tísně.
+Not implemented yet.
 
 % Literatura
 
@@ -527,24 +539,6 @@ Jako poslední jsem naprogramoval monitorovací aplikaci pro Android, která um�
 
 \appendix
 \chapter{Obsah přiloženého CD}
-Struktura a obsah adresářů je následující:
-
-\paragraph{/Dokumentace}\mbox{}\\\mbox{}\\
-Text bakalářské práce ve formátu pdf.
-
-\paragraph{/Hardware}\mbox{}\\\mbox{}\\
-Kompletní dokumentace s podklady k použitým sloučástkám, včetně fotografií.
-
-\paragraph{/Software}\mbox{}\\\mbox{}\\
-Vyvinutý software a zdrojové kódy, rozděleny do více kategorií.
-
-\paragraph{/Software/Security (Firmware)}\mbox{}\\\mbox{}\\
-Arduino aplikace, nahrané na desce zabezpečovacího zařízení.
-
-\paragraph{/Software/SecurityControl (Nastavení a monitoring)}\mbox{}\\\mbox{}\\
-Desktopová aplikace, sloužící k nastavení a monitorování zabezpečovacího zařízení.
-
-\paragraph{/Software/SecurityViewer (Monitoring)}\mbox{}\\\mbox{}\\
-Mobilní aplikace, sloužící k monitorování zabezpečovacího zařízení.
+Not implemented yet.
 
 \end{document}
