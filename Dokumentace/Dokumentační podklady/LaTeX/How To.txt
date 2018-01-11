@@ -1,0 +1,8 @@
+1. Informace, balíčky, návody -> http://www.nti.tul.cz/~satrapa/vyuka/latex-tul/
+2. Nainstaluj program MikTex (LaTeX) -> https://miktex.org/download
+3. Nainstaluj program TeXworks, nebo TexMaker (editační program) -> https://www.tug.org/texworks/
+4. Otevři TeXworks -> Úpravy -> Nastavení -> Sazba -> Cesty k TeXu -> + -> C:\Program Files\MiKTeX 2.9\miktex\bin\x64 
+ -> Tím přidáme pdfLaTeX a další do programu
+5. Přidej obsah tul-1.3.rar (tulthesis) do -> Users/<Your home folder>/texmf/tex/latex/local/
+6. Otevři MikTeX Settings -> Roots -> Add -> Users/<Your home folder>/texmf/
+7. Hotovo, možná bude chtít program stahovat z netu použité balíčky, tak jenom odklikat
