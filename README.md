@@ -4,8 +4,8 @@
 * https://github.com/Tmthetom/master_project
 
 ## Used programming languages
-* ServerServer (Windows)        : C#
-* SecurityControl (Windows)     : C#
-* Security (Arduino firmware)   : C, Wiring
-* SecurityViewer (Android App)  : Java
-* SecurityMonitoring (Web)      : JavaScript
+* SecurityServer (Windows)		: C#
+* SecurityControl (Windows)		: C#
+* SecurityFirmware (Arduino)	: C, C++, Wiring
+* SecurityViewer (Android)		: Java
+* SecurityMonitoring (Web)		: JavaScript
