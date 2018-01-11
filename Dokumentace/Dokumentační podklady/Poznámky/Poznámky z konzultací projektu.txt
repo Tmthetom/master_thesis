@@ -1,95 +1,71 @@
-​Diplomovy projekt
+14. 06. 2017
+ -> Během obhajoby jsem málo udržoval oční kontakt s komisí
+ -> IPv6 má veřejnou a statickou IP, možná by to mohlo jít využít (poznámka jednoho z komise)
 
-16.6.2017
-IPv6 ma verejnou IP - vyuzit?
-Mluvit na komisi
-Zkusit komunikaci
+29. 05. 2017
+ -> Přidáva volba pinu dle připojené desky
+ -> Opraveno přepínání typu senzoru
+ -> Opraveno chybné zobrazení portů při více zařízeních
+ -> Opraveno duplicitní zobrazení portů
+ -> Aplikace dokončena
+ -> Dokumentace dokončena
+ -> Prezentace: cíle, závěr, blokové schéma, využití telefonu nevyšlo
+ -> Nabídka diplomové práce: web s vyhodnocením, meteostanice, sensory, teploměry, srážkoměr
 
-29.5.2017
-Pridana volba pinu dle desky (vsechny desky Arduino a Genuino)
-Opraveno prepinani typu senzoru (chyba firmware)
-Opraveno to, ze byl port videt 2x
-Aplikace funguje
-Dokumentace napsala
-Web s vyhodnocenim, meteostanice, vyhodnoceni.
-Senzory, teplomery, srazkomery,
-Cile, zaver, nemluvit o resersi, blokove schema, teleofn jsem chtel vyuzil
+23. 05. 2017
+ -> Jméno je magisterský projekt
+ -> Do práce musím vložit zadání
+ -> Ceny mám uvádět pouze orientační
+ -> Mobilní aplikace bude v zadání
+ -> Windows app musí být výběr pinu dle desky
+ -> Změna typu čidla nefunguje
 
-23.5.2017
-Jmeno je magistersky projekt?
-Vlozit do prace zadani?
-Zadani prace?
-Presna cena GSM modulu
-Davat vubec mobilni aplikaci do zadani?
-Volba pinu dle desky, nejpouzivanejsich desk
-Aplikace v pondeli i na Android
-Zmena typu cidla, nefunguje
-Odevzdani v pondeli
+03. 05. 2017
+ -> Odevzdání textu do 25. května, jeden výtisk, kroužková vazba.
+ -> Finální projekt přinést na flashdisku se vším.
+ -> Abstrakt, úvod, teorie max 3 stránky, popis systému, závěr.
+ -> Příští týden napsat jak jsem postoupil.
+ -> 13. týden předvést reálnou aplikaci.
+ -> Senzory na spinací a rozpínací.
+ -> Dostal jsem GSM/GPRS + PIR + dveřní čidlo.
 
-3.5.2017
-Odevzdani do 25. Kvetna jeden vytisk, krouzkova vazba.
-Finalni projekt na flesce.
-Abstract
-Uvod
-Teorie max 3 stranky
-Popis systemu
-Zaver
-Pristi tyden napsat postup
-13 tyden predvest realnou aplikaci
-Senzory na spinaci a rozspinaci a switche
-Dostal jsem gsm a senzory
+26. 04. 2017
+ -> Výrobce odpověděl negativně.
+ -> Mám základ programu, funkční komunikační protokol.
+ -> Zařídit, aby arduino uchovávalo nastavení v sobě..
+ -> Udělat lepší GUI, nejlépe Ribon rozhraní.
+ -> Možnost připojení více arduin.
+ -> Dokumentace 10 až 15 stránek.
+ -> Aplikace na Android bude zatím fungovat přes Bluetooth.
 
-26.4.2017
-Vyrobce odpovedel negativne
-Mam zaklad programu
-Funkcni komunikacni protokol
-Ribon rozhrani
-Arduino uchovat strings v arduinu
-Moznost vice arduin
-Dokumentace 10 az 15 stranek
-10 minutova prezentace
-Aplikace android zatim pres bluetooth
+11. 04. 2017
+ -> Napsal jsem výrobci, čekám na odpověď.
+ -> Pokusit se napsat aplikaci pro řízení Arduina z PC.
+ -> Možnost přejmenovávat senzory, přidávat piny.
+ -> Čtení dat ze senzorů, přidávání různých spínaných výstupů.
+ -> Napsat mobilní aplikaci která může číst vše z Arduina.
 
-11.4.2017
-Napsal jsem vyrobci
-Aplikace
-Tlacitka jako dverni cidla
-Konfigurace z pc, pojmenovani promennych, cisla pinu.
-Rizeni z telefonu taky aplikace, android, nebude umet konfigurovat. Prijmani informaci z cidel, poslech mikrofonu. GPRS nebo sms kontrola. Mozne vystupy, treba rele na spinani topeni.
+04. 04. 2017
+ -> Telefon rozebrán, objeveny servisní piny.
+ -> Napsat email výrobci.
 
-4.4.2017
-Zavolat, sms, vysledovat interval a cetnost.
-Napsat vyrobci.
+21. 03. 2017
+ -> K telefonu neexistuje žádná dokumentace.
+ -> Průzkum jiných prací, vše se starými telefony, které měli pro komunikaci API (motorola a další).
+ -> Je možné telefon rozebrat?
 
-21.3.2017
-Dokumentace nic
-Pruzkum pouze stare telefony, napojeni na primo, telefony s Androidem pres aplikaci, nektere motorola meli usb api
-Muzu telefon rozebrat?
+14. 03. 2017
+ -> Telefon objednán a obdržen, vše funguje.
+ -> Telefon nemá klasický operační systém, nelze do něj napsat aplikaci.
+ -> První pokusy s řízení pomocí USB.
 
-14.3.2017
-Telefon objednan, prozkoumat, vse funguje.
-Mam sebou uctenku, tu mu dam
-Vypada to ze do telefonu nepujde napsat aplikace a dostat zdroje pres usb.
-Hodnoceni ucitelu
+07. 03. 2017
+ -> Zjistěny ceny, zakoupit telefon za 449 Kč, škola proplatí.
+ -> Sehnat SIMkartu, klidně z trafiky, škola proplatí.
+ -> Zatím pouze testy s GSM, žádná data.
 
-7.3.2017
-449 Kc dluh skola za telefon
-Cidlo na dvere zatim jako jedine
-Objednat telefon
-Simkarta vyresit, klidne nejaka z trafiky
-Skola vsechno proplati
-Nakoupit a dat skole uctenku
-Muzu zacit telefon rozebirat a zprovoznovat gsm
-Zatim pouze gsm
-Otazky
-SIM?
-GPRS? Server?
-GSM? Rizeni pres sms
-
-28.2.2017
-Kolik stoji gsm, mobil levny
-Nejlevnejsi telefon bude pripojeny k arduinu pres to pujdou senzory a vse ovladane telefonem
-Priste reseni usb ovladani telefonu.
-Mikrofon, data, sms.
-Konzultace - Utery 12:45
-Android aplikace,
+28. 02. 2017
+ -> Zjistit kolik stojí levný telefon, GSM modul a GSM shield.
+ -> Nejlevnější telefon bude připojený k arduinu.
+ -> Z telefonu se bude využívat jeho reproduktoru, mikrofonu, data, SMS.
+ -> Telefon bude řízení Android aplikací
