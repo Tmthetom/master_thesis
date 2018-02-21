@@ -108,7 +108,7 @@ V následující části se zaměřím na požadované vlastnosti zabezpečovac�
 Z úvodní části je zřejmé, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
 
 \subsection{Ústředna}
-Požadavky na ústřednu jsou takové, že musí být schopná komunikovat jak s desktopovou aplikací, tak s mobilní aplikací a zároveň musí řídit a zpracovávat jednotlivé komponenty. Zadání informuje o použití vývojové platformy Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware pro ústřednu bude psán v jazyku  C a C++ s nadstavbou Wiring (knihovny pro řízení hardwaru) \cite{Wiring}, vývojové prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}.
+Požadavky na ústřednu jsou takové, že musí být schopná komunikovat jak s desktopovou aplikací, tak s mobilní aplikací a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že ústřednou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware ústředny bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
 
 \paragraph{Zvolená ústředna:}
 \begin{itemize}
@@ -266,12 +266,12 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 \end{figure}
 
 \section{Firmware}
-Hlavním účelem softwaru je možnost kompletní řízení zabezpečovacího zařízení a komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro platformu Arduino (čip ATmega) v programovacím jazyce C++, za pomocí IDE Visual Studio 2017 a kompilátoru Arduino IDE. 
+Hlavním účelem firmwaru je možnost kompletního řízení zabezpečovacího systému a umožnění komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro platformu Arduino (čip ATmega) v programovacím jazyce C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring}, za pomocí vývojového prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
 
-Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení a přístupu k aplikaci (API).
+Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení zařízení a přístupu k aplikaci (API), samotný kód lze nalézt v příloze a zmiňován zde nebude.
 
 \subsection{Nastavení}
-Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení nelze měnit, pokud zařízení běží.
+Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení po nahrání kódu do zařízení nelze měnit. Jedinou cestou k jeho změně je tedy opětovná kompilace kódu s upraveným nastavením a následné nahrání do mikrokontroleru.
 
 \paragraph{Nastavit lze:}
 \begin{itemize}
@@ -283,14 +283,14 @@ Inicializační část slouží k prvotnímu nastavení mikrokontroleru před sp
 \end{itemize} 
 
 \subsection{API}
-Jednotlivé parametry jsou odděleny čárkou a všechny jsou zapouzdřeny kulatými závorkami, tedy \uv{(} a \uv{)}, ve výsledku potom \uv{SetSensor(10,5)}.
+Funkce API jsou nazvány podle své činnosti. Při volání jednolivých funkcí se posílá nejdříve název funkce, které následují kulaté závorky, tedy \uv{(} a \uv{)}, vnichž jsou uvedeny jednotlivé parametry. Každý jeden parametr je oddělen čárkou. Ve výsledku může výstup vypadat například takto \uv{SetSensor(10,5)}. V následující tabulce jsou vypsány všechny dostupné funkce, typu getter.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{| l | c | c| c |}
 \hline
-Dotaz & Parametry & Popis & Vrací\\
+Funkce & Parametry & Popis & Vrací\\
 \hline
 \hline
 GetAllSensors() & / & Vrací list všech senzorů & id, pin, name, state \\
@@ -311,6 +311,8 @@ Sensors((Id = 0,Pin = 8,Name = Door Sensor,State = 0,Type = 0)(Id = 1,Pin = 7,Na
 \begin{center}
 Switches((Id = 0,Pin = 6,Name = Led Switch,State = 0))
 \end{center} 
+
+Další tabulka obsahuje výpis všech dostupných funkcí, typu setter.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
@@ -363,7 +365,7 @@ DeleteSwitch(1)
 \end{center}
 
 \subsection{Notifikace}
-Bezpečnostní zařízení má uložené všechny poslední stavy senzorů. Při každém průchodu hlavní smyčkou proběhne čtení, pomocí funkce \uv{checkSensorStateChangedAndSendIfTrue()} a pokud nový stav nesouhlasí se starým, je zaslána notifikace s ID zařízení a aktuálním stavem. Poté záleží na jedné z aplikací, jak informaci zpracuje.
+Bezpečnostní zařízení má uložené všechny poslední stavy senzorů a při každém průchodu hlavní smyčkou proběhne čtení, pomocí funkce \uv{checkSensorStateChangedAndSendIfTrue()}. Pokud nový stav nesouhlasí se starým, je zaslána notifikace s ID zařízení a aktuálním stavem. Poté záleží na cílové aplikaci, jak informaci zpracuje.
 
 \paragraph{Ukázka notifikace:}
 \begin{center}
@@ -371,8 +373,7 @@ Sensor(Id = 1,State = 0)
 \end{center} 
 
 \subsection{Chybová hlášení}
-Původně byla chybová hlášení, při neúspěšném provedení operace nebo jiné chybě, tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Kontroluje se vždy zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Poslední chybovou hláškou je, že příkaz nebyl rozpoznán, ten je navrácen, pokud příkaz nesplňuje kritéria tohoto API.
-
+Původně byla chybová hlášení (při neúspěšném provedení operace nebo jiné chybě), tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Vždy se kontroluje, zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Pokud příkaz nebyl rozpoznán, nebo nesplňuje kritéria tohoto API, je vrácena chybová hláška o nerozpoznání příkazu.
 \paragraph{Ukázka nerozpoznání příkazu:}
 \begin{center}
 Command 'SetSensor(15,5)' not recognized.
@@ -381,7 +382,7 @@ Command 'SetSensor(15,5)' not recognized.
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
-Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), za pomocí IDE Visual Studio 2017.
+Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), za pomocí IDE Visual Studio 2017. Testován byl pouze pod systémem Windows 10 v několika různých sestavách.
 
 \section{Blokové schéma}
 
