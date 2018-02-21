@@ -43,22 +43,24 @@
 \contentsline {subsection}{\numberline {4.3.3}Notifikace}{23}{subsection.4.3.3}
 \contentsline {paragraph}{Uk\IeC {\'a}zka notifikace:}{24}{paragraph*.14}
 \contentsline {subsection}{\numberline {4.3.4}Chybov\IeC {\'a} hl\IeC {\'a}\IeC {\v s}en\IeC {\'\i }}{24}{subsection.4.3.4}
-\contentsline {paragraph}{Uk\IeC {\'a}zka nerozpozn\IeC {\'a}n\IeC {\'\i } p\IeC {\v r}\IeC {\'\i }kazu:}{24}{paragraph*.15}
+\contentsline {paragraph}{Uk\IeC {\'a}zka odpov\IeC {\v e}di p\IeC {\v r}i nerozpozn\IeC {\'a}n\IeC {\'\i } p\IeC {\v r}\IeC {\'\i }kazu:}{24}{paragraph*.15}
 \contentsline {chapter}{\numberline {5}Desktopov\IeC {\'a} aplikace}{25}{chapter.5}
-\contentsline {section}{\numberline {5.1}Blokov\IeC {\'e} sch\IeC {\'e}ma}{25}{section.5.1}
-\contentsline {section}{\numberline {5.2}Spojen\IeC {\'\i }}{26}{section.5.2}
-\contentsline {section}{\numberline {5.3}P\IeC {\v r}ehled}{27}{section.5.3}
-\contentsline {section}{\numberline {5.4}Nastaven\IeC {\'\i } senzoru}{28}{section.5.4}
-\contentsline {section}{\numberline {5.5}Nastaven\IeC {\'\i } sp\IeC {\'\i }na\IeC {\v c}e}{28}{section.5.5}
-\contentsline {section}{\numberline {5.6}Funkce programu a nastaven\IeC {\'\i }}{28}{section.5.6}
-\contentsline {paragraph}{P\IeC {\v r}ehled funkc\IeC {\'\i }:}{28}{paragraph*.16}
-\contentsline {section}{\numberline {5.7}Notifikace}{29}{section.5.7}
-\contentsline {paragraph}{P\IeC {\v r}ehled implementovan\IeC {\'y}ch notifikac\IeC {\'\i }:}{29}{paragraph*.17}
-\contentsline {chapter}{\numberline {6}Komunika\IeC {\v c}n\IeC {\'\i } server}{30}{chapter.6}
-\contentsline {chapter}{\numberline {7}Mobiln\IeC {\'\i } aplikace}{31}{chapter.7}
-\contentsline {section}{\numberline {7.1}P\IeC {\v r}ehled}{31}{section.7.1}
-\contentsline {section}{\numberline {7.2}Intern\IeC {\'\i } nastaven\IeC {\'\i }}{32}{section.7.2}
-\contentsline {chapter}{\numberline {8}Webov\IeC {\'a} aplikace}{33}{chapter.8}
-\contentsline {chapter}{\numberline {9}Z\IeC {\'a}v\IeC {\v e}r}{34}{chapter.9}
-\contentsline {chapter}{Literatura}{34}{chapter.9}
-\contentsline {chapter}{\numberline {A}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{37}{appendix.A}
+\contentsline {section}{\numberline {5.1}Kompatibilita}{25}{section.5.1}
+\contentsline {paragraph}{Seznam v\IeC {\v s}ech testovan\IeC {\'y}ch sestav syst\IeC {\'e}mu Windows 10:}{25}{paragraph*.16}
+\contentsline {section}{\numberline {5.2}Blokov\IeC {\'e} sch\IeC {\'e}ma}{26}{section.5.2}
+\contentsline {section}{\numberline {5.3}Spojen\IeC {\'\i }}{27}{section.5.3}
+\contentsline {section}{\numberline {5.4}P\IeC {\v r}ehled}{28}{section.5.4}
+\contentsline {section}{\numberline {5.5}Nastaven\IeC {\'\i } senzoru}{29}{section.5.5}
+\contentsline {section}{\numberline {5.6}Nastaven\IeC {\'\i } sp\IeC {\'\i }na\IeC {\v c}e}{29}{section.5.6}
+\contentsline {section}{\numberline {5.7}Funkce programu a nastaven\IeC {\'\i }}{29}{section.5.7}
+\contentsline {paragraph}{P\IeC {\v r}ehled funkc\IeC {\'\i }:}{29}{paragraph*.17}
+\contentsline {section}{\numberline {5.8}Notifikace}{30}{section.5.8}
+\contentsline {paragraph}{P\IeC {\v r}ehled implementovan\IeC {\'y}ch notifikac\IeC {\'\i }:}{30}{paragraph*.18}
+\contentsline {chapter}{\numberline {6}Komunika\IeC {\v c}n\IeC {\'\i } server}{31}{chapter.6}
+\contentsline {chapter}{\numberline {7}Mobiln\IeC {\'\i } aplikace}{32}{chapter.7}
+\contentsline {section}{\numberline {7.1}P\IeC {\v r}ehled}{32}{section.7.1}
+\contentsline {section}{\numberline {7.2}Intern\IeC {\'\i } nastaven\IeC {\'\i }}{33}{section.7.2}
+\contentsline {chapter}{\numberline {8}Webov\IeC {\'a} aplikace}{34}{chapter.8}
+\contentsline {chapter}{\numberline {9}Z\IeC {\'a}v\IeC {\v e}r}{35}{chapter.9}
+\contentsline {chapter}{Literatura}{35}{chapter.9}
+\contentsline {chapter}{\numberline {A}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{38}{appendix.A}

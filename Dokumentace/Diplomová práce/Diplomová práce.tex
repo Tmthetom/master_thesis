@@ -374,7 +374,7 @@ Sensor(Id = 1,State = 0)
 
 \subsection{Chybová hlášení}
 Původně byla chybová hlášení (při neúspěšném provedení operace nebo jiné chybě), tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Vždy se kontroluje, zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Pokud příkaz nebyl rozpoznán, nebo nesplňuje kritéria tohoto API, je vrácena chybová hláška o nerozpoznání příkazu.
-\paragraph{Ukázka nerozpoznání příkazu:}
+\paragraph{Ukázka odpovědi při nerozpoznání příkazu:}
 \begin{center}
 Command 'SetSensor(15,5)' not recognized.
 \end{center} 
@@ -382,7 +382,19 @@ Command 'SetSensor(15,5)' not recognized.
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
-Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\# (vyslovováno C-Sharp), za pomocí IDE Visual Studio 2017. Testován byl pouze pod systémem Windows 10 v několika různých sestavách.
+Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Aplikace se zaměřuje zejména na správu (vytváření, upravování, mazání) všech senzorů a spínačů. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\#, za pomocí IDE Visual Studio 2017.
+
+\section{Kompatibilita}
+Desktopová aplikace byla testována pod operačním systémem Windows 10 ve všech (v době psaní práce) vydaných sestavách a pro tento systém byla také optimalizována. Nicméně cílová platforma Microsoft .NET Framework 4.5.2 \cite{WhatsNew.NetFramework4.5.2} by měla zajišťovat zpětnou kompatibilitu až do systému Windows Vista. Jmenovitě pro Windows Vista SP2, Windows 7 SP1, Windows 8, Windows 8.1, Windows 10 a novější \cite{.NetFramework4.5.2}.
+
+\paragraph{Seznam všech testovaných sestav systému Windows 10:}
+\begin{itemize}
+\item Version 1507 - Build 10.0.10240 (čistá instalace systému)
+\item Version 1511 - Build 10.0.10586 (November Update)
+\item Version 1607 - Build 10.0.14393 (Anniversary Update)
+\item Version 1703 - Build 10.0.15063 (Creators Update)
+\item Version 1709 - Build 10.0.16299 (Fall Creators Update)
+\end{itemize}
 
 \section{Blokové schéma}
 
@@ -534,6 +546,10 @@ Not implemented yet.
 \bibitem{LaTeX}SATRAPA, Pavel. Stručný přehled příkazů LaTeXu [online]. 2011, 2 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-prehled.pdf}
 \bibitem{TULVisual}Manuál jednotného vizuálního stylu Technické univerzity v Liberci [online]. , 27 [cit. 2017-05-27]. Dostupné z: \url{http://www.ft.tul.cz/document/126}
 \bibitem{HTML1.1}FIELDING, R., UC IRVINE, J. GETTYS, et al. Hypertext Transfer Protocol -- HTTP/1.1 [online]. 1999, , 176 [cit. 2017-05-27]. Dostupné z: \url{http://www.ietf.org/rfc/rfc2616.txt}
+\bibitem{WhatsNew.NetFramework4.5.2}What's new in the .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://docs.microsoft.com/en-us/dotnet/framework/whats-new/index#v452}
+\bibitem{.NetFramework4.5.2}Microsoft .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://support.microsoft.com/en-us/help/2901907/microsoft-net-framework-4-5-2-offline-installer-for-windows-server-201}
+
+
 \end{thebibliography}
 
 % Příloha
