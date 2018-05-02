@@ -96,7 +96,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tryParseData(String data){
-        notification.toast(data);
+
+        // Notification (only for testing)
+        if (!data.equals("")) notification.toast(data);
+
         int startingItemSize = items.size();
 
         // Try to parse sensors
