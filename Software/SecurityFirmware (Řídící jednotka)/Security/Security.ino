@@ -1,4 +1,4 @@
-
+ 
 /*
 TODO: Fix memory leaks from String (object) arrays using reserve.
 ... Until fixed, maxSensors|maxSwitches set to 6.
@@ -99,35 +99,29 @@ void setup() {
 
 	// Read memory
 	//InitialFillMemory();
-
+  /*
 	// Sensors
-	/*
-	pinSensor[0] = 11;
+	pinSensor[0] = 53;
 	nameSensor[0] = "Door Sensor";
-	typeSensor[0] = false;  // Normaly open type = NO = Push to break
-
-	pinSensor[1] = 6;
-	nameSensor[1] = "PIR Sensor";
-	typeSensor[1] = true;  // Normaly close type = NC = Push to make
+	typeSensor[0] = true;  // Normaly close type = NC = Push to make
 	setPinMode(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), INPUT);
 	getSensorsState(pinSensor, sizeof(pinSensor) / sizeof(uint8_t), stateSensorOld);
-	*/
-
+  */
 	// Switches
-	pinSwitch[0] = 5;
+	pinSwitch[0] = 52;
 	nameSwitch[0] = "Led Switch 1";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
-	digitalWrite(pinSwitch[0], HIGH);
+	digitalWrite(pinSwitch[0], LOW);
 
-	pinSwitch[1] = 6;
+	pinSwitch[1] = 51;
 	nameSwitch[1] = "Led Switch 2";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
-	digitalWrite(pinSwitch[1], HIGH);
+	digitalWrite(pinSwitch[1], LOW);
 
-	pinSwitch[2] = 7;
-	nameSwitch[2] = "Led Switch 3";
+	pinSwitch[2] = 50;
+	nameSwitch[2] = "Led Blue";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
-	digitalWrite(pinSwitch[2], HIGH);
+	digitalWrite(pinSwitch[2], LOW);
 
 	// Allocation
 	in.reserve(maxBytesOfMessageIn);
