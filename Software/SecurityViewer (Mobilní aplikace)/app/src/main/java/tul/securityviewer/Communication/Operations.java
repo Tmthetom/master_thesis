@@ -11,7 +11,7 @@ public class Operations {
 
     public List<CustomListItem> getAllItems(Client client){
         ArrayList<CustomListItem> items = new ArrayList<>();
-        //getAllSensors(client, items);
+        getAllSensors(client, items);
         getAllSwitches(client, items);
         return items;
     }
@@ -29,7 +29,7 @@ public class Operations {
         String received = "";
 
         client.send("GetAllSwitches");
-        //sleep(3);
+        sleep(10);
 
         //dataParser.switches(items, received);
     }

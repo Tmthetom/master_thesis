@@ -23,7 +23,7 @@ public class Client {
     private MainActivity mainActivity;  // Main activity with items
 
     private InputStreamReader streamIn;  // Read string
-    private OutputStreamWriter streamOut;  // send string
+    private OutputStreamWriter streamOut;  // Send string
 
     public Client(String ipAddress, int port, MainActivity activity) {
         try{
@@ -70,7 +70,6 @@ public class Client {
     private class MessageReceived implements Runnable {
 
         private String message;
-
         private MessageReceived(String message) {
             this.message = message;
         }
@@ -163,16 +162,16 @@ public class Client {
 
                     // Read all
                     String message = "";
-                    while(!message.endsWith("ยง")){  // Until this special character came....
+                    while(!message.endsWith("§")){  // Until this special character came....
                         message += (char)streamIn.read();
                     }
-                    message = message.replace("ยง", "");
+                    message = message.replace("§", "");  // Delete ending character
 
                     // send it to notification
                     UIHandler.post(new MessageReceived(message));
 
                 } catch (Exception exception) {
-                    notification.exception(getClass().getSimpleName(),"Communication", exception.getMessage());
+                    notification.exception(getClass().getSimpleName(),"Receiving message from server", exception.getMessage());
                 }
             }
         }
