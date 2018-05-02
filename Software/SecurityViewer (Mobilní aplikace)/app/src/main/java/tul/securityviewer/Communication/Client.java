@@ -26,38 +26,43 @@ public class Client {
     private OutputStreamWriter streamOut;  // send string
 
     public Client(String ipAddress, int port, MainActivity activity) {
-        notification = new Notification(activity);
+        try{
+            notification = new Notification(activity);
 
-        // Setup destination
-        this.IP = ipAddress;
-        this.PORT = port;
+            // Setup destination
+            this.IP = ipAddress;
+            this.PORT = port;
 
-        // To interact UI from thread (like Delegates from C#)
-        UIHandler = new Handler();
-        this.mainActivity = activity;
+            // To interact UI from thread (like Delegates from C#)
+            UIHandler = new Handler();
+            this.mainActivity = activity;
 
-        // Startup TCP/IP communication thread
-        initializeConnection = new InitializeConnection();
-        this.thread = new Thread(initializeConnection);
-        this.thread.start();
+            // Startup TCP/IP communication thread
+            initializeConnection = new InitializeConnection();
+            this.thread = new Thread(initializeConnection);
+            this.thread.start();
 
-        /*
-        HERE SHOULD BE CHECK, IF CONNECTION IS ESTABLISHED, INSTEAD OF JUST ONE SECOND DELAY
-         */
+            /*
+            HERE SHOULD BE CHECK, IF CONNECTION IS ESTABLISHED, INSTEAD OF JUST ONE SECOND DELAY
+             */
 
-        // Initialize role
-        sleep(1);
-        send("SecurityViewer");
+            // Initialize role
+            sleep(1);
+            send("SecurityViewer");
+        }
+        catch (Exception exception){
+            notification.exception(getClass().getSimpleName(),"Creating client", exception.getMessage());
+        }
     }
 
-    // send message to server
+    // Send message to server
     public void send(String message) {
         try{
             streamOut.write(message);
             streamOut.flush();
         }
         catch (Exception exception){
-            notification.toast("send exception: " + exception.getMessage());
+            notification.exception(getClass().getSimpleName(),"Sending message to server", exception.getMessage());
         }
     }
 
@@ -83,7 +88,7 @@ public class Client {
             TimeUnit.SECONDS.sleep(seconds);
         }
         catch (Exception exception){
-            notification.toast("Sleep exception: " + exception.getMessage());
+            notification.exception(getClass().getSimpleName(), "Falling to sleep", exception.getMessage());
         }
     }
 
@@ -101,7 +106,7 @@ public class Client {
             //if (streamOut != null) streamOut.close();
         }
         catch (Exception exception){
-            notification.toast("Closing exception: " + exception.getMessage());
+            notification.exception(getClass().getSimpleName(),"Closing connection", exception.getMessage());
         }
     }
 
@@ -112,18 +117,18 @@ public class Client {
         @Override
         public void run() {
             //while(running){
-                try {
-                    // Setup destination
-                    InetAddress serverAddress = InetAddress.getByName(IP);
-                    clientSocket = new Socket(serverAddress, PORT);
+            try {
+                // Setup destination
+                InetAddress serverAddress = InetAddress.getByName(IP);
+                clientSocket = new Socket(serverAddress, PORT);
 
-                    ThreadCommunication threadCommunication = new ThreadCommunication();
-                    new Thread(threadCommunication).start();
-                    return;
+                ThreadCommunication threadCommunication = new ThreadCommunication();
+                new Thread(threadCommunication).start();
+                return;
 
-                } catch (Exception exception){
-                    notification.toast("InitializeConnection run exception: " + exception.getMessage());
-                }
+            } catch (Exception exception){
+                notification.exception(getClass().getSimpleName(),"Starting communication", exception.getMessage());
+            }
             //}
         }
 
@@ -140,7 +145,7 @@ public class Client {
                 streamIn = new InputStreamReader(clientSocket.getInputStream());  // Message received
                 streamOut = new OutputStreamWriter(clientSocket.getOutputStream());  // Message sending
             } catch (Exception exception) {
-                notification.toast("ThreadCommunication create exception: " + exception.getMessage());
+                notification.exception(getClass().getSimpleName(),"Creating communication thread", exception.getMessage());
             }
         }
 
@@ -158,16 +163,16 @@ public class Client {
 
                     // Read all
                     String message = "";
-                    while(!message.endsWith("§")){  // Until this special character came....
+                    while(!message.endsWith("ยง")){  // Until this special character came....
                         message += (char)streamIn.read();
                     }
-                    message = message.replace("§", "");
+                    message = message.replace("ยง", "");
 
                     // send it to notification
                     UIHandler.post(new MessageReceived(message));
 
                 } catch (Exception exception) {
-                    notification.toast("ThreadCommunication run exception: " + exception.getMessage());
+                    notification.exception(getClass().getSimpleName(),"Communication", exception.getMessage());
                 }
             }
         }

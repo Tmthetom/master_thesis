@@ -13,4 +13,10 @@ public class Notification {
     public void toast(String message){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
+
+    public void exception(String className, String whenItHappened, String exceptionMessage){
+        toast("Exception in [" + className + "], " +
+                "when [" + whenItHappened + "]: " +
+                exceptionMessage);
+    }
 }

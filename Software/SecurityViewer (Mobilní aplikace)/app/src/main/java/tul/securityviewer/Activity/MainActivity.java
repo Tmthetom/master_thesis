@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
         // Startup TCP/IP communication thread
         client = new Client(IP, PORT, this);
@@ -80,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
         // Add sensors
         dataParser.sensors(items,
                 "(Id = 2,Pin = 6,Name = Testing sensor 1,State = 0,Type = 0)," +
-                "(Id = 3,Pin = 8,Name = Testing sensor 2,State = 1,Type = 0)," +
-                "(Id = 4,Pin = 9,Name = Testing sensor 3,State = 0,Type = 0)");
+                        "(Id = 3,Pin = 8,Name = Testing sensor 2,State = 1,Type = 0)," +
+                        "(Id = 4,Pin = 9,Name = Testing sensor 3,State = 0,Type = 0)");
 
         // Add switches
         dataParser.switches(items,
                 "(Id = 1,Pin = 2,Name = Testing switch 1,State = 0)," +
-                "(Id = 5,Pin = 3,Name = Testing switch 2,State = 1)," +
-                "(Id = 7,Pin = 5,Name = Testing switch 3,State = 0)");
+                        "(Id = 5,Pin = 3,Name = Testing switch 2,State = 1)," +
+                        "(Id = 7,Pin = 5,Name = Testing switch 3,State = 0)");
 
         if (items.size() == 0) return;
 
