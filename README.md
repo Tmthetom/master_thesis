@@ -8,4 +8,4 @@
 * SecurityControl (Windows)		: C#
 * SecurityFirmware (Arduino)	: C, C++, Wiring
 * SecurityViewer (Android)		: Java
-* SecurityMonitoring (Web)		: JavaScript
+* SecurityDashboard (Web)		: JavaScript
