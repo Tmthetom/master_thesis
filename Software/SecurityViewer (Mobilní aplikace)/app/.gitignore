@@ -2,4 +2,4 @@
 /build/intermediates
 /build/tmp
 /build/outputs/logs
-/build/outputs/apk/debug/*.json
+*.json
