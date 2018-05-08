@@ -70,6 +70,7 @@ namespace SecurityControl.Arduino
             // Get
             myConnection.Send("GetAllSwitches");
             String inString = myConnection.ReadLine();
+            MessageBox.Show(inString);
             Regex regex = new Regex(@"\(Id = ([0-9]+),Pin = ([0-9]+),Name = ([a-zA-Z0-9 ]+),State = ([0-1])\)");
 
             // Parse

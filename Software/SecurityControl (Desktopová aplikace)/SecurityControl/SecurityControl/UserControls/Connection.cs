@@ -85,20 +85,17 @@ namespace SecurityControl.UserControls
                 // Initialize BaudRates
                 string[] baudRates = new string[] {
                     "300",
+                    "600",
                     "1200",
                     "2400",
                     "4800",
                     "9600",
+                    "14400",
                     "19200",
+                    "28800",
                     "38400",
                     "57600",
-                    "74880",
-                    "115200",
-                    "230400",
-                    "250000",
-                    "500000",
-                    "1000000",
-                    "2000000",
+                    "115200"
                 };                
                 foreach (string baudRate in baudRates) bunifuDropdownBaudRate.AddItem(baudRate);
                 bunifuDropdownBaudRate.Items = baudRates;
