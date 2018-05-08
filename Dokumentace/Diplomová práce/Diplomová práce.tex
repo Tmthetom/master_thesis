@@ -60,7 +60,6 @@ Not implemented yet.
 \textbf{SMS} & Short message service, služba krátkých textových zpráv\\
 \textbf{TUL} & Technical University of Liberec, Technická univerzita v Liberci\\
 \textbf{USB} & Universal Serial Bus, univerzální sériová sběrnice\\
-
 \end{abbrList}
 
 % Úvod
@@ -68,17 +67,26 @@ Not implemented yet.
 \chapter{Úvod}
 Not implemented yet.
 
+% Inteligentní domovní systém
+
+\chapter{Inteligentní domovní systém}
+
+\section{Historie}
+
+\section{Přítomnost}
+
 % Zabezpečovací systém
-\chapter{Zabezpečovací systém}
+
+\section{Zabezpečovací systém}
 Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní, či okenní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
 
-\section{Ústředna}
+\subsection{Ústředna}
 Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často bývá vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustického (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
 
-\section{Ovladač}
+\subsection{Ovladač}
 Ovladač je prvek, který slouží k ovládání a případně též k programování ústředny. Dnešní alarmy je možné ovládat několika způsoby. Jako ovladač se nejčastěji používá klávesnice vybavená tlačítky, případně čtečkou (čipovými kartami a přívěšky) nebo též dálkové ovládání. U některých systémů se dá přes klávesnici provést nastavení celého systému. Klávesnice slouží k zastřežení i odstřežení systému \cite{Electronic security signalisation}. Dalšími způsoby je ovládání přes internet, kdy se většinou používá integrované webové rozhraní, ke kterému se uživatel může připojit po zadání hesla, nebo ovládání přes mobil (SMS příkazy) \cite{Bachelor thesis}.
 
-\section{Detektor}
+\subsection{Detektor}
 Detektor je prvek systému, který je rozmístěn v hlídaném objektu a má za úkol reagovat aktivací při narušení (otevření, pohyb, rozbití atd.) a to tak, že tuto informaci předá ústředně, která ji následně zpracuje \cite{Electronic security signalisation}. Nejčastěji používané detektorové prvky jsou:
 
 \begin{itemize}
@@ -87,9 +95,9 @@ Detektor je prvek systému, který je rozmístěn v hlídaném objektu a má za 
 \item Detektor tříštění skla (GBS detektor)
 \item Detektor plynu
 \item Infra závora
-\end{itemize} 
+\end{itemize}
 
-\section{Komunikátor}
+\subsection{Komunikátor}
 Komunikátor je zařízení, které odesílá informaci o narušení objektu, případně o odchylce od normálního provozního stavu zabezpečovacího systému, mimo  hlídaný objekt. \cite{Electronic security signalisation}. Nejčastější typy komunikátorů jsou:
 
 \begin{itemize}
@@ -97,18 +105,62 @@ Komunikátor je zařízení, které odesílá informaci o narušení objektu, p�
 \item LAN komunikátor
 \item Telefonní komunikátor
 \item Komunikátor využívající radiové sítě s vyhrazenou frekvencí
-\end{itemize} 
+\end{itemize}
+
+% Inteligentní dům
+
+\section{Inteligentní dům}
+
+\subsection{Inteligentní dům}
+
+\subsection{Centrální jednotka}
+
+% Požadované vlastnosti
+
+\section{Požadované vlastnosti}
+
+\subsection{Domovní systém}
+
+\subsection{Desktopová aplikace}
+
+\subsection{Mobilní aplikace}
+
+\subsection{Webová aplikace}
+
+\subsection{Komunikační server}
+
+% Zvolené řešení
+
+\chapter{Zvolené řešení}
+
+\section{Domovní systém}
+
+\subsection{Řídící jednotka}
+
+\subsection{Detektory}
+
+\subsection{Spínací prkvy}
+
+\subsection{Komunikátor}
+
+\section{Desktopová aplikace}
+
+\section{Mobilní aplikace}
+
+\section{Webová aplikace}
+
+\section{Komunikační server}
 
 % Požadované vlastnosti a zvolené komponenty
 
 \chapter{Požadované vlastnosti a zvolené komponenty}
-V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení, a jaké komponenty byly na jejich základě zvoleny.
+V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení, a jaké komponenty byly na základě těchto požadavků zvoleny.
 
 \section{Hardware}
 Z úvodní části je zřejmé, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
 
 \subsection{Ústředna}
-Požadavky na ústřednu jsou takové, že musí být schopná komunikovat jak s desktopovou aplikací, tak s mobilní aplikací a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že ústřednou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware ústředny bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
+Ústředna musí být schopna spravovat všechny připojené detektory, senzory a spínací prvky, a komunikovat s desktopovou a mobilní aplikací. a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že ústřednou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware ústředny bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
 
 \paragraph{Zvolená ústředna:}
 \begin{itemize}
@@ -157,40 +209,47 @@ Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. 
 \end{center}
 \end{figure}
 
-\section{Software (Ovladač)}
-Výše zmíněné prvky musí  být řízeny ovladačem, v mém případě aplikací jak desktopovou tak mobilní. Proto bude následující část rozdělena do těchto dvou částí.
+\section{Software (ovladač)}
+V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou a mobilní aplikaci. Následující část rozdělena do těchto dvou částí.
 
 \subsection{Desktopová aplikace}
-Na desktopovou aplikaci jsou kladeny požadavky tak, aby byla schopna využít všech možností, které nám ústředna poskytuje. Musí být schopna kompletní správy a nastavení jednotlivých komponent (spínače a senzory) a tím pádem i komunikaci s ní. Cílový operační systém jsem si zvolil Windows 10, jakožto ve škole nejrozšířenější, programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže.
+Desktopová aplikace musí být schopna využít plného potenciálu ústředny, tedy umožnit kompletní správu a nastavování jednotlivých komponent (spínačů a senzorů). Komunikace s ústřednou bude umožněna pomocí sériové linky (COM port), v případě prototypu bude použito připojení skrze USB. Cílový operační systém jsem zvolil Windows 10, jakožto v evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže.
 
 \paragraph{Požadavky na desktopovou aplikaci:}
 \begin{itemize}
-\item Sledování aktuálních stavů komponent
+\item Zobrazení seznamu všech připojench komponent
+\item Zobrazení všech informací o zvolené komponentě
+\item Změna libovolného nastavení všech komponent
+\item Sledování aktuálního stavu všech komponent
 \item Přidávání nových komponent
 \item Odstraňování stávajících komponent
-\item Přejmenování komponent
-\item Změna pinů komponent
-\item Změna nastavení senzorů jako spínacích či rozpínacích
 \item Notifikace v případě změny stavů senzorů
-\item Přepínání stavů spínačů
-\item Připojování a odpojování ke zvolené ústředně
-\end{itemize} 
+\item Změna stavu spínačů
+\item Připojování a odpojování od zvolené ústředny
+\end{itemize}
+
+\subsection{Komunikační server}
 
 \subsection{Mobilní aplikace}
-Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bude možné sledovat stavy jednotlivých senzorů, případně spínač spínače. Její návrh je tedy značně jednodušší oproti komplexnější desktopové aplikaci. Cílový operační systém jsem zvolil Android, jakožto nerozšířenější, programovací jazyk Java a vývojové prostředí a Android Studio.
+Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bude možné sledovat stavy jednotlivých senzorů, případně spínat veškeré spínací prvky. Její návrh je tedy značně jednodušší oproti komplexnější desktopové aplikaci. Cílový operační systém jsem zvolil Android, jakožto v evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže.
 
 \paragraph{Požadavky na mobilní aplikaci:}
 \begin{itemize}
-\item Sledování aktuálních stavů komponent
-\item Přepínání stavů spínačů
-\item Připojování a odpojování ke zvolené ústředně
-\end{itemize} 
+\item Zobrazení seznamu všech připojench komponent
+\item Zobrazení všech informací o zvolené komponentě
+\item Sledování aktuálního stavu všech komponent
+\item Notifikace v případě změny stavů senzorů
+\item Změna stavu spínačů
+\item Připojování a odpojování od zvolené ústředny
+\end{itemize}
+
+\subsection{Webová aplikace}
 
 % Domovní systém (hardware a firmware)
 
 \chapter{Domovní systém}
 
-\section{Využití mobilního telefonu}
+\section{Slepá cesta vývoje (využití mobilního telefonu)}
 Následující část pojednává o snaze využít GSM/GPRS modulu integrovaném v mobilním telefonu. Práce na této části zabrali přibližně dva měsíce, proto bude rozdělena do více částí.
 
 \subsection{Možné postupy}
@@ -382,22 +441,10 @@ Command 'SetSensor(15,5)' not recognized.
 % Desktopová aplikace
 
 \chapter{Desktopová aplikace}
-Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Aplikace se zaměřuje zejména na správu (vytváření, upravování, mazání) všech senzorů a spínačů. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\#, za pomocí IDE Visual Studio 2017.
-
-\section{Kompatibilita}
-Desktopová aplikace byla testována pod operačním systémem Windows 10 ve všech (v době psaní práce) vydaných sestavách a pro tento systém byla také optimalizována. Nicméně cílová platforma Microsoft .NET Framework 4.5.2 \cite{WhatsNew.NetFramework4.5.2} by měla zajišťovat zpětnou kompatibilitu až do systému Windows Vista. Jmenovitě pro Windows Vista SP2, Windows 7 SP1, Windows 8, Windows 8.1, Windows 10 a novější \cite{.NetFramework4.5.2}.
-
-\paragraph{Seznam všech testovaných sestav systému Windows 10:}
-\begin{itemize}
-\item Version 1507 - Build 10.0.10240 (čistá instalace systému)
-\item Version 1511 - Build 10.0.10586 (November Update)
-\item Version 1607 - Build 10.0.14393 (Anniversary Update)
-\item Version 1703 - Build 10.0.15063 (Creators Update)
-\item Version 1709 - Build 10.0.16299 (Fall Creators Update)
-\item Version 1803 - Build 10.0.17134 (April 2018 Update)
-\end{itemize}
+Hlavním účelem desktopové aplikace je možnost kompletního nastavení a monitorování zabezpečovacího zařízení. Aplikace se zaměřuje zejména na správu (vytváření, upravování, mazání) všech senzorů a spínačů. Software byl vyvinut pro operační systém Windows v programovacím jazyce C\#, za pomocí IDE Visual Studio 2017. Design byl inspirovaný manuálem jednotného vizuálního stylu TUL \cite{TULVisual}.
 
 \section{Blokové schéma}
+Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně komunikují. Pod blokovým schématem následuje detailní popis těchto jednotlivých částí.
 
 \begin{figure}[H]
 \begin{center}
@@ -407,21 +454,40 @@ Desktopová aplikace byla testována pod operačním systémem Windows 10 ve vš
 \end{center}
 \end{figure}
 
-Kód aplikace je rozdělen do více spolu bloků, které spolu vzájemně komunikují. Arduino Connector slouží k napojení zabezpečovacího zařízení a využívá API poskytované zabezpečovacím zařízením, díky čemuž poskytuje funkce pro jednoduché zapisování a čtení do Arduina. Windows Forms poskytují grafické uživatelské rozhraní, základní logiku na propojení jednotlivých funkčních celků a notifikace pro uživatele. UserControls poskytují jednotlivé funkce aplikace, z nichž každá má své vlastní GUI, které se zobrazuje ve Windows Forms. Dále budou zmíněny pouze ty UserContorls, které jsou důležité pro pochopení ovládání aplikace. Design byl inspirovaný manuálem jednotného vizuálního stylu TUL \cite{TULVisual}.
+\subsection{Connection}
+Blok „Connection“ slouží k připojení řídící jednotky skrze seriovou linku (SerialPort Connection), po které komunikuje za pomocí API, poskytované touto jednotkou. Po navázání spojení se určí typ připojené řídící jednotky, kvůli poskytnutí seznamu použitelných pinů. Výstupem tohoto bloku jsou funkce pro jednoduché zapisování a čtení z této jednotky (Arduino Operations), včetně kompletního seznamu použitelných pinů této jednotky. Seznam podporovaných řídících jednotek Arduino lze nalézt v části Kompatibilita.
 
-\section{Spojení}
+\subsection{Logic}
+Blok „Logic“ je hlavní vlákno, které načítá veškeré viditelné části aplikace (GUI Controller) z bloku „GUI“ a zároveň zprostředkovává komunikaci mezi blokem Connection a jednotlivými funkcemi v oknech aplikace (GUI). Nachází se zde tedy napojení na Arduino Operations z bloku „Connection“. Zároveň zpracovává všechny informace, přicházejících směrem od řídící jednotky (například notifikace, chybová hlášení, stavové kódy atd.).
+
+\subsection{GUI}
+Blok „GUI“ poskytuje jednotlivé funkce aplikace, včetně jejich grafického uživatelského rozhraní. Například „Overview“ poskytuje GUI pro přehled všech připojených senzorů a spínačů, „Senzor“ poskytuje GUI pro vytváření a upravování senzorů. Tyto funkce jsou využívány v bloku „Logic“, za pomocí „GUI Controlleru“, který je načítá do hlavního okna aplikace.
+
+\section{Grafické uživatelské rozhraní}
+V této části textu budou zmíněny pouze ty části GUI, které jsou důležité pro pochopení ovládání aplikace.
+
+\subsection{Připojení/odpojení řídící jednotky (Connection)}
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\textwidth]{images/connection.png}
-\caption{Okno s možností připojení/odpojení od řídící jednotky}
+\caption{Okno s možností připojení/odpojení řídící jednotky}
 \label{image}
 \end{center}
 \end{figure}
 
-Spojení slouží k připojení či odpojení od zabezpečovacího zařízení. Za běhu aplikace na pozadí hlídá, zda je připojení stále navázáno. Při ztrátě spojení ihned informuje uživatele a upraví chování celé aplikace. Spojení rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení.
+Záložka „Connection“ slouží k připojení či odpojení řídící jednotky. Tato záložka hlídá, zda je připojení stále aktivní. Při ztrátě spojení ihned informuje uživatele a upraví chování celé aplikace. Záložka rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení. 
 
-\section{Přehled}
+Zařízení pro připojení se vybírá pomocí „Port“, které obsahuje seznam všech dostupných COM portů. K vybranému COM portu je následně zjištěn název zařízení, který se objeví v „Device“. Rychlost komunikace (BaudRate), lze vybrat ze standardních komunikačních rychlostí \cite{BaudRates}. Vybraná komunikační rychlost musí být stejná, jako v řídící jednotce. Automaticky nastavená hodnota 9600 by měla odpovídat přednastavené rychlosti řídící jednotky. 
+
+Po zvolení řídící jednotky a komunikační rychlosti stačí zmáčknou oranžové tlačítko „Connect“ pro připojení, případně „Disconnect“ pro odpojení.  
+
+\paragraph{Dostupné komunikační rychlosti (BaudRate):}
+\begin{itemize}
+\item 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200
+\end{itemize} 
+
+\subsection{Přehled připojených komponent (Overview)}
 
 \begin{figure}[H]
 \begin{center}
@@ -431,37 +497,43 @@ Spojení slouží k připojení či odpojení od zabezpečovacího zařízení. 
 \end{center}
 \end{figure}
 
-Přehled slouží pro zobrazení všech dostupných spínačů a senzorů, které jsou v zabezpečovacím zařízení dostupné. Obsah se generuje dynamicky pod sebe, lze tedy vytvořit neomezený počet zobrazených zařízení. Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze měnit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. V případě, že žádná zařízení neexistují, je uživatel upozorněn. Žádná data nejsou měněna v objektech uvnitř aplikace, ale změny jsou poslány do zabezpečovacího zařízení, po obdržení odpovědi se změní stav v aplikaci a uživatel je upozorněn.
+Přehled připojených komponent (Overview) slouží pro zobrazení všech dostupných spínačů a senzorů, které jsou v řídící jednotce dostupné. Obsah se generuje dynamicky pod sebe, lze tedy zobrazit neomezený počet zařízení (po přetečení viditelné části se objeví scrollbar). Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze měnit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. V případě, že žádná zařízení neexistují, je uživatel upozorněn. 
 
-\section{Nastavení senzoru}
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+
+\subsection{Nastavení senzoru (Sensor Edit)}
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\textwidth]{images/settings.png}
-\caption{Okno s nastavením komponenty (Senzor)}
+\caption{Okno s nastavením senzoru}
 \label{image}
 \end{center}
 \end{figure}
 
-Nastavení senzoru slouží k změně interního nastavení uvnitř zabezpečovacího zařízení. Lze měnit název zařízení, pin na kterém se nachází a typ tohoto zařízení (rozpínací, spínací). Výběr pinů závisí vždy na připojené desce, pro tento účel byl vytvořen kompletní seznam desek Arduino (USA) a Genuino (Evropa), dnes již znovu pouze Arduino, s kompletním seznamem pinů, které lze použít. Poslední funkcí je smazání zařízení.
+Nastavení senzoru slouží k změně interního nastavení uvnitř řídící jednotky. Lze měnit název zařízení (omezeno na 30 znaků), pin na kterém se senzor nachází, typ senzoru (rozpínací, spínací) a poslední možností je smazání senzoru. Výběr pinů závisí vždy na připojené desce. Pro tento účel byl vytvořen kompletní seznam všech testovaných a kompatibilních desek, které lze k softwaru připojit. Kompletní seznam desek, které lze použít, je k nalezení v části textu nazvané „Podporované řídící jednotky“. 
 
-\section{Nastavení spínače}
-Nastavení je téměř identické s předchozím, lze měnit název, pin, a místo typu zařízení lze přenastavit jeho stav.
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
 
-\section{Funkce programu a nastavení}
+\subsection{Nastavení spínače (Switch Edit)}
+Nastavení je téměř identické s předchozím, proto není nutné náhledový obrázek. Lze měnit název (omezeno na 30 znaků), pin na kterém se spínač nachází. Jedinou změnou možnost změny stavu tohoto spínače (zapnuto/vypnuto).
+
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+
+\subsection{Možnosti programu (Features)}
 Tato záložka zpřístupňuje různá nastavení a funkce, které nejsou běžně potřebné.
 
 \paragraph{Přehled funkcí:}
 \begin{itemize}
 \item Přidat nový senzor
 \item Přidat nový spínač
-\item Znovu načíst všechna data ze zabezpečovacího zařízení
+\item Znovu načíst všechna data z řídící jednotky
 \item Zobrazovat notifikace, pokud se změní stav senzoru (přepínač)
 \item Zobrazovat notifikace, pokud se senzor navrátí do výchozího stavu (přepínač)
 \end{itemize} 
 
-\section{Notifikace}
-Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlášení, která slouží při upozornění uživatele na nějakou situaci. Například se jedná o změnu stavu pinů, chybové stavy řídící jednotky, nebo odpojení zabezpečovacího zařízení. Notifikace se zachytávají v hlavním okně, v záložce \uv{Autocalled functions (Events from Arduino)}, pomocí eventů.
+\subsection{Notifikace}
+Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlášení, která slouží pro upozornění uživatele na nastalou situaci. Například se jedná o změnu stavu pinů, chybové stavy řídící jednotky, nebo odpojení zařízení. Notifikace se zachytávají v hlavním okně, v části kódu nazvané \uv{Autocalled functions (Events from Arduino)}, pomocí eventů.
 
 \paragraph{Přehled implementovaných notifikací:}
 \begin{itemize}
@@ -481,17 +553,76 @@ Aplikace podporuje širokou škálu notifikací, upozornění a varovných hlá�
 \item Nastavení notifikací změněno
 \end{itemize} 
 
-% Komunikační server
+\section{Kompatibilita}
 
-\chapter{Komunikační server}
-Not implemented yet.
+\subsection{Testované verze Windows 10}
+Desktopová aplikace byla testována pod operačním systémem Windows 10 ve všech (v době psaní práce) vydaných sestavách a pro tento systém byla také optimalizována. Nicméně cílová platforma Microsoft .NET Framework 4.5.2 \cite{WhatsNew.NetFramework4.5.2} by měla zajišťovat zpětnou kompatibilitu až do systému Windows Vista. Jmenovitě pro Windows Vista SP2, Windows 7 SP1, Windows 8, Windows 8.1, Windows 10 a novější \cite{.NetFramework4.5.2}.
+
+\paragraph{Seznam všech testovaných sestav systému Windows 10:}
+\begin{itemize}
+\item Version 1507 - Build 10.0.10240 (čistá instalace systému)
+\item Version 1511 - Build 10.0.10586 (November Update)
+\item Version 1607 - Build 10.0.14393 (Anniversary Update)
+\item Version 1703 - Build 10.0.15063 (Creators Update)
+\item Version 1709 - Build 10.0.16299 (Fall Creators Update)
+\item Version 1803 - Build 10.0.17134 (April 2018 Update)
+\end{itemize}
+
+\subsection{Podporované řídící jednotky}
+Řídící jednotka, v případě tohoto prototypu deska Arduino, existuje v několika variantách \cite{ArduinoProducts}. Jako řídící jednotku je vhodné použít jednu z řady produktů ENHANCED FEATURES (Mega, Due a další) \cite{ArduinoProducts}, vzhedem k tomu, že obsahují dostatečné množství paměti \cite{CompareBoardSpecs} pro udržování většího množství senzorů a spínačů. Vybrané jednotky, které jsou pro tento projekt použitelné, jsem otestoval a zařadil mezi jednotky podporované. Tyto podporované jednotky se vyznačují tím, že desktopová aplikace obsahuje seznam použitelných pinů pro každou z těchto desek. Tento seznam se získává ihned po připojení jednotky, a to na základě názvu desky poskytnutého řadičem. Pokud připojená deska není v seznamu, použije se seznam pinů pro desku Arduino Uno. V takovémto případě není zaručena správná funkčnost softwaru. Pokud použitý pin není v seznamu pinů desky, zařízení na tomto pinu nebude možné ovládat, upravovat, ani s ním jakkoliv pracovat.
+
+\paragraph{Seznam všech podporovaných řídících jednotek:}
+\begin{itemize}
+\item Arduino/Genuino Uno (nedoporučeno)
+\item Arduino/Genuino Mega
+\item Arduino/Genuino Mega 2560
+\item Arduino Due (doporučeno)
+\end{itemize}
+
+\paragraph{Seznam desek kompatibilních s Arduino/Genuino Uno:}
+\begin{itemize}
+\item Arduino/Genuino Duemilanove
+\item Arduino/Genuino Diecimila
+\item Arduino/Genuino Nano
+\item Arduino/Genuino NG
+\item Arduino/Genuino Mini
+\item Arduino/Genuino Extreme
+\item Arduino/Genuino USB
+\item Arduino/Genuino Serial
+\item Arduino/Genuino 101
+\end{itemize}
 
 % Mobilní aplikace
 
 \chapter{Mobilní aplikace}
-Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zařízení, a není tedy možno měnit jakékoliv nastavení, k čemuž slouží desktopová aplikace. Aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, za pomocí IDE Android Studio 2.3.2.
+Hlavním účelem mobilní aplikace je čisté monitorování řídící jednotky. Není tedy možno měnit jakékoliv nastavení (k čemuž slouží desktopová aplikace). Tato aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, za pomocí IDE Android Studio 2.3.2.
 
-\section{Přehled}
+\section{Blokové schéma}
+Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně komunikují. Pod blokovým schématem následuje detailní popis těchto jednotlivých částí.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{vector/blokoveSchemaSecurityViewer.pdf}
+\caption{Blokové schéma objektového návrhu aplikace}
+\label{image}
+\end{center}
+\end{figure}
+
+\subsection{Communication}
+Blok „Communication“ slouží k připojení řídící jednotky skrze internetové připojení (GPRS), za pomocí mobilní datové sítě. Toto připojení komunikuje pomocí API, poskytované řídící jednotkou. Po navázání spojení se zažádá o všechna dostupná data, která může řídící jednotka poskytnout. Samotnou komunikaci zpracovává vlákno „GPRS Client“, které je napojené na „Operations“, kde se nachází implementace API.
+
+Aby internetová komunikace fungovala, musel být napsán komunikační server, který je pevným bodem v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Více o této problematice v části textu nazvané „Komunikační server“.
+
+\subsection{Logic}
+Blok „Logic“ je hlavní vlákno, které díky „Activity Controlleru“ načítá veškeré viditelné části aplikace z bloku „Activities“ a zároveň zprostředkovává komunikaci mezi blokem Communication a jednotlivými funkcemi v oknech aplikace (Activities). Nachází se zde tedy napojení na Arduino Operations z bloku „Communication“. Zároveň zpracovává všechny informace, přicházejících směrem od řídící jednotky (například notifikace, chybová hlášení, stavové kódy atd.).
+
+\subsection{Activities}
+Blok „Activites“ poskytuje jednotlivé funkce aplikace, včetně jejich GUI, v Androidu nazvaném jako Activity. Například „Overview“ poskytuje Activity pro přehled všech připojených senzorů a spínačů, „Item Detail“ poskytuje Activity přehled o všech dostupných informací, které o vybrané komponentě aplikace má, a „Menu“ poskytuje Acitivity s nastavením. Tyto funkce jsou využívány v bloku „Logic“, za pomocí „Activity Controlleru“, který je načítá do hlavního okna aplikace.
+
+\section{Grafické uživatelské rozhraní}
+V této části textu budou zmíněny pouze ty části GUI (Activities), které jsou důležité pro pochopení ovládání aplikace.
+
+\subsection{Přehled připojených komponent}
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.4\textwidth]{images/app1.png}
@@ -500,9 +631,13 @@ Hlavním účelem mobilní aplikace je monitorování zabezpečovacího zaříze
 \end{center}
 \end{figure}
 
-Stejně jako v případě desktopové aplikace, slouží přehled pro zobrazení všech dostupných spínačů a senzorů, které jsou v zabezpečovacím zařízení dostupné. Obsah se generuje dynamicky pod sebe, lze tedy vytvořit neomezený počet zobrazených zařízení. Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze zobrazit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. Žádná data nejsou měněna v objektech uvnitř aplikace, ale změny jsou poslány do zabezpečovacího zařízení, po obdržení odpovědi se změní stav v aplikaci a uživatel je upozorněn.
+Stejně jako v případě desktopové aplikace, slouží přehled připojených zařízení pro zobrazení všech dostupných spínačů a senzorů, které jsou v řídící jednotce dostupné. Obsah se generuje dynamicky pod sebe, lze tedy zobrazit neomezený počet zařízení (po přetečení viditelné části se objeví scrollbar). Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze zobrazit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. V případě, že žádná zařízení neexistují, je uživatel upozorněn.
 
-\section{Interní nastavení}
+Tlačítko na pravé straně „i“, tedy značí zobrazení podrobností vybrané komponenty. Dále v horní liště vidíme zatočenou šipku, která značí ruční aktualizaci všech zařízení. Posledním prvkem horního menu jsou tři tečky, takzvané „Hamburger Menu“, které složí pro otevření nastavení aplikace.
+
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+
+\subsection{Podrobnosti vybrané komponenty}
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.4\textwidth]{images/app2.png}
@@ -511,11 +646,53 @@ Stejně jako v případě desktopové aplikace, slouží přehled pro zobrazení
 \end{center}
 \end{figure}
 
-Zobrazení interního nastavení jednotlivých komponent ukazuje méně důležité údaje. Vrátit se lze tlačítkem zpět, které má každý mobilní telefon se systémem Android implementované (ať už softwarově nebo hardwarově).
+Zobrazení podrobností o vybrané komponentě ukazuje všechny dostupné údaje, které má aplikace k dispozici. Běžně se tak jedná o typ zařízení (senzor, spínač), název zařízení (omezeno na 30 znaků), číslo pinu, na kterém je zařízení připojení, a stav zařízení (zapnuto, vypnuto). Pokud se jedná o senzor, je zde vyobrazen i typ vybraného senzoru (spínací, rozpínací).
+
+Vrátit se lze tlačítkem zpět, které má každý mobilní telefon se systémem Android implementované (ať již softwarově nebo hardwarově).
+
+\paragraph{Seznam všech podrobností komponenty:}
+\begin{itemize}
+\item Typ (senzor, spínač)
+\item Název (maximálně 30 znaků)
+\item Pin (číslo pinu, na kterém je zařízení připojeno)
+\item Stav (zapnuto, vypnuto)
+\item Typ senzoru (spínací, rozpínací)
+\end{itemize}
 
 % Webová aplikace
 
 \chapter{Webová aplikace}
+Not implemented yet.
+
+\section{Blokové schéma}
+Not implemented yet.
+
+\section{Grafické uživatelské rozhraní}
+Not implemented yet.
+
+% Komunikační server
+
+\chapter{Komunikační server}
+K zajištění komunikace mezi řídící jednotkou a mobilní aplikací fungovala, musel být napsán komunikační server, který má pevonu adresu v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Díky tomuto spojení si ukládá přenášená data, která jsou následně používána k zobrazení statistik ve webové aplikaci.
+
+\section{Slepé cesty vývoje}
+
+\subsection{Přímá komunikace mezi zařízeními}
+Prvním vyvíjeným řešením bylo propojení řídící jednotky a aplikací bez komunikačního serveru. Po půl roce výzkumu jsem tuto variantu zavrhl, protože veřejné IP adresy v mobilní datové sítí jsou dynamické (včetně IPV6). Bez pevného bodu v internetu, jsem nebyl schopen určit adresu ostatních zařízení.
+
+\subsection{Implementace serveru v řídící jednotce}
+Druhým vyvíjeným řešením bylo vytvoření komunikačního serveru přímo v řídící jednotce. Po čase jsem odhalil, že přidání další zátěže jednočipovému počítači, mělo za následek nestabilitu celého systému. Řídící jednotka nestíhala obsluhovat všechny požadavky najednou (jak hardwarové, tak softwarové) a s rostoucí komunikací začala mít nedostatek paměti. Stejně tak jako předchozí řešení, i tuto variantu jsem po půl roce výzkumu zavrhl.
+
+\section{Blokové schéma}
+Not implemented yet.
+
+\section{Zprovoznění}
+Pro správnou funkcionalitu komunikačního serveru, je nutné server provozovat na veřejné IP adrese, s přesměrováním portu 6666 na lokální adresu serveru v interní síti.
+
+\section{Grafické uživatelské rozhraní}
+Not implemented yet.
+
+\section{Testovací klient}
 Not implemented yet.
 
 % Závěr
@@ -549,6 +726,11 @@ Not implemented yet.
 \bibitem{HTML1.1}FIELDING, R., UC IRVINE, J. GETTYS, et al. Hypertext Transfer Protocol -- HTTP/1.1 [online]. 1999, , 176 [cit. 2017-05-27]. Dostupné z: \url{http://www.ietf.org/rfc/rfc2616.txt}
 \bibitem{WhatsNew.NetFramework4.5.2}What's new in the .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://docs.microsoft.com/en-us/dotnet/framework/whats-new/index#v452}
 \bibitem{.NetFramework4.5.2}Microsoft .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://support.microsoft.com/en-us/help/2901907/microsoft-net-framework-4-5-2-offline-installer-for-windows-server-201}
+\bibitem{DesktopMarketShare}Desktop Operating System Market Share Europe [online]. [cit. 2018-05-07]. Dostupné z: \url{http://gs.statcounter.com/os-market-share/desktop/europe/#monthly-201704-201804-bar}
+\bibitem{MobileMarketShare}Mobile Operating System Market Share Europe [online]. [cit. 2018-05-07]. Dostupné z: \url{http://gs.statcounter.com/os-market-share/mobile/europe/#monthly-201704-201804-bar}
+\bibitem{ArduinoProducts}Arduino Products [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Main/Products}
+\bibitem{CompareBoardSpecs}Compare board specs [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Products/Compare}
+\bibitem{BaudRates}BaudRates for communicating with the computer [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/serial/begin}
 
 
 \end{thebibliography}
