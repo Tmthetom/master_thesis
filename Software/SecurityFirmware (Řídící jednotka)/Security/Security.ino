@@ -113,12 +113,12 @@ void setup() {
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
 	digitalWrite(pinSwitch[0], LOW);
 
-	pinSwitch[1] = 51;
+	pinSwitch[1] = 50;
 	nameSwitch[1] = "Led Switch 2";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
 	digitalWrite(pinSwitch[1], LOW);
 
-	pinSwitch[2] = 50;
+	pinSwitch[2] = 51;
 	nameSwitch[2] = "Led Blue";
 	setPinMode(pinSwitch, sizeof(pinSwitch) / sizeof(uint8_t), OUTPUT);
 	digitalWrite(pinSwitch[2], LOW);
@@ -207,12 +207,12 @@ void readGsmAndRespond() {
 			// Send received message to console
 			in = Serial1.readString();
 			in.trim();
-			Serial.println(arduinoReceived + in);
+			//Serial.println(arduinoReceived + in);
 
 			// Check if command runs OK
 			if (in.endsWith("OK")) {
 				watingForResponse = false;
-				Serial.println();
+				//Serial.println();
 			}
 			
 			// When wating for client IP, check if runs OK
@@ -220,7 +220,7 @@ void readGsmAndRespond() {
 				for (int i = 0; i < in.length(); i++) {
 					if (in.charAt(i) == '.') {
 						numberOfDots++;
-						Serial.println();
+						//Serial.println();
 					}
 				}
 				if (numberOfDots >= 3) {
@@ -241,7 +241,7 @@ void readGsmAndRespond() {
 
 				in = Serial1.readString();
 				in.trim();
-				Serial.println(arduinoReceived + in);
+				//Serial.println(arduinoReceived + in);
 
 				// Sensors
 				if (in.equalsIgnoreCase(stringGetAllSensors)) getAllSensors();
@@ -813,16 +813,16 @@ void serialEvent() {
 #pragma region SecurityViewer Communication
 
 void sendCommand(String command) {
-	Serial.println(arduinoSending + command);
+	//Serial.println(arduinoSending + command);
 	Serial1.println(command);
 	watingForResponse = true;
 }
 
 void sendMessage(String message) {
-	Serial.println(arduinoSending + "AT+CIPSEND");
+	//Serial.println(arduinoSending + "AT+CIPSEND");
 	Serial1.println("AT+CIPSEND");
 	delay(1000);
-	Serial.println(arduinoSending + message);
+	//Serial.println(arduinoSending + message);
 	Serial1.println(message);
 	delay(1000);
 	Serial1.println((char)26);
