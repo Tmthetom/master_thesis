@@ -797,7 +797,21 @@ Testovací klient vznik za účelem testování serverové části, bez nutnosti
 % Závěr
 
 \chapter{Závěr}
-Not implemented yet.
+V rešeršní části jsem definoval zabezpečovací systém a inteligentní dům, ze kterých se sestává inteligentní domovní systém. Nakonec jsem definoval požadované vlastnosti jednotlivých součástí inteligentího domovního systému, kterými jsou domovní systém, desktopová aplikace, mobilní aplikace, webová aplikace a komunikační server. 
+
+Na základě častých konzultací s vedoucím práce, jsem navrhl koncept cílového produktu, doporučil realizační postupy, vybral hardware, nebo uvedl více možností jeho výběru, kterými může být dosaženo výsledného zařízení. Následně jsem zvolil komunikační prostředky a architekturu jednotlivých komponentů.
+
+V první fázi jsem na základě konceptu jsem zvolil nejvhodnější komponenty pro vývoj prototypu, které jsem následně zakoupil. Při práci na prototypu jsem odhalil, že jednen z původních cílů, využít tlačítkový mobilní telefon pro přístup do sítě GPRS, je nerealizovatelný, zvolil jsem tedy alternativní postup. Dále jsem vyvinul firmware řídící jednotky, který jsem úspěšně otestoval na prototypu. Po dopsání vlastního kódu jsem podrobně popsal všechny funkce programu.
+
+V druhé fázi jsem vyvinul desktopovou aplikaci pro systém Windows, kterou jsem plně otestoval pro více verzí systému Windows 10, popsal všechny funkce programu a zajistil kompatibilitu pro starší verze systému Windows.
+
+Třetí fáze zahrnovala tvrobu mobilní aplikace, u které jsem zjistil, že přímá komunikace aplikace a řídící jednotky je nerealizovatelná, proto jsem nejdříve vytvořil komunikační server pro systém Windows, který zprostředkovával požadované spoojení v síti internet. Následně jsem dokončil mobilní aplikaci pro systém Android. Aplikaci jsem plně otestoval, popsal všechny funkce a zajistil kompatibilitu u starších systémů.
+
+Poslední fáze byla tvorba webového prostředí pro monitoring domácího systému. Webovou aplikaci, čerpající data z komunikačního serveru jsem otestoval a řádně popsal všechny její funkce.
+
+Funkční prototyp, včetně všech příslušných aplikací jsem otestoval v běžném provozu.
+
+Zadání se mi podařilo splnit ve všech bodech. Do budoucna bych rád předělal komunikační server ze systému Windows na běžnější formu serveru, kterou bude možné spustit na některé z hostingových služeb. Rád bych také vytvořil mobilní aplikaci pro systém iOS.
 
 % Literatura
 
