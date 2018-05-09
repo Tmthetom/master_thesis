@@ -57,7 +57,6 @@ Not implemented yet.
 \textbf{LAN} & Local Area Network, místní počítačová síť\\
 \textbf{LED} & Light-Emitting Diode, dioda emitující světlo\\
 \textbf{PIR} & Passive infrared sensor, infračervený sensor pohybu\\
-\textbf{SMS} & Short message service, služba krátkých textových zpráv\\
 \textbf{TUL} & Technical University of Liberec, Technická univerzita v Liberci\\
 \textbf{USB} & Universal Serial Bus, univerzální sériová sběrnice\\
 \end{abbrList}
@@ -70,6 +69,7 @@ Not implemented yet.
 % Inteligentní domovní systém
 
 \chapter{Inteligentní domovní systém}
+Inteligentní domovní systém je kombinací zabezpečovacího systému s prvky chytré domácnosti.
 
 \section{Historie}
 
@@ -118,17 +118,27 @@ Komunikátor je zařízení, které odesílá informaci o narušení objektu, p�
 % Požadované vlastnosti
 
 \section{Požadované vlastnosti}
-V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení, a jaké komponenty byly na základě těchto požadavků zvoleny.
+V následující části se zaměřím na požadované vlastnosti všech částí inteligentního domovního systému (ekosystém).
 
 \subsection{Domovní systém}
-Z úvodní části je zřejmé, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
-V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou a mobilní aplikaci. Následující část rozdělena do těchto dvou částí.
+Z úvodní části je zřejmé, že domovní systém obsahuje jak prvky zabezpečovacího systému, tedy musí obsahovat detektory, komunikátor a ústřednu. Zároveň však obsahuje prvky inteligentního domu, tedy musí být schopna monitorovat a řídit různá zařízení v domácnosti. V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou, mobilní aplikaci a webovou aplikaci. Komunikace bude probíhat přes internet.
+
+\paragraph{Požadavky na domovní systém:}
+\begin{itemize}
+\item Poskytnutí API
+\item Komunikace přes internet
+\item Vzdálené ovládání všech připojených zařízení
+\item Vzdálená správa a monitoring všech připojených zařízení
+\item Spuštění poplachu při splnění podmínek (kontaktování uživatele)
+\item Komunikaci s desktopovou, mobilní a webovou aplikací
+\end{itemize}
 
 \subsection{Desktopová aplikace}
-Desktopová aplikace musí být schopna využít plného potenciálu ústředny, tedy umožnit kompletní správu a nastavování jednotlivých komponent (spínačů a senzorů). Komunikace s ústřednou bude umožněna pomocí sériové linky (COM port), v případě prototypu bude použito připojení skrze USB. Cílový operační systém jsem zvolil Windows 10, jakožto v evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže.
+Desktopová aplikace musí být schopna využít plného potenciálu ústředny, tedy umožnit kompletní správu a nastavování jednotlivých komponent (spínačů a senzorů). Komunikace s ústřednou bude umožněna pomocí sériové linky (COM port), v případě prototypu bude použito připojení skrze USB.
 
 \paragraph{Požadavky na desktopovou aplikaci:}
 \begin{itemize}
+\item Komunikace po seriové lince
 \item Zobrazení seznamu všech připojench komponent
 \item Zobrazení všech informací o zvolené komponentě
 \item Změna libovolného nastavení všech komponent
@@ -141,10 +151,11 @@ Desktopová aplikace musí být schopna využít plného potenciálu ústředny,
 \end{itemize}
 
 \subsection{Mobilní aplikace}
-Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bude možné sledovat stavy jednotlivých senzorů, případně spínat veškeré spínací prvky. Její návrh je tedy značně jednodušší oproti komplexnější desktopové aplikaci. Cílový operační systém jsem zvolil Android, jakožto v evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže.
+Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bude možné sledovat stavy jednotlivých senzorů, případně spínat veškeré spínací prvky. Její návrh je tedy značně jednodušší oproti komplexnější desktopové aplikaci. Komunikace bude probíhat přes internet.
 
 \paragraph{Požadavky na mobilní aplikaci:}
 \begin{itemize}
+\item Komunikace přes internet
 \item Zobrazení seznamu všech připojench komponent
 \item Zobrazení všech informací o zvolené komponentě
 \item Sledování aktuálního stavu všech komponent
@@ -153,35 +164,52 @@ Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bu
 \item Připojování a odpojování od zvolené ústředny
 \end{itemize}
 
-
 \subsection{Webová aplikace}
+Od webové aplikace se očekává možnost sledování aktuálního denní a zobrazení historických dat. Od aplikace se neočekává možnost editace, ani a jakékoliv řízení. Komunikace bude probíhat přes internet.
+
+\paragraph{Požadavky na webovou aplikaci:}
+\begin{itemize}
+\item Komunikace přes internet
+\item Sledování aktuálního stavu všech komponent
+\item Zobrazení historických dat
+\end{itemize}
 
 \subsection{Komunikační server}
+Komunikační server je nutný pro navázání spojení mezi řídící jednotkou a mobilní a webovou aplikací. Od serveru se očekává udržování a správa všech spojení, stejně tak jako propagace zpráv do jejich cílových destinací. Komunikaci je nutné logovat a bude probíhat přes internet.
+
+\paragraph{Požadavky na komunikační server:}
+\begin{itemize}
+\item Komunikace přes internet
+\item Udržování stálého spojení s klienty
+\item Zajištění komunikace mezi klienty
+\item Logování probíhající komunikace
+\end{itemize}
 
 % Zvolené řešení
 
 \chapter{Zvolené řešení}
 
 \section{Domovní systém}
+Jak již bylo řečeno, domovní systém je kombinací zabezpečovacího zařízení a spínacích prvků. Všem těmto částem se budu věnovat níže, kde vyberu nejvhodnější varianty.
 
 \subsection{Řídící jednotka}
-Ústředna musí být schopna spravovat všechny připojené detektory, senzory a spínací prvky, a komunikovat s desktopovou a mobilní aplikací. a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že ústřednou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware ústředny bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
+Řídící jednotka musí být schopna spravovat všechny připojené detektory, senzory a spínací prvky, a komunikovat s desktopovou a mobilní aplikací. a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že řídící jednotkou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, případně ARM Cortex-M3, více než vhodnou pro tyto účely. Firmware řídící jednotky bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino. Komunikace bude probíhat skrze mobilní datovou síť.
 
-\paragraph{Zvolená ústředna:}
+\paragraph{Zvolená řídící jednotka:}
 \begin{itemize}
-\item Arduino Uno Rev3 (700 Kč s DPH), (\url{arduino-shop.cz})
+\item Arduino DUE (914 Kč s DPH), (\url{arduino-shop.cz})
 \end{itemize}
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=0.4\textwidth]{images/arduino.png}
-\caption{Vývojová platforma Arduino}
+\includegraphics[width=0.5\textwidth]{images/arduinoDue.png}
+\caption{Vývojová platforma Arduino DUE}
 \label{image}
 \end{center}
 \end{figure}
 
 \subsection{Detektory}
-Požadavky nejsou kladeny pouze na samotné detektory, ale také na spínače, kterými bude možné spínat různá zařízení. Jako spínací prvky není nutné volit jednotlivé komponenty, stačí připravit implementaci jejich spínání. V případě detektorů musí být možné připojit libovolný detektor, který lze nastavit jako spínací (normálně rozepnutý), nebo rozpínací (normálně sepnutý). Pro testovací účely byly zvoleny dva detektory, každý jednoho typu.
+Detektory jsou všechny velmi podobné a proto stačí připravit implementaci jejich snímání. V případě detektorů musí být možné připojit libovolný detektor, který lze nastavit jako spínací (normálně rozepnutý), nebo rozpínací (normálně sepnutý). Pro testovací účely byly zvoleny dva detektory, každý jednoho typu.
 
 \paragraph{Zvolené detektory:}
 \begin{itemize}
@@ -198,9 +226,10 @@ Požadavky nejsou kladeny pouze na samotné detektory, ale také na spínače, k
 \end{figure}
 
 \subsection{Spínací prkvy}
+U spínacích prvků není nutné volit jednotlivé komponenty, ale stačí připravit implementaci jejich spínání. Poté je možné připojit libovolnou spínatelnou součástku.
 
 \subsection{Komunikátor}
-Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. Zadání jako hlavní komunikátor určuje mobilní telefon, pomocí kterého máme umožnit ústředně datové přenosy. Zvolen byl nový a zároveň nejlevnější mobilní telefon na trhu. Pro případ neúspěchu, při získávání zdrojů mobilního telefonu, byla zvolena alternativa v podobě GSM/GPRS modulu, který byl zakoupen z Číny, dodací doba této součástky, stejně jako na všechny ostatní, byla přes jeden kalendářní měsíc.
+Požadavek na komunikátor je přenos dat na server přes mobilní data. Původní zadání jako komunikátor určuje mobilní telefon, pomocí kterého máme umožnit řídící jednotce datové přenosy. Zvolen byl nový a zároveň nejlevnější mobilní telefon na trhu. Tento způsob přístupu do mobilní datové sítě se nezdařil a zadání bylo upraveno. Byla zvolena alternativa v podobě GSM/GPRS modulu, který byl zakoupen z Číny, dodací doba této součástky, stejně jako na všechn ostatních, byla přes jeden kalendářní měsíc.
 
 \paragraph{Zvolené komunikátory:}
 \begin{itemize}
@@ -217,12 +246,16 @@ Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. 
 \end{figure}
 
 \section{Desktopová aplikace}
+Na základě požadovaných vlastností jsem cílový operační systém jsem zvolil Windows 10, jakožto v evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže. Komunikace s aplikací bude probíhat skrze připojení USB (COM).
 
 \section{Mobilní aplikace}
+Cílový operační systém jsem zvolil Android, jakožto v evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže. Komunikace bude probíhat skrze mobilní datovou síť.
 
 \section{Webová aplikace}
+Not implemented yet.
 
 \section{Komunikační server}
+Pperační systém jsem zvolil Windows 10, kvůli rychlosti vývoje. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Komunikace s aplikací bude probíhat skrze pevné připojení k internetu.
 
 % Domovní systém (hardware a firmware)
 
@@ -290,20 +323,31 @@ Po dohodě s vedoucím práce, jsem se rozhodl porušit záruku a rozebrat telfe
 \subsection{Závěr rozboru}
 Po dvou měsíčním snažení se z mobilního telefonu nepodařilo získat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Tuto cestu jsem byl nucen uzavřít a oznámit vedoucímu, že tudy cesta nevede. Od využití mobilního telefonu bylo tedy upuštěno a jako vstupní brána do GPRS byl pořízen samostatný GSM/GPRS modul.
 
-\section{Prototyp}
+\section{Prototyp domovního systému}
+Účelem prototypu je vývoj a testování firmware a vzájemné komunikace s jednotlivými aplikacemi. Zapojení musí být modulární, snadno přepojitelné a jednoduše přístupné k měření.
 
 \subsection{Blokové schéma}
+Prototyp je rozdělen do třech hlavních bloků, které spolu vzájemně komunikují. Pod blokovým schématem následuje detailní popis těchto jednotlivých částí.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\textwidth]{vector/blokoveSchemaHardware.pdf}
-\caption{Blokové schéma zapojení prototypu zabezpečovacího zařízení}
+\caption{Blokové schéma zapojení prototypu domovního systému}
 \label{image}
 \end{center}
 \end{figure}
 
+\paragraph{Komunikační zařízení:}
+Blok „Komunikační zařízení“ obsahuje všechna zařízení zprostředkovávající komunikaci. Vždy potřebujeme komunikovat pomocí USB a internetového připojení. V případě prototypu složí k USB komunikaci vestavěn řadič USU, který se nachází na desce Arduino. Internetové připojení zprostředkovává GPRS modul, v případě prototypu model SIM808, případně podobný.
+
+\paragraph{Arduino Due:}
+Hlavní blok „Arduino Due“ obsahuje vývojvou desku Arduino Due, která slouží jako centrální jednotka celého domovního systému. Do této jednotky jsou zapojeny veškeré periferie, ať již komunikátory, nebo senzory a spínače.
+
+\paragraph{Periferie}
+Blok „Periferi“ obsahuje všechna čidla, senzory, spínače a podobná zařízení, které má za úkol řídící jednotka kontrolovat. Pro demonstraci základních funkcionalit jsem zvolil dveřní čidlo, senzor pohybu PIR a spínací prvek typu LED dioda. Všechny tyto periferie lze jednodšue nahradit jinou libovolnou součástkou, případě nové přidat.
+
 \subsection{Výsledný prototyp}
-Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího systému. Obsahuje (zleva) řídící desku Arduino, jednu diody (LED) pro simulování spínacího prvku, dále diodu která signalizuje, zda je sepnutý senzor PIR, a diodu signalizující sepnutí dveřního čidla (vpravo). 
+Výsledný prototyp je schopen simulovat reálné nasazení domovnío systému. Obsahuje řídící desku Arduino, GSM modul pro připojení do sítě internet, jeden spínací prvek (LED) a dva senzory diody (PIR a dveřní čidlo). Každý senzor má svou vlastní kontrolní diodu. Ta signalizuje, zda je senzor sepnutý či nikoliv.
 
 \begin{figure}[H]
 \begin{center}
@@ -313,13 +357,16 @@ Výsledný prototyp je schopen simulovat reálné nasazení zabezpečovacího sy
 \end{center}
 \end{figure}
 
+\subsection{Schéma zapojení}
+Not implemented yet.
+
 \section{Firmware}
-Hlavním účelem firmwaru je možnost kompletního řízení zabezpečovacího systému a umožnění komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro platformu Arduino (čip ATmega) v programovacím jazyce C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring}, za pomocí vývojového prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
+Hlavním účelem firmware (software pro řídící jednotku) je možnost kompletního řízení domovního systému a umožnění komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro platformu Arduino (čip ARM Cortex-M3) v programovacím jazyce C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring}, za pomocí vývojového prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
 
 Dále budou zmíněny pouze ty části, které jsou důležité pro pochopení nastavení zařízení a přístupu k aplikaci (API), samotný kód lze nalézt v příloze a zmiňován zde nebude.
 
 \subsection{Nastavení}
-Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení po nahrání kódu do zařízení nelze měnit. Jedinou cestou k jeho změně je tedy opětovná kompilace kódu s upraveným nastavením a následné nahrání do mikrokontroleru.
+Inicializační část slouží k prvotnímu nastavení mikrokontroleru před spuštěním. Toto nastavení lze měnit pouze před první kompilací kódu, za běhu programu jej změnit nelze. Jedinou cestou k jeho změně je tedy opětovná kompilace kódu s upraveným nastavením a následné nahrání do mikrokontroleru.
 
 \paragraph{Nastavit lze:}
 \begin{itemize}
@@ -413,7 +460,7 @@ DeleteSwitch(1)
 \end{center}
 
 \subsection{Notifikace}
-Bezpečnostní zařízení má uložené všechny poslední stavy senzorů a při každém průchodu hlavní smyčkou proběhne čtení, pomocí funkce \uv{checkSensorStateChangedAndSendIfTrue()}. Pokud nový stav nesouhlasí se starým, je zaslána notifikace s ID zařízení a aktuálním stavem. Poté záleží na cílové aplikaci, jak informaci zpracuje.
+Řídící jednotka má uložené všechny poslední stavy senzorů a při každém průchodu hlavní smyčkou proběhne čtení, pomocí funkce \uv{checkSensorStateChangedAndSendIfTrue()}. Pokud nový stav nesouhlasí se starým, je zaslána notifikace s ID zařízení a aktuálním stavem. Poté záleží na cílové aplikaci, jak informaci zpracuje.
 
 \paragraph{Ukázka notifikace:}
 \begin{center}
@@ -421,7 +468,7 @@ Sensor(Id = 1,State = 0)
 \end{center} 
 
 \subsection{Chybová hlášení}
-Původně byla chybová hlášení (při neúspěšném provedení operace nebo jiné chybě), tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při provádění kterékoliv z operací podporující API. Vždy se kontroluje, zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Pokud příkaz nebyl rozpoznán, nebo nesplňuje kritéria tohoto API, je vrácena chybová hláška o nerozpoznání příkazu.
+Chybová hlášení (při neúspěšném provedení operace nebo jiné chybě) byla původně tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti (při vvoji na platformě Arduino Uno) byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při zpracovávání kterékoliv z operací podporující API. Vždy se kontroluje, zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Pokud příkaz nebyl rozpoznán, nebo nesplňuje kritéria tohoto API, je vrácena chybová hláška o nerozpoznání příkazu.
 \paragraph{Ukázka odpovědi při nerozpoznání příkazu:}
 \begin{center}
 Command 'SetSensor(15,5)' not recognized.
@@ -584,7 +631,7 @@ Desktopová aplikace byla testována pod operačním systémem Windows 10 ve vš
 % Mobilní aplikace
 
 \chapter{Mobilní aplikace}
-Hlavním účelem mobilní aplikace je čisté monitorování řídící jednotky. Není tedy možno měnit jakékoliv nastavení (k čemuž slouží desktopová aplikace). Tato aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, za pomocí IDE Android Studio 2.3.2.
+Hlavním účelem mobilní aplikace je čisté monitorování řídící jednotky. Není tedy možno měnit jakékoliv nastavení (k čemuž slouží desktopová aplikace). Tato aplikace byla vyvinuta pro mobilní operační systém Android 4.0.3 (Ice Cream Sandwich - API 15) a vyšší, v programovacím jazyce Java, za pomocí IDE Android Studio 2.3.2. Design byl inspirovaný manuálem jednotného vizuálního stylu TUL \cite{TULVisual}.
 
 \section{Blokové schéma}
 Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně komunikují. Pod blokovým schématem následuje detailní popis těchto jednotlivých částí.
@@ -662,7 +709,7 @@ Not implemented yet.
 % Komunikační server
 
 \chapter{Komunikační server}
-K zajištění komunikace mezi řídící jednotkou a mobilní aplikací fungovala, musel být napsán komunikační server, který má pevonu adresu v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Díky tomuto spojení si ukládá přenášená data, která jsou následně používána k zobrazení statistik ve webové aplikaci.
+K zajištění komunikace mezi řídící jednotkou a mobilní aplikací fungovala, musel být napsán komunikační server, který má pevonu adresu v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Díky tomuto spojení si ukládá přenášená data, která jsou následně používána k zobrazení statistik ve webové aplikaci. Server teoreticky umožňuje připojení libovolného počtu mobilních aplikací k jedné řídící jednotce naráz.
 
 \section{Slepé cesty vývoje}
 
@@ -673,16 +720,70 @@ Prvním vyvíjeným řešením bylo propojení řídící jednotky a aplikací b
 Druhým vyvíjeným řešením bylo vytvoření komunikačního serveru přímo v řídící jednotce. Po čase jsem odhalil, že přidání další zátěže jednočipovému počítači, mělo za následek nestabilitu celého systému. Řídící jednotka nestíhala obsluhovat všechny požadavky najednou (jak hardwarové, tak softwarové) a s rostoucí komunikací začala mít nedostatek paměti. Stejně tak jako předchozí řešení, i tuto variantu jsem po půl roce výzkumu zavrhl.
 
 \section{Blokové schéma}
-Not implemented yet.
+Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně komunikují. Pod blokovým schématem následuje detailní popis těchto jednotlivých částí.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{vector/blokoveSchemaSecurityServer.pdf}
+\caption{Blokové schéma objektového návrhu komunikačního serveru}
+\label{image}
+\end{center}
+\end{figure}
+
+\subsection{Communication}
+Blok „Communication“ obsahuje vlákno „Socket Server“, které poslouchá na portu 6666 a navazuje komunikaci přes technologii Socket. Server udržuje všechna spojení aktivní a stárá se o produkci všech zpáv až ke všem cílům. Pokud je některé spojení přerušeno, zajistí informování všech ostatních uživatelů a uvolní zdroje. 
+
+„Role Assigner“ se stará o oddělení neidentifikovaných klientů od těch indetifikovaných. Identifikovaný klient se vyznačuje tím, že provedl autorizaci jako řídící jednotka, nebo mobilní aplikace. Dále se vyznačuje tím, že je mu umožněno komunikovat s ostatními protějšky, tedy řídící jednotka může kontaktovat všechny mobilní aplikace, a všechny mobilní aplikace mohou kontaktovat všechny řídící jednotky. Dokud není klient identifikovaný, není mu umožněno komunikovat s nikým jiným, než s komunikačním serverem.
+
+\subsection{Logic}
+Blok „Logic“ je hlavní vlákno, které řídí tok komunikace indetifikovanch klientů. Protékající data zpracovává a uchovává k zobrazení ve webové aplikac. Dále se stará o tisk komunikace na zvolených výstupech z bloku „Logger“.
+
+\subsection{Logger}
+Blok „Logger“ slouží k výpisu či logování probíhající komunikace a dalších informací. Aktuálně je možné výpis provádět do konzole, která je ideální pro ladění uživatelem, případně je možný výpis do souboru, kde slouží pro zpětné dohledávání chyb.
 
 \section{Zprovoznění}
 Pro správnou funkcionalitu komunikačního serveru, je nutné server provozovat na veřejné IP adrese, s přesměrováním portu 6666 na lokální adresu serveru v interní síti.
 
-\section{Grafické uživatelské rozhraní}
-Not implemented yet.
+\section{Konzolový výstup}
+Pro lepší vývoj a testování jsem vytvořil konzolový náhled na komunikaci serveru, kde jsou časově a barevně odlišeny různé operace.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/serverView.png}
+\caption{Konzolové okno komunikačního server}
+\label{image}
+\end{center}
+\end{figure}
+
+\paragraph{Významy barev v serverovém logu:}
+\begin{itemize}
+\item Zelená - Zařízení připojeno
+\item Žlutá - Zařízení identifikováno (řídící jednotka, nebo mobilní aplikace)
+\item Červená - Zařízení odpojeno
+\item Šedivá - Běžná komunikace
+\end{itemize}
 
 \section{Testovací klient}
-Not implemented yet.
+Testovací klient vznik za účelem testování serverové části, bez nutnosti komunikace reálných zařízení nad reálnými daty. Klient umožňuje výběr z několika režimů, kde každý umožňuje simulovat něco jiného. Po výběru jednoho z režimů, se testovací klient připojí na komukační server pod zvoleným nastavením. Poté lze například zasílat testovací retěžce se seznamem komponent, odpovídat na API dotazy a podobné.
+
+\paragraph{Seznam všech režimů testovacího klienta:}
+\begin{itemize}
+\item Simulace mobilní aplikace
+\item Simulace mobilní aplikace (READ ONLY)
+\item Simulace mobilní aplikace (WRITE ONLY)
+\item Simulace řídící jednotky
+\item Simulace řídící jednotky (READ ONLY)
+\item Simulace řídící jednotky (WRITE ONLY)
+\end{itemize}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=\textwidth]{images/testingClient.png}
+\caption{Konzolové okno testovacího klienta}
+\label{image}
+\end{center}
+\end{figure}
+
 
 % Závěr
 
@@ -694,33 +795,33 @@ Not implemented yet.
 \addcontentsline{toc}{chapter}{Literatura}
 
 \begin{thebibliography}{10}
-\bibitem{Bachelor thesis}MORAVEC, Tomáš. Koncept nízkonákladového sledovacího zařízení pro osobní automobily: The concept of a low cost tracking device for personal cars. Liberec: Technická univerzita v Liberci, 2016.
-\bibitem{Security alarm}Security alarm. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://en.wikipedia.org/wiki/Security_alarm}
-\bibitem{Electronic security system}Elektronické zabezpečovací systémy [online]. , 1 [cit. 2017-05-23]. Dostupné z: \url{http://www.ezasys.cz/elektronicke-zabezpecovaci-systemy/}
-\bibitem{Electronic security signalisation}Elektronická zabezpečovací signalizace. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Elektronick\%C3\%A1\_zabezpe\%C4\%8Dovac\%C3\%AD_signalizace}
-\bibitem{Wiring}Wiring [online]. [cit. 2016-05-08]. Dostupné z: \url{http://wiring.org.co/}
-\bibitem{Visual Micro}Visual Micro [online]. [cit. 2017-05-23]. Dostupné z: \url{http://www.visualmicro.com/}
 \bibitem{Arduino intro}Arduino introduction. Arduino [online]. [cit. 2017-05-23]. Dostupné z: \url{https://www.arduino.cc/en/Guide/Introduction}
 \bibitem{Arduino lib}Arduino libraries. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Reference/Libraries}
+\bibitem{ArduinoProducts}Arduino Products [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Main/Products}
 \bibitem{Arduino lang}Arduino programming language. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Reference/HomePage}
-\bibitem{Arduino schematic}ARDUINO LLC. Arduino Schematic [online]. 1 s. [cit. 2016-05-07]. Dostupné z: \url{https://www.arduino.cc/en/uploads/Main/Arduino\_Uno\_Rev3-schematic.pdf}
+\bibitem{Arduino schematic}Arduino Schematic [online]. 1 s. [cit. 2016-05-07]. Dostupné z: \url{https://www.arduino.cc/en/uploads/Main/Arduino\_Uno\_Rev3-schematic.pdf}
 \bibitem{Arduino soft} Arduino software. Arduino [online]. [cit. 2016-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Main/Software}
 \bibitem{Arduino source}Arduino source code. GitHub [online]. [cit. 2016-05-08]. Dostupné z: \url{https://github.com/arduino/Arduino/tree/1.6.8}
-\bibitem{Atmega datasheet}ATMEL CORPORATION. ATmega48A/PA/88A/PA/168A/PA/328/P Datasheet [online]. 2015, 660 s. [cit. 2016-05-07]. Dostupné z: http://www.atmel.com/images/Atmel-8271-8-bit-AVR-Microcontroller-ATmega48A-48PA-88A-88PA-168A-168PA-328-328P\_ datasheet\_Complete.pdf
-\bibitem{LaTeX}SATRAPA, Pavel. LaTeX pro pragmatiky [online]. 2011, 87 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-pro-pragmatiky.pdf}
-\bibitem{Pruvodce arduinem}VODA, Zbyšek. Průvodce světem Arduina [online]. Vydání první. Bučovice: Martin Stříž, 2015 [cit. 2016-05-07]. ISBN 978-80-87106-90-7.
-\bibitem{SIMCOM SW}SIMCOM WIRELESS SOLUTIONS. SIM908 AT Command Manual [online]. Jinzhong, 2011, 249 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.dfrobot.com/image/data/TEL0051/3.0/SIM908\_AT\%20Command\%20Manua\_V1.01.pdf}
-\bibitem{SIMCOM HW}SIMCOM WIRELESS SOLUTIONS. SIM908 Hardware Design [online]. 2. Jinzhong, 2012, 53 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.niplesoft.net/blog/wp-content/uploads/2016/02/SIM908-Hardware-Design-V2.00-1.pdf}
-\bibitem{LaTeX}SATRAPA, Pavel. Stručný přehled příkazů LaTeXu [online]. 2011, 2 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-prehled.pdf}
-\bibitem{TULVisual}Manuál jednotného vizuálního stylu Technické univerzity v Liberci [online]. , 27 [cit. 2017-05-27]. Dostupné z: \url{http://www.ft.tul.cz/document/126}
-\bibitem{HTML1.1}FIELDING, R., UC IRVINE, J. GETTYS, et al. Hypertext Transfer Protocol -- HTTP/1.1 [online]. 1999, , 176 [cit. 2017-05-27]. Dostupné z: \url{http://www.ietf.org/rfc/rfc2616.txt}
-\bibitem{WhatsNew.NetFramework4.5.2}What's new in the .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://docs.microsoft.com/en-us/dotnet/framework/whats-new/index#v452}
-\bibitem{.NetFramework4.5.2}Microsoft .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://support.microsoft.com/en-us/help/2901907/microsoft-net-framework-4-5-2-offline-installer-for-windows-server-201}
-\bibitem{DesktopMarketShare}Desktop Operating System Market Share Europe [online]. [cit. 2018-05-07]. Dostupné z: \url{http://gs.statcounter.com/os-market-share/desktop/europe/#monthly-201704-201804-bar}
-\bibitem{MobileMarketShare}Mobile Operating System Market Share Europe [online]. [cit. 2018-05-07]. Dostupné z: \url{http://gs.statcounter.com/os-market-share/mobile/europe/#monthly-201704-201804-bar}
-\bibitem{ArduinoProducts}Arduino Products [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Main/Products}
-\bibitem{CompareBoardSpecs}Compare board specs [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Products/Compare}
+\bibitem{Atmega datasheet}ATmega48A/PA/88A/PA/168A/PA/328/P Datasheet [online]. 2015, 660 s. [cit. 2016-05-07]. Dostupné z: http://www.atmel.com/images/Atmel-8271-8-bit-AVR-Microcontroller-ATmega48A-48PA-88A-88PA-168A-168PA-328-328P\_ datasheet\_Complete.pdf
 \bibitem{BaudRates}BaudRates for communicating with the computer [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/serial/begin}
+\bibitem{CompareBoardSpecs}Compare board specs [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Products/Compare}
+\bibitem{DesktopMarketShare}Desktop Operating System Market Share Europe [online]. [cit. 2018-05-07]. Dostupné z: \url{http://gs.statcounter.com/os-market-share/desktop/europe/#monthly-201704-201804-bar}
+\bibitem{Electronic security signalisation}Elektronická zabezpečovací signalizace. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Elektronick\%C3\%A1\_zabezpe\%C4\%8Dovac\%C3\%AD_signalizace}
+\bibitem{Electronic security system}Elektronické zabezpečovací systémy [online]. , 1 [cit. 2017-05-23]. Dostupné z: \url{http://www.ezasys.cz/elektronicke-zabezpecovaci-systemy/}
+\bibitem{HTML1.1}FIELDING, R., UC IRVINE, J. GETTYS, et al. Hypertext Transfer Protocol -- HTTP/1.1 [online]. 1999, , 176 [cit. 2017-05-27]. Dostupné z: \url{http://www.ietf.org/rfc/rfc2616.txt}
+\bibitem{TULVisual}Manuál jednotného vizuálního stylu Technické univerzity v Liberci [online]. , 27 [cit. 2017-05-27]. Dostupné z: \url{http://www.ft.tul.cz/document/126}
+\bibitem{.NetFramework4.5.2}Microsoft .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://www.microsoft.com/en-us/download/details.aspx?id=42642}
+\bibitem{MobileMarketShare}Mobile Operating System Market Share Europe [online]. [cit. 2018-05-07]. Dostupné z: \url{http://gs.statcounter.com/os-market-share/mobile/europe/#monthly-201704-201804-bar}
+\bibitem{Bachelor thesis}MORAVEC, Tomáš. Koncept nízkonákladového sledovacího zařízení pro osobní automobily: The concept of a low cost tracking device for personal cars. Liberec: Technická univerzita v Liberci, 2016.
+\bibitem{LaTeX}SATRAPA, Pavel. LaTeX pro pragmatiky [online]. 2011, 87 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-pro-pragmatiky.pdf}
+\bibitem{LaTeX}SATRAPA, Pavel. Stručný přehled příkazů LaTeXu [online]. 2011, 2 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.nti.tul.cz/~satrapa/docs/latex/latex-prehled.pdf}
+\bibitem{Security alarm}Security alarm. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://en.wikipedia.org/wiki/Security_alarm}
+\bibitem{SIMCOM SW}SIM908 AT Command Manual [online]. Jinzhong, 2011, 249 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.dfrobot.com/image/data/TEL0051/3.0/SIM908\_AT\%20Command\%20Manua\_V1.01.pdf}
+\bibitem{SIMCOM HW}SIM908 Hardware Design [online]. 2. Jinzhong, 2012, 53 s. [cit. 2016-05-07]. Dostupné z: \url{http://www.niplesoft.net/blog/wp-content/uploads/2016/02/SIM908-Hardware-Design-V2.00-1.pdf}
+\bibitem{Visual Micro}Visual Micro [online]. [cit. 2017-05-23]. Dostupné z: \url{http://www.visualmicro.com/}
+\bibitem{Pruvodce arduinem}VODA, Zbyšek. Průvodce světem Arduina [online]. Vydání první. Bučovice: Martin Stříž, 2015 [cit. 2016-05-07]. ISBN 978-80-87106-90-7.
+\bibitem{WhatsNew.NetFramework4.5.2}What's new in the .NET Framework 4.5.2. Microsoft.com [online]. [cit. 2018-02-21]. Dostupné z: \url{https://docs.microsoft.com/en-us/dotnet/framework/whats-new/index#v452}
+\bibitem{Wiring}Wiring [online]. [cit. 2016-05-08]. Dostupné z: \url{http://wiring.org.co/}
 \end{thebibliography}
 
 % Příloha
