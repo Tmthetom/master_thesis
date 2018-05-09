@@ -118,12 +118,41 @@ Komunikátor je zařízení, které odesílá informaci o narušení objektu, p�
 % Požadované vlastnosti
 
 \section{Požadované vlastnosti}
+V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení, a jaké komponenty byly na základě těchto požadavků zvoleny.
 
 \subsection{Domovní systém}
+Z úvodní části je zřejmé, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
+V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou a mobilní aplikaci. Následující část rozdělena do těchto dvou částí.
 
 \subsection{Desktopová aplikace}
+Desktopová aplikace musí být schopna využít plného potenciálu ústředny, tedy umožnit kompletní správu a nastavování jednotlivých komponent (spínačů a senzorů). Komunikace s ústřednou bude umožněna pomocí sériové linky (COM port), v případě prototypu bude použito připojení skrze USB. Cílový operační systém jsem zvolil Windows 10, jakožto v evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže.
+
+\paragraph{Požadavky na desktopovou aplikaci:}
+\begin{itemize}
+\item Zobrazení seznamu všech připojench komponent
+\item Zobrazení všech informací o zvolené komponentě
+\item Změna libovolného nastavení všech komponent
+\item Sledování aktuálního stavu všech komponent
+\item Přidávání nových komponent
+\item Odstraňování stávajících komponent
+\item Notifikace v případě změny stavů senzorů
+\item Změna stavu spínačů
+\item Připojování a odpojování od zvolené ústředny
+\end{itemize}
 
 \subsection{Mobilní aplikace}
+Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bude možné sledovat stavy jednotlivých senzorů, případně spínat veškeré spínací prvky. Její návrh je tedy značně jednodušší oproti komplexnější desktopové aplikaci. Cílový operační systém jsem zvolil Android, jakožto v evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže.
+
+\paragraph{Požadavky na mobilní aplikaci:}
+\begin{itemize}
+\item Zobrazení seznamu všech připojench komponent
+\item Zobrazení všech informací o zvolené komponentě
+\item Sledování aktuálního stavu všech komponent
+\item Notifikace v případě změny stavů senzorů
+\item Změna stavu spínačů
+\item Připojování a odpojování od zvolené ústředny
+\end{itemize}
+
 
 \subsection{Webová aplikace}
 
@@ -136,30 +165,6 @@ Komunikátor je zařízení, které odesílá informaci o narušení objektu, p�
 \section{Domovní systém}
 
 \subsection{Řídící jednotka}
-
-\subsection{Detektory}
-
-\subsection{Spínací prkvy}
-
-\subsection{Komunikátor}
-
-\section{Desktopová aplikace}
-
-\section{Mobilní aplikace}
-
-\section{Webová aplikace}
-
-\section{Komunikační server}
-
-% Požadované vlastnosti a zvolené komponenty
-
-\chapter{Požadované vlastnosti a zvolené komponenty}
-V následující části se zaměřím na požadované vlastnosti zabezpečovacího zařízení, a jaké komponenty byly na základě těchto požadavků zvoleny.
-
-\section{Hardware}
-Z úvodní části je zřejmé, že kompletní zabezpečovací systém musí obsahovat detektory, komunikátor a ústřednu. Rozebereme si tedy jednotlivé části.
-
-\subsection{Ústředna}
 Ústředna musí být schopna spravovat všechny připojené detektory, senzory a spínací prvky, a komunikovat s desktopovou a mobilní aplikací. a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že ústřednou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, více než vhodnou pro tyto účely. Firmware ústředny bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
 
 \paragraph{Zvolená ústředna:}
@@ -192,6 +197,8 @@ Požadavky nejsou kladeny pouze na samotné detektory, ale také na spínače, k
 \end{center}
 \end{figure}
 
+\subsection{Spínací prkvy}
+
 \subsection{Komunikátor}
 Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. Zadání jako hlavní komunikátor určuje mobilní telefon, pomocí kterého máme umožnit ústředně datové přenosy. Zvolen byl nový a zároveň nejlevnější mobilní telefon na trhu. Pro případ neúspěchu, při získávání zdrojů mobilního telefonu, byla zvolena alternativa v podobě GSM/GPRS modulu, který byl zakoupen z Číny, dodací doba této součástky, stejně jako na všechny ostatní, byla přes jeden kalendářní měsíc.
 
@@ -209,99 +216,81 @@ Požadavek na komunikátor je přenos dat do počítače a přes mobilní data. 
 \end{center}
 \end{figure}
 
-\section{Software (ovladač)}
-V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou a mobilní aplikaci. Následující část rozdělena do těchto dvou částí.
+\section{Desktopová aplikace}
 
-\subsection{Desktopová aplikace}
-Desktopová aplikace musí být schopna využít plného potenciálu ústředny, tedy umožnit kompletní správu a nastavování jednotlivých komponent (spínačů a senzorů). Komunikace s ústřednou bude umožněna pomocí sériové linky (COM port), v případě prototypu bude použito připojení skrze USB. Cílový operační systém jsem zvolil Windows 10, jakožto v evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže.
+\section{Mobilní aplikace}
 
-\paragraph{Požadavky na desktopovou aplikaci:}
-\begin{itemize}
-\item Zobrazení seznamu všech připojench komponent
-\item Zobrazení všech informací o zvolené komponentě
-\item Změna libovolného nastavení všech komponent
-\item Sledování aktuálního stavu všech komponent
-\item Přidávání nových komponent
-\item Odstraňování stávajících komponent
-\item Notifikace v případě změny stavů senzorů
-\item Změna stavu spínačů
-\item Připojování a odpojování od zvolené ústředny
-\end{itemize}
+\section{Webová aplikace}
 
-\subsection{Komunikační server}
-
-\subsection{Mobilní aplikace}
-Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bude možné sledovat stavy jednotlivých senzorů, případně spínat veškeré spínací prvky. Její návrh je tedy značně jednodušší oproti komplexnější desktopové aplikaci. Cílový operační systém jsem zvolil Android, jakožto v evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže.
-
-\paragraph{Požadavky na mobilní aplikaci:}
-\begin{itemize}
-\item Zobrazení seznamu všech připojench komponent
-\item Zobrazení všech informací o zvolené komponentě
-\item Sledování aktuálního stavu všech komponent
-\item Notifikace v případě změny stavů senzorů
-\item Změna stavu spínačů
-\item Připojování a odpojování od zvolené ústředny
-\end{itemize}
-
-\subsection{Webová aplikace}
+\section{Komunikační server}
 
 % Domovní systém (hardware a firmware)
 
 \chapter{Domovní systém}
 
 \section{Slepá cesta vývoje (využití mobilního telefonu)}
-Následující část pojednává o snaze využít GSM/GPRS modulu integrovaném v mobilním telefonu. Práce na této části zabrali přibližně dva měsíce, proto bude rozdělena do více částí.
+Následující část pojednává o snaze využít GSM/GPRS modulu integrovaném v „hloupém“ mobilním telefonu. Práce na této části zabrali přibližně dva měsíce, po kterých se tato cesta ukázala jak slepá, proto byla zavrhnuta.
 
-\subsection{Možné postupy}
-První úkolem bylo, jak by bylo možné tyto zdroje z mobilního telefonu získat. Průzkumem existujících prací a internetu jsem mohl tento problém rozdělit na dvě kategorie. Chytré telefony a klasické telefony. U chytrých telefonů není získání těchto zdrojů problém, stačí napsat software, který tyto zdroje poskytne přes port USB a tím je problém vyřešen. Klasické telefony se dělí do dvou podkategorií. Telefony s dokumentací s API a poté telefon bez API a dokumentace. Některé starší telefony měli otevřené dokumentace a některá dokonce i API přímo pro tyto účely (Motorola, Nokia), pro tyto mobilní telefony existuje internet plný návodů, jak se dostat ke zdrojům které chceme, nicméně takových modelů je opravdu malé množství. Poslední kategorií jsou mobilní telefony bez otevřených dokumentací a bez API, která by zpřístupňovala chtěné zdroje mobilního telefonu. Pro tyto mobilní telefony jsem nenalezl žádné dostupné řešení, přitom jsou to telefony nejrozšířenější a tím se staly pro tento projekt zajímavými.
+\subsection{Využití mobilního telefonu pro datovou komunikaci}
+Jednou z prvních myšlenek této práce bylo, zdali je možné využít starší „hloupý“ mobilní telefon pro přístup do datové sítě. V aktuální době se mobilní telefony rozdělují do dvou hlavních kategorií, tedy chytré telefony a klasické "hloupé" telefony.
 
-\paragraph{Varianty telefonů:}
+U chytrých telefonů je získání přístupu do sítě GPRS triviální. Stačí napsat software, který tyto zdroje poskytne přes port USB a tím je problém vyřešen. Klasické telefony se dělí do dvou podkategorií. 
+
+První podkategorie jsou telefony s dokumentací a s API. Některé starší telefony měli otevřené dokumentace a některá dokonce i API přímo pro tyto účely (Motorola, Nokia). Pro tyto mobilní telefony existuje velké množtví návodů a postupů, jak připojení do sítě GPRS docílit. 
+
+Druhou podkategorií jsou mobilní telefony bez otevřených dokumentací a bez API, která by zpřístupňovala zdroje mobilního telefonu. Pro tyto mobilní telefony jsem nenalezl žádné dostupné řešení, přitom jsou to telefony nejrozšířenější, tím se staly pro tento projekt zajímavými.
+
+\paragraph{Získání přístupu do sítě GPRS, skrze:}
 \begin{itemize}
 \item Chytrý telefon (vyřešeno)
 \item Klasický telefon s API (vyřešeno)
 \item Klasický telefon bez API a dokumentace (nevyřešeno)
 \end{itemize} 
 
-\subsection{Výběr telefonu}
-Prvním úkolem bylo vybrání vhodného kandidáta pro tyto účely. Bylo tedy nutné zvolit telefon, pro který zatím není problém vyřešen. Po provedení průzkumu trhu jsem zjistil, že je možné vybírat jak z bazarových kousků, tak z nových. Zajímavým zjištěním bylo, že ceny nových telefonů podporujících s funkcí GSM i GPRS startují na 450 Kč s DPH za kus. Bazarové kousky začínají na 600 Kč s DPH za kus. Vzhledem k nižší ceně, záruce a garanci funkčnosti bylo rozhodnuto pro nový kus.
+\subsection{Klasický telefon bez API a dokumentace}
+Prvním úkolem bylo vybrání vhodného telefonu pro tyto účely. Po provedení průzkumu trhu jsem zjistil, že je možné vybírat jak z bazarových kusů, tak z nových. Zajímavým zjištěním bylo, že ceny nových telefonů podporujících s funkcí GSM i GPRS se pohybují kolem 450 Kč s DPH za kus. Bazarové kousky začínají na 600 Kč s DPH za kus. Vzhledem k nižší ceně, záruce a garanci funkčnosti jsem se rozhodl zakoupit nový model.
 
-\subsection{První rozbor}
-Před obdržením zakoupeného telefonu jsem provedl průzkum, zda existují dokumentace, nebo zda se někdo pokoušel alespoň o něco podobného. Výsledkem bylo, že kromě oficiálního letáku s velice obecnými parametry přístroje, neexistují žádné veřejné dokumentace ani studie zařízení. Ihned po obdržení jsem se tedy pustil do vlastního průzkumu.
+\subsection{Tlačítkový telefon STK R45i}
+Při výběru nového telefonu jsem primárně sledoval cenu a přítomnost GPRS. Bezkonkurenčně nejlevnějším telefonem byl tlačítkový mobil od britského výrobce STK R45i. Zakoupen byl prostřednictvím internetového obchodu Alza.cz za cenu 419 Kč s DPH bez dopravy. Cena s dopravou činila celkových 449 Kč s DPH.
+
+Před obdržením zakoupeného telefonu jsem provedl průzkum, zda existují dokumentace, nebo zda se pokoušel někdo o něco podobného u této značky. Kromě oficiálního letáku s velice obecnými parametry přístroje jsem nenalezl žádné veřejné dokumentace. Stejně tak jsem nenalezl žádné informace o tom, že by někdo prováděl, třeba i rozbor, tohoto, či jiného zařízení od této značky. Ihned po obdržení jsem se tedy pustil do vlastního průzkumu.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.4\textwidth]{images/phone.png}
-\caption{Zakoupený mobilní telefon}
+\caption{Zakoupený mobilní telefon STK R45i}
 \label{image}
 \end{center}
 \end{figure}
 
 \subsection{Kontaktování výrobce}
-Jedním z prvních kroků bylo kontaktování výrobce s vysvětlením mého projektu a žádostí o poskytnutí dokumentačních podkladů. Napsal jsem celkem na 3 oddělení britské společnosti, přesněji na obchodní, podporu a servis. Mezitím jsem se pokusil o komunikaci s mobilním telefonem skrze USB, stejně jako to bylo možné u telefonů s API k těmto účelům, to se nepodařilo. Nakonec přišla shodná odpověď ze všech tří kontaktovaných oddělení, tedy že mi dokumentace neposkytnou.
+Bez existujících dokumentací jsem se nejdříve rozhodl kontaktovat samotného výrobce s vysvětlením mého projektu a žádostí o poskytnutí dokumentačních podkladů. Napsal jsem celkem na 3 oddělení britské společnosti, přesněji na obchodní, podporu a servis. Do jednoho týdne přišla shodná odpověď od všech tří kontaktovaných oddělení. Zprávou bylo, že mi dokumentace neposkytnou a že mi v mé práci nemohou pomoci.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.6\textwidth]{images/response.png}
-\caption{Odpověď od společnosti STK}
+\caption{Jedna z odpovědí od společnosti STK}
 \label{image}
 \end{center}
 \end{figure}
 
-\subsection{Hlubší rozbor}
-Bez dokumentací jsem musel začít zkoumat více do hloubky. Po konzultaci s vedoucím byl telefon rozebrán a zkoumán na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi jako jednu variantu podařilo nalézt servisní piny, které jsem se následně snažil analyzovat a skrze ně komunikovat s mobilním telefonem.
+\subsection{Rozebrání mobilního telefonu}
+Vzhledem k negativní odpovědi výrobce jsem zahájil vlastní výzkum. Prvním pokusem byla komunikace s mobilním telefonem skrze USB, stejně jako to bylo možné u telefonů s API k těmto účelům. Několik týdnů výzkumu jsem zasvětil pokusům o přímou komunikaci po seriové lince. Bez úspěchu.
+
+Po dohodě s vedoucím práce, jsem se rozhodl porušit záruku a rozebrat telfefon. Zaměřil jsem se primárně na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi podařilo nalézt servisní piny, které jsem se následně snažil analyzovat a skrze ně komunikovat s mobilním telefonem. Po několika týdnech opět bez úspěchu.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=0.7\textwidth]{images/servicePins.png}
-\caption{Objevené servisní piny}
+\caption{Servisní piny}
 \label{image}
 \end{center}
 \end{figure}
 
 \subsection{Závěr rozboru}
-Ani po několika týdenním snažení se nepodařilo z pinů dostat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním  analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Po dvouměsíčním zkoumání jsem musel celou věc uzavřít a oznámit vedoucímu, že tudy zřejmě cesta nevede. Od využití mobilního telefonu bylo tedy upuštěno.
+Po dvou měsíčním snažení se z mobilního telefonu nepodařilo získat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Tuto cestu jsem byl nucen uzavřít a oznámit vedoucímu, že tudy cesta nevede. Od využití mobilního telefonu bylo tedy upuštěno a jako vstupní brána do GPRS byl pořízen samostatný GSM/GPRS modul.
 
-\section{Zapojení}
+\section{Prototyp}
 
 \subsection{Blokové schéma}
 
@@ -678,7 +667,7 @@ K zajištění komunikace mezi řídící jednotkou a mobilní aplikací fungova
 \section{Slepé cesty vývoje}
 
 \subsection{Přímá komunikace mezi zařízeními}
-Prvním vyvíjeným řešením bylo propojení řídící jednotky a aplikací bez komunikačního serveru. Po půl roce výzkumu jsem tuto variantu zavrhl, protože veřejné IP adresy v mobilní datové sítí jsou dynamické (včetně IPV6). Bez pevného bodu v internetu, jsem nebyl schopen určit adresu ostatních zařízení.
+Prvním vyvíjeným řešením bylo propojení řídící jednotky a aplikací bez komunikačního serveru. Po půl roce výzkumu jsem tuto variantu zavrhl, protože veřejné IP adresy v mobilní datové sítí jsou dynamické (včetně IPv6). Bez pevného bodu v internetu, jsem nebyl schopen určit adresu ostatních zařízení.
 
 \subsection{Implementace serveru v řídící jednotce}
 Druhým vyvíjeným řešením bylo vytvoření komunikačního serveru přímo v řídící jednotce. Po čase jsem odhalil, že přidání další zátěže jednočipovému počítači, mělo za následek nestabilitu celého systému. Řídící jednotka nestíhala obsluhovat všechny požadavky najednou (jak hardwarové, tak softwarové) a s rostoucí komunikací začala mít nedostatek paměti. Stejně tak jako předchozí řešení, i tuto variantu jsem po půl roce výzkumu zavrhl.
@@ -703,6 +692,7 @@ Not implemented yet.
 % Literatura
 
 \addcontentsline{toc}{chapter}{Literatura}
+
 \begin{thebibliography}{10}
 \bibitem{Bachelor thesis}MORAVEC, Tomáš. Koncept nízkonákladového sledovacího zařízení pro osobní automobily: The concept of a low cost tracking device for personal cars. Liberec: Technická univerzita v Liberci, 2016.
 \bibitem{Security alarm}Security alarm. Wikipedia [online]. [cit. 2017-05-23]. Dostupné z: \url{https://en.wikipedia.org/wiki/Security_alarm}
@@ -731,13 +721,12 @@ Not implemented yet.
 \bibitem{ArduinoProducts}Arduino Products [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Main/Products}
 \bibitem{CompareBoardSpecs}Compare board specs [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/Products/Compare}
 \bibitem{BaudRates}BaudRates for communicating with the computer [online]. [cit. 2018-05-08]. Dostupné z: \url{https://www.arduino.cc/en/serial/begin}
-
-
 \end{thebibliography}
 
 % Příloha
 
 \appendix
+
 \chapter{Obsah přiloženého CD}
 Struktura a obsah adresářů je následující:
 
