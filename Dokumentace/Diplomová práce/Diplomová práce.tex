@@ -32,14 +32,13 @@ Děkuji vedoucímu práce panu doc. Ing. Josefu Chaloupkovy, Ph.D. za odborné v
 % Abstrakt
 
 \begin{abstractCZ}
-Práce se zabývá vytvořením inteligentního domovního systému, určenému ke zpracování dat z bezpečnostních a meteorologických čidel, a řízení vybraných domovních zařízení. Komplexní řešení zahrnuje jak samotný domovní systém, tak mobilní, webovou a desktopovou aplikaci. V úvodu jsou definovány základní pojmy a požadované vlastnosti. Následuje rešerše a výběr vhodných hardwarových a softwarových řešení. Ná základě rešerše je navržen koncept komplexního domovního systému, který je následně realizován v jednotlivých etapách. Výstupem práce je funkční cílové zařízení, které aplikuje zvolené hardwarové i softwarové řešení.
-
+Diplomová práce se zabývá vytvořením inteligentního domovního systému, určenému ke zpracování dat z bezpečnostních a meteorologických čidel, a řízení vybraných domovních zařízení. Komplexní řešení zahrnuje jak samotný domovní systém, tak mobilní, webovou a desktopovou aplikaci. V úvodu jsou definovány základní pojmy a požadované vlastnosti. Následuje rešerše a výběr vhodných hardwarových a softwarových řešení. Na základě rešerše je navržen koncept komplexního domovního systému, který je následně realizován v jednotlivých etapách. Výstupem práce je funkční cílové zařízení, které aplikuje zvolené hardwarové i softwarové řešení.
 \end{abstractCZ}
 
 \vspace{2cm}
 
 \begin{abstractEN}
-Not implemented yet.
+The master thesis deals with development of an intelligent home system, designed to process data from security and meteorological sensors, and to control of selected home devices. The solution includes not only home system, but also mobile, internet and desktop applications. The introduction defines basic concepts and required functions, followed by a research and selection of the best hardware and software solutions. Based on the research, a concept of the complex system is designed and the solution is realized in separate stages. The result of this work is target device, which follows the chosen hardware and software solution.
 \end{abstractEN}
 
 % Seznam zkratek
@@ -72,18 +71,18 @@ Not implemented yet.
 % Inteligentní domovní systém
 
 \chapter{Inteligentní domovní systém}
-Inteligentní domovní systém je kombinací zabezpečovacího systému s prvky chytré domácnosti. Nyní se zaměřím na vysvětlení pojmů zabezpečovací systém a inteligentní dům (chytrá domácnost).
+Inteligentní domovní systém je kombinací zabezpečovacího systému a prvků chytré domácnosti. Tímto spojením se zvyšuje komfort obyvatel domu, s cílem zvýšit jejich pohodlí a zaručit nejvyšší možnou bezpečnost. Následující část se věnuje vysvětlení elementárních pojmů této problematiky, které se v dané tématice běžně vyskytují. Tato část rozdělena na zabezpečovací systém a inteligentní dům, z kterýchž se inteligentní domovní systém sestává.
 
 % Zabezpečovací systém
 
 \section{Zabezpečovací systém}
-Zabezpečovací systém, někdy také elektronická zabezpečovací signalizace, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní, či okenní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
+Elektronická zabezpečovací signalizace, neboli zabezpečovací systém, je zařízení, které vizuálně nebo akusticky vyhlašuje poplach a dává na vědomí, že nastaly nějaké potíže nebo došlo ke splnění sledované podmínky \cite{Security alarm}. Jde tedy o zařízení, které slouží k ochraně osob a majetku. Systém je řízen ústřednou a může se spustit analogovou (např. dveřní, či okenní čidlo) i digitální (detektor pohybu) detekcí. Komunikace mezi detektory a ústřednou může být vedena kabelem, bezdrátově anebo kombinací předešlých způsobů, tj. jeden detektor může být připojen kabelem a druhý bezdrátově \cite{Electronic security system}.
 
 \subsection{Ústředna}
-Ústředna je „mozek“ celého systému, který je propojen s ostatními prvky systému kabely nebo bezdrátově. Obstarává komunikaci mezi jednotlivými komponenty systému, má v integrované paměti uložené nejdůležitější nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často bývá vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustického (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
+Mozkem celého systému je ústředna. Propojena je s ostatními prvky systému kabely nebo bezdrátově a obstarává komunikaci mezi jednotlivými komponenty systému. V integrované paměti má uložené nejdůležitější informace a nastavení \cite{Electronic security system}. V závislosti na připojených komponentech pak může různě reagovat na splnění sledovaných podmínek. Často bývá vybavena jenom tím nejnutnějším pro vyvolání poplachu, to ať už akustického (siréna), nebo tichého (informování majitele) \cite{Security alarm}.
 
 \subsection{Ovladač}
-Ovladač je prvek, který slouží k ovládání a případně též k programování ústředny. Dnešní alarmy je možné ovládat několika způsoby. Jako ovladač se nejčastěji používá klávesnice vybavená tlačítky, případně čtečkou (čipovými kartami a přívěšky) nebo též dálkové ovládání. U některých systémů se dá přes klávesnici provést nastavení celého systému. Klávesnice slouží k zastřežení i odstřežení systému \cite{Electronic security signalisation}. Dalšími způsoby je ovládání přes internet, kdy se většinou používá integrované webové rozhraní, ke kterému se uživatel může připojit po zadání hesla, nebo ovládání přes mobil (SMS příkazy) \cite{Bachelor thesis}.
+K ovládání, případně k programování ústředny slouží ovladač. Dnešní alarmy je možné ovládat několika způsoby. Jako ovladač se nejčastěji používá klávesnice vybavená tlačítky, případně čtečkou (čipovými kartami a přívěšky) nebo též dálkové ovládání. U některých systémů se dá přes klávesnici provést nastavení celého systému. Klávesnice slouží k zastřežení i odstřežení systému \cite{Electronic security signalisation}. Dalšími způsoby je ovládání přes internet, kdy se většinou používá integrované webové rozhraní, ke kterému se uživatel může připojit po zadání hesla, nebo ovládání přes mobil (SMS příkazy) \cite{Bachelor thesis}.
 
 \subsection{Detektor}
 Detektor je prvek systému, který je rozmístěn v hlídaném objektu a má za úkol reagovat aktivací při narušení (otevření, pohyb, rozbití atd.) a to tak, že tuto informaci předá ústředně, která ji následně zpracuje \cite{Electronic security signalisation}. Nejčastěji používané detektorové prvky jsou:
@@ -97,7 +96,7 @@ Detektor je prvek systému, který je rozmístěn v hlídaném objektu a má za 
 \end{itemize}
 
 \subsection{Komunikátor}
-Komunikátor je zařízení, které odesílá informaci o narušení objektu, případně o odchylce od normálního provozního stavu zabezpečovacího systému, mimo  hlídaný objekt. \cite{Electronic security signalisation}. Nejčastější typy komunikátorů jsou:
+V případě nutnosti odeslání informací o narušení objektu, případně o odchylce od normálního provozního stavu zabezpečovacího systému, je možné využít komunikátor. Ten může být řešen více způsoby, ale běžně se využívá radiový vysílač. Přítomnost komunikátoru v systému, na rozdíl od ostatních částí, není podmínkou. \cite{Electronic security signalisation}. Nejčastější typy komunikátorů jsou:
 
 \begin{itemize}
 \item GSM komunikátor
@@ -109,10 +108,10 @@ Komunikátor je zařízení, které odesílá informaci o narušení objektu, p�
 % Inteligentní dům
 
 \section{Inteligentní dům}
-Inteligentní dům, neboli chytrá domácnost znamená možnost ovládání osvětlení, elektroinstalace, termostatu, domácího alarmu, kamer nebo zámku dveří na dálku skrze chytrý telefon, tablet, ale i počítač nebo televizi. Běžně je vše propojeno centální jednotkou, která většinou poskytuje dálkové ovládání skrze internet.
+Inteligentní dům, neboli chytrá domácnost, znamená možnost ovládání osvětlení, elektroinstalace, termostatu, domácího alarmu, kamer nebo zámku dveří na dálku skrze chytrý telefon, tablet, ale i počítač nebo televizi. Běžně je vše propojeno centrální jednotkou, která většinou poskytuje dálkové ovládání skrze internet.
 
 \subsection{Centrální jednotka}
-Srdcem chytré domácnosti je centrální jednotka (neboli řídící jednotka), která komunikuje prostřednictvím konkrétního protokolu. K takové jednotce je možné kdykoliv dokupovat další zařízení, a tvořit tak komplexní chytrou domácnost. Ovládání a řízení celého systému je velmi jednoduché a intuitivní. Inteligentní dům se samozřejmě také stará o zabezpečení domácnosti a poskytuje vám kdykoliv a kdekoliv přehled o jejím aktuálním stavu.
+Srdcem chytré domácnosti je centrální jednotka (neboli řídící jednotka), která komunikuje prostřednictvím konkrétního protokolu. K takové jednotce je možné kdykoliv dokupovat další zařízení, a tvořit tak komplexní chytrou domácnost. Ovládání a řízení celého systému je velmi jednoduché a intuitivní. Inteligentní dům se také stará o zabezpečení domácnosti a poskytuje aktuální přehled informací o svém stavu.
 
 \paragraph{Nejčastější typy připojovaných řízení:}
 \begin{itemize}
@@ -127,10 +126,10 @@ Srdcem chytré domácnosti je centrální jednotka (neboli řídící jednotka),
 % Požadované vlastnosti
 
 \section{Požadované vlastnosti}
-V následující části se zaměřím na požadované vlastnosti všech částí inteligentního domovního systému (ekosystém).
+Na základě požadovaných vlastností, byl sestaven seznam požadavků všech částí inteligentního domovního systému. Každá z pěti částí obsahuje popis požadovaných vlastností a výsledný seznam požadavků.
 
 \subsection{Domovní systém}
-Z úvodní části je zřejmé, že domovní systém obsahuje jak prvky zabezpečovacího systému, tedy musí obsahovat detektory, komunikátor a ústřednu. Zároveň však obsahuje prvky inteligentního domu, tedy musí být schopna monitorovat a řídit různá zařízení v domácnosti. V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou, mobilní aplikaci a webovou aplikaci. Komunikace bude probíhat přes internet.
+Z úvodní části je zřejmé, že domovní systém obsahuje jak prvky zabezpečovacího systému, tedy musí obsahovat detektory, komunikátor a ústřednu. Zároveň však obsahuje prvky inteligentního domu, tedy musí být schopen monitorovat a řídit různá zařízení v domácnosti. V rámci domovního systému jsou výše zmíněné prvky řízeny ovladačem. V této práci se jedná o desktopovou, mobilní aplikaci a webovou aplikaci. Komunikace bude probíhat přes internet.
 
 \paragraph{Požadavky na domovní systém:}
 \begin{itemize}
@@ -174,13 +173,12 @@ Mobilní aplikace je učena pouze jako monitorovací zařízení, ze kterého bu
 \end{itemize}
 
 \subsection{Webová aplikace}
-Od webové aplikace se očekává možnost sledování aktuálního denní a zobrazení historických dat. Od aplikace se neočekává možnost editace, ani a jakékoliv řízení. Komunikace bude probíhat přes internet.
+Od webové aplikace se očekává možnost sledování aktuálního denní online. Od aplikace se neočekává možnost editace, ani a jakékoliv řízení. Komunikace bude probíhat přes internet.
 
 \paragraph{Požadavky na webovou aplikaci:}
 \begin{itemize}
 \item Komunikace přes internet
 \item Sledování aktuálního stavu všech komponent
-\item Zobrazení historických dat
 \end{itemize}
 
 \subsection{Komunikační server}
@@ -194,15 +192,16 @@ Komunikační server je nutný pro navázání spojení mezi řídící jednotko
 \item Logování probíhající komunikace
 \end{itemize}
 
-% Zvolené řešení
+% Koncept
 
-\chapter{Zvolené řešení}
+\chapter{Koncept}
+Na základě požadovaných vlastností a přechozích zkušeností autora, byl vybrán 
 
 \section{Domovní systém}
-Jak již bylo řečeno, domovní systém je kombinací zabezpečovacího zařízení a spínacích prvků. Všem těmto částem se budu věnovat níže, kde vyberu nejvhodnější varianty.
+Jak již bylo řečeno, domovní systém je kombinací zabezpečovacího zařízení a spínacích prvků. Těmto částem se budu věnovat níže, kde vyberu nejvhodnější varianty.
 
 \subsection{Řídící jednotka}
-Řídící jednotka musí být schopna spravovat všechny připojené detektory, senzory a spínací prvky, a komunikovat s desktopovou a mobilní aplikací. a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že řídící jednotkou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, případně ARM Cortex-M3, více než vhodnou pro tyto účely. Firmware řídící jednotky bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino. Komunikace bude probíhat skrze mobilní datovou síť.
+Řídící jednotka musí být schopna spravovat všechny připojené detektory, senzory a spínací prvky, a komunikovat s desktopovou a mobilní aplikací, a zároveň musí řídit a zpracovávat jednotlivé komponenty. Již ze zadání diplomové je zřejmé, že řídící jednotkou bude vývojová platforma Arduino \cite{Pruvodce arduinem}, která je se svými periferiemi \cite{Arduino schematic} a čipem Atmega \cite{Atmega datasheet}, případně ARM Cortex-M3, více než vhodnou pro tyto účely. Firmware řídící jednotky bude psán v jazyku  C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring} a vývoj bude probíhat v prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino. Komunikace bude probíhat skrze mobilní datovou síť.
 
 \paragraph{Zvolená řídící jednotka:}
 \begin{itemize}
@@ -255,47 +254,51 @@ Požadavek na komunikátor je přenos dat na server přes mobilní data. Původn
 \end{figure}
 
 \section{Desktopová aplikace}
-Na základě požadovaných vlastností jsem cílový operační systém jsem zvolil Windows 10, jakožto v evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže. Komunikace s aplikací bude probíhat skrze připojení USB (COM).
+Na základě požadovaných vlastností byl zvolen cílový operační systém Windows 10, jakožto v Evropě nejrozšířenější \cite{DesktopMarketShare}. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Jednotlivé požadavky kladené na desktopovou aplikaci lze nalézt níže. Komunikace s aplikací bude probíhat skrze připojení USB (COM).
 
 \section{Mobilní aplikace}
-Cílový operační systém jsem zvolil Android, jakožto v evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže. Komunikace bude probíhat skrze mobilní datovou síť.
+Cílový operační systém byl zvolen Android, jakožto v Evropě nerozšířenější \cite{MobileMarketShare}. Programovací jazyk Java a vývojové prostředí a Android Studio. Jednotlivé požadavky kladené na mobilní aplikaci lze nalézt níže. Komunikace bude probíhat skrze mobilní datovou síť.
 
 \section{Webová aplikace}
 Not implemented yet.
 
 \section{Komunikační server}
-Pperační systém jsem zvolil Windows 10, kvůli rychlosti vývoje. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Komunikace s aplikací bude probíhat skrze pevné připojení k internetu.
+Operační systém byl zvolen Windows 10, kvůli rychlosti vývoje. Programovací jazyk C\# a vývojové prostředí Visual Studio 2017. Komunikace s aplikací bude probíhat skrze pevné připojení k internetu.
 
-% Domovní systém (hardware a firmware)
+% Prototyp domovního systému
 
-\chapter{Domovní systém}
+\chapter{Prototyp domovního systému}
 
-\section{Slepá cesta vývoje (využití mobilního telefonu)}
-Následující část pojednává o snaze využít GSM/GPRS modulu integrovaném v „hloupém“ mobilním telefonu. Práce na této části zabrali přibližně dva měsíce, po kterých se tato cesta ukázala jak slepá, proto byla zavrhnuta.
+\section{Využití mobilního telefonu}
+Následující část pojednává o snaze využít levný tlačítkový mobilní telefon pro přístup do datové sítě, přesněji využít jeho GSM/GPRS modulu, integrovaném na desce telefonu. Práce na této části zabraly přibližně dva měsíce, po kterých se tato cesta ukázala jak slepá, proto byla zavrhnuta. 
+
+Za vším stála myšlenka, že existuje velké množství poškozených a nepoužívaných tlačítkových mobilních telefonů, které jsou dnes již jednoduše nepoužitelné. Takový nepoužitelný telefon je prakticky bezcenný, ale většinou stále obsahuje funkční součástky, které je možné využít.
+
+Jedním z cílů práce bylo zjistit, zda již existují jiná řešení daného problému, případně pokrýt chybějící část těchto řešení, například pro nezdokumentované modely telefonů.
 
 \subsection{Využití mobilního telefonu pro datovou komunikaci}
-Jednou z prvních myšlenek této práce bylo, zdali je možné využít starší „hloupý“ mobilní telefon pro přístup do datové sítě. V aktuální době se mobilní telefony rozdělují do dvou hlavních kategorií, tedy chytré telefony a klasické "hloupé" telefony.
+Aktuálně se mobilní telefony rozdělují do dvou hlavních kategorií. Telefony chytré (smartphone), a telefony klasické, tlačítkové. 
 
 U chytrých telefonů je získání přístupu do sítě GPRS triviální. Stačí napsat software, který tyto zdroje poskytne přes port USB a tím je problém vyřešen. Klasické telefony se dělí do dvou podkategorií. 
 
-První podkategorie jsou telefony s dokumentací a s API. Některé starší telefony měli otevřené dokumentace a některá dokonce i API přímo pro tyto účely (Motorola, Nokia). Pro tyto mobilní telefony existuje velké množtví návodů a postupů, jak připojení do sítě GPRS docílit. 
+První podkategorie jsou telefony s dokumentací a s API. Některé starší telefony měli otevřené dokumentace a některá dokonce i API přímo pro tyto účely (Motorola, Nokia). Pro tyto mobilní telefony existuje velké množství návodů a postupů, jak připojení do sítě GPRS docílit. 
 
-Druhou podkategorií jsou mobilní telefony bez otevřených dokumentací a bez API, která by zpřístupňovala zdroje mobilního telefonu. Pro tyto mobilní telefony jsem nenalezl žádné dostupné řešení, přitom jsou to telefony nejrozšířenější, tím se staly pro tento projekt zajímavými.
+Druhou podkategorií jsou mobilní telefony bez otevřených dokumentací a bez API, která by zpřístupňovala zdroje mobilního telefonu. Pro tyto mobilní telefony nebylo nalezeno žádné dostupné řešení, přitom jsou to telefony nejrozšířenější, tím se staly pro tento projekt zajímavými.
 
 \paragraph{Získání přístupu do sítě GPRS, skrze:}
 \begin{itemize}
-\item Chytrý telefon (vyřešeno)
-\item Klasický telefon s API (vyřešeno)
-\item Klasický telefon bez API a dokumentace (nevyřešeno)
+\item Chytrý telefon (řešení existují)
+\item Klasický telefon s API (řešení existují)
+\item Klasický telefon bez API a dokumentace (řešení nenalazeno)
 \end{itemize} 
 
-\subsection{Klasický telefon bez API a dokumentace}
-Prvním úkolem bylo vybrání vhodného telefonu pro tyto účely. Po provedení průzkumu trhu jsem zjistil, že je možné vybírat jak z bazarových kusů, tak z nových. Zajímavým zjištěním bylo, že ceny nových telefonů podporujících s funkcí GSM i GPRS se pohybují kolem 450 Kč s DPH za kus. Bazarové kousky začínají na 600 Kč s DPH za kus. Vzhledem k nižší ceně, záruce a garanci funkčnosti jsem se rozhodl zakoupit nový model.
+\subsection{Výběr vhodného telefonu}
+Vzhledem k výsledkům průzkumu bylo rozhodnuto, pokusit se o vyřešení využití klasického telefonu bez API a dokumentace. Prvním úkolem bylo vybrání vhodného tlačítkového mobilního telefonu pro tyto účely. Po provedení průzkumu trhu bylo zjištěno, že je možné vybírat jak z bazarových kusů, tak z nových. Zajímavým zjištěním bylo, že ceny nových telefonů podporujících funkci GPRS se pohybují kolem 450 Kč s DPH za kus, zatím co bazarové kousky začínají na 600 Kč s DPH za kus. Vzhledem k nižší ceně, záruce a garanci funkčnosti bylo rozhodnuto zakoupit nový model.
 
-\subsection{Tlačítkový telefon STK R45i}
-Při výběru nového telefonu jsem primárně sledoval cenu a přítomnost GPRS. Bezkonkurenčně nejlevnějším telefonem byl tlačítkový mobil od britského výrobce STK R45i. Zakoupen byl prostřednictvím internetového obchodu Alza.cz za cenu 419 Kč s DPH bez dopravy. Cena s dopravou činila celkových 449 Kč s DPH.
+\subsection{Zakoupený tlačítkový mobilní telefon}
+Při výběru nového tlačítkového telefonu byla hlavním sledovaným prvkem cena a přítomnost GPRS. Bezkonkurenčně nejlevnějším telefonem byl tlačítkový mobil od britského výrobce STK R45i. Zakoupen byl prostřednictvím internetového obchodu Alza.cz za cenu 419 Kč s DPH bez dopravy. Cena s dopravou činila celkových 449 Kč s DPH.
 
-Před obdržením zakoupeného telefonu jsem provedl průzkum, zda existují dokumentace, nebo zda se pokoušel někdo o něco podobného u této značky. Kromě oficiálního letáku s velice obecnými parametry přístroje jsem nenalezl žádné veřejné dokumentace. Stejně tak jsem nenalezl žádné informace o tom, že by někdo prováděl, třeba i rozbor, tohoto, či jiného zařízení od této značky. Ihned po obdržení jsem se tedy pustil do vlastního průzkumu.
+Před obdržením zakoupeného telefonu byl proveden průzkum, zda existují dokumentace, nebo zda se již někdo, s touto značkou, pokusil o něco podobného. Kromě oficiálního letáku s velice obecnými parametry přístroje nebylo možné nalézt žádné veřejné dokumentace. Stejně tak nebyly nalezeny žádné informace o tom, že by někdo prováděl, třeba i rozbor, tohoto, či jiného zařízení od této značky. Ihned po obdržení bylo zahájeno vlastní snažení o zpřístupnění GPRS.
 
 \begin{figure}[H]
 \begin{center}
@@ -305,8 +308,8 @@ Před obdržením zakoupeného telefonu jsem provedl průzkum, zda existují dok
 \end{center}
 \end{figure}
 
-\subsection{Kontaktování výrobce}
-Bez existujících dokumentací jsem se nejdříve rozhodl kontaktovat samotného výrobce s vysvětlením mého projektu a žádostí o poskytnutí dokumentačních podkladů. Napsal jsem celkem na 3 oddělení britské společnosti, přesněji na obchodní, podporu a servis. Do jednoho týdne přišla shodná odpověď od všech tří kontaktovaných oddělení. Zprávou bylo, že mi dokumentace neposkytnou a že mi v mé práci nemohou pomoci.
+\subsection{Informativní kontaktování výrobce}
+Bez existujících dokumentací bylo rozhodnuto kontaktovat samotného výrobce.  Byl zaslán email s vysvětlením tohoto projektu a žádostí o poskytnutí dokumentačních podkladů. Napsáno bylo celkem na 3 oddělení této britské společnosti, přesněji na obchodní oddělení, oddělení podpory a servisní centrum. Do jednoho týdne přišla shodná odpověď od všech tří kontaktovaných oddělení. Zprávou bylo, že dokumentace nejsou schopni poskytnout a nemohou nijak pomoci.
 
 \begin{figure}[H]
 \begin{center}
@@ -317,9 +320,9 @@ Bez existujících dokumentací jsem se nejdříve rozhodl kontaktovat samotnéh
 \end{figure}
 
 \subsection{Rozebrání mobilního telefonu}
-Vzhledem k negativní odpovědi výrobce jsem zahájil vlastní výzkum. Prvním pokusem byla komunikace s mobilním telefonem skrze USB, stejně jako to bylo možné u telefonů s API k těmto účelům. Několik týdnů výzkumu jsem zasvětil pokusům o přímou komunikaci po seriové lince. Bez úspěchu.
+Vzhledem k negativní odpovědi výrobce byl zahájen vlastní výzkum. Prvním pokusem byla komunikace s mobilním telefonem skrze USB, stejně jako to bylo možné u telefonů s API k těmto účelům. Pokusy o přímou komunikaci po sériové lince byly systematicky prováděny po dobu tří týdnů. Bez úspěchu.
 
-Po dohodě s vedoucím práce, jsem se rozhodl porušit záruku a rozebrat telfefon. Zaměřil jsem se primárně na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se mi podařilo nalézt servisní piny, které jsem se následně snažil analyzovat a skrze ně komunikovat s mobilním telefonem. Po několika týdnech opět bez úspěchu.
+Po dohodě s vedoucím práce, bylo rozhodnuto porušit záruku a rozebrat telefon. Primární zaměření bylo na případné servisní piny pro připojení a diagnostiku. Po hlubším prozkoumání se podařilo nalézt servisní piny, kde byla snaha je co nejlépe analyzovat a skrze ně komunikovat s mobilním telefonem. Po několika týdnech opět bez úspěchu.
 
 \begin{figure}[H]
 \begin{center}
@@ -330,7 +333,9 @@ Po dohodě s vedoucím práce, jsem se rozhodl porušit záruku a rozebrat telfe
 \end{figure}
 
 \subsection{Závěr rozboru}
-Po dvou měsíčním snažení se z mobilního telefonu nepodařilo získat žádnou informaci. První týden se mi podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním analyzátorem bylo zjištěno, že se nejedná o číslicový signál. Tuto cestu jsem byl nucen uzavřít a oznámit vedoucímu, že tudy cesta nevede. Od využití mobilního telefonu bylo tedy upuštěno a jako vstupní brána do GPRS byl pořízen samostatný GSM/GPRS modul.
+Po dvou měsících snažení se z mobilního telefonu nepodařilo získat žádnou informaci. První týden se podařilo zachytávat neznámé signály, nicméně po hlubším přezkoumání spektrálním analyzátorem bylo zjištěno, že se nejedná o číslicový signál.
+
+Po dvou měsících práce, byla možnost využití tlačítkového telefonu, pro přístup do sítě GPRS, uzavřena. Od využití mobilního telefonu bylo tedy upuštěno a jako vstupní brána do GPRS byl pořízen samostatný GSM/GPRS modul.
 
 \section{Prototyp domovního systému}
 Účelem prototypu je vývoj a testování firmware a vzájemné komunikace s jednotlivými aplikacemi. Zapojení musí být modulární, snadno přepojitelné a jednoduše přístupné k měření.
@@ -347,21 +352,21 @@ Prototyp je rozdělen do třech hlavních bloků, které spolu vzájemně komuni
 \end{figure}
 
 \paragraph{Komunikační zařízení:}
-Blok „Komunikační zařízení“ obsahuje všechna zařízení zprostředkovávající komunikaci. Vždy potřebujeme komunikovat pomocí USB a internetového připojení. V případě prototypu složí k USB komunikaci vestavěn řadič USU, který se nachází na desce Arduino. Internetové připojení zprostředkovává GPRS modul, v případě prototypu model SIM808, případně podobný.
+Tento blok obsahuje všechna zařízení zprostředkovávající komunikaci. Vždy potřebujeme komunikovat pomocí USB a internetového připojení. V případě prototypu složí k USB komunikaci vestavěn řadič USU, který se nachází na desce Arduino. Internetové připojení zprostředkovává GPRS modul, v případě prototypu model SIM808, případně podobný.
 
 \paragraph{Arduino Due:}
-Hlavní blok „Arduino Due“ obsahuje vývojvou desku Arduino Due, která slouží jako centrální jednotka celého domovního systému. Do této jednotky jsou zapojeny veškeré periferie, ať již komunikátory, nebo senzory a spínače.
+Hlavní blok Arduino Due obsahuje vývojovou desku Arduino Due, která slouží jako centrální jednotka celého domovního systému. Do této jednotky jsou zapojeny veškeré periferie, ať již komunikátory, nebo senzory a spínače.
 
 \paragraph{Periferie}
-Blok „Periferi“ obsahuje všechna čidla, senzory, spínače a podobná zařízení, které má za úkol řídící jednotka kontrolovat. Pro demonstraci základních funkcionalit jsem zvolil dveřní čidlo, senzor pohybu PIR a spínací prvek typu LED dioda. Všechny tyto periferie lze jednodšue nahradit jinou libovolnou součástkou, případě nové přidat.
+Blok periferie obsahuje všechna čidla, senzory, spínače a podobná zařízení, které má za úkol řídící jednotka kontrolovat. Pro demonstraci základních funkcionalit bylo zvoleno dveřní čidlo, senzor pohybu PIR a spínací prvek typu LED dioda. Všechny tyto periferie lze jednoduše nahradit jinou libovolnou součástkou, případě nové přidat.
 
 \subsection{Výsledný prototyp}
-Výsledný prototyp je schopen simulovat reálné nasazení domovnío systému. Obsahuje řídící desku Arduino, GSM modul pro připojení do sítě internet, jeden spínací prvek (LED) a dva senzory diody (PIR a dveřní čidlo). Každý senzor má svou vlastní kontrolní diodu. Ta signalizuje, zda je senzor sepnutý či nikoliv.
+Prototyp je schopen simulovat reálné nasazení domovního systému. Obsahuje řídící desku Arduino, GSM modul pro připojení do sítě internet, jeden spínací prvek (LED) a dva senzory (PIR a dveřní čidlo). Každý senzor má svou vlastní kontrolní diodu. Ta signalizuje, zda je senzor sepnutý či nikoliv.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=\textwidth]{images/board.png}
-\caption{Finální prototyp na nepájivém poli}
+\caption{Jeden z prototypů na nepájivém poli}
 \label{image}
 \end{center}
 \end{figure}
@@ -387,7 +392,7 @@ Inicializační část slouží k prvotnímu nastavení mikrokontroleru před sp
 \end{itemize} 
 
 \subsection{API}
-Funkce API jsou nazvány podle své činnosti. Při volání jednolivých funkcí se posílá nejdříve název funkce, které následují kulaté závorky, tedy \uv{(} a \uv{)}, vnichž jsou uvedeny jednotlivé parametry. Každý jeden parametr je oddělen čárkou. Ve výsledku může výstup vypadat například takto \uv{SetSensor(10,5)}. V následující tabulce jsou vypsány všechny dostupné funkce, typu getter.
+Funkce API jsou nazvány podle své činnosti. Při volání jednotlivých funkcí se posílá nejdříve název funkce, které následují kulaté závorky, tedy \uv{(} a \uv{)}, v nichž jsou uvedeny jednotlivé parametry. Každý jeden parametr je oddělen čárkou. Ve výsledku může výstup vypadat například takto \uv{SetSensor(10,5)}. V následující tabulce jsou vypsány všechny dostupné funkce, typu getter.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
@@ -477,7 +482,7 @@ Sensor(Id = 1,State = 0)
 \end{center} 
 
 \subsection{Chybová hlášení}
-Chybová hlášení (při neúspěšném provedení operace nebo jiné chybě) byla původně tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti (při vvoji na platformě Arduino Uno) byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při zpracovávání kterékoliv z operací podporující API. Vždy se kontroluje, zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Pokud příkaz nebyl rozpoznán, nebo nesplňuje kritéria tohoto API, je vrácena chybová hláška o nerozpoznání příkazu.
+Chybová hlášení (při neúspěšném provedení operace nebo jiné chybě) byla původně tvořena pomocí stavových kódů HTML \cite{HTML1.1}. Z důvodu nedostatku paměti (při vývoji na platformě Arduino Uno) byla nahrazena jednoduchým \uv{OK} a \uv{ERROR}. Kontrola chyb se provádí vždy při zpracovávání kterékoliv z operací podporující API. Vždy se kontroluje, zda je možné zapsat, zda se provedl zápis, zda je nová hodnota po přečtení stejná jako zapisovaná, a tak dále. Pokud nastane chyba, je vše vráceno do původního stavu. Pokud příkaz nebyl rozpoznán, nebo nesplňuje kritéria tohoto API, je vrácena chybová hláška o nerozpoznání příkazu.
 \paragraph{Ukázka odpovědi při nerozpoznání příkazu:}
 \begin{center}
 Command 'SetSensor(15,5)' not recognized.
@@ -500,13 +505,13 @@ Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně k
 \end{figure}
 
 \subsection{Connection}
-Blok „Connection“ slouží k připojení řídící jednotky skrze seriovou linku (SerialPort Connection), po které komunikuje za pomocí API, poskytované touto jednotkou. Po navázání spojení se určí typ připojené řídící jednotky, kvůli poskytnutí seznamu použitelných pinů. Výstupem tohoto bloku jsou funkce pro jednoduché zapisování a čtení z této jednotky (Arduino Operations), včetně kompletního seznamu použitelných pinů této jednotky. Seznam podporovaných řídících jednotek Arduino lze nalézt v části Kompatibilita.
+Tento blok slouží k připojení řídící jednotky skrze sériovou linku (SerialPort Connection), po které komunikuje za pomocí API, poskytované touto jednotkou. Po navázání spojení se určí typ připojené řídící jednotky, kvůli poskytnutí seznamu použitelných pinů. Výstupem tohoto bloku jsou funkce pro jednoduché zapisování a čtení z této jednotky (Arduino Operations), včetně kompletního seznamu použitelných pinů této jednotky. Seznam podporovaných řídících jednotek Arduino lze nalézt v části Kompatibilita.
 
 \subsection{Logic}
-Blok „Logic“ je hlavní vlákno, které načítá veškeré viditelné části aplikace (GUI Controller) z bloku „GUI“ a zároveň zprostředkovává komunikaci mezi blokem Connection a jednotlivými funkcemi v oknech aplikace (GUI). Nachází se zde tedy napojení na Arduino Operations z bloku „Connection“. Zároveň zpracovává všechny informace, přicházejících směrem od řídící jednotky (například notifikace, chybová hlášení, stavové kódy atd.).
+Logic je hlavní vlákno, které načítá veškeré viditelné části aplikace (GUI Controller) z bloku GUI a zároveň zprostředkovává komunikaci mezi blokem Connection a jednotlivými funkcemi v oknech aplikace (GUI). Nachází se zde tedy napojení na Arduino Operations z bloku Connection. Zároveň zpracovává všechny informace, přicházejících směrem od řídící jednotky (například notifikace, chybová hlášení, stavové kódy atd.).
 
 \subsection{GUI}
-Blok „GUI“ poskytuje jednotlivé funkce aplikace, včetně jejich grafického uživatelského rozhraní. Například „Overview“ poskytuje GUI pro přehled všech připojených senzorů a spínačů, „Senzor“ poskytuje GUI pro vytváření a upravování senzorů. Tyto funkce jsou využívány v bloku „Logic“, za pomocí „GUI Controlleru“, který je načítá do hlavního okna aplikace.
+Jednotlivé funkce aplikace, včetně jejich grafického uživatelského rozhraní poskytuje blok GUI. Například Overview poskytuje GUI pro přehled všech připojených senzorů a spínačů, Senzor poskytuje GUI pro vytváření a upravování senzorů. Tyto funkce jsou využívány v bloku Logic, za pomocí GUI Controlleru, který je načítá do hlavního okna aplikace.
 
 \section{Grafické uživatelské rozhraní}
 V této části textu budou zmíněny pouze ty části GUI, které jsou důležité pro pochopení ovládání aplikace.
@@ -521,11 +526,11 @@ V této části textu budou zmíněny pouze ty části GUI, které jsou důleži
 \end{center}
 \end{figure}
 
-Záložka „Connection“ slouží k připojení či odpojení řídící jednotky. Tato záložka hlídá, zda je připojení stále aktivní. Při ztrátě spojení ihned informuje uživatele a upraví chování celé aplikace. Záložka rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení. 
+Záložka Connection slouží k připojení či odpojení řídící jednotky. Tato záložka hlídá, zda je připojení stále aktivní. Při ztrátě spojení ihned informuje uživatele a upraví chování celé aplikace. Záložka rovněž hlídá, zda se neobjevilo nové zařízení k připojení, pokud ano, informuje uživatele a zobrazí nově dostupná zařízení. 
 
-Zařízení pro připojení se vybírá pomocí „Port“, které obsahuje seznam všech dostupných COM portů. K vybranému COM portu je následně zjištěn název zařízení, který se objeví v „Device“. Rychlost komunikace (BaudRate), lze vybrat ze standardních komunikačních rychlostí \cite{BaudRates}. Vybraná komunikační rychlost musí být stejná, jako v řídící jednotce. Automaticky nastavená hodnota 9600 by měla odpovídat přednastavené rychlosti řídící jednotky. 
+Zařízení pro připojení se vybírá pomocí Port, které obsahuje seznam všech dostupných COM portů. K vybranému COM portu je následně zjištěn název zařízení, který se objeví v Device. Rychlost komunikace (BaudRate), lze vybrat ze standardních komunikačních rychlostí \cite{BaudRates}. Vybraná komunikační rychlost musí být stejná, jako v řídící jednotce. Automaticky nastavená hodnota 9600 by měla odpovídat přednastavené rychlosti řídící jednotky. 
 
-Po zvolení řídící jednotky a komunikační rychlosti stačí zmáčknou oranžové tlačítko „Connect“ pro připojení, případně „Disconnect“ pro odpojení.  
+Po zvolení řídící jednotky a komunikační rychlosti stačí zmáčknou oranžové tlačítko Connect pro připojení, případně Disconnect pro odpojení.  
 
 \paragraph{Dostupné komunikační rychlosti (BaudRate):}
 \begin{itemize}
@@ -544,7 +549,7 @@ Po zvolení řídící jednotky a komunikační rychlosti stačí zmáčknou ora
 
 Přehled připojených komponent (Overview) slouží pro zobrazení všech dostupných spínačů a senzorů, které jsou v řídící jednotce dostupné. Obsah se generuje dynamicky pod sebe, lze tedy zobrazit neomezený počet zařízení (po přetečení viditelné části se objeví scrollbar). Každý dynamický řádek je zobrazen dle svého typu, tedy zda se jedná o senzor nebo spínač. U spínačů lze měnit jejich aktuální stav, u senzorů lze aktuální stav pouze sledovat. V obou případech lze měnit interní nastavení každého zařízení, pomocí tlačítka na pravé straně. V případě, že žádná zařízení neexistují, je uživatel upozorněn. 
 
-Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel upozorněn zda změna proběhla, či zda neproběhla.
 
 \subsection{Nastavení senzoru (Sensor Edit)}
 
@@ -558,12 +563,12 @@ Přehled připojených komponent (Overview) slouží pro zobrazení všech dostu
 
 Nastavení senzoru slouží k změně interního nastavení uvnitř řídící jednotky. Lze měnit název zařízení (omezeno na 30 znaků), pin na kterém se senzor nachází, typ senzoru (rozpínací, spínací) a poslední možností je smazání senzoru. Výběr pinů závisí vždy na připojené desce. Pro tento účel byl vytvořen kompletní seznam všech testovaných a kompatibilních desek, které lze k softwaru připojit. Kompletní seznam desek, které lze použít, je k nalezení v části textu nazvané „Podporované řídící jednotky“. 
 
-Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel upozorněn zda změna proběhla, či zda neproběhla.
 
 \subsection{Nastavení spínače (Switch Edit)}
 Nastavení je téměř identické s předchozím, proto není nutné náhledový obrázek. Lze měnit název (omezeno na 30 znaků), pin na kterém se spínač nachází. Jedinou změnou možnost změny stavu tohoto spínače (zapnuto/vypnuto).
 
-Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel upozorněn zda změna proběhla, či zda neproběhla.
 
 \subsection{Možnosti programu (Features)}
 Tato záložka zpřístupňuje různá nastavení a funkce, které nejsou běžně potřebné.
@@ -614,7 +619,7 @@ Desktopová aplikace byla testována pod operačním systémem Windows 10 ve vš
 \end{itemize}
 
 \subsection{Podporované řídící jednotky}
-Řídící jednotka, v případě tohoto prototypu deska Arduino, existuje v několika variantách \cite{ArduinoProducts}. Jako řídící jednotku je vhodné použít jednu z řady produktů ENHANCED FEATURES (Mega, Due a další) \cite{ArduinoProducts}, vzhedem k tomu, že obsahují dostatečné množství paměti \cite{CompareBoardSpecs} pro udržování většího množství senzorů a spínačů. Vybrané jednotky, které jsou pro tento projekt použitelné, jsem otestoval a zařadil mezi jednotky podporované. Tyto podporované jednotky se vyznačují tím, že desktopová aplikace obsahuje seznam použitelných pinů pro každou z těchto desek. Tento seznam se získává ihned po připojení jednotky, a to na základě názvu desky poskytnutého řadičem. Pokud připojená deska není v seznamu, použije se seznam pinů pro desku Arduino Uno. V takovémto případě není zaručena správná funkčnost softwaru. Pokud použitý pin není v seznamu pinů desky, zařízení na tomto pinu nebude možné ovládat, upravovat, ani s ním jakkoliv pracovat.
+Řídící jednotka, v případě tohoto prototypu deska Arduino, existuje v několika variantách \cite{ArduinoProducts}. Jako řídící jednotku je vhodné použít jednu z řady produktů ENHANCED FEATURES (Mega, Due a další) \cite{ArduinoProducts}, vzhedem k tomu, že obsahují dostatečné množství paměti \cite{CompareBoardSpecs} pro udržování většího množství senzorů a spínačů. Vybrané jednotky, které jsou pro tento projekt použitelné, byly otestovány a zařazeny mezi jednotky podporované. Tyto podporované jednotky se vyznačují tím, že desktopová aplikace obsahuje seznam použitelných pinů pro každou z těchto desek. Tento seznam se získává ihned po připojení jednotky, a to na základě názvu desky poskytnutého řadičem. Pokud připojená deska není v seznamu, použije se seznam pinů pro desku Arduino Uno. V takovémto případě není zaručena správná funkčnost softwaru. Pokud použitý pin není v seznamu pinů desky, zařízení na tomto pinu nebude možné ovládat, upravovat, ani s ním jakkoliv pracovat.
 
 \paragraph{Seznam všech podporovaných řídících jednotek:}
 \begin{itemize}
@@ -654,15 +659,15 @@ Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně k
 \end{figure}
 
 \subsection{Communication}
-Blok „Communication“ slouží k připojení řídící jednotky skrze internetové připojení (GPRS), za pomocí mobilní datové sítě. Toto připojení komunikuje pomocí API, poskytované řídící jednotkou. Po navázání spojení se zažádá o všechna dostupná data, která může řídící jednotka poskytnout. Samotnou komunikaci zpracovává vlákno „GPRS Client“, které je napojené na „Operations“, kde se nachází implementace API.
+Tento blok slouží k připojení řídící jednotky skrze internetové připojení (GPRS), za pomocí mobilní datové sítě. Toto připojení komunikuje pomocí API, poskytované řídící jednotkou. Po navázání spojení se zažádá o všechna dostupná data, která může řídící jednotka poskytnout. Samotnou komunikaci zpracovává vlákno GPRS Client, které je napojené na Operations, kde se nachází implementace API.
 
-Aby internetová komunikace fungovala, musel být napsán komunikační server, který je pevným bodem v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Více o této problematice v části textu nazvané „Komunikační server“.
+Aby internetová komunikace fungovala, musel být napsán komunikační server, který je pevným bodem v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Více o této problematice v části textu nazvané Komunikační server.
 
 \subsection{Logic}
-Blok „Logic“ je hlavní vlákno, které díky „Activity Controlleru“ načítá veškeré viditelné části aplikace z bloku „Activities“ a zároveň zprostředkovává komunikaci mezi blokem Communication a jednotlivými funkcemi v oknech aplikace (Activities). Nachází se zde tedy napojení na Arduino Operations z bloku „Communication“. Zároveň zpracovává všechny informace, přicházejících směrem od řídící jednotky (například notifikace, chybová hlášení, stavové kódy atd.).
+Blok Logic je hlavní vlákno, které díky Activity Controlleru načítá veškeré viditelné části aplikace z bloku „Activities“ a zároveň zprostředkovává komunikaci mezi blokem Communication a jednotlivými funkcemi v oknech aplikace (Activities). Nachází se zde tedy napojení na Arduino Operations z bloku Communication. Zároveň zpracovává všechny informace, přicházejících směrem od řídící jednotky (například notifikace, chybová hlášení, stavové kódy atd.).
 
 \subsection{Activities}
-Blok „Activites“ poskytuje jednotlivé funkce aplikace, včetně jejich GUI, v Androidu nazvaném jako Activity. Například „Overview“ poskytuje Activity pro přehled všech připojených senzorů a spínačů, „Item Detail“ poskytuje Activity přehled o všech dostupných informací, které o vybrané komponentě aplikace má, a „Menu“ poskytuje Acitivity s nastavením. Tyto funkce jsou využívány v bloku „Logic“, za pomocí „Activity Controlleru“, který je načítá do hlavního okna aplikace.
+Jednotlivé funkce aplikace, včetně jejich GUI, poskytuje blok Activites, v Androidu nazvaném jako Activity. Například Overview poskytuje Activity pro přehled všech připojených senzorů a spínačů, Item Detail poskytuje Activity přehled o všech dostupných informací, které o vybrané komponentě aplikace má, a Menu poskytuje Acitivity s nastavením. Tyto funkce jsou využívány v bloku Logic, za pomocí Activity Controlleru, který je načítá do hlavního okna aplikace.
 
 \section{Grafické uživatelské rozhraní}
 V této části textu budou zmíněny pouze ty části GUI (Activities), které jsou důležité pro pochopení ovládání aplikace.
@@ -680,7 +685,7 @@ Stejně jako v případě desktopové aplikace, slouží přehled připojených 
 
 Tlačítko na pravé straně „i“, tedy značí zobrazení podrobností vybrané komponenty. Dále v horní liště vidíme zatočenou šipku, která značí ruční aktualizaci všech zařízení. Posledním prvkem horního menu jsou tři tečky, takzvané „Hamburger Menu“, které složí pro otevření nastavení aplikace.
 
-Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel je upozorněn zda změna proběhla, či zda neproběhla.
+Žádná data nejsou editována v objektech uvnitř aplikace, ale žádosti o změnu jsou zasílány do řídící jednotky. Po obdržení odpovědi se buď projeví požadovaná změna, nebo je zobrazeno chybové hlášení. V obou případech je uživatel upozorněn zda změna proběhla, či zda neproběhla.
 
 \subsection{Podrobnosti vybrané komponenty}
 \begin{figure}[H]
@@ -718,15 +723,15 @@ Not implemented yet.
 % Komunikační server
 
 \chapter{Komunikační server}
-K zajištění komunikace mezi řídící jednotkou a mobilní aplikací fungovala, musel být napsán komunikační server, který má pevonu adresu v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Díky tomuto spojení si ukládá přenášená data, která jsou následně používána k zobrazení statistik ve webové aplikaci. Server teoreticky umožňuje připojení libovolného počtu mobilních aplikací k jedné řídící jednotce naráz.
+K zajištění komunikace mezi řídící jednotkou a mobilní aplikací fungovala, musel být napsán komunikační server, který má pevnou adresu v síti. Server na dané IP adrese a portu, zajišťuje komunikaci všech existujících řídících jednotek a mobilních aplikací. Díky tomuto spojení si ukládá přenášená data, která jsou následně používána k zobrazení statistik ve webové aplikaci. Server teoreticky umožňuje připojení libovolného počtu mobilních aplikací k jedné řídící jednotce naráz.
 
 \section{Slepé cesty vývoje}
 
 \subsection{Přímá komunikace mezi zařízeními}
-Prvním vyvíjeným řešením bylo propojení řídící jednotky a aplikací bez komunikačního serveru. Po půl roce výzkumu jsem tuto variantu zavrhl, protože veřejné IP adresy v mobilní datové sítí jsou dynamické (včetně IPv6). Bez pevného bodu v internetu, jsem nebyl schopen určit adresu ostatních zařízení.
+Prvním vyvíjeným řešením bylo propojení řídící jednotky a aplikací bez komunikačního serveru. Po půl roce výzkumu byla tato varianta zavrhnuta, protože veřejné IP adresy v mobilní datové sítí jsou dynamické (včetně IPv6). Bez pevného bodu v internetu, nebylo možné určit adresu ostatních zařízení.
 
 \subsection{Implementace serveru v řídící jednotce}
-Druhým vyvíjeným řešením bylo vytvoření komunikačního serveru přímo v řídící jednotce. Po čase jsem odhalil, že přidání další zátěže jednočipovému počítači, mělo za následek nestabilitu celého systému. Řídící jednotka nestíhala obsluhovat všechny požadavky najednou (jak hardwarové, tak softwarové) a s rostoucí komunikací začala mít nedostatek paměti. Stejně tak jako předchozí řešení, i tuto variantu jsem po půl roce výzkumu zavrhl.
+Druhým vyvíjeným řešením bylo vytvoření komunikačního serveru přímo v řídící jednotce. Po čase bylo odhaleno, že přidání další zátěže jednočipovému počítači, mělo za následek nestabilitu celého systému. Řídící jednotka nestíhala obsluhovat všechny požadavky najednou (jak hardwarové, tak softwarové) a s rostoucí komunikací začala mít nedostatek paměti. Stejně tak jako předchozí řešení, i tato varianta byla po půl roce výzkumu zavržena.
 
 \section{Blokové schéma}
 Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně komunikují. Pod blokovým schématem následuje detailní popis těchto jednotlivých částí.
@@ -740,21 +745,21 @@ Kód aplikace je rozdělen do třech hlavních bloků, které spolu vzájemně k
 \end{figure}
 
 \subsection{Communication}
-Blok „Communication“ obsahuje vlákno „Socket Server“, které poslouchá na portu 6666 a navazuje komunikaci přes technologii Socket. Server udržuje všechna spojení aktivní a stárá se o produkci všech zpáv až ke všem cílům. Pokud je některé spojení přerušeno, zajistí informování všech ostatních uživatelů a uvolní zdroje. 
+Tento blok obsahuje vlákno Socket Server, které poslouchá na portu 6666 a navazuje komunikaci přes technologii Socket. Server udržuje všechna spojení aktivní a stará se o produkci všech zpráv ke všem cílům. Pokud je některé spojení přerušeno, zajistí informování všech ostatních uživatelů a uvolní zdroje. 
 
-„Role Assigner“ se stará o oddělení neidentifikovaných klientů od těch indetifikovaných. Identifikovaný klient se vyznačuje tím, že provedl autorizaci jako řídící jednotka, nebo mobilní aplikace. Dále se vyznačuje tím, že je mu umožněno komunikovat s ostatními protějšky, tedy řídící jednotka může kontaktovat všechny mobilní aplikace, a všechny mobilní aplikace mohou kontaktovat všechny řídící jednotky. Dokud není klient identifikovaný, není mu umožněno komunikovat s nikým jiným, než s komunikačním serverem.
+Role Assigner se stará o oddělení neidentifikovaných klientů od těch identifikovaných. Takovýý klient se vyznačuje tím, že provedl autorizaci jako řídící jednotka, nebo mobilní aplikace. Dále se vyznačuje tím, že je mu umožněno komunikovat s ostatními protějšky, tedy řídící jednotka může kontaktovat všechny mobilní aplikace, a všechny mobilní aplikace mohou kontaktovat všechny řídící jednotky. Dokud není klient identifikovaný, není mu umožněno komunikovat s nikým jiným, než s komunikačním serverem.
 
 \subsection{Logic}
-Blok „Logic“ je hlavní vlákno, které řídí tok komunikace indetifikovanch klientů. Protékající data zpracovává a uchovává k zobrazení ve webové aplikac. Dále se stará o tisk komunikace na zvolených výstupech z bloku „Logger“.
+Blok Logic je hlavní vlákno, které řídí tok komunikace identifikovaných klientů. Protékající data zpracovává a uchovává k zobrazení ve webové aplikaci. Dále se stará o tisk komunikace na zvolených výstupech z bloku Logger.
 
 \subsection{Logger}
-Blok „Logger“ slouží k výpisu či logování probíhající komunikace a dalších informací. Aktuálně je možné výpis provádět do konzole, která je ideální pro ladění uživatelem, případně je možný výpis do souboru, kde slouží pro zpětné dohledávání chyb.
+Logger slouží k výpisu či logování probíhající komunikace a dalších možných informací. Aktuálně je možné výpis provádět do konzole, která je ideální pro ladění uživatelem, případně je možný výpis do souboru, kde slouží pro zpětné dohledávání chyb.
 
 \section{Zprovoznění}
 Pro správnou funkcionalitu komunikačního serveru, je nutné server provozovat na veřejné IP adrese, s přesměrováním portu 6666 na lokální adresu serveru v interní síti.
 
 \section{Konzolový výstup}
-Pro lepší vývoj a testování jsem vytvořil konzolový náhled na komunikaci serveru, kde jsou časově a barevně odlišeny různé operace.
+Pro lepší vývoj a testování byl vytvořen konzolový náhled na komunikaci serveru, kde jsou časově a barevně odlišeny různé operace.
 
 \begin{figure}[H]
 \begin{center}
@@ -773,7 +778,7 @@ Pro lepší vývoj a testování jsem vytvořil konzolový náhled na komunikaci
 \end{itemize}
 
 \section{Testovací klient}
-Testovací klient vznik za účelem testování serverové části, bez nutnosti komunikace reálných zařízení nad reálnými daty. Klient umožňuje výběr z několika režimů, kde každý umožňuje simulovat něco jiného. Po výběru jednoho z režimů, se testovací klient připojí na komukační server pod zvoleným nastavením. Poté lze například zasílat testovací retěžce se seznamem komponent, odpovídat na API dotazy a podobné.
+Testovací klient vznik za účelem testování serverové části, bez nutnosti komunikace reálných zařízení nad reálnými daty. Klient umožňuje výběr z několika režimů, kde každý umožňuje simulovat něco jiného. Po výběru jednoho z režimů, se testovací klient připojí na komunikační  server pod zvoleným nastavením. Poté lze například zasílat testovací řetězce se seznamem komponent, odpovídat na API dotazy a podobné.
 
 \paragraph{Seznam všech režimů testovacího klienta:}
 \begin{itemize}
@@ -797,7 +802,7 @@ Testovací klient vznik za účelem testování serverové části, bez nutnosti
 % Závěr
 
 \chapter{Závěr}
-V rešeršní části jsem definoval zabezpečovací systém a inteligentní dům, ze kterých se sestává inteligentní domovní systém. Nakonec jsem definoval požadované vlastnosti jednotlivých součástí inteligentího domovního systému, kterými jsou domovní systém, desktopová aplikace, mobilní aplikace, webová aplikace a komunikační server. 
+V rešeršní části jsem definoval zabezpečovací systém a inteligentní dům, ze kterých se sestává inteligentní domovní systém. Nakonec jsem definoval požadované vlastnosti jednotlivých součástí inteligentního domovního systému, kterými jsou domovní systém, desktopová aplikace, mobilní aplikace, webová aplikace a komunikační server.
 
 Na základě častých konzultací s vedoucím práce, jsem navrhl koncept cílového produktu, doporučil realizační postupy, vybral hardware, nebo uvedl více možností jeho výběru, kterými může být dosaženo výsledného zařízení. Následně jsem zvolil komunikační prostředky a architekturu jednotlivých komponentů.
 
