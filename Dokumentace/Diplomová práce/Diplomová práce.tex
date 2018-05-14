@@ -66,7 +66,11 @@ The master thesis deals with development of an intelligent home system, designed
 % Úvod
 
 \chapter{Úvod}
-Not implemented yet.
+Podnětem pro vytvoření této práce mi byl můj vlastní zájem o zabezpečovací systémy, inteligentní domovní zařízení a propojování hardware a software. 
+
+V dnešní době je běžné, že je rodinný dům vybaven zabezpečovacím zařízením, typicky proti zlodějům. V těchto případech se běžně používá tlačítková klávesnice jako vstupní prvek do zabezpečovacího systému. V posledních letech se také oblibě začínají těšit domácí asistenti, chytré domy a všeobecně přidávání chytrých prvků do našich domovů, řízených většino pomocí mobilního telefonu. Navazujíc na svou bakalářskou práci, zabezpečovací zařízení pro osobní automobily, jsem měl v plánu tematicky pokračovat touto cestou. Proto jsem se rozhodl pro spojení klasického zabezpečovacího systému s chytrými prvky, jako je například ovládání pomocí mobilní aplikace, nebo skrze webové rozhraní. Vlastním řešení jsem se rozhodl dokázat, že tvorba takovéhoto systému je možná, a také, že výsledný produkt je praktický zároveň. Při této příležitosti jsem se rozhodl vytvořit kompletní paletu produktů, které reprezentují všechny velké softwarové platformy, tedy desktopovou, mobilní a webovou.
+
+Svým výzkumem jsem zjistil, že vše lze realizovat. Proto jsem se rozhodl, že v rámci své diplomové práci provedu první etapu, a to vytvoření funkčního prototypu a implementace kompletního softwarového řešení, které již bude možné využívat s případným reálným produktem.
 
 % Inteligentní domovní systém
 
@@ -390,9 +394,6 @@ Prototyp je schopen simulovat reálné nasazení domovního systému. Obsahuje �
 \label{image}
 \end{center}
 \end{figure}
-
-\subsection{Schéma zapojení}
-Not implemented yet.
 
 \section{Firmware}
 Hlavním účelem firmware (software pro řídící jednotku) je možnost kompletního řízení domovního systému a umožnění komunikace, včetně poskytování API pro přístup aplikací. Software byl vyvinut pro platformu Arduino (čip ARM Cortex-M3) v programovacím jazyce C++ s nadstavbou Wiring (knihovna pro řízení hardwaru) \cite{Wiring}, za pomocí vývojového prostředí Visual Studio 2017 s rozšířením Visual Micro \cite{Visual Micro}, které poskytuje zvýrazňování syntaxe knihovny Wiring a umožňuje komplikaci a nahrávání kódu přímo na desku Arduino.
@@ -759,13 +760,9 @@ Aplikace byla testována na mobilním telefonu Samsung Galaxy S3 s operačním s
 % Webová aplikace
 
 \chapter{Webová aplikace}
-Not implemented yet.
+Poslední fáze diplomové práce bylo vytvoření webového prostředí pro monitoring domácího systému. Webová aplikace, čerpající data z komunikačního serveru byla otestována a zprovozněna. Webovou aplikaci čekají finální grafické úpravy, které budou k nalezení na přiloženém CD.
 
-\section{Blokové schéma}
-Not implemented yet.
-
-\section{Grafické uživatelské rozhraní}
-Not implemented yet.
+Aplikace je napojena a byla vyvíjena spolu s komunikačním serverem. Slouží jako jedna z možností zobrazení historie komunikace. Otevření aplikace je možné na adrese IP serveru.
 
 % Komunikační server
 
@@ -849,21 +846,23 @@ Testovací klient vznik za účelem testování serverové části, bez nutnosti
 % Závěr
 
 \chapter{Závěr}
-V rešeršní části jsem definoval zabezpečovací systém a inteligentní dům, ze kterých se sestává inteligentní domovní systém. Nakonec jsem definoval požadované vlastnosti jednotlivých součástí inteligentního domovního systému, kterými jsou domovní systém, desktopová aplikace, mobilní aplikace, webová aplikace a komunikační server.
+V rešeršní části byly definovány základní pojmy z témat zabezpečovacích systémů a inteligentních domů, ze kterých se sestává inteligentní domovní systém. Dále byly definovány požadované vlastnosti jednotlivých součástí inteligentního domovního systému, kterými jsou domovní systém, desktopová, mobilní a webová aplikace, a komunikační server. Na základě požadovaných vlastností, byl sestaven seznam požadavků všech částí inteligentního domovního systému.
 
-Na základě častých konzultací s vedoucím práce, jsem navrhl koncept cílového produktu, doporučil realizační postupy, vybral hardware, nebo uvedl více možností jeho výběru, kterými může být dosaženo výsledného zařízení. Následně jsem zvolil komunikační prostředky a architekturu jednotlivých komponentů.
+Na základě častých konzultací s vedoucím práce, byl navržen koncept cílového produktu, byly doporučeny realizační postupy, vybrán hardware, nebo bylo uvedeno více možností jeho výběru, kterými může být dosaženo výsledného zařízení. Dále byl pro každou z jednotlivých částí zvolen vhodný programovací jazyk a jedno, nebo více vývojových prostředí (IDE). Nakonec byl zvolen způsob datové komunikace, pomocí mobilních sítí GPRS.
 
-V první fázi jsem na základě konceptu jsem zvolil nejvhodnější komponenty pro vývoj prototypu, které jsem následně zakoupil. Při práci na prototypu jsem odhalil, že jednen z původních cílů, využít tlačítkový mobilní telefon pro přístup do sítě GPRS, je nerealizovatelný, zvolil jsem tedy alternativní postup. Dále jsem vyvinul firmware řídící jednotky, který jsem úspěšně otestoval na prototypu. Po dopsání vlastního kódu jsem podrobně popsal všechny funkce programu.
+Tvorba inteligentního domovního systému byla rozdělena na několik fází. První fáze byla tvorba prototypu, zbylé fáze vývoj jednotlivých softwarových produktů.
 
-V druhé fázi jsem vyvinul desktopovou aplikaci pro systém Windows, kterou jsem plně otestoval pro více verzí systému Windows 10, popsal všechny funkce programu a zajistil kompatibilitu pro starší verze systému Windows.
+V první fázi byla na základě konceptu zvolena nejvhodnější kombinace komponent vývoj prototypu, která byla následně zakoupena. Při práci na prototypu bylo odhaleno, že jeden z původních cílů, využít tlačítkový mobilní telefon pro přístup do sítě GPRS, je nerealizovatelný, zvolen by tedy alternativní postup. Dále byl vyvinut firmware řídící jednotky, který byl úspěšně otestován na prototypu. Po dopsání vlastního kódu byly podrobně popsány všechny funkce programu.
 
-Třetí fáze zahrnovala tvrobu mobilní aplikace, u které jsem zjistil, že přímá komunikace aplikace a řídící jednotky je nerealizovatelná, proto jsem nejdříve vytvořil komunikační server pro systém Windows, který zprostředkovával požadované spoojení v síti internet. Následně jsem dokončil mobilní aplikaci pro systém Android. Aplikaci jsem plně otestoval, popsal všechny funkce a zajistil kompatibilitu u starších systémů.
+Dále byla vyvinuta desktopová aplikace pro systém Windows, která byla plně otestována pro více verzí systému Windows 10. Následně byly všechny funkce programu a zajištěna kompatibilita pro starší verze systému Windows.
 
-Poslední fáze byla tvorba webového prostředí pro monitoring domácího systému. Webovou aplikaci, čerpající data z komunikačního serveru jsem otestoval a řádně popsal všechny její funkce.
+Při tvorbě mobilní aplikace bylo zjištěno, že přímá komunikace aplikace a řídící jednotky je nerealizovatelná. Nejdříve bylo nutné vytvořil komunikační server pro systém Windows, který zprostředkovával požadované spojení v síti internet. Následně byla mobilní aplikace pro systém Android plně dokončena. Aplikace byla otestována, všechny funkce popsány a nakonec byla zajištěna kompatibilita pro starší i novější verze systému Android.
 
-Funkční prototyp, včetně všech příslušných aplikací jsem otestoval v běžném provozu.
+Poslední fáze byla tvorba webového prostředí pro monitoring domácího systému. Webová aplikace, čerpající data z komunikačního serveru byla otestována a zprovozněna. Webovou aplikaci čekají během následujícího týdne finální grafické úpravy, které budou k nalezení na přiloženém CD.
 
-Zadání se mi podařilo splnit ve všech bodech. Do budoucna bych rád předělal komunikační server ze systému Windows na běžnější formu serveru, kterou bude možné spustit na některé z hostingových služeb. Rád bych také vytvořil mobilní aplikaci pro systém iOS.
+Funkční prototyp, včetně všech příslušných aplikací byl otestován a byla zajištěna stabilitu celého systému.
+
+Do budoucna by bylo vhodné předělat komunikační server ze systému Windows na běžnější formu serveru, kterou bude možné spustit na některé z běžných hostingových služeb. V plánu je také vytvoření mobilní aplikace pro systém iOS.
 
 % Literatura
 
@@ -923,9 +922,6 @@ Zdrojové kódy jednotlivých aplikací.
 
 \paragraph{/Software/SecurityControl (Desktopová aplikace)}\mbox{}\\\mbox{}\\
 Desktopová aplikace pro operační systém Windows.
-
-\paragraph{/Software/SecurityDashboard (Webová aplikace)}\mbox{}\\\mbox{}\\
-Webová aplikace pro online statistiky.
 
 \paragraph{/Software/SecurityFirmware (Řídící jednotka)}\mbox{}\\\mbox{}\\
 Firmware pro řídící jednotku Arduino.
